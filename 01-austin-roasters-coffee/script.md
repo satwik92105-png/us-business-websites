@@ -1,8 +1,8 @@
 # Client Outreach Script & Package Proposals: Flat Track Coffee Roasters
 
-> 🌐 **Package 1 Live Demo (Essential Storefront - $497):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)  
-> 🌐 **Package 2 Live Demo (Customer Acquisition Engine - $997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)  
-> 🌐 **Package 3 Live Demo (Full Digital Business Suite - $1,997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html)  
+> 🌐 **Package 1 Live Demo (Tier 1 - $497):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)  
+> 🌐 **Package 2 Live Demo (Tier 2 - $997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)  
+> 🌐 **Package 3 Live Demo (Tier 3 - $1,997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html)  
 > 📁 **Master Hub Demo:** [https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/](https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/)  
 > 📍 **Target Business:** Flat Track Coffee Roasters  
 > 🏢 **Public Address:** 1611 E Cesar Chavez St, Austin, TX 78702  
@@ -28,64 +28,68 @@
 
 ## 📦 The 3 Package Websites & Clear Value Differentiation
 
-### 🔹 Tier 1: The Essential Storefront Package ($497 One-Time)
+### 🔹 Tier 1: The Gorgeous Digital Storefront ($497 One-Time)
 - **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)
-- **Design Level:** Clean, minimalist dark luxury aesthetic (`#0c0a09` graphite and warm amber).
+- **Concept:** 100% Focused on a breathtaking, high-converting digital storefront.
 - **Core Features Included:**
-  - Lightning-fast mobile-first responsive architecture (< 0.5s load time, 100/100 performance score)
+  - Ultra-fast mobile architecture (< 0.5s load time, 100/100 performance score)
+  - Dark obsidian luxury aesthetic tailored to Flat Track's East Austin motorcycle/roastery heritage
   - Curated menu showcase featuring 6 core items (Dogspeed espresso, nitro brew, pour-over, breakfast tacos, whole bean bags)
   - 1 Customer Pass highlight: Weekend Explorer Pass ($35 One-Time)
-  - **Embedded Google Maps Location Suite**: Interactive map centered on 1611 E Cesar Chavez St
+  - Embedded Google Maps Location Suite centered on 1611 E Cesar Chavez St
   - Arrival Guide: Free street parking, bike racks, shaded dog-friendly patio
   - One-tap driving navigation buttons (Google Maps + Apple Maps)
   - Operating hours table with real-time dynamic "Open Now" badge
   - Direct inquiry / contact form with instant validation
   - LocalBusiness JSON-LD Google search rich-result schema
-- **Why It's Worth $497:** Replaces broken or nonexistent websites with a rock-solid, ultra-fast mobile storefront that instantly captures local drive-by and foot traffic.
+- **Why It's Worth $497:** Instantly gives the roastery a world-class, lightning-fast digital storefront that converts local searchers into foot traffic.
 
 ---
 
-### 🔹 Tier 2: The Customer Acquisition Engine ($997 One-Time)
+### 🔹 Tier 2: Frontend + Backend Architecture & Owner POS Portal ($997 One-Time)
 - **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)
-- **Design Level:** Obsidian glassmorphism with 3D ambient particles and rich customer conversion tools.
-- **HUGE Step Up in Customer Interactivity ($500 Extra Value):**
-  - **Online Pre-Order System & Real-Time Slide-over Cart Drawer**: Customers can order ahead, select their counter pickup time, calculate tax, and generate order tickets directly on the site.
-  - **Interactive Menu Search & Category Filters**: Real-time instant search across drinks, food, and beans.
-  - **4-Step Table Reservation Wizard**: Guests pick their date, time window, party size, and seating preference, generating a verified ticket code (`#FT-89421`).
-  - **Interactive Bean Customizer Lab**: Customers can select origin, roast level slider, grind type, and bag size with live price updates.
-  - **3-Tier Customer Loyalty Passes**:
-    1. *Weekend Explorer ($35 One-Time)*
-    2. *Tasting Reserve ($68 One-Time)*
-    3. *Roaster's Circle ($110 One-Time)*
-  - **Upcoming Events & Public Cuppings Calendar**: Schedule of community tastings, latte art workshops, and blend reveals.
-  - **Digital Gift Card Purchase Flow**: $15, $25, $50, $75, $100 instant gift cards.
-  - **Interactive FAQ Accordion**: Answers to dog-friendly patio, parking, grind service, catering, and wholesale questions.
-  - **Verified Reviews Grid**: Google and Yelp customer reviews wall.
-  - **Full Embedded Google Maps & Location Suite**.
-- **Why It's Worth $997:** Turns a passive storefront into an active 24/7 revenue engine that captures pre-orders, reservations, gift cards, and memberships without agency fees.
+- **Concept:** Frontend + Full Working Backend with 2 Integrated Operational Phases: Customer View & Owner/Kitchen Portal.
+- **HUGE Step Up in Functionality ($500 Extra Value):**
+  - **Phase 1: Customer Storefront**:
+    - Live items listing with real-time stock status ("In Stock" / "Sold Out")
+    - Online pre-ordering with slide-over cart drawer & counter pickup time selection
+    - Interactive 4-step table reservation wizard with instant confirmation codes (`#BK-8491`)
+    - Real-time search bar & category filters
+  - **Phase 2: Owner & Kitchen POS Portal**:
+    - Dedicated management dashboard for the store owner / baristas
+    - **Live Incoming Orders Queue**: Shows tickets, customer names, ordered items, subtotal, and status (`New`, `Preparing`, `Ready`, `Completed`)
+    - **1-Tap Order Status Advancement**: Baristas can mark items as brewing, notify counter, and complete orders
+    - **Upcoming Table Bookings Manager**: View party sizes, times, and seating preferences with 1-click seating confirmation
+    - **Live Menu Stock Manager**: 1-click toggle to mark items "Out of Stock" (instantly updates customer view in real-time)
+    - **KPI Summary**: Live counter of active queue orders, today's digital revenue, and confirmed bookings
+  - **Production Backend Code Included**: Complete Python backend script (`backend_server.py`) with FastAPI, SQLite database, and REST endpoints.
+- **Why It's Worth $997:** Replaces expensive monthly POS subscriptions (Toast, Square Online) with a custom, direct 0% commission ordering system that connects customers directly to the barista kitchen.
 
 ---
 
-### 🔹 Tier 3: The Full Digital Business Suite / Flagship Empire ($1,997 One-Time)
+### 🔹 Tier 3: The Complete Enterprise Suite ($1,997 One-Time)
 - **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html)
-- **Design Level:** Ultra-luxury Spatial UI with real-time telemetry HUD, 6-axis flavor radar, B2B wholesale portal, Newtonian gravity physics, and spatial audio synthesis.
+- **Concept:** Everything in Tier 2 + Google Sign-In Verification, Online Payment Gateway, Live Order Tracking HUD, and an In-Website Mini-Game!
 - **Includes EVERYTHING from Tier 1 & Tier 2, PLUS ($1,000 Extra Value):**
-  - **B2B Wholesale & Commercial Roasting Portal**: Lead capture engine for Austin corporate tech offices, restaurants, and cafes to request weekly bulk 5lb bean deliveries, espresso machine leasing, and barista training.
-  - **Live San Franciscan Roaster Drum Telemetry HUD**: Real-time PID temperature fluctuation monitor (`DRUM: 418.6°F • ROR: +14.2°F/m • BATCH: #FT-9402 ETHIOPIA`) giving an authentic micro-roastery command center experience.
-  - **Interactive 6-Axis Sensory Flavor Radar Chart**: Real-time SVG polygon morphing between roast profiles (Ethiopian Yirgacheffe, Dogspeed Blend, Colombian Dark).
-  - **Interactive 4-Step Bean Journey Timeline**: Trace beans from 1,950m MASL origin farms through grain logistics, convection drum roasting, to precision espresso extraction.
-  - **Austin Driving ETA & Route Calculator**: Select any Austin neighborhood (Downtown 78701, East Austin 78702, South Congress 78704, Hyde Park 78751) to get live driving minutes, route details, and parking status.
-  - **3 Prestige Holographic VIP Metal Passes**:
-    1. *Brushed Steel: Weekend Explorer Pass ($35)*
-    2. *Titanium Reserve: Tasting Reserve ($68)*
-    3. *24K Sovereign Gold: Roaster's Circle Flagship ($185)* with dynamic rainbow optical shimmer.
-  - **Press Mentions & Media Accolades Wall**: Showcasing awards from Austin Chronicle ("Best Neighborhood Roaster"), Eater Austin, and Texas Monthly.
-  - **Curated Community Instagram Grid**: Integrated aesthetic gallery connecting customers with Flat Track culture.
-  - **Newtonian Gravity Physics Coffee Bean Cannon**: Drop tumbling interactive coffee beans that bounce realistically across the screen.
-  - **Web Audio Roastery Ambiance Synthesizer**: Native browser acoustic generator simulating warm cafe atmosphere and espresso extraction soundscapes.
-  - **Accessibility Control Suite**: On-the-fly contrast switching and text size adjustments (`A+` / `A-`).
-  - **Google Lighthouse Certified Performance Badge**: Documenting 99 Performance, 100 SEO, and 0.4s LCP speed.
-- **Why It's Worth $1,997:** An unmatched digital asset that positions Flat Track as Austin's preeminent coffee brand, capturing lucrative high-dollar B2B wholesale contracts while providing customers an unforgettable interactive digital experience.
+  - **Google Sign-In Verification**: Official Google OAuth authentication widget allowing 1-click customer login, verified profile badge, and auto-filled checkout details.
+  - **Integrated Online Payment Gateway**:
+    - Secure checkout with Credit/Debit Cards, Google Pay, and Apple Pay
+    - Live card input validation and format masking
+    - Instant verified transaction ID generation (`TXN_8849204AUSTIN`) with printable digital receipt
+  - **Live Order & Delivery Status Tracker HUD**:
+    - Real-time 4-stage tracking radar (`Order Paid` → `Barista Brewing` → `Ready at Counter` → `Enjoyed`)
+    - Dynamic countdown timer and live progress indicators
+    - Synced with Owner Portal so when the kitchen advances the order, the customer's tracker updates automatically
+  - **In-Website Mini-Game: "Flat Track Bean Rush"**:
+    - Interactive 60fps arcade canvas game embedded directly into the website (no separate app or external site)
+    - Players catch falling golden beans in an East Austin coffee cup while dodging obstacles
+    - Includes score counter, lives, and high-score tracker
+    - **Gamified Customer Incentive**: Reaching 100+ points unlocks an exclusive reward voucher (`BEANS100 - 15% OFF`) that automatically applies a 15% discount to their checkout cart!
+  - **Flagship Roastery Accoutrements**:
+    - Live Roaster Drum Telemetry HUD (`DRUM: 418.6°F`)
+    - 6-Axis Sensory Flavor Radar Chart
+    - Austin Zip-Code Driving ETA & Route Calculator
+- **Why It's Worth $1,997:** An unmatched, all-in-one digital business machine that handles authentication, takes real payments, gives customers UberEats-style order tracking, and keeps them engaged with a branded arcade mini-game that drives repeat orders.
 
 ---
 
@@ -102,7 +106,10 @@ YOU: "Hey [Name], my name is [Your Name]. I know you're busy running the roaster
 
 I was checking out your location on East Cesar Chavez and saw you guys have an incredible 4.8-star reputation with over 750 reviews. But I noticed when people search for your roastery on mobile, there's a huge opportunity to capture more direct bean orders and tasting reservations.
 
-We actually specialize in building high-converting digital storefronts for top Austin businesses, and instead of pitching theoretical ideas, we already built three working showcase models specifically for Flat Track Coffee—pre-loaded with your Dogspeed espresso, your cold brew taps, and interactive customer pass systems.
+We actually specialize in building high-converting digital storefronts for top Austin businesses, and instead of pitching theoretical ideas, we already built three working showcase models specifically for Flat Track Coffee:
+1. A fast, gorgeous mobile storefront ($497)
+2. A direct ordering system connected to your own kitchen POS portal ($997)
+3. A flagship suite with Google sign-in, online card payments, live order tracking, and an interactive mini-game ($1,997)
 
 Would you be open to me sending a quick 30-second text with the live links so you can take a look on your phone whenever you have a free minute?"
 
@@ -116,16 +123,16 @@ PROSPECT: "Sure, send it over. What's the number / link?"
 ```text
 Hey [Name]! This is [Your Name]. As promised, here are the 3 working showcase models we custom-built for Flat Track Coffee on E Cesar Chavez:
 
-🥉 Essential Storefront ($497 one-time):
+🥉 Tier 1: Gorgeous Mobile Storefront ($497 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html
 
-🥈 Customer Acquisition Engine ($997 one-time):
+🥈 Tier 2: Ordering + Owner Kitchen POS Portal ($997 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html
-(Includes online pre-ordering, cart, table reservations & bean customizer lab)
+(Includes customer ordering, table booking & live Owner management terminal)
 
-👑 Full Digital Business Suite ($1,997 one-time):
+👑 Tier 3: Complete Enterprise Suite ($1,997 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html
-(Includes B2B wholesale portal, live roast telemetry HUD, sensory radar, Austin ETA calculator & VIP passes)
+(Includes Google Sign-In, card/Apple Pay checkout, live order tracking HUD & Bean Rush arcade game)
 
 Everything is 100% turnkey—zero monthly retainer fees or agency contracts. Take a quick look on your phone when you have a free minute and let me know which direction fits Flat Track best!
 ```
@@ -143,17 +150,17 @@ I'm a big fan of Flat Track Coffee Roasters on East Cesar Chavez—you've built 
 
 Rather than sending a generic agency pitch, my team and I already built three working digital showcase models specifically for Flat Track Coffee:
 
-1. Essential Storefront ($497 one-time):
+1. Gorgeous Mobile Storefront ($497 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html
 Fast mobile storefront, menu showcase, Weekend Explorer Pass, and embedded maps.
 
-2. Customer Acquisition Engine ($997 one-time):
+2. Ordering + Owner Kitchen POS Portal ($997 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html
-Direct online pre-ordering, slide-over cart, table reservation wizard, and interactive bean customizer.
+Direct online pre-ordering with a dedicated Owner/Kitchen management terminal that lets your staff track incoming tickets, seat table bookings, and toggle sold-out items in real time.
 
-3. Full Digital Business Suite ($1,997 one-time):
+3. Complete Enterprise Suite ($1,997 one-time):
 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html
-Full roastery command center with B2B wholesale lead capture, live drum telemetry HUD, 6-axis flavor radar, Austin driving ETA calculator, and VIP holographic metal passes.
+Complete digital engine featuring Google sign-in verification, online payments (Card, Apple Pay, Google Pay), a live order & delivery status tracker HUD, and an in-website "Bean Rush" arcade game that unlocks customer discount codes.
 
 Every package is delivered as a 100% Turnkey Asset—you pay once and own all the code forever with zero monthly agency retainers.
 

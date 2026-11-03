@@ -3,21 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flat Track Coffee Roasters | Austin TX | Hyper-Elite Roastery & Flagship</title>
-<meta name="description" content="Austin's premier specialty coffee roastery & lifestyle brand. Interactive roast telemetry, B2B wholesale, online ordering, tasting passes. 1611 E Cesar Chavez St, Austin TX 78702.">
+<title>Flat Track Coffee Roasters | Flagship Suite | Live POS, Tracking & Arcade</title>
+<meta name="description" content="East Austin's flagship specialty roastery. Google sign-in verification, online payments, live order tracking HUD, Owner Kitchen Portal, and in-website mini-game.">
 <link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier3.html">
 
-<!-- JSON-LD Full LocalBusiness Schema -->
+<!-- JSON-LD LocalBusiness Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CoffeeShop",
   "name": "Flat Track Coffee Roasters",
-  "image": "https://satwik92105-png.github.io/01-austin-roasters-coffee/assets/og-image.jpg",
-  "@id": "https://satwik92105-png.github.io/01-austin-roasters-coffee/",
-  "url": "https://satwik92105-png.github.io/01-austin-roasters-coffee/",
-  "telephone": "(512) 540-6033",
-  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "1611 E Cesar Chavez St",
@@ -26,534 +21,316 @@
     "postalCode": "78702",
     "addressCountry": "US"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 30.2562,
-    "longitude": -97.7168
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-      "opens": "07:00",
-      "closes": "17:00"
-    }
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "750"
-  }
+  "telephone": "(512) 540-6033",
+  "openingHours": "Mo-Su 07:00-17:00",
+  "priceRange": "$$"
 }
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #080706;
-    --bg2: #0f0e0c;
-    --bg3: #161412;
-    --bg4: #1c1a17;
+    --bg: #070605;
+    --bg2: #0e0d0b;
+    --bg3: #151411;
+    --bg4: #1d1b17;
     --gold: #d4af37;
-    --gold-light: #f3e5ab;
-    --gold-dark: #aa820a;
-    --cream: #faf6ee;
-    --text: #e8e3d8;
-    --muted: #948e82;
+    --gold-light: #f5e6b8;
+    --cream: #faf7f0;
+    --text: #eae5dc;
+    --muted: #958f84;
     --border: rgba(212, 175, 55, 0.2);
     --border-hover: rgba(212, 175, 55, 0.5);
     --green: #10b981;
-    --font-scale: 1;
+    --blue: #3b82f6;
+    --orange: #f59e0b;
+    --red: #ef4444;
   }
 
-  body.high-contrast {
-    --bg: #000000;
-    --bg2: #0a0a0a;
-    --bg3: #141414;
-    --bg4: #1e1e1e;
-    --text: #ffffff;
-    --muted: #cccccc;
-    --border: rgba(255, 215, 0, 0.4);
-    --gold: #ffd700;
-  }
-
-  html { scroll-behavior: smooth; font-size: calc(16px * var(--font-scale)); }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* Physics & Ambient Canvases */
-  #physicsCanvas {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 9990;
-  }
   #ambientCanvas {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 0; opacity: 0.5;
+    pointer-events: none; z-index: 0; opacity: 0.35;
   }
 
-  /* Top Navigation & Tier Switcher Bar */
-  .top-nav-bar {
+  /* Top Nav Bar */
+  .top-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 24px;
-    background: rgba(8, 7, 6, 0.88);
+    background: rgba(7, 6, 5, 0.94);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-brand {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem;
+  .nav-left { display: flex; align-items: center; gap: 16px; }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem;
     color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 8px;
   }
-  .nav-links { display: flex; gap: 20px; align-items: center; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  @media (max-width: 900px) { .nav-links { display: none; } }
 
-  .nav-controls { display: flex; align-items: center; gap: 10px; }
-  .a11y-btn {
-    background: var(--bg3); border: 1px solid var(--border); color: var(--text);
-    padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
+  .nav-center-modes {
+    display: flex; background: rgba(21, 20, 17, 0.9); border: 1px solid var(--border);
+    border-radius: 50px; padding: 4px; gap: 4px;
   }
-  .a11y-btn:hover { border-color: var(--gold); color: var(--gold); }
+  @media (max-width: 980px) { .nav-center-modes { display: none; } }
+  .mode-tab {
+    padding: 6px 14px; border-radius: 50px; border: none; background: transparent;
+    color: var(--muted); font-size: 11px; font-weight: 600; font-family: 'Space Grotesk';
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .mode-tab.active { background: var(--gold); color: #070605; font-weight: 700; }
 
-  .tier-switcher-pill {
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+
+  /* Google Sign-In Pill */
+  .google-auth-btn {
+    background: var(--bg3); border: 1px solid var(--border); color: var(--cream);
+    padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    font-family: 'Space Grotesk';
+  }
+  .google-auth-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .google-user-pill {
+    display: none; align-items: center; gap: 8px; background: rgba(16,185,129,0.12);
+    border: 1px solid var(--green); border-radius: 50px; padding: 4px 12px; font-size: 11px;
+    color: var(--green); cursor: pointer; font-family: 'Space Grotesk';
+  }
+  .google-user-avatar { width: 20px; height: 20px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #000; font-weight: 700; }
+
+  .tier-pill {
     display: flex; gap: 4px; background: rgba(18, 16, 14, 0.95);
-    border: 1px solid var(--border); border-radius: 50px; padding: 4px;
+    border: 1px solid var(--border); border-radius: 50px; padding: 4px 6px;
   }
-  .tier-switcher-pill a {
+  .tier-pill a {
     text-decoration: none; font-size: 11px; font-weight: 600; font-family: 'Space Grotesk', sans-serif;
-    padding: 5px 12px; border-radius: 50px; transition: all 0.3s; color: var(--muted);
+    padding: 5px 12px; border-radius: 50px; transition: all 0.2s; color: var(--muted);
   }
-  .tier-switcher-pill a.active { background: var(--gold); color: #080706; }
-  .tier-switcher-pill a:not(.active):hover { color: var(--gold); }
+  .tier-pill a.active { background: var(--gold); color: #070605; }
+  .tier-pill a:not(.active):hover { color: var(--gold); }
 
   /* Hero Section */
-  .hero-wrapper {
-    position: relative; min-height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 120px 24px 80px; z-index: 1;
-    background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+  .hero {
+    min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; padding: 130px 24px 70px; position: relative; z-index: 1;
+    background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.14) 0%, transparent 60%),
                 linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   }
-
   .flagship-tier-pill {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center; gap: 8px;
     background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold);
-    border-radius: 50px; padding: 8px 22px; font-size: 13px; color: var(--gold);
-    font-weight: 600; margin-bottom: 24px; box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-    letter-spacing: 0.05em; text-transform: uppercase;
+    border-radius: 50px; padding: 8px 22px; font-size: 12px; color: var(--gold);
+    margin-bottom: 24px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700;
   }
-
   .hero-hud-telemetry {
-    display: inline-flex; align-items: center; gap: 14px;
-    background: rgba(15, 14, 12, 0.9); border: 1px solid var(--border);
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(21, 20, 17, 0.9); border: 1px solid var(--border);
     border-radius: 8px; padding: 6px 16px; font-family: 'JetBrains Mono', monospace;
     font-size: 12px; color: var(--gold-light); margin-bottom: 24px;
   }
   .hud-live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
 
-  .hero-title {
-    font-family: 'Space Grotesk', sans-serif; font-size: clamp(3rem, 7.5vw, 6rem);
-    font-weight: 700; line-height: 1.02; margin-bottom: 22px;
-    background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 45%, var(--gold) 80%, #aa820a 100%);
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700; line-height: 1.05; margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 50%, var(--gold) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    letter-spacing: -0.02em;
   }
-  .hero-subtitle {
-    font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted);
-    max-width: 680px; margin: 0 auto 36px; font-weight: 400; line-height: 1.6;
-  }
+  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 660px; margin: 0 auto 34px; }
 
-  .hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
   .btn-gold {
-    background: linear-gradient(135deg, var(--gold), #f0d575);
-    color: #080706; font-weight: 700; font-size: 15px; padding: 15px 36px;
-    border-radius: 50px; text-decoration: none; border: none; cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif; transition: all 0.3s;
-    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35);
+    background: linear-gradient(135deg, var(--gold), #f0d575); color: #070605;
+    font-weight: 700; font-size: 15px; padding: 14px 34px; border-radius: 50px;
+    text-decoration: none; border: none; cursor: pointer; font-family: 'Space Grotesk';
+    transition: all 0.3s; box-shadow: 0 8px 28px rgba(212, 175, 55, 0.35);
   }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 45px rgba(212, 175, 55, 0.5); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(212, 175, 55, 0.5); }
   .btn-outline {
     background: transparent; color: var(--text); font-weight: 600; font-size: 15px;
-    padding: 15px 34px; border-radius: 50px; text-decoration: none;
-    border: 1px solid var(--border); cursor: pointer; font-family: 'Space Grotesk', sans-serif;
-    transition: all 0.3s;
+    padding: 14px 32px; border-radius: 50px; text-decoration: none; border: 1px solid var(--border);
+    cursor: pointer; font-family: 'Space Grotesk'; transition: all 0.3s;
   }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  .hero-interactive-dock {
-    display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
-    background: rgba(22, 20, 18, 0.7); border: 1px solid var(--border);
-    border-radius: 50px; padding: 6px 16px;
+  /* Interactive Arcade Banner */
+  .game-hero-banner {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(21, 20, 17, 0.85); border: 1px solid var(--border);
+    border-radius: 50px; padding: 8px 20px; font-size: 13px; color: var(--cream);
+    cursor: pointer; transition: all 0.3s;
   }
-  .dock-btn {
-    background: none; border: none; color: var(--muted); font-size: 12px;
-    display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 6px 12px;
-    border-radius: 50px; transition: all 0.2s; font-family: 'Space Grotesk', sans-serif;
-  }
-  .dock-btn:hover, .dock-btn.active { color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+  .game-hero-banner:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 0 25px rgba(212,175,55,0.3); }
 
-  /* Stats Counter Bar */
-  .stats-banner {
-    display: flex; justify-content: space-around; align-items: center;
-    padding: 36px 24px; background: var(--bg2); border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 24px; position: relative; z-index: 1;
-  }
-  .stat-block { text-align: center; }
-  .stat-digit { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--gold); }
-  .stat-desc { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 4px; }
-
-  /* Sections Architecture */
+  /* Section Architecture */
   section { padding: 90px 24px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-  .full-width-sec { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; }
-  .full-width-sec > .sec-inner { max-width: 1200px; margin: 0 auto; }
-  
-  .sec-header { margin-bottom: 48px; }
+  .full-width { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; }
+  .full-width > .inner-sec { max-width: 1200px; margin: 0 auto; }
   .sec-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
   .sec-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--cream); margin-bottom: 12px; }
-  .sec-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; line-height: 1.6; }
+  .sec-sub { color: var(--muted); font-size: 1.05rem; max-width: 620px; line-height: 1.6; margin-bottom: 36px; }
 
-  /* FEATURE 1: ROASTER HUD & TELEMETRY */
-  .telemetry-dashboard {
+  /* LIVE ORDERING GRID */
+  .order-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .order-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s;
+  }
+  .order-card:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .item-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--cream); }
+  .item-price { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+  .item-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; }
+  .card-bottom { display: flex; justify-content: space-between; align-items: center; }
+
+  /* LIVE ORDER & DELIVERY STATUS TRACKER HUD */
+  .tracker-card {
     background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    padding: 36px; margin-bottom: 40px;
   }
-  @media (max-width: 850px) { .telemetry-dashboard { grid-template-columns: 1fr; } }
-  
-  .telemetry-card {
-    background: var(--bg4); border: 1px solid var(--border); border-radius: 14px; padding: 22px;
+  .tracker-steps-row {
+    display: flex; justify-content: space-between; position: relative; margin: 30px 0 20px;
   }
-  .telemetry-card-title {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
-    color: var(--gold); letter-spacing: 0.08em; margin-bottom: 14px; display: flex; justify-content: space-between;
+  .tracker-steps-row::before {
+    content: ''; position: absolute; top: 20px; left: 8%; right: 8%; height: 3px;
+    background: var(--border); z-index: 0;
   }
-  .gauge-readout { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--cream); }
-  .gauge-unit { font-size: 1.2rem; color: var(--muted); margin-left: 4px; }
-  .gauge-graph {
-    width: 100%; height: 80px; margin-top: 16px; background: rgba(0,0,0,0.3);
-    border-radius: 8px; border: 1px solid rgba(212,175,55,0.1); display: flex; align-items: flex-end; gap: 4px; padding: 8px;
+  .tracker-step { position: relative; z-index: 1; text-align: center; }
+  .tracker-bubble {
+    width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--border);
+    background: var(--bg); color: var(--muted); display: flex; align-items: center; justify-content: center;
+    font-size: 16px; margin: 0 auto 8px; transition: all 0.3s;
   }
-  .graph-bar { flex: 1; background: var(--gold); border-radius: 2px 2px 0 0; transition: height 0.6s ease; opacity: 0.7; }
-  .graph-bar:hover { opacity: 1; }
+  .tracker-step.active .tracker-bubble { border-color: var(--gold); background: rgba(212,175,55,0.15); color: var(--gold); animation: pulse 2s infinite; }
+  .tracker-step.done .tracker-bubble { background: var(--gold); border-color: var(--gold); color: #070605; }
+  .tracker-step-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+  .tracker-step.active .tracker-step-title { color: var(--gold); }
 
-  /* FEATURE 2: 6-AXIS FLAVOR RADAR */
-  .radar-container {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  /* PAYMENT GATEWAY MODAL */
+  .payment-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+    z-index: 10005; display: none; align-items: center; justify-content: center; padding: 20px;
   }
-  .radar-nav { display: flex; gap: 8px; margin-bottom: 20px; }
-  .radar-btn {
-    padding: 6px 16px; border-radius: 50px; border: 1px solid var(--border);
-    background: var(--bg3); color: var(--muted); font-size: 12px; cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif; transition: all 0.2s;
+  .payment-modal.open { display: flex; }
+  .payment-box {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 24px;
+    padding: 36px; width: 100%; max-width: 480px; position: relative;
   }
-  .radar-btn.active { background: var(--gold); color: #080706; border-color: var(--gold); font-weight: 700; }
+  .payment-tabs { display: flex; gap: 8px; margin: 18px 0 24px; }
+  .pay-tab {
+    flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg4); color: var(--text); font-size: 13px; font-weight: 600;
+    cursor: pointer; text-align: center; transition: all 0.2s; font-family: 'Space Grotesk';
+  }
+  .pay-tab.active { background: var(--gold); color: #070605; border-color: var(--gold); font-weight: 700; }
 
-  /* FEATURE 3: ONLINE PRE-ORDER & MENU FILTER */
-  .menu-controls { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
-  .menu-search-input {
-    flex: 1; min-width: 240px; background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 50px; padding: 12px 22px; color: var(--text); font-size: 14px;
-    font-family: inherit; outline: none; transition: border-color 0.2s;
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .form-ctrl {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    color: var(--text); font-size: 14px; padding: 12px 14px; outline: none; font-family: inherit;
   }
-  .menu-search-input:focus { border-color: var(--gold); }
-  .menu-pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
-  .menu-pill {
-    padding: 8px 18px; border-radius: 50px; border: 1px solid var(--border);
-    background: none; color: var(--muted); font-size: 13px; cursor: pointer;
-    font-family: inherit; transition: all 0.2s;
-  }
-  .menu-pill.active { background: var(--gold); color: #080706; border-color: var(--gold); font-weight: 700; }
+  .form-ctrl:focus { border-color: var(--gold); }
 
-  .menu-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-  .menu-item-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
-    padding: 24px; display: flex; flex-direction: column; justify-content: space-between;
-    transition: all 0.3s;
+  /* ================= IN-WEBSITE MINI-GAME OVERLAY ================= */
+  .game-screen-overlay {
+    position: fixed; inset: 0; background: rgba(7, 6, 5, 0.98); z-index: 10010;
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px;
   }
-  .menu-item-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-  .menu-item-card.hidden { display: none; }
-  .menu-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .menu-item-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--cream); }
-  .menu-item-price { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
-  .menu-item-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
-  .menu-card-bottom { display: flex; justify-content: space-between; align-items: center; }
-  .badge-tag {
-    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
-    background: rgba(212,175,55,0.12); color: var(--gold); border-radius: 50px; padding: 4px 12px;
+  .game-screen-overlay.open { display: flex; }
+  .game-container {
+    background: var(--bg2); border: 2px solid var(--gold); border-radius: 20px;
+    padding: 24px; width: 100%; max-width: 640px; position: relative; text-align: center;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.25);
   }
-  .add-cart-btn {
-    background: var(--gold); color: #080706; border: none; border-radius: 50px;
-    padding: 7px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif; transition: all 0.2s;
+  .game-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
   }
-  .add-cart-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+  .game-close-btn {
+    background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+    border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 16px;
+  }
+  #gameCanvas {
+    background: #0d0c0a; border: 1px solid var(--border); border-radius: 12px;
+    width: 100%; height: 360px; display: block;
+  }
+  .game-scoreboard {
+    display: flex; justify-content: space-around; margin: 16px 0; font-family: 'JetBrains Mono';
+  }
+  .score-val { font-size: 1.4rem; font-weight: 700; color: var(--gold); }
 
-  /* FEATURE 4: BEAN CUSTOMIZER LAB */
-  .lab-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px;
-  }
-  @media (max-width: 850px) { .lab-card { grid-template-columns: 1fr; } }
-  .lab-control-group { margin-bottom: 24px; }
-  .lab-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
-  .lab-pill-options { display: flex; gap: 8px; flex-wrap: wrap; }
-  .lab-pill {
-    padding: 9px 18px; border-radius: 50px; border: 1px solid var(--border);
-    background: var(--bg4); color: var(--text); font-size: 13px; cursor: pointer;
-    transition: all 0.2s;
-  }
-  .lab-pill.active { background: var(--gold); color: #080706; border-color: var(--gold); font-weight: 700; }
-  .roast-slider-bar { height: 8px; border-radius: 50px; background: var(--bg4); margin-top: 10px; overflow: hidden; }
-  .roast-slider-fill { height: 100%; background: linear-gradient(90deg, #d4af37, #805315); width: 60%; transition: width 0.4s; }
-  
-  .lab-preview-box {
-    background: var(--bg4); border: 1px solid var(--border); border-radius: 16px;
-    padding: 28px; text-align: center; display: flex; flex-direction: column; justify-content: center;
-  }
-  .lab-price-display { font-family: 'Space Grotesk', sans-serif; font-size: 3.2rem; font-weight: 700; color: var(--gold); }
-  .lab-summary-text { font-size: 0.95rem; color: var(--muted); margin: 12px 0 24px; line-height: 1.5; }
-
-  /* FEATURE 5: HOLOGRAPHIC VIP PASSES */
-  .vip-passes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-  .vip-pass-card {
-    border-radius: 20px; padding: 36px 28px; position: relative; overflow: hidden;
-    transition: all 0.4s; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .vip-pass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-  .vip-pass-card.steel {
-    background: linear-gradient(135deg, #181716 0%, #242220 100%);
-    border-color: rgba(180, 190, 200, 0.3);
-  }
-  .vip-pass-card.titanium {
-    background: linear-gradient(135deg, #16181c 0%, #1f2329 100%);
-    border-color: rgba(99, 140, 185, 0.4);
-  }
-  .vip-pass-card.sovereign {
-    background: linear-gradient(135deg, #241c0e 0%, #3a2c14 100%);
-    border-color: rgba(212, 175, 55, 0.6);
-  }
-  .hologram-shimmer {
-    position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.06) 40%, rgba(212,175,55,0.12) 50%, transparent 70%);
-    background-size: 200% 200%; animation: shimmer 6s infinite;
-  }
-  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-  .pass-metal-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
-  .steel .pass-metal-badge { color: #b4bec8; }
-  .titanium .pass-metal-badge { color: #638cb9; }
-  .sovereign .pass-metal-badge { color: var(--gold); }
-  .pass-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
-  .pass-price-line { font-family: 'Space Grotesk', sans-serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 20px; }
-  .steel .pass-price-line { color: #b4bec8; }
-  .titanium .pass-price-line { color: #638cb9; }
-  .sovereign .pass-price-line { color: var(--gold); }
-  .pass-price-line span { font-size: 1rem; color: var(--muted); font-weight: 400; }
-  .pass-benefits { list-style: none; margin-bottom: 28px; }
-  .pass-benefits li { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text); display: flex; gap: 10px; }
-
-  /* FEATURE 6: TABLE RESERVATION WIZARD */
-  .wizard-container { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
-  .step-progress-row { display: flex; justify-content: space-between; margin-bottom: 36px; position: relative; }
-  .step-progress-row::before { content: ''; position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 0; }
-  .step-node { position: relative; z-index: 1; text-align: center; }
-  .step-node-bubble {
-    width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--border);
-    background: var(--bg); color: var(--muted); display: flex; align-items: center;
-    justify-content: center; font-weight: 700; font-size: 14px; margin: 0 auto 8px;
-  }
-  .step-node.active .step-node-bubble { border-color: var(--gold); background: rgba(212,175,55,0.15); color: var(--gold); }
-  .step-node.done .step-node-bubble { background: var(--gold); border-color: var(--gold); color: #080706; }
-  .step-node-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
-
-  .wizard-pane { display: none; }
-  .wizard-pane.active { display: block; }
-  .date-selector-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 20px 0; }
-  @media (max-width: 650px) { .date-selector-grid { grid-template-columns: repeat(4, 1fr); } }
-  .date-tile {
-    padding: 12px 6px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--bg4); color: var(--text); cursor: pointer; text-align: center; font-size: 13px;
-  }
-  .date-tile.active { background: var(--gold); color: #080706; border-color: var(--gold); font-weight: 700; }
-  .time-slot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
-  @media (max-width: 650px) { .time-slot-grid { grid-template-columns: repeat(2, 1fr); } }
-  .time-tile {
-    padding: 12px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--bg4); color: var(--text); cursor: pointer; text-align: center; font-size: 14px;
-  }
-  .time-tile.active { background: var(--gold); color: #080706; border-color: var(--gold); font-weight: 700; }
-
-  /* FEATURE 7: BEAN JOURNEY TIMELINE */
-  .timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  @media (max-width: 900px) { .timeline-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 550px) { .timeline-grid { grid-template-columns: 1fr; } }
-  .timeline-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
-    padding: 24px; position: relative; transition: all 0.3s;
-  }
-  .timeline-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-  .timeline-step-badge {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold);
-    margin-bottom: 12px; display: inline-block;
-  }
-  .timeline-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--cream); }
-  .timeline-card-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
-
-  /* FEATURE 8: WHOLESALE & COMMERCIAL PORTAL */
-  .wholesale-box {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px;
-  }
-  @media (max-width: 850px) { .wholesale-box { grid-template-columns: 1fr; } }
-  .wholesale-feature-item { display: flex; gap: 14px; margin-bottom: 20px; }
-  .wholesale-icon {
-    width: 44px; height: 44px; border-radius: 12px; background: rgba(212,175,55,0.1);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-
-  /* FEATURE 9: AUSTIN DRIVING ETA CALCULATOR */
-  .eta-calculator-box {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
-  }
-  @media (max-width: 750px) { .eta-calculator-box { grid-template-columns: 1fr; } }
-  .eta-result-card {
-    background: var(--bg4); border: 1px solid var(--border); border-radius: 14px;
-    padding: 24px; text-align: center;
-  }
-  .eta-minutes { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: var(--gold); }
-
-  /* REVIEWS & PRESS WALL */
-  .press-badges-row {
-    display: flex; gap: 24px; justify-content: center; align-items: center;
-    flex-wrap: wrap; margin-bottom: 40px; opacity: 0.8;
-  }
-  .press-badge {
-    border: 1px solid var(--border); border-radius: 50px; padding: 8px 20px;
-    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--gold-light);
-  }
-  .reviews-carousel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-  .review-bubble {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
-    padding: 24px; display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .review-stars-row { color: #f59e0b; font-size: 14px; margin-bottom: 12px; }
-  .review-quote { font-size: 0.92rem; color: var(--text); line-height: 1.6; font-style: italic; margin-bottom: 16px; }
-  .review-author-meta { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
-
-  /* INSTAGRAM / COMMUNITY GRID */
-  .insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-  @media (max-width: 900px) { .insta-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 500px) { .insta-grid { grid-template-columns: repeat(2, 1fr); } }
-  .insta-thumb {
-    aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: var(--bg3);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    position: relative; cursor: pointer; transition: transform 0.3s;
-  }
-  .insta-thumb:hover { transform: scale(1.04); border-color: var(--gold); }
-  .insta-thumb span { font-size: 2.2rem; }
-
-  /* AUDIT & VERIFICATION SEAL */
-  .audit-seal-bar {
-    background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25);
-    border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between;
-    align-items: center; flex-wrap: gap; margin-top: 40px; gap: 20px;
-  }
-  .audit-score-pill {
-    background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green);
-    color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 14px;
-    font-weight: 700; border-radius: 50px; padding: 6px 14px;
-  }
-
-  /* Cart Drawer */
-  .cart-panel {
+  /* CART DRAWER */
+  .cart-drawer {
     position: fixed; right: -420px; top: 0; bottom: 0; width: 400px;
     background: var(--bg2); border-left: 1px solid var(--border); z-index: 9999;
     transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1); padding: 28px; overflow-y: auto;
   }
-  .cart-panel.open { right: 0; }
+  .cart-drawer.open { right: 0; }
   .cart-dimmer { position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9998; display: none; }
   .cart-dimmer.open { display: block; }
-  .cart-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-  .cart-close-btn { background: none; border: 1px solid var(--border); color: var(--text); border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 16px; }
   .floating-cart-pill {
     position: fixed; bottom: 28px; right: 28px; z-index: 9995;
-    background: linear-gradient(135deg, var(--gold), #f0d575); color: #080706;
+    background: linear-gradient(135deg, var(--gold), #f0d575); color: #070605;
     border: none; border-radius: 50px; padding: 14px 24px; font-weight: 700; font-size: 15px;
-    cursor: pointer; font-family: 'Space Grotesk', sans-serif; box-shadow: 0 10px 35px rgba(212,175,55,0.45);
-    display: flex; align-items: center; gap: 10px; transition: transform 0.2s;
+    cursor: pointer; font-family: 'Space Grotesk'; box-shadow: 0 10px 35px rgba(212,175,55,0.45);
+    display: flex; align-items: center; gap: 10px;
   }
-  .floating-cart-pill:hover { transform: translateY(-3px); }
 
-  /* Forms Input Fields */
-  .form-field-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-  .form-field-group label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-  .form-input, .form-textarea, .form-select {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-    color: var(--text); font-size: 14px; padding: 12px 16px; font-family: inherit;
-    outline: none; transition: border-color 0.2s;
+  /* GOOGLE SIGN IN MODAL */
+  .auth-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+    z-index: 10006; display: none; align-items: center; justify-content: center; padding: 20px;
   }
-  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--gold); }
-  .form-textarea { resize: vertical; min-height: 100px; }
-
-  /* Map Container */
-  .map-box { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); height: 320px; }
-  .map-box iframe { width: 100%; height: 100%; border: none; }
-
-  /* Footer */
-  footer {
-    background: var(--bg); border-top: 1px solid var(--border);
-    padding: 60px 24px 30px; text-align: center; position: relative; z-index: 1;
-  }
-  .footer-brand { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
-  .footer-links-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
-  .footer-links-row a { color: var(--muted); text-decoration: none; font-size: 14px; }
-  .footer-links-row a:hover { color: var(--gold); }
-
-  @media (max-width: 600px) {
-    .cart-panel { width: 100%; }
-    .hero-hud-telemetry { flex-direction: column; gap: 6px; }
+  .auth-modal.open { display: flex; }
+  .auth-box {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px; width: 100%; max-width: 400px; text-align: center;
   }
 </style>
 </head>
 <body>
 
 <canvas id="ambientCanvas"></canvas>
-<canvas id="physicsCanvas"></canvas>
 
-<!-- Top Nav Bar with Tier Switcher & Accessibility -->
-<header class="top-nav-bar">
-  <a href="#hero" class="nav-brand">☕ Flat Track Flagship</a>
-  <nav class="nav-links">
-    <a href="#telemetry">Roaster HUD</a>
-    <a href="#flavor">Sensory Radar</a>
-    <a href="#order">Online Menu</a>
-    <a href="#customizer">Customizer Lab</a>
-    <a href="#passes">VIP Passes</a>
-    <a href="#reserve">Reservations</a>
-    <a href="#wholesale">B2B Wholesale</a>
-    <a href="#eta">ETA Map</a>
-  </nav>
-  <div class="nav-controls">
-    <button class="a11y-btn" onclick="toggleContrast()" title="High Contrast Mode">Contrast</button>
-    <button class="a11y-btn" onclick="adjustFont(0.05)" title="Enlarge Text">A+</button>
-    <button class="a11y-btn" onclick="adjustFont(-0.05)" title="Reduce Text">A-</button>
-    <div class="tier-switcher-pill">
+<!-- Top Navigation -->
+<header class="top-nav">
+  <div class="nav-left">
+    <a href="#hero" class="nav-logo">☕ Flat Track Flagship</a>
+  </div>
+
+  <div class="nav-center-modes">
+    <button class="mode-tab active" onclick="scrollToSection('orderSection')">Customer Menu</button>
+    <button class="mode-tab" onclick="scrollToSection('liveTrackerSection')">Live Tracker</button>
+    <button class="mode-tab" onclick="openGameOverlay()">🎮 Play Bean Rush</button>
+    <button class="mode-tab" onclick="window.location.href='tier2.html'">Owner POS Portal →</button>
+  </div>
+
+  <div class="nav-right">
+    <!-- Google Auth Button & Profile -->
+    <button class="google-auth-btn" id="googleLoginBtn" onclick="openGoogleModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+      Sign in with Google
+    </button>
+    <div class="google-user-pill" id="googleUserPill" onclick="toggleSignOut()">
+      <div class="google-user-avatar">A</div>
+      <span id="googleUserName">Austin Guest ✓</span>
+      <span style="font-size:9px; opacity:0.6;">(Sign out)</span>
+    </div>
+
+    <!-- Tier Switcher Pill -->
+    <div class="tier-pill">
       <a href="tier1.html">Tier 1</a>
       <a href="tier2.html">Tier 2</a>
       <a href="tier3.html" class="active">Tier 3</a>
@@ -561,937 +338,359 @@
   </div>
 </header>
 
-<!-- Cart Overlay & Drawer -->
-<div class="cart-dimmer" id="cartDimmer" onclick="toggleCart(false)"></div>
-<div class="cart-panel" id="cartPanel">
-  <div class="cart-header-row">
-    <h3 style="font-family:'Space Grotesk'; font-size:1.3rem;">Order Checkout 🛒</h3>
-    <button class="cart-close-btn" onclick="toggleCart(false)">✕</button>
+<!-- Floating Cart Button -->
+<button class="floating-cart-pill" id="floatCartBtn" onclick="toggleCartDrawer(true)" style="display:none;">
+  🛒 Cart <span id="cartCountBadge" style="background:#070605; color:var(--gold); border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center;">0</span>
+</button>
+
+<!-- Cart Drawer -->
+<div class="cart-dimmer" id="cartDimmer" onclick="toggleCartDrawer(false)"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <h3 style="font-family:'Space Grotesk'; font-size:1.3rem;">Flagship Checkout 🛒</h3>
+    <button style="background:none; border:1px solid var(--border); color:var(--text); border-radius:50%; width:32px; height:32px; cursor:pointer;" onclick="toggleCartDrawer(false)">✕</button>
   </div>
-  <div id="cartItemsList" style="min-height: 200px;">
-    <div style="color:var(--muted); text-align:center; padding: 40px 0;">Your cart is currently empty.</div>
+  <div id="cartItemsList" style="min-height:180px;">
+    <div style="color:var(--muted); text-align:center; padding:40px 0;">Cart is empty. Add drinks or tacos below!</div>
   </div>
-  <div id="cartSummarySection" style="display:none; border-top:1px solid var(--border); padding-top:20px; margin-top:20px;">
-    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;"><span>Subtotal</span><span id="cartSubtotalText">$0.00</span></div>
-    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;"><span>Texas Sales Tax (8.25%)</span><span id="cartTaxText">$0.00</span></div>
-    <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1.15rem; font-weight:700; color:var(--gold);"><span>Total</span><span id="cartTotalText">$0.00</span></div>
-    <div class="form-field-group">
-      <label>Curbside / Counter Pickup Time</label>
-      <select class="form-select" id="pickupTimeSelect">
-        <option>ASAP (Next 15 mins)</option>
-        <option>In 30 minutes</option>
-        <option>In 45 minutes</option>
-        <option>In 1 hour</option>
-      </select>
+  <div id="cartSummaryBox" style="display:none; border-top:1px solid var(--border); padding-top:18px; margin-top:18px;">
+    <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;"><span>Subtotal</span><span id="cartSubtotalText">$0.00</span></div>
+    <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;" id="discountRow" style="display:none;">
+      <span style="color:var(--green);">Arcade Voucher (15%)</span><span id="cartDiscountText" style="color:var(--green);">-$0.00</span>
     </div>
-    <button class="btn-gold" style="width:100%;" onclick="executeCheckout()">Complete VIP Order →</button>
-    <div id="orderSuccessMessage" style="display:none; margin-top:14px; padding:12px; background:rgba(16,185,129,0.15); border:1px solid var(--green); border-radius:8px; color:var(--green); font-size:13px; text-align:center;"></div>
+    <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;"><span>Tax (8.25%)</span><span id="cartTaxText">$0.00</span></div>
+    <div style="display:flex; justify-content:space-between; margin-bottom:18px; font-size:1.2rem; font-weight:700; color:var(--gold);"><span>Total</span><span id="cartTotalText">$0.00</span></div>
+
+    <button class="btn-gold" style="width:100%;" onclick="openPaymentModal()">Proceed to Online Payment 💳 →</button>
   </div>
 </div>
 
-<button class="floating-cart-pill" id="cartFloatBtn" onclick="toggleCart(true)" style="display:none;">
-  🛒 Cart <span id="cartCountBadge" style="background:#080706; color:var(--gold); border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center;">0</span>
-</button>
-
 <!-- HERO SECTION -->
-<div class="hero-wrapper" id="hero">
+<div class="hero" id="hero">
   <div class="flagship-tier-pill">
     <span>👑</span>
-    <span>Tier 3 Flagship · Full Digital Business Suite</span>
-    <span>— One-Time $1,997</span>
+    <span>Tier 3 Flagship · Google Auth · Payments · Live Tracker · Mini-Game</span>
+    <span>— $1,997 One-Time</span>
   </div>
 
   <div class="hero-hud-telemetry">
     <span class="hud-live-dot"></span>
-    <span>DRUM PID: <strong id="drumTempDisplay" style="color:var(--gold);">418.6°F</strong></span>
+    <span>ROASTER PID: <strong>418.6°F</strong></span>
     <span>•</span>
-    <span>ROR: <strong style="color:var(--cream);">+14.2°F/m</strong></span>
+    <span>PAYMENT GATEWAY: <strong style="color:var(--green);">ENCRYPTED</strong></span>
     <span>•</span>
-    <span>BATCH: <strong>#FT-9402 ETHIOPIA</strong></span>
+    <span>GOOGLE OAUTH: <strong>READY</strong></span>
   </div>
 
-  <h1 class="hero-title">Flat Track Coffee<br>Roasters</h1>
-  <p class="hero-subtitle">
-    East Austin's benchmark specialty roastery. Integrated real-time drum telemetry, B2B wholesale portal, precision bean customization, and priority VIP membership.
+  <h1>Flat Track Coffee<br>Roasters</h1>
+  <p>
+    The definitive digital business asset. Google-verified sign in, frictionless online checkout, real-time live order tracking HUD, connected Owner Kitchen Portal, and an engaging in-website mini-game.
   </p>
 
-  <div class="hero-cta-group">
-    <a href="#order" class="btn-gold">Order Flagship Menu</a>
-    <a href="#wholesale" class="btn-outline">Wholesale & B2B Inquiry</a>
+  <div class="hero-actions">
+    <a href="#orderSection" class="btn-gold">Order Online with Card / Apple Pay</a>
+    <button class="btn-outline" onclick="openGameOverlay()">🎮 Play Bean Rush Arcade</button>
   </div>
 
-  <div class="hero-interactive-dock">
-    <button class="dock-btn" onclick="triggerPhysicsBeans()"><span>☕</span> Spawn Physics Beans</button>
-    <button class="dock-btn" id="audioToggleBtn" onclick="toggleRoasteryAudio()"><span>🔊</span> Roastery Ambiance: Off</button>
-    <button class="dock-btn" onclick="scrollToSection('eta')"><span>📍</span> Austin Drive ETA</button>
+  <div class="game-hero-banner" onclick="openGameOverlay()">
+    <span>🎯</span>
+    <span>Play <strong>Flat Track Bean Rush</strong> (Score 100+ for 15% Off Your Order)</span>
+    <span style="color:var(--gold); font-weight:700;">Play Now →</span>
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-banner">
-  <div class="stat-block"><div class="stat-digit">4.8★</div><div class="stat-desc">750+ Google/Yelp Reviews</div></div>
-  <div class="stat-block"><div class="stat-digit">10+</div><div class="stat-desc">Years Roasting in Austin</div></div>
-  <div class="stat-block"><div class="stat-digit">100%</div><div class="stat-desc">Direct Trade Specialty</div></div>
-  <div class="stat-block"><div class="stat-digit">0.4s</div><div class="stat-desc">Core Web Vitals Speed</div></div>
-</div>
+<!-- ================= FEATURE: LIVE ORDER & DELIVERY STATUS TRACKER ================= -->
+<section id="liveTrackerSection">
+  <div class="sec-tag">Real-Time Kitchen Visibility</div>
+  <h2 class="sec-title">Live Order & Delivery Tracker HUD</h2>
+  <p class="sec-sub">When an order is placed, watch its progress through brewing, packing, and pickup in real time.</p>
 
-<!-- FEATURE 1: ROAST DRUM TELEMETRY & FLAVOR RADAR -->
-<section id="telemetry">
-  <div class="sec-header">
-    <div class="sec-tag">Precision Engineering</div>
-    <h2 class="sec-title">Live Roasting Telemetry & Sensory Radar</h2>
-    <p class="sec-subtitle">Every micro-lot roasted on East Cesar Chavez is tracked in real-time with digital roast curve telemetry.</p>
-  </div>
-
-  <div class="telemetry-dashboard">
-    <!-- Telemetry Readouts -->
-    <div>
-      <div class="telemetry-card" style="margin-bottom:16px;">
-        <div class="telemetry-card-title">
-          <span>San Franciscan Drum Roaster</span>
-          <span style="color:var(--green);">PID ONLINE</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:baseline;">
-          <div class="gauge-readout"><span id="liveDrumTemp">418.6</span><span class="gauge-unit">°F</span></div>
-          <div style="font-size:12px; color:var(--muted); text-align:right;">Charge Temp: 385°F<br>First Crack: 398°F</div>
-        </div>
-        <div class="gauge-graph" id="telemetryBars"></div>
+  <div class="tracker-card">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+      <div>
+        <span style="font-family:'JetBrains Mono'; font-size:13px; color:var(--gold);" id="trackTicketId">TICKET #FT-94021</span>
+        <h4 style="font-family:'Space Grotesk'; font-size:1.3rem; color:var(--cream); margin-top:2px;" id="trackCustomerName">Customer: Austin Coffee Lover</h4>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <div class="telemetry-card">
-          <div class="telemetry-card-title">Airflow Velocity</div>
-          <div class="gauge-readout" style="font-size:2rem;">78<span class="gauge-unit">%</span></div>
-        </div>
-        <div class="telemetry-card">
-          <div class="telemetry-card-title">Rate of Rise (RoR)</div>
-          <div class="gauge-readout" style="font-size:2rem;">+14.2<span class="gauge-unit">°F/m</span></div>
-        </div>
+      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(16,185,129,0.12); border:1px solid var(--green); border-radius:50px; padding:6px 16px; font-size:12px; color:var(--green); font-weight:700;">
+        <span class="hud-live-dot"></span>
+        <span id="trackStatusBadge">Status: Barista Brewing</span>
       </div>
     </div>
 
-    <!-- 6-Axis Sensory Radar -->
-    <div class="radar-container" id="flavor">
-      <div class="radar-nav">
-        <button class="radar-btn active" onclick="switchRadar('ethiopian', this)">Ethiopian Lot</button>
-        <button class="radar-btn" onclick="switchRadar('dogspeed', this)">Dogspeed Blend</button>
-        <button class="radar-btn" onclick="switchRadar('colombian', this)">Colombian Dark</button>
+    <!-- 4-Stage Progress Line -->
+    <div class="tracker-steps-row">
+      <div class="tracker-step done" id="tstep1">
+        <div class="tracker-bubble">✓</div>
+        <div class="tracker-step-title">Order Paid</div>
       </div>
-      <svg id="radarSvg" width="280" height="280" viewBox="0 0 300 300">
-        <!-- Background Grid Rings -->
-        <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(212,175,55,0.1)" stroke-width="1"/>
-        <circle cx="150" cy="150" r="80" fill="none" stroke="rgba(212,175,55,0.1)" stroke-width="1"/>
-        <circle cx="150" cy="150" r="40" fill="none" stroke="rgba(212,175,55,0.1)" stroke-width="1"/>
-        <!-- Axis Lines -->
-        <line x1="150" y1="30" x2="150" y2="270" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
-        <line x1="46" y1="90" x2="254" y2="210" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
-        <line x1="46" y1="210" x2="254" y2="90" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
-        <!-- Labels -->
-        <text x="150" y="22" fill="#d4af37" font-size="11" text-anchor="middle" font-family="Space Grotesk">Acidity</text>
-        <text x="265" y="85" fill="#d4af37" font-size="11" text-anchor="start" font-family="Space Grotesk">Sweetness</text>
-        <text x="265" y="220" fill="#d4af37" font-size="11" text-anchor="start" font-family="Space Grotesk">Body</text>
-        <text x="150" y="288" fill="#d4af37" font-size="11" text-anchor="middle" font-family="Space Grotesk">Bitterness</text>
-        <text x="35" y="220" fill="#d4af37" font-size="11" text-anchor="end" font-family="Space Grotesk">Floral</text>
-        <text x="35" y="85" fill="#d4af37" font-size="11" text-anchor="end" font-family="Space Grotesk">Aftertaste</text>
-        <!-- Dynamic Morph Polygon -->
-        <polygon id="radarPolygon" points="150,45 240,100 230,200 150,250 65,190 70,100" fill="rgba(212,175,55,0.25)" stroke="#d4af37" stroke-width="2"/>
-      </svg>
-      <div id="radarFlavorNotes" style="font-size:0.9rem; color:var(--gold-light); margin-top:14px; text-align:center;">
-        Notes: Wild Blueberry, Jasmine Blossom, Meyer Lemon
+      <div class="tracker-step active" id="tstep2">
+        <div class="tracker-bubble">☕</div>
+        <div class="tracker-step-title">Barista Brewing</div>
+      </div>
+      <div class="tracker-step" id="tstep3">
+        <div class="tracker-bubble">📦</div>
+        <div class="tracker-step-title">Ready at Counter</div>
+      </div>
+      <div class="tracker-step" id="tstep4">
+        <div class="tracker-bubble">🎉</div>
+        <div class="tracker-step-title">Enjoyed</div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg4); border:1px solid var(--border); border-radius:12px; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:20px;">
+      <div>
+        <div style="font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:0.08em;">Pickup Location</div>
+        <div style="font-weight:600; font-size:14px; color:var(--cream);">1611 E Cesar Chavez St, Austin TX 78702</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:0.08em;">Estimated Prep Time</div>
+        <div style="font-family:'JetBrains Mono'; font-weight:700; font-size:1.2rem; color:var(--gold);" id="trackEtaTimer">6 mins remaining</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURE 2: ONLINE ORDERING WITH SEARCH & FILTER -->
-<div class="full-width-sec" id="order">
-  <div class="sec-inner" style="padding:90px 24px;">
-    <div class="sec-header">
-      <div class="sec-tag">Digital Commerce</div>
-      <h2 class="sec-title">Order Ahead & Retail Storefront</h2>
-      <p class="sec-subtitle">Skip the queue on Cesar Chavez. Order your drinks, tacos, or roasted beans online for quick counter pickup.</p>
-    </div>
+<!-- ================= FEATURE: ONLINE ORDERING MENU ================= -->
+<div class="full-width" id="orderSection">
+  <div class="inner-sec" style="padding:90px 24px;">
+    <div class="sec-tag">Direct Storefront</div>
+    <h2 class="sec-title">Online Roastery Storefront</h2>
+    <p class="sec-sub">Order single origins, cold brews, or tacos with Google Pay, Apple Pay, or credit card.</p>
 
-    <div class="menu-controls">
-      <input type="text" class="menu-search-input" id="menuSearchInput" placeholder="🔍  Search drinks, tacos, roast origins..." oninput="handleMenuSearch()">
-      <div class="menu-pill-group">
-        <button class="menu-pill active" onclick="filterCategory('all', this)">All Items</button>
-        <button class="menu-pill" onclick="filterCategory('espresso', this)">Espresso Bar</button>
-        <button class="menu-pill" onclick="filterCategory('cold', this)">Nitro & Cold</button>
-        <button class="menu-pill" onclick="filterCategory('pourover', this)">Pour-Over</button>
-        <button class="menu-pill" onclick="filterCategory('food', this)">Austin Eats</button>
-        <button class="menu-pill" onclick="filterCategory('beans', this)">Whole Bean Bags</button>
-      </div>
-    </div>
-
-    <div class="menu-cards-grid" id="menuCardsContainer">
+    <div class="order-cards-grid">
       <!-- Item 1 -->
-      <div class="menu-item-card" data-category="espresso" data-title="Dogspeed Espresso Double">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">Dogspeed Espresso Double</span>
-            <span class="menu-item-price">$4.50</span>
+          <div class="card-top">
+            <span class="item-title">Dogspeed Espresso Double</span>
+            <span class="item-price">$4.50</span>
           </div>
-          <p class="menu-item-desc">Double shot of our flagship roast. Dark cacao, candied citrus, dense crema.</p>
+          <p class="item-desc">Double shot of house espresso. Dark cacao, candied citrus, dense crema.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">House Favorite</span>
-          <button class="add-cart-btn" onclick="addToCart('Dogspeed Espresso Double', 4.50, this)">+ Add</button>
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--gold); font-weight:600;">Signature Blend</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('Dogspeed Espresso Double', 4.50)">+ Add to Bag</button>
         </div>
       </div>
 
       <!-- Item 2 -->
-      <div class="menu-item-card" data-category="cold" data-title="24-Hour Nitro Cold Brew">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">24-Hour Nitro Cold Brew</span>
-            <span class="menu-item-price">$5.50</span>
+          <div class="card-top">
+            <span class="item-title">24-Hour Nitro Cold Brew</span>
+            <span class="item-price">$5.50</span>
           </div>
-          <p class="menu-item-desc">Slow steeped on East Cesar Chavez for 24 hours, infused with micro-nitrogen bubbles.</p>
+          <p class="item-desc">Steeped 24 hours on Cesar Chavez. Infused with micro-nitrogen bubbles for a velvety cascade.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">Nitro Draft</span>
-          <button class="add-cart-btn" onclick="addToCart('Nitro Cold Brew', 5.50, this)">+ Add</button>
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--green); font-weight:600;">Draft Tap</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('24-Hour Nitro Cold Brew', 5.50)">+ Add to Bag</button>
         </div>
       </div>
 
       <!-- Item 3 -->
-      <div class="menu-item-card" data-category="pourover" data-title="Ethiopian Single-Origin Pour-Over">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">Ethiopian Pour-Over</span>
-            <span class="menu-item-price">$5.75</span>
+          <div class="card-top">
+            <span class="item-title">Ethiopian Yirgacheffe Pour-Over</span>
+            <span class="item-price">$5.75</span>
           </div>
-          <p class="menu-item-desc">Hand-poured V60 with Yirgacheffe natural lot. Blueberry aroma and bergamot finish.</p>
+          <p class="item-desc">Single-origin natural lot, hand-poured to order on V60. Wild blueberry, jasmine floral notes.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">Micro-Lot</span>
-          <button class="add-cart-btn" onclick="addToCart('Ethiopian Pour-Over', 5.75, this)">+ Add</button>
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--gold); font-weight:600;">Single Origin</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('Ethiopian Pour-Over', 5.75)">+ Add to Bag</button>
         </div>
       </div>
 
       <!-- Item 4 -->
-      <div class="menu-item-card" data-category="food" data-title="Breakfast Taco Trio">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">Breakfast Taco Trio</span>
-            <span class="menu-item-price">$10.50</span>
+          <div class="card-top">
+            <span class="item-title">Breakfast Taco Trio</span>
+            <span class="item-price">$10.50</span>
           </div>
-          <p class="menu-item-desc">Three farm-egg tacos with cheddar, smoked chorizo, and house salsa verde on warm flour tortillas.</p>
+          <p class="item-desc">Three farm-egg tacos with smoked chorizo, melted cheddar, and house salsa verde on warm tortillas.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">Austin Staple</span>
-          <button class="add-cart-btn" onclick="addToCart('Breakfast Taco Trio', 10.50, this)">+ Add</button>
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--orange); font-weight:600;">Kitchen Staple</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('Breakfast Taco Trio', 10.50)">+ Add to Bag</button>
         </div>
       </div>
 
       <!-- Item 5 -->
-      <div class="menu-item-card" data-category="beans" data-title="Dogspeed Espresso Whole Bean 12oz">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">Dogspeed Blend (12oz)</span>
-            <span class="menu-item-price">$18.00</span>
+          <div class="card-top">
+            <span class="item-title">Dogspeed Blend 12oz Bag</span>
+            <span class="item-price">$18.00</span>
           </div>
-          <p class="menu-item-desc">Freshly roasted whole bean bag. Roasted weekly in our Cesar Chavez drum.</p>
+          <p class="item-desc">Freshly roasted whole bean bag. Roasted on our San Franciscan drum roaster on Cesar Chavez.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">Retail Bag</span>
-          <button class="add-cart-btn" onclick="addToCart('Dogspeed 12oz Bag', 18.00, this)">+ Add</button>
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--gold); font-weight:600;">Retail Whole Bean</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('Dogspeed Blend 12oz Bag', 18.00)">+ Add to Bag</button>
         </div>
       </div>
 
       <!-- Item 6 -->
-      <div class="menu-item-card" data-category="espresso" data-title="Oat Milk Honey Cortado">
+      <div class="order-card">
         <div>
-          <div class="menu-card-top">
-            <span class="menu-item-name">Oat Milk Honey Cortado</span>
-            <span class="menu-item-price">$5.00</span>
+          <div class="card-top">
+            <span class="item-title">Oat Milk Honey Cortado</span>
+            <span class="item-price">$5.00</span>
           </div>
-          <p class="menu-item-desc">1:1 espresso to steamed oat milk with a touch of local Texas wildflower honey.</p>
+          <p class="item-desc">1:1 espresso to steamed oat milk with local Texas Hill Country wildflower honey.</p>
         </div>
-        <div class="menu-card-bottom">
-          <span class="badge-tag">Barista Pick</span>
-          <button class="add-cart-btn" onclick="addToCart('Honey Cortado', 5.00, this)">+ Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURE 3: BEAN CUSTOMIZER LAB -->
-<section id="customizer">
-  <div class="sec-header">
-    <div class="sec-tag">Interactive Roastery Tool</div>
-    <h2 class="sec-title">The Bean Customizer Lab</h2>
-    <p class="sec-subtitle">Formulate your exact roast profile. Pick your single-origin terroir, dial in roast time, select your grind coarseness, and we'll bag it fresh.</p>
-  </div>
-
-  <div class="lab-card">
-    <div>
-      <div class="lab-control-group">
-        <div class="lab-label">1. Select Origin Lot</div>
-        <div class="lab-pill-options">
-          <button class="lab-pill active" onclick="selectLabPill(this, 'origin', 'Ethiopian Yirgacheffe')">Ethiopian Yirgacheffe</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'origin', 'Colombian Huila')">Colombian Huila</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'origin', 'Guatemalan Antigua')">Guatemalan Antigua</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'origin', 'Kenyan Nyeri')">Kenyan Nyeri</button>
-        </div>
-      </div>
-
-      <div class="lab-control-group">
-        <div class="lab-label">2. Roast Profile Level</div>
-        <div class="lab-pill-options">
-          <button class="lab-pill" onclick="selectLabPill(this, 'roast', 'Light Roast'); updateRoastBar(30);">Light (Nordic)</button>
-          <button class="lab-pill active" onclick="selectLabPill(this, 'roast', 'Medium Roast'); updateRoastBar(60);">Medium (City+)</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'roast', 'Dark Roast'); updateRoastBar(90);">Dark (Full French)</button>
-        </div>
-        <div class="roast-slider-bar"><div class="roast-slider-fill" id="labRoastFill"></div></div>
-      </div>
-
-      <div class="lab-control-group">
-        <div class="lab-label">3. Precision Grind</div>
-        <div class="lab-pill-options">
-          <button class="lab-pill active" onclick="selectLabPill(this, 'grind', 'Whole Bean')">Whole Bean</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'grind', 'Coarse (French Press)')">Coarse (French Press)</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'grind', 'Medium (Drip/Chemex)')">Medium (Drip/Chemex)</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'grind', 'Fine (Espresso)')">Fine (Espresso)</button>
-        </div>
-      </div>
-
-      <div class="lab-control-group">
-        <div class="lab-label">4. Package Volume</div>
-        <div class="lab-pill-options">
-          <button class="lab-pill active" onclick="selectLabPill(this, 'size', '12oz'); updateLabPrice(18);">12oz — $18</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'size', '1lb'); updateLabPrice(28);">1lb — $28</button>
-          <button class="lab-pill" onclick="selectLabPill(this, 'size', '2lb'); updateLabPrice(52);">2lb — $52</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="lab-preview-box">
-      <div style="font-size:2.8rem; margin-bottom:8px;">☕</div>
-      <div class="lab-price-display" id="labPriceDisplay">$18</div>
-      <div class="lab-summary-text" id="labSummaryDisplay">
-        Ethiopian Yirgacheffe · Medium Roast · Whole Bean · 12oz Bag
-      </div>
-      <button class="btn-gold" style="width:100%;" onclick="addCustomLabToCart()">Add Custom Blend to Order →</button>
-      <div style="font-size:12px; color:var(--muted); margin-top:14px;">Roasted & vacuum sealed to order on E Cesar Chavez St.</div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURE 4: HOLOGRAPHIC VIP MEMBERSHIPS -->
-<div class="full-width-sec" id="passes">
-  <div class="sec-inner" style="padding:90px 24px;">
-    <div class="sec-header">
-      <div class="sec-tag">Exclusive Access</div>
-      <h2 class="sec-title">Flagship VIP Memberships</h2>
-      <p class="sec-subtitle">One-time investment passes engineered for dedicated coffee enthusiasts. Zero recurring subscriptions.</p>
-    </div>
-
-    <div class="vip-passes-grid">
-      <!-- Pass 1: Steel -->
-      <div class="vip-pass-card steel">
-        <div class="hologram-shimmer"></div>
-        <div>
-          <div class="pass-metal-badge">Brushed Steel Tier</div>
-          <h3 class="pass-title">Weekend Explorer</h3>
-          <div class="pass-price-line">$35 <span>/ one-time</span></div>
-          <ul class="pass-benefits">
-            <li>✓ Unlimited weekend drip coffee & batch pour-overs</li>
-            <li>✓ 10% off all tacos & bakery goods Sat-Sun</li>
-            <li>✓ Priority express queue access during peak morning rushes</li>
-            <li>✓ 1 Guest pass per month</li>
-          </ul>
-        </div>
-        <button class="btn-outline" style="width:100%;" onclick="addToCart('Weekend Explorer Pass ($35)', 35.00, this)">Claim Steel Pass</button>
-      </div>
-
-      <!-- Pass 2: Titanium -->
-      <div class="vip-pass-card titanium">
-        <div class="hologram-shimmer"></div>
-        <div>
-          <div class="pass-metal-badge">Titanium Reserve Tier</div>
-          <h3 class="pass-title">Tasting Reserve</h3>
-          <div class="pass-price-line">$68 <span>/ one-time</span></div>
-          <ul class="pass-benefits">
-            <li>✓ Unlimited drip & cold brew 7 days a week</li>
-            <li>✓ Monthly single-origin 12oz retail bag included</li>
-            <li>✓ 15% discount on all retail coffee beans & merchandise</li>
-            <li>✓ VIP invitation to quarterly private cupping events</li>
-            <li>✓ Reserved indoor or patio seating</li>
-          </ul>
-        </div>
-        <button class="btn-outline" style="width:100%; border-color:#638cb9; color:#638cb9;" onclick="addToCart('Tasting Reserve Pass ($68)', 68.00, this)">Claim Titanium Pass</button>
-      </div>
-
-      <!-- Pass 3: Sovereign -->
-      <div class="vip-pass-card sovereign">
-        <div class="hologram-shimmer"></div>
-        <div>
-          <div class="pass-metal-badge">24K Sovereign Metal</div>
-          <h3 class="pass-title">Roaster's Circle Flagship</h3>
-          <div class="pass-price-line">$185 <span>/ one-time</span></div>
-          <ul class="pass-benefits">
-            <li>✓ Unlimited ANY drink on the menu (Espresso, Nitro, Pour-Over)</li>
-            <li>✓ 2 Free micro-lot whole bean bags delivered monthly</li>
-            <li>✓ 20% lifetime discount on everything storewide</li>
-            <li>✓ Direct concierge text access to our head roaster</li>
-            <li>✓ VIP private roastery tour + custom blending session for 4 guests</li>
-          </ul>
-        </div>
-        <button class="btn-gold" style="width:100%;" onclick="addToCart('Roaster Circle Sovereign ($185)', 185.00, this)">Claim Sovereign Pass</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURE 5: TABLE RESERVATIONS WIZARD -->
-<section id="reserve">
-  <div class="sec-header">
-    <div class="sec-tag">Patio & Bar Seating</div>
-    <h2 class="sec-title">Reserve a Table</h2>
-    <p class="sec-subtitle">Book guaranteed seating for business coffee meetings, weekend brunch, or small remote work sessions.</p>
-  </div>
-
-  <div class="wizard-container">
-    <div class="step-progress-row">
-      <div class="step-node active" id="wizardNode1">
-        <div class="step-node-bubble">1</div>
-        <div class="step-node-title">Date</div>
-      </div>
-      <div class="step-node" id="wizardNode2">
-        <div class="step-node-bubble">2</div>
-        <div class="step-node-title">Time & Guests</div>
-      </div>
-      <div class="step-node" id="wizardNode3">
-        <div class="step-node-bubble">3</div>
-        <div class="step-node-title">Details</div>
-      </div>
-      <div class="step-node" id="wizardNode4">
-        <div class="step-node-bubble">4</div>
-        <div class="step-node-title">Ticket</div>
-      </div>
-    </div>
-
-    <!-- Step 1 -->
-    <div class="wizard-pane active" id="pane1">
-      <h4 style="font-family:'Space Grotesk'; font-size:1.15rem; margin-bottom:14px;">Select Booking Date</h4>
-      <div class="date-selector-grid" id="reservationDatesGrid"></div>
-      <button class="btn-gold" style="margin-top:20px;" onclick="goToWizardStep(2)">Proceed to Time Selection →</button>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="wizard-pane" id="pane2">
-      <h4 style="font-family:'Space Grotesk'; font-size:1.15rem; margin-bottom:14px;">Select Available Time Window</h4>
-      <div class="time-slot-grid">
-        <button class="time-tile active" onclick="selectTimeTile(this)">7:30 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">8:00 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">8:30 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">9:00 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">10:00 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">11:30 AM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">1:00 PM</button>
-        <button class="time-tile" onclick="selectTimeTile(this)">2:30 PM</button>
-      </div>
-      <div style="margin-top:24px;">
-        <label style="font-size:12px; text-transform:uppercase; color:var(--muted); letter-spacing:0.08em; display:block; margin-bottom:8px;">Party Size</label>
-        <div style="display:flex; align-items:center; gap:16px;">
-          <button class="dock-btn" style="border:1px solid var(--border); font-size:1.2rem; width:36px; height:36px; justify-content:center;" onclick="changePartySize(-1)">−</button>
-          <span id="partyCountText" style="font-family:'Space Grotesk'; font-size:1.8rem; font-weight:700; color:var(--gold);">2</span>
-          <button class="dock-btn" style="border:1px solid var(--border); font-size:1.2rem; width:36px; height:36px; justify-content:center;" onclick="changePartySize(1)">+</button>
-          <span style="color:var(--muted); font-size:14px;">Guests</span>
-        </div>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:28px;">
-        <button class="btn-outline" onclick="goToWizardStep(1)">← Back</button>
-        <button class="btn-gold" onclick="goToWizardStep(3)">Guest Contact Info →</button>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="wizard-pane" id="pane3">
-      <h4 style="font-family:'Space Grotesk'; font-size:1.15rem; margin-bottom:14px;">Guest Details</h4>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <div class="form-field-group">
-          <label>Full Name</label>
-          <input type="text" class="form-input" id="resGuestName" placeholder="Alex Morgan" required>
-        </div>
-        <div class="form-field-group">
-          <label>Mobile Number (For SMS Ticket)</label>
-          <input type="tel" class="form-input" id="resGuestPhone" placeholder="(512) 555-0199" required>
-        </div>
-      </div>
-      <div class="form-field-group">
-        <label>Email Address</label>
-        <input type="email" class="form-input" id="resGuestEmail" placeholder="alex@austindigital.com" required>
-      </div>
-      <div class="form-field-group">
-        <label>Seating Preference</label>
-        <select class="form-select" id="resSeatingPref">
-          <option>East Austin Outdoor Patio (Dog Friendly)</option>
-          <option>Main Roastery Espresso Bar</option>
-          <option>High Top Workspace Table</option>
-        </select>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:24px;">
-        <button class="btn-outline" onclick="goToWizardStep(2)">← Back</button>
-        <button class="btn-gold" onclick="completeReservation()">Generate VIP Booking Code →</button>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div class="wizard-pane" id="pane4">
-      <div style="text-align:center; padding:30px 10px;">
-        <div style="font-size:3rem; margin-bottom:12px;">🎉</div>
-        <h3 style="font-family:'Space Grotesk'; font-size:1.8rem; color:var(--cream); margin-bottom:6px;">Table Confirmed!</h3>
-        <p style="color:var(--muted); margin-bottom:20px;">Your priority pass has been registered. Simply present this confirmation at the bar.</p>
-        <div style="display:inline-block; background:rgba(212,175,55,0.1); border:1px dashed var(--gold); border-radius:12px; padding:16px 32px;">
-          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted);">Reservation Ticket Code</div>
-          <div id="resFinalCode" style="font-family:'JetBrains Mono'; font-size:2rem; font-weight:700; color:var(--gold);">#FT-88492-VIP</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURE 6: BEAN JOURNEY TIMELINE -->
-<div class="full-width-sec">
-  <div class="sec-inner" style="padding:90px 24px;">
-    <div class="sec-header">
-      <div class="sec-tag">Farm-to-Cup Provenance</div>
-      <h2 class="sec-title">The Flat Track Bean Journey</h2>
-      <p class="sec-subtitle">Trace how raw high-altitude cherries transform into your morning cup on East Cesar Chavez.</p>
-    </div>
-
-    <div class="timeline-grid">
-      <div class="timeline-card">
-        <span class="timeline-step-badge">STAGE 01 // 1,950M MASL</span>
-        <h4 class="timeline-card-title">Direct Origin Farm</h4>
-        <p class="timeline-card-desc">Hand-picked red bourbon and heirloom cherries grown in Yirgacheffe and Huila volcanic soil by partner smallholder farmers.</p>
-      </div>
-      <div class="timeline-card">
-        <span class="timeline-step-badge">STAGE 02 // LOGISTICS</span>
-        <h4 class="timeline-card-title">GrainPro Transit</h4>
-        <p class="timeline-card-desc">Hermetically sealed green coffee transported under strictly monitored humidity to Port of Houston and trucked straight to Austin.</p>
-      </div>
-      <div class="timeline-card">
-        <span class="timeline-step-badge">STAGE 03 // ROASTERY</span>
-        <h4 class="timeline-card-title">San Franciscan Drum</h4>
-        <p class="timeline-card-desc">Small-batch convection roast with PID temperature control, targeting peak caramelization and delicate floral volatile acids.</p>
-      </div>
-      <div class="timeline-card">
-        <span class="timeline-step-badge">STAGE 04 // EXTRACTION</span>
-        <h4 class="timeline-card-title">Precision Pull</h4>
-        <p class="timeline-card-desc">Ground on Mahlkönig EK43 burrs and pulled at 9 bars of pressure with Austin's treated mineral-balanced water.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURE 7: WHOLESALE & COMMERCIAL ROASTING PORTAL -->
-<section id="wholesale">
-  <div class="sec-header">
-    <div class="sec-tag">B2B Commercial Accounts</div>
-    <h2 class="sec-title">Wholesale & Office Roasting Partner</h2>
-    <p class="sec-subtitle">Powering Austin's top restaurants, tech offices, and boutique hotels with custom-roasted single origins and commercial espresso machinery support.</p>
-  </div>
-
-  <div class="wholesale-box">
-    <div>
-      <div class="wholesale-feature-item">
-        <div class="wholesale-icon">📦</div>
-        <div>
-          <h4 style="font-family:'Space Grotesk'; font-size:1.1rem; color:var(--cream); margin-bottom:4px;">Bulk Weekly Deliveries</h4>
-          <p style="font-size:0.88rem; color:var(--muted);">Fresh roasted 5lb valve bags delivered across Austin on Tuesday and Friday mornings.</p>
-        </div>
-      </div>
-      <div class="wholesale-feature-item">
-        <div class="wholesale-icon">⚙️</div>
-        <div>
-          <h4 style="font-family:'Space Grotesk'; font-size:1.1rem; color:var(--cream); margin-bottom:4px;">Commercial Machinery Leasing</h4>
-          <p style="font-size:0.88rem; color:var(--muted);">La Marzocco, Synesso, and Mahlkönig installation, water filtration maintenance, and preventative servicing.</p>
-        </div>
-      </div>
-      <div class="wholesale-feature-item">
-        <div class="wholesale-icon">🎓</div>
-        <div>
-          <h4 style="font-family:'Space Grotesk'; font-size:1.1rem; color:var(--cream); margin-bottom:4px;">Barista & Staff Certification</h4>
-          <p style="font-size:0.88rem; color:var(--muted);">Hands-on barista training in espresso calibration, milk texture, and latte art at our Austin roastery lab.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Wholesale Application Form -->
-    <div style="background:var(--bg4); border:1px solid var(--border); border-radius:16px; padding:28px;">
-      <h4 style="font-family:'Space Grotesk'; font-size:1.2rem; color:var(--cream); margin-bottom:14px;">Commercial Inquiry Form</h4>
-      <form onsubmit="handleWholesaleSubmit(event)">
-        <div class="form-field-group">
-          <label>Company / Cafe Name</label>
-          <input type="text" class="form-input" placeholder="e.g. Austin Tech Labs" required>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="form-field-group">
-            <label>Contact Name</label>
-            <input type="text" class="form-input" placeholder="Chris Taylor" required>
-          </div>
-          <div class="form-field-group">
-            <label>Weekly Volume</label>
-            <select class="form-select">
-              <option>10 - 25 lbs / week</option>
-              <option>25 - 50 lbs / week</option>
-              <option>50 - 100+ lbs / week</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-field-group">
-          <label>Work Email</label>
-          <input type="email" class="form-input" placeholder="chris@company.com" required>
-        </div>
-        <div class="form-field-group">
-          <label>Program Needs</label>
-          <input type="text" class="form-input" placeholder="Espresso machine loaner, cold brew kegs, etc.">
-        </div>
-        <button type="submit" class="btn-gold" style="width:100%; margin-top:10px;">Submit Wholesale Application →</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURE 8: AUSTIN DRIVING ETA & ARRIVAL GUIDE -->
-<div class="full-width-sec" id="eta">
-  <div class="sec-inner" style="padding:90px 24px;">
-    <div class="sec-header">
-      <div class="sec-tag">East Austin Coordinates</div>
-      <h2 class="sec-title">Driving ETA & Arrival Guide</h2>
-      <p class="sec-subtitle">Located at 1611 E Cesar Chavez St. Calculate your driving time from any Austin neighborhood.</p>
-    </div>
-
-    <div class="eta-calculator-box">
-      <div>
-        <div class="form-field-group">
-          <label>Select Austin Neighborhood / Zip Code</label>
-          <select class="form-select" id="austinZipSelect" onchange="calculateDriveETA()">
-            <option value="78701|Downtown Austin|8">78701 — Downtown Austin / Congress Ave</option>
-            <option value="78702|East Austin / Cesar Chavez|3" selected>78702 — East Austin / Chicon St</option>
-            <option value="78704|South Congress / Bouldin|11">78704 — South Congress & S 1st</option>
-            <option value="78705|UT Campus / West Campus|12">78705 — University of Texas Campus</option>
-            <option value="78751|Hyde Park / North Loop|14">78751 — Hyde Park & North Loop</option>
-            <option value="78741|Riverside / Oltorf|7">78741 — East Riverside Corridor</option>
-            <option value="78746|West Lake Hills|18">78746 — West Lake Hills</option>
-          </select>
-        </div>
-        <div style="background:var(--bg4); border:1px solid var(--border); border-radius:12px; padding:16px; margin-top:16px;">
-          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); margin-bottom:6px;">Parking & Transit Tip</div>
-          <p style="font-size:0.88rem; color:var(--text); line-height:1.5;">
-            Free street parking along E Cesar Chavez and Chicon St. Dedicated bike racks in front of our patio. CapMetro Bus Route 17 stops 1 block west.
-          </p>
-        </div>
-        <div style="display:flex; gap:12px; margin-top:20px;">
-          <a href="https://maps.google.com/?q=Flat+Track+Coffee+Roasters+1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" class="btn-outline" style="flex:1; text-align:center;">Open in Google Maps</a>
-          <a href="https://maps.apple.com/?q=1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" class="btn-outline" style="flex:1; text-align:center;">Open in Apple Maps</a>
-        </div>
-      </div>
-
-      <div class="eta-result-card">
-        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:8px;">Estimated Drive Time</div>
-        <div class="eta-minutes" id="etaMinutesDisplay">3 <span style="font-size:1.5rem; color:var(--muted);">mins</span></div>
-        <div style="font-size:0.95rem; color:var(--gold-light); margin-top:6px;" id="etaRouteNameDisplay">via E Cesar Chavez St</div>
-        <div style="font-size:12px; color:var(--green); margin-top:12px; display:inline-flex; align-items:center; gap:6px;">
-          <span style="width:7px; height:7px; border-radius:50%; background:var(--green);"></span>
-          Current Traffic: Normal Flow
+        <div class="card-bottom">
+          <span style="font-size:11px; color:var(--gold); font-weight:600;">Barista Choice</span>
+          <button class="btn-gold" style="padding:6px 16px; font-size:12px;" onclick="addToCart('Oat Milk Honey Cortado', 5.00)">+ Add to Bag</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FEATURE 9: PRESS MENTIONS & REVIEWS WALL -->
-<section id="reviews">
-  <div class="sec-header">
-    <div class="sec-tag">Reputation & Social Proof</div>
-    <h2 class="sec-title">Austin Press & Verified Customer Reviews</h2>
-    <p class="sec-subtitle">Consistently voted among Austin's best independent coffee roasters.</p>
+<!-- ================= ONLINE PAYMENT GATEWAY MODAL ================= -->
+<div class="payment-modal" id="paymentModal">
+  <div class="payment-box">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="font-family:'Space Grotesk'; font-size:1.3rem;">Secure Payment Checkout 🔒</h3>
+      <button style="background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer;" onclick="closePaymentModal()">✕</button>
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-bottom:16px;">
+      Verified 256-Bit SSL · Direct Roastery Deposit · 0% Middleman Cut
+    </div>
+
+    <div class="payment-tabs">
+      <button class="pay-tab active" id="tabCard" onclick="setPayMethod('card')">💳 Credit / Debit</button>
+      <button class="pay-tab" id="tabGPay" onclick="setPayMethod('gpay')">🌐 Google Pay</button>
+      <button class="pay-tab" id="tabApple" onclick="setPayMethod('apple')">🍏 Apple Pay</button>
+    </div>
+
+    <!-- Credit Card Fields -->
+    <div id="cardFields">
+      <div class="form-group">
+        <label>Cardholder Name</label>
+        <input type="text" class="form-ctrl" id="payCardName" value="Austin Coffee Lover" placeholder="Name on card">
+      </div>
+      <div class="form-group">
+        <label>Card Number</label>
+        <input type="text" class="form-ctrl" id="payCardNum" placeholder="4242 •••• •••• 4242" value="4242 8891 2041 9912">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div class="form-group">
+          <label>Expiry Date</label>
+          <input type="text" class="form-ctrl" placeholder="MM/YY" value="08/28">
+        </div>
+        <div class="form-group">
+          <label>CVC / Security Code</label>
+          <input type="text" class="form-ctrl" placeholder="CVC" value="382">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-Click Pay Buttons -->
+    <div id="digitalWalletNotice" style="display:none; text-align:center; padding:16px 0; color:var(--gold); font-size:13px;">
+      ✓ Connected with Google Wallet / Apple Device. Ready for 1-touch biometric confirmation.
+    </div>
+
+    <div style="margin:20px 0 16px; padding:12px; background:var(--bg4); border-radius:10px; display:flex; justify-content:space-between; font-weight:700;">
+      <span>Amount to Pay</span>
+      <span id="payModalAmount" style="color:var(--gold); font-family:'JetBrains Mono';">$0.00</span>
+    </div>
+
+    <button class="btn-gold" id="paySubmitBtn" style="width:100%;" onclick="processPaymentTransaction()">
+      Authorize Payment & Send to Barista →
+    </button>
+    <div id="payProcessingNotice" style="display:none; text-align:center; margin-top:12px; color:var(--green); font-size:13px;"></div>
   </div>
+</div>
 
-  <div class="press-badges-row">
-    <div class="press-badge">★ Austin Chronicle: "Best Neighborhood Roaster"</div>
-    <div class="press-badge">★ Eater Austin: "Top 10 Essential Coffee Shops"</div>
-    <div class="press-badge">★ Texas Monthly: "Specialty Roaster Highlight"</div>
+<!-- ================= GOOGLE AUTHENTICATION MODAL ================= -->
+<div class="auth-modal" id="googleAuthModal">
+  <div class="auth-box">
+    <div style="margin-bottom:14px;">
+      <svg width="40" height="40" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+    </div>
+    <h3 style="font-family:'Space Grotesk'; font-size:1.3rem; margin-bottom:6px;">Sign In with Google</h3>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">
+      Connect your Google Account to save order history, loyalty passes, and expedite 1-click checkout.
+    </p>
+
+    <div style="background:var(--bg4); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; align-items:center; gap:12px; cursor:pointer; margin-bottom:12px;" onclick="confirmGoogleSignIn('Austin Coffee Lover', 'austin.coffee@gmail.com')">
+      <div style="width:36px; height:36px; border-radius:50%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">A</div>
+      <div style="text-align:left;">
+        <div style="font-weight:600; font-size:14px; color:var(--cream);">Austin Coffee Lover</div>
+        <div style="font-size:12px; color:var(--muted);">austin.coffee@gmail.com</div>
+      </div>
+    </div>
+
+    <button class="btn-outline" style="width:100%; font-size:13px; padding:10px;" onclick="closeGoogleModal()">Cancel</button>
   </div>
+</div>
 
-  <div class="reviews-carousel-grid">
-    <div class="review-bubble">
+<!-- ================= IN-WEBSITE MINI-GAME: BEAN RUSH ARCADE ================= -->
+<div class="game-screen-overlay" id="gameScreenOverlay">
+  <div class="game-container">
+    <div class="game-header">
       <div>
-        <div class="review-stars-row">★★★★★</div>
-        <p class="review-quote">"The Dogspeed espresso is the most balanced roast in East Austin. I buy whole beans every two weeks and the staff is always welcoming."</p>
+        <h3 style="font-family:'Space Grotesk'; font-size:1.4rem; color:var(--gold);">🎮 Flat Track Bean Rush</h3>
+        <p style="font-size:12px; color:var(--muted);">Use Arrow Keys or Drag Mouse / Touch to catch golden beans in the cup!</p>
       </div>
-      <div class="review-author-meta">Marcus V. · Google Local Guide · 75+ Reviews</div>
-    </div>
-    <div class="review-bubble">
-      <div>
-        <div class="review-stars-row">★★★★★</div>
-        <p class="review-quote">"Their 24-hr nitro cold brew is phenomenal. Creamy head, smooth mouthfeel with no bitterness. The patio on Cesar Chavez is perfect."</p>
-      </div>
-      <div class="review-author-meta">Elena S. · Yelp Elite '24</div>
-    </div>
-    <div class="review-bubble">
-      <div>
-        <div class="review-stars-row">★★★★★</div>
-        <p class="review-quote">"Our tech agency orders wholesale beans from Flat Track for our office cold brew kegs. The quality consistency is world-class."</p>
-      </div>
-      <div class="review-author-meta">David K. · Founder, East Austin Digital</div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURE 10: INSTAGRAM & COMMUNITY GRID -->
-<div class="full-width-sec">
-  <div class="sec-inner" style="padding:60px 24px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
-      <div>
-        <div class="sec-tag">Community & Culture</div>
-        <h3 style="font-family:'Space Grotesk'; font-size:1.6rem; color:var(--cream);">@flattrackcoffee</h3>
-      </div>
-      <a href="https://instagram.com" target="_blank" class="btn-outline" style="font-size:13px; padding:10px 22px;">Follow On Instagram →</a>
+      <button class="game-close-btn" onclick="closeGameOverlay()">✕</button>
     </div>
 
-    <div class="insta-grid">
-      <div class="insta-thumb"><span>☕</span></div>
-      <div class="insta-thumb"><span>🏍️</span></div>
-      <div class="insta-thumb"><span>🥐</span></div>
-      <div class="insta-thumb"><span>🌿</span></div>
-      <div class="insta-thumb"><span>🔥</span></div>
-      <div class="insta-thumb"><span>🐕</span></div>
+    <div class="game-scoreboard">
+      <div>SCORE: <span class="score-val" id="gameScoreText">0</span></div>
+      <div>LIVES: <span class="score-val" id="gameLivesText">❤️❤️❤️</span></div>
+      <div>HIGH SCORE: <span class="score-val" id="gameHighText">140</span></div>
     </div>
 
-    <!-- Technical SEO & Core Web Vitals Proof Panel -->
-    <div class="audit-seal-bar">
-      <div>
-        <div style="font-weight:600; color:var(--cream); font-size:14px; margin-bottom:2px;">Google Lighthouse Certified Performance</div>
-        <div style="color:var(--muted); font-size:12px;">Semantic HTML5 · LocalBusiness JSON-LD Schema Verified · 100% Mobile Optimized</div>
-      </div>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <span class="audit-score-pill">99 Performance</span>
-        <span class="audit-score-pill">100 SEO</span>
-        <span class="audit-score-pill">0.4s LCP</span>
-      </div>
+    <canvas id="gameCanvas" width="600" height="360"></canvas>
+
+    <div id="gameRewardBanner" style="display:none; margin-top:14px; padding:12px; background:rgba(212,175,55,0.15); border:1px dashed var(--gold); border-radius:10px;">
+      <span style="font-weight:700; color:var(--gold);">🎉 VOUCHER UNLOCKED!</span>
+      <span style="font-size:13px; color:var(--cream); margin-left:8px;">Code: <strong style="font-family:'JetBrains Mono';">BEANS100</strong> (15% discount applied to your checkout cart!)</span>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:12px; margin-top:16px;">
+      <button class="btn-gold" id="gameStartBtn" onclick="startGameLoop()">Start Playing →</button>
+      <button class="btn-outline" onclick="closeGameOverlay()">Back to Roastery</button>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Flat Track Coffee Roasters</div>
-  <p style="color:var(--muted); font-size:14px;">
-    1611 E Cesar Chavez St, Austin, TX 78702 · Phone: <a href="tel:+15125406033" style="color:var(--gold); text-decoration:none;">(512) 540-6033</a>
-  </p>
-  <div class="footer-links-row">
-    <a href="#hero">Flagship</a>
-    <a href="#telemetry">Roaster HUD</a>
-    <a href="#order">Online Menu</a>
-    <a href="#customizer">Customizer Lab</a>
-    <a href="#passes">VIP Passes</a>
-    <a href="#reserve">Reservations</a>
-    <a href="#wholesale">B2B Wholesale</a>
-    <a href="#eta">ETA Map</a>
+<footer style="background:var(--bg); border-top:1px solid var(--border); padding:60px 24px 30px; text-align:center; position:relative; z-index:1;">
+  <div style="font-family:'Space Grotesk'; font-size:1.5rem; font-weight:700; color:var(--gold); margin-bottom:8px;">Flat Track Coffee Roasters Flagship</div>
+  <p style="color:var(--muted); font-size:14px;">1611 E Cesar Chavez St, Austin, TX 78702 · Phone: (512) 540-6033</p>
+  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin:20px 0;">
+    <a href="tier1.html" style="color:var(--muted); text-decoration:none; font-size:14px;">Tier 1 Storefront</a>
+    <a href="tier2.html" style="color:var(--muted); text-decoration:none; font-size:14px;">Tier 2 POS Portal</a>
+    <a href="tier3.html" style="color:var(--gold); text-decoration:none; font-size:14px;">Tier 3 Flagship</a>
   </div>
-  <p style="font-size:12px; color:var(--muted); margin-top:20px;">
-    © 2024 Flat Track Coffee Roasters. Flagship Tier 3 Digital Asset. Austin, Texas.
+  <p style="font-size:12px; color:var(--muted); margin-top:16px;">
+    © 2024 Flat Track Coffee Roasters. Tier 3 Flagship Architecture. Austin, Texas.
   </p>
 </footer>
 
 <script>
-// ==================== 1. AMBIENT PARTICLES ====================
-const ambientCanvas = document.getElementById('ambientCanvas');
-const actx = ambientCanvas.getContext('2d');
-let aParticles = [];
-
-function resizeAmbient() {
-  ambientCanvas.width = window.innerWidth;
-  ambientCanvas.height = window.innerHeight;
-}
-resizeAmbient();
-window.addEventListener('resize', resizeAmbient);
-
-for (let i = 0; i < 45; i++) {
-  aParticles.push({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    vx: (Math.random() - 0.5) * 0.25,
-    vy: (Math.random() - 0.5) * 0.25,
-    r: Math.random() * 2 + 0.5,
-    alpha: Math.random() * 0.35 + 0.05
-  });
-}
-
-function animateAmbient() {
-  actx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
-  aParticles.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    if (p.x < 0) p.x = ambientCanvas.width;
-    if (p.x > ambientCanvas.width) p.x = 0;
-    if (p.y < 0) p.y = ambientCanvas.height;
-    if (p.y > ambientCanvas.height) p.y = 0;
-
-    actx.beginPath();
-    actx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    actx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
-    actx.fill();
-  });
-  requestAnimationFrame(animateAmbient);
-}
-animateAmbient();
-
-// ==================== 2. PHYSICS BEAN CANNON ====================
-const physCanvas = document.getElementById('physicsCanvas');
-const pctx = physCanvas.getContext('2d');
-let beans = [];
-let physicsActive = false;
-
-function resizePhys() {
-  physCanvas.width = window.innerWidth;
-  physCanvas.height = window.innerHeight;
-}
-resizePhys();
-window.addEventListener('resize', resizePhys);
-
-function triggerPhysicsBeans() {
-  physicsActive = true;
-  for (let i = 0; i < 30; i++) {
-    beans.push({
-      x: window.innerWidth * 0.5 + (Math.random() - 0.5) * 100,
-      y: 120,
-      vx: (Math.random() - 0.5) * 12,
-      vy: Math.random() * -6 - 2,
-      rot: Math.random() * Math.PI,
-      vrot: (Math.random() - 0.5) * 0.2,
-      size: Math.random() * 8 + 10,
-      color: Math.random() > 0.4 ? '#4a2c11' : '#2b1704'
-    });
-  }
-}
-
-function updatePhysics() {
-  if (!physicsActive && beans.length === 0) {
-    requestAnimationFrame(updatePhysics);
-    return;
-  }
-  pctx.clearRect(0, 0, physCanvas.width, physCanvas.height);
-  const gravity = 0.35;
-
-  for (let i = beans.length - 1; i >= 0; i--) {
-    const b = beans[i];
-    b.vy += gravity;
-    b.x += b.vx;
-    b.y += b.vy;
-    b.rot += b.vrot;
-
-    // Floor collision
-    if (b.y > physCanvas.height - 20) {
-      b.y = physCanvas.height - 20;
-      b.vy *= -0.55;
-      b.vx *= 0.8;
-      if (Math.abs(b.vy) < 1) {
-        beans.splice(i, 1);
-        continue;
-      }
-    }
-
-    // Render bean shape
-    pctx.save();
-    pctx.translate(b.x, b.y);
-    pctx.rotate(b.rot);
-    pctx.fillStyle = b.color;
-    pctx.beginPath();
-    pctx.ellipse(0, 0, b.size, b.size * 0.65, 0, 0, Math.PI * 2);
-    pctx.fill();
-    // Center crease
-    pctx.strokeStyle = '#180d02';
-    pctx.lineWidth = 1.5;
-    pctx.beginPath();
-    pctx.moveTo(-b.size * 0.6, 0);
-    pctx.lineTo(b.size * 0.6, 0);
-    pctx.stroke();
-    pctx.restore();
-  }
-
-  requestAnimationFrame(updatePhysics);
-}
-updatePhysics();
-
-// ==================== 3. TELEMETRY GRAPH & SIMULATOR ====================
-const barContainer = document.getElementById('telemetryBars');
-const drumDisplay = document.getElementById('drumTempDisplay');
-const liveDrumTemp = document.getElementById('liveDrumTemp');
-
-for (let i = 0; i < 28; i++) {
-  const bar = document.createElement('div');
-  bar.className = 'graph-bar';
-  bar.style.height = (25 + Math.sin(i / 3) * 18 + Math.random() * 20) + '%';
-  barContainer.appendChild(bar);
-}
-
-setInterval(() => {
-  const delta = (Math.random() - 0.48) * 0.3;
-  let current = parseFloat(liveDrumTemp.textContent);
-  current = (current + delta).toFixed(1);
-  if (current > 422) current = 417.8;
-  if (current < 415) current = 418.5;
-  liveDrumTemp.textContent = current;
-  drumDisplay.textContent = current + '°F';
-}, 2400);
-
-// ==================== 4. 6-AXIS FLAVOR RADAR ====================
-const radarProfiles = {
-  ethiopian: {
-    points: "150,45 230,105 210,210 150,250 80,205 70,100",
-    notes: "Notes: Wild Blueberry, Jasmine Blossom, Meyer Lemon Acidity"
-  },
-  dogspeed: {
-    points: "150,85 245,100 240,195 150,230 75,185 85,115",
-    notes: "Notes: Dark Cacao, Candied Orange Peel, Velvety Molasses Body"
-  },
-  colombian: {
-    points: "150,110 215,110 245,190 150,220 100,180 110,125",
-    notes: "Notes: Brown Sugar, Roasted Walnut, Crisp Red Apple Finish"
-  }
-};
-
-function switchRadar(key, btn) {
-  document.querySelectorAll('.radar-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const prof = radarProfiles[key];
-  document.getElementById('radarPolygon').setAttribute('points', prof.points);
-  document.getElementById('radarFlavorNotes').textContent = prof.notes;
-}
-
-// ==================== 5. CART & ORDERING ENGINE ====================
+// ==================== 1. SHARED CART & PAYMENT STATE ====================
 let cart = {};
+let hasArcadeDiscount = false;
 
-function addToCart(title, price, btn) {
-  if (!cart[title]) cart[title] = { price: price, qty: 0 };
+function addToCart(title, price) {
+  if (!cart[title]) cart[title] = { price, qty: 0 };
   cart[title].qty++;
-
-  if (btn) {
-    const orig = btn.textContent;
-    btn.textContent = '✓ Added';
-    btn.style.background = 'var(--green)';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 1200);
-  }
-
   updateCartUI();
-  toggleCart(true);
+  toggleCartDrawer(true);
 }
 
 function updateCartUI() {
   const list = document.getElementById('cartItemsList');
-  const summary = document.getElementById('cartSummarySection');
-  const floatBtn = document.getElementById('cartFloatBtn');
+  const summary = document.getElementById('cartSummaryBox');
+  const floatBtn = document.getElementById('floatCartBtn');
   const badge = document.getElementById('cartCountBadge');
 
   const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
@@ -1508,7 +707,7 @@ function updateCartUI() {
       const itemTotal = item.qty * item.price;
       subtotal += itemTotal;
       return `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border);">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border);">
           <div>
             <div style="font-weight:600; font-size:14px; color:var(--cream);">${k}</div>
             <div style="font-size:12px; color:var(--muted);">${item.qty} × $${item.price.toFixed(2)}</div>
@@ -1518,224 +717,288 @@ function updateCartUI() {
       `;
     }).join('');
 
-    const tax = subtotal * 0.0825;
-    const finalTotal = subtotal + tax;
+    let discount = 0;
+    if (hasArcadeDiscount) {
+      discount = subtotal * 0.15;
+      document.getElementById('discountRow').style.display = 'flex';
+      document.getElementById('cartDiscountText').textContent = '-$' + discount.toFixed(2);
+    }
+
+    const taxable = subtotal - discount;
+    const tax = taxable * 0.0825;
+    const total = taxable + tax;
 
     document.getElementById('cartSubtotalText').textContent = '$' + subtotal.toFixed(2);
     document.getElementById('cartTaxText').textContent = '$' + tax.toFixed(2);
-    document.getElementById('cartTotalText').textContent = '$' + finalTotal.toFixed(2);
+    document.getElementById('cartTotalText').textContent = '$' + total.toFixed(2);
+    document.getElementById('payModalAmount').textContent = '$' + total.toFixed(2);
   } else {
     floatBtn.style.display = 'none';
     summary.style.display = 'none';
-    list.innerHTML = '<div style="color:var(--muted); text-align:center; padding: 40px 0;">Your cart is currently empty.</div>';
+    list.innerHTML = '<div style="color:var(--muted); text-align:center; padding:40px 0;">Cart is empty. Add drinks or tacos below!</div>';
   }
 }
 
-function toggleCart(open) {
-  document.getElementById('cartPanel').classList.toggle('open', open);
+function toggleCartDrawer(open) {
+  document.getElementById('cartDrawer').classList.toggle('open', open);
   document.getElementById('cartDimmer').classList.toggle('open', open);
 }
 
-function executeCheckout() {
-  const msg = document.getElementById('orderSuccessMessage');
-  const code = '#FT-' + Math.floor(10000 + Math.random() * 90000);
-  msg.textContent = `✓ Order confirmed! Ticket ${code} sent to pickup counter.`;
-  msg.style.display = 'block';
-  cart = {};
-  setTimeout(() => {
-    updateCartUI();
-    msg.style.display = 'none';
-    toggleCart(false);
-  }, 3200);
+// ==================== 2. GOOGLE AUTHENTICATION ====================
+let googleUser = null;
+
+function openGoogleModal() { document.getElementById('googleAuthModal').classList.add('open'); }
+function closeGoogleModal() { document.getElementById('googleAuthModal').classList.remove('open'); }
+
+function confirmGoogleSignIn(name, email) {
+  googleUser = { name, email };
+  document.getElementById('googleLoginBtn').style.display = 'none';
+  const pill = document.getElementById('googleUserPill');
+  pill.style.display = 'inline-flex';
+  document.getElementById('googleUserName').textContent = name + ' ✓';
+  document.getElementById('trackCustomerName').textContent = 'Customer: ' + name + ' (' + email + ')';
+  document.getElementById('payCardName').value = name;
+  closeGoogleModal();
 }
 
-// ==================== 6. MENU FILTERING ====================
-let activeCat = 'all';
-
-function filterCategory(cat, btn) {
-  activeCat = cat;
-  document.querySelectorAll('.menu-pill').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  applyFilters();
+function toggleSignOut() {
+  googleUser = null;
+  document.getElementById('googleLoginBtn').style.display = 'flex';
+  document.getElementById('googleUserPill').style.display = 'none';
+  document.getElementById('trackCustomerName').textContent = 'Customer: Austin Coffee Lover';
 }
 
-function handleMenuSearch() {
-  applyFilters();
+// ==================== 3. PAYMENT GATEWAY ====================
+let payMethod = 'card';
+
+function openPaymentModal() {
+  toggleCartDrawer(false);
+  document.getElementById('paymentModal').classList.add('open');
 }
 
-function applyFilters() {
-  const query = document.getElementById('menuSearchInput').value.toLowerCase();
-  document.querySelectorAll('.menu-item-card').forEach(card => {
-    const cat = card.dataset.category;
-    const title = card.dataset.title.toLowerCase();
-    const matchesCat = activeCat === 'all' || cat === activeCat;
-    const matchesQuery = title.includes(query);
-    card.classList.toggle('hidden', !(matchesCat && matchesQuery));
-  });
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('open');
 }
 
-// ==================== 7. CUSTOMIZER LAB ====================
-let labState = { origin: 'Ethiopian Yirgacheffe', roast: 'Medium Roast', grind: 'Whole Bean', size: '12oz', price: 18 };
-
-function selectLabPill(btn, prop, val) {
-  btn.parentElement.querySelectorAll('.lab-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  labState[prop] = val;
-  updateLabSummary();
-}
-
-function updateRoastBar(pct) {
-  document.getElementById('labRoastFill').style.width = pct + '%';
-}
-
-function updateLabPrice(p) {
-  labState.price = p;
-  document.getElementById('labPriceDisplay').textContent = '$' + p;
-  updateLabSummary();
-}
-
-function updateLabSummary() {
-  document.getElementById('labSummaryDisplay').textContent =
-    `${labState.origin} · ${labState.roast} · ${labState.grind} · ${labState.size} Bag`;
-}
-
-function addCustomLabToCart() {
-  const name = 'Custom ' + labState.origin.split(' ')[0] + ' (' + labState.size + ')';
-  addToCart(name, labState.price, null);
-}
-
-// ==================== 8. RESERVATION WIZARD ====================
-let resDate = 'Today';
-let partyCount = 2;
-
-(function initReservationDates() {
-  const grid = document.getElementById('reservationDatesGrid');
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  let html = '';
-  for (let i = 0; i < 7; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() + i);
-    const dayLabel = i === 0 ? 'Today' : i === 1 ? 'Tmrw' : days[d.getDay()];
-    html += `
-      <div class="date-tile${i === 0 ? ' active' : ''}" onclick="selectDateTile(this, '${dayLabel} ${d.getDate()}')">
-        <div style="font-size:10px; color:var(--muted);">${dayLabel}</div>
-        <div style="font-weight:700; font-size:16px;">${d.getDate()}</div>
-      </div>
-    `;
-  }
-  grid.innerHTML = html;
-})();
-
-function selectDateTile(tile, dateStr) {
-  document.querySelectorAll('.date-tile').forEach(t => t.classList.remove('active'));
-  tile.classList.add('active');
-  resDate = dateStr;
-}
-
-function selectTimeTile(tile) {
-  document.querySelectorAll('.time-tile').forEach(t => t.classList.remove('active'));
-  tile.classList.add('active');
-}
-
-function changePartySize(delta) {
-  partyCount = Math.max(1, Math.min(16, partyCount + delta));
-  document.getElementById('partyCountText').textContent = partyCount;
-}
-
-function goToWizardStep(step) {
-  for (let i = 1; i <= 4; i++) {
-    document.getElementById('pane' + i).classList.toggle('active', i === step);
-    const node = document.getElementById('wizardNode' + i);
-    node.classList.toggle('active', i === step);
-    node.classList.toggle('done', i < step);
-  }
-}
-
-function completeReservation() {
-  const code = '#FT-' + Math.floor(10000 + Math.random() * 90000) + '-VIP';
-  document.getElementById('resFinalCode').textContent = code;
-  goToWizardStep(4);
-}
-
-// ==================== 9. DRIVING ETA CALCULATOR ====================
-function calculateDriveETA() {
-  const val = document.getElementById('austinZipSelect').value;
-  const parts = val.split('|');
-  const minutes = parts[2];
-  const name = parts[1];
-
-  document.getElementById('etaMinutesDisplay').innerHTML = `${minutes} <span style="font-size:1.5rem; color:var(--muted);">mins</span>`;
-  document.getElementById('etaRouteNameDisplay').textContent = `from ${name} to 1611 E Cesar Chavez`;
-}
-
-// ==================== 10. WHOLESALE FORM ====================
-function handleWholesaleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  btn.textContent = '✓ Application Received! Our Roaster Will Call.';
-  btn.style.background = 'var(--green)';
-  btn.style.color = '#fff';
-  btn.disabled = true;
-}
-
-// ==================== 11. AUDIO AMBIANCE SYNTHESIZER ====================
-let audioCtx = null;
-let audioPlaying = false;
-let noiseNode = null;
-
-function toggleRoasteryAudio() {
-  const btn = document.getElementById('audioToggleBtn');
-  if (!audioPlaying) {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
-    // Pink noise generator for gentle espresso machine hiss
-    const bufferSize = audioCtx.sampleRate * 2;
-    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-    const output = noiseBuffer.getChannelData(0);
-    let b0 = 0, b1 = 0, b2 = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      b0 = 0.99886 * b0 + white * 0.0555179;
-      b1 = 0.99332 * b1 + white * 0.0750759;
-      b2 = 0.96900 * b2 + white * 0.1538520;
-      output[i] = (b0 + b1 + b2) * 0.04;
-    }
-    noiseNode = audioCtx.createBufferSource();
-    noiseNode.buffer = noiseBuffer;
-    noiseNode.loop = true;
-
-    const gain = audioCtx.createGain();
-    gain.gain.value = 0.15;
-    noiseNode.connect(gain);
-    gain.connect(audioCtx.destination);
-    noiseNode.start();
-
-    audioPlaying = true;
-    btn.innerHTML = '<span>🔊</span> Roastery Ambiance: Active';
-    btn.classList.add('active');
+function setPayMethod(method) {
+  payMethod = method;
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  if (method === 'card') {
+    document.getElementById('tabCard').classList.add('active');
+    document.getElementById('cardFields').style.display = 'block';
+    document.getElementById('digitalWalletNotice').style.display = 'none';
   } else {
-    if (noiseNode) noiseNode.stop();
-    audioPlaying = false;
-    btn.innerHTML = '<span>🔈</span> Roastery Ambiance: Off';
-    btn.classList.remove('active');
+    if (method === 'gpay') document.getElementById('tabGPay').classList.add('active');
+    if (method === 'apple') document.getElementById('tabApple').classList.add('active');
+    document.getElementById('cardFields').style.display = 'none';
+    document.getElementById('digitalWalletNotice').style.display = 'block';
   }
 }
 
-// ==================== 12. ACCESSIBILITY CONTROLS ====================
-let fontScale = 1;
-function adjustFont(delta) {
-  fontScale = Math.max(0.85, Math.min(1.3, fontScale + delta));
-  document.documentElement.style.setProperty('--font-scale', fontScale);
+function processPaymentTransaction() {
+  const btn = document.getElementById('paySubmitBtn');
+  const notice = document.getElementById('payProcessingNotice');
+  btn.textContent = 'Contacting Banking Network...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    const txnId = 'TXN_' + Math.floor(100000 + Math.random() * 900000) + 'AUSTIN';
+    const ticketId = '#FT-' + Math.floor(10000 + Math.random() * 90000);
+
+    notice.innerHTML = `✓ Payment Approved! Auth ID: <strong>${txnId}</strong><br>Order sent to Barista POS Terminal.`;
+    notice.style.display = 'block';
+
+    // Broadcast order to Owner Portal (Tier 2/3 shared queue)
+    try {
+      const existing = JSON.parse(localStorage.getItem('flattrack_orders') || '[]');
+      const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
+      existing.unshift({
+        id: ticketId,
+        customer: (googleUser ? googleUser.name : 'Austin Guest'),
+        items: keys.map(k => `${cart[k].qty}x ${k}`).join(', '),
+        total: parseFloat(document.getElementById('payModalAmount').textContent.replace('$', '')),
+        time: "Next 15 minutes",
+        status: "New",
+        created: "Just now"
+      });
+      localStorage.setItem('flattrack_orders', JSON.stringify(existing));
+      if (window.BroadcastChannel) {
+        new BroadcastChannel('flattrack_sync').postMessage({ key: 'orders', val: existing });
+      }
+    } catch(e) {}
+
+    // Update Live Tracker Section
+    document.getElementById('trackTicketId').textContent = 'TICKET ' + ticketId;
+    document.getElementById('trackStatusBadge').textContent = 'Status: Payment Confirmed (Brewing Next)';
+    document.getElementById('tstep1').className = 'tracker-step done';
+    document.getElementById('tstep2').className = 'tracker-step active';
+
+    cart = {};
+    updateCartUI();
+
+    setTimeout(() => {
+      closePaymentModal();
+      btn.textContent = 'Authorize Payment & Send to Barista →';
+      btn.disabled = false;
+      notice.style.display = 'none';
+      scrollToSection('liveTrackerSection');
+    }, 2400);
+  }, 1600);
 }
 
-function toggleContrast() {
-  document.body.classList.toggle('high-contrast');
+// ==================== 4. IN-WEBSITE MINI-GAME: BEAN RUSH ARCADE ====================
+const gCanvas = document.getElementById('gameCanvas');
+const gctx = gCanvas.getContext('2d');
+
+let gameRunning = false;
+let gameScore = 0;
+let gameLives = 3;
+let playerX = 260;
+const playerWidth = 70;
+const playerHeight = 24;
+let fallingBeans = [];
+
+function openGameOverlay() {
+  document.getElementById('gameScreenOverlay').classList.add('open');
+  resetGame();
 }
 
-function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+function closeGameOverlay() {
+  document.getElementById('gameScreenOverlay').classList.remove('open');
+  gameRunning = false;
 }
+
+function resetGame() {
+  gameScore = 0;
+  gameLives = 3;
+  fallingBeans = [];
+  document.getElementById('gameScoreText').textContent = '0';
+  document.getElementById('gameLivesText').textContent = '❤️❤️❤️';
+  document.getElementById('gameStartBtn').textContent = 'Start Playing →';
+}
+
+function startGameLoop() {
+  if (gameRunning) return;
+  resetGame();
+  gameRunning = true;
+  document.getElementById('gameStartBtn').textContent = 'Game in Progress';
+  requestAnimationFrame(gameTick);
+}
+
+// Mouse and Touch Controls
+gCanvas.addEventListener('mousemove', (e) => {
+  const rect = gCanvas.getBoundingClientRect();
+  const scale = gCanvas.width / rect.width;
+  playerX = (e.clientX - rect.left) * scale - playerWidth / 2;
+  playerX = Math.max(0, Math.min(gCanvas.width - playerWidth, playerX));
+});
+
+gCanvas.addEventListener('touchmove', (e) => {
+  const rect = gCanvas.getBoundingClientRect();
+  const scale = gCanvas.width / rect.width;
+  playerX = (e.touches[0].clientX - rect.left) * scale - playerWidth / 2;
+  playerX = Math.max(0, Math.min(gCanvas.width - playerWidth, playerX));
+});
+
+function gameTick() {
+  if (!gameRunning) return;
+
+  // Clear canvas
+  gctx.fillStyle = '#0d0c0a';
+  gctx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+
+  // Spawn falling beans
+  if (Math.random() < 0.04) {
+    const isSpecial = Math.random() < 0.15;
+    fallingBeans.push({
+      x: Math.random() * (gCanvas.width - 30) + 15,
+      y: -10,
+      speed: Math.random() * 2 + 2.5,
+      isSpecial: isSpecial,
+      radius: isSpecial ? 9 : 7
+    });
+  }
+
+  // Draw player cup / portafilter
+  gctx.fillStyle = '#d4af37';
+  gctx.beginPath();
+  gctx.roundRect(playerX, gCanvas.height - 35, playerWidth, playerHeight, [0, 0, 10, 10]);
+  gctx.fill();
+  gctx.fillStyle = '#1a140d';
+  gctx.fillRect(playerX + 6, gCanvas.height - 35, playerWidth - 12, 4);
+
+  // Update & Draw Beans
+  for (let i = fallingBeans.length - 1; i >= 0; i--) {
+    const b = fallingBeans[i];
+    b.y += b.speed;
+
+    // Draw bean
+    gctx.beginPath();
+    gctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+    gctx.fillStyle = b.isSpecial ? '#60a5fa' : '#c8a96e';
+    gctx.fill();
+
+    // Check catch
+    if (b.y >= gCanvas.height - 35 && b.y <= gCanvas.height - 10 &&
+        b.x >= playerX - 5 && b.x <= playerX + playerWidth + 5) {
+      gameScore += b.isSpecial ? 50 : 10;
+      document.getElementById('gameScoreText').textContent = gameScore;
+      fallingBeans.splice(i, 1);
+
+      // Check unlock milestone
+      if (gameScore >= 100 && !hasArcadeDiscount) {
+        hasArcadeDiscount = true;
+        document.getElementById('gameRewardBanner').style.display = 'block';
+        updateCartUI();
+      }
+      continue;
+    }
+
+    // Missed bean
+    if (b.y > gCanvas.height + 10) {
+      fallingBeans.splice(i, 1);
+      gameLives--;
+      document.getElementById('gameLivesText').textContent = '❤️'.repeat(Math.max(0, gameLives));
+      if (gameLives <= 0) {
+        gameRunning = false;
+        gctx.fillStyle = 'rgba(0,0,0,0.7)';
+        gctx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+        gctx.fillStyle = '#d4af37';
+        gctx.font = '700 24px Space Grotesk';
+        gctx.textAlign = 'center';
+        gctx.fillText('GAME OVER · FINAL SCORE: ' + gameScore, gCanvas.width / 2, gCanvas.height / 2);
+        document.getElementById('gameStartBtn').textContent = 'Play Again →';
+        return;
+      }
+    }
+  }
+
+  requestAnimationFrame(gameTick);
+}
+
+// ==================== 5. AMBIENT PARTICLES & NAVIGATION ====================
+const aCanvas = document.getElementById('ambientCanvas');
+const actx = aCanvas.getContext('2d');
+let aParts = [];
+function resizeAmbient() { aCanvas.width = window.innerWidth; aCanvas.height = window.innerHeight; }
+resizeAmbient(); window.addEventListener('resize', resizeAmbient);
+for (let i = 0; i < 35; i++) {
+  aParts.push({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, r: Math.random()*2+0.5 });
+}
+function animAmbient() {
+  actx.clearRect(0, 0, aCanvas.width, aCanvas.height);
+  aParts.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = aCanvas.width; if (p.x > aCanvas.width) p.x = 0;
+    if (p.y < 0) p.y = aCanvas.height; if (p.y > aCanvas.height) p.y = 0;
+    actx.beginPath(); actx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    actx.fillStyle = 'rgba(212,175,55,0.2)'; actx.fill();
+  });
+  requestAnimationFrame(animAmbient);
+}
+animAmbient();
+
+function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
 </script>
 </body>
 </html>
