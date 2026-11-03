@@ -1,36 +1,34 @@
-# 🌐 Austin Roasters Craft Coffee — Official Showcase Website
+# ☕ Flat Track Coffee Roasters — Showcase Website
 
-> Modern, high-performance responsive showcase website for **Austin Roasters Craft Coffee**, Austin, TX.
+> Modern, ultra-fast responsive showcase website for **Flat Track Coffee Roasters**, East Austin, TX.
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=github)](https://satwik92105-png.github.io/01-austin-roasters-coffee/)
-[![Rating](https://img.shields.io/badge/Rating-4.9%20%E2%98%85%20%28480%2B%20Reviews%29-orange?style=for-the-badge)](https://maps.google.com)
+[![Rating](https://img.shields.io/badge/Rating-4.8%20%E2%98%85%20%28750%2B%20Reviews%29-orange?style=for-the-badge)](https://maps.google.com/?q=Flat+Track+Coffee+Austin)
 
 ---
 
 ## 🌟 Overview
 
-**Austin Roasters Craft Coffee** is a premier specialty coffee roaster & cafe located at 1204 S Congress Ave, Austin, TX 78704. This showcase website delivers a clean digital customer experience designed to capture high-intent local search traffic and streamline bookings.
+**Flat Track Coffee Roasters** is a premier micro-roastery and community cafe located at 1611 E Cesar Chavez St, Austin, TX 78702. This showcase website is engineered to capture high-intent local search traffic, highlight signature roasts (Dogspeed, Nitro Cold Brew), and drive pre-paid customer passes.
 
-- **Category:** Specialty Coffee Roaster & Cafe
-- **Location:** 1204 S Congress Ave, Austin, TX 78704
-- **Phone:** (512) 842-1920
-- **Live Demo:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)
-- **Sales Outreach Script:** [script.md](file:///C:/Users/HP/.gemini/antigravity/scratch/us-business-websites/01-austin-roasters-coffee/script.md)
+- **Category:** Specialty Coffee Micro-Roastery & Cafe
+- **Location:** 1611 E Cesar Chavez St, Austin, TX 78702
+- **Direct Phone:** (512) 540-6033
+- **Hours:** Monday – Sunday: 7:00 AM – 5:00 PM
+- **Rating:** 4.8 ★ (750+ Verified Public Reviews)
+- **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)
+- **Master Hub Mirror:** [https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/](https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/)
+- **Sales Outreach Script & Proposal:** [`script.md`](file:///C:/Users/HP/.gemini/antigravity/scratch/us-business-websites/01-austin-roasters-coffee/script.md)
 
-## ✨ Key Features
+## ✨ Key Features & UX Intelligence
 
-- **📱 Mobile-First Responsive Design:** Fluidly optimized across all iOS and Android devices.
-- **🏷️ Interactive Packages & Plans:** Clear pricing tiers on the website for memberships and services.
-- **📅 Fast Booking & Quote Form:** Streamlined lead capture form with instant validation.
-- **⭐ Social Proof Showcase:** Verified customer reviews and 4.9★ rating highlights.
-- **📍 Location & Directions:** Embedded Google Maps navigation and direct phone calling.
-
-## 🛠️ Built With
-
-- **HTML5** semantic markup
-- **Modern CSS3** (variables, flexbox, CSS grid, glassmorphism)
-- **Google Fonts** (Outfit & Plus Jakarta Sans)
-- **Font Awesome 6**
+- **⚡ Blazing Fast Performance:** 100% lightweight semantic HTML5 & modern CSS3. Zero framework bloat.
+- **🎨 Senior UI/UX Design System:** Color tokens inspired by espresso and amber roast tones, WCAG AA compliant.
+- **🏷️ Category Filtering:** Instant JavaScript filtering between single origins, lattes, cold drafts, and bakery items.
+- **📅 Interactive 3-Step Booking Wizard:** Step progression with date/time selection, guest size, input validation, and instant confirmation code generation.
+- **💎 Customer Passes & Bundles:** Showcases one-time packages ($35, $68, $185) with zero recurring subscriptions.
+- **❓ Animated FAQ Accordion:** Accessible collapsible questions answering real customer queries.
+- **📍 Location & Direct Calling:** Google Maps embed and instant tap-to-call barista desk button.
 
 ---
-*Created as part of the US Local Business Growth Initiative.*
+*Created as part of the US Local Business Showcase Project.*
