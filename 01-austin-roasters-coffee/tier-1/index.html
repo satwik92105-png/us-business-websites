@@ -35,42 +35,20 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
 
-    <!-- Global Bulletproof Package Tier Switcher -->
-    <aside id="global-package-switcher" style="position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:999999; display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:9999px; background:rgba(10,10,12,0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 20px 45px rgba(0,0,0,0.85); font-family:ui-monospace, monospace; font-size:11px;">
-        <span style="color:#71717a; font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em; padding-right:4px;">PACKAGE:</span>
-        <span style="background:#f59e0b; color:#000; font-weight:800; padding:5px 14px; border-radius:9999px; box-shadow:0 0 15px rgba(245,158,11,0.45); cursor:default;">Tier 1: Essential ($497)</span>
-        <a href="javascript:void(0)" onclick="goToTier(2)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 2: 3D Growth ($997)</a>
-        <a href="javascript:void(0)" onclick="goToTier(3)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 3: 3D Hyper-Elite ($1,997)</a>
-    </aside>
-    <script>
-    function goToTier(tierNum) {
-        var p = window.location.pathname;
-        if (p.endsWith('.html')) {
-            p = p.substring(0, p.lastIndexOf('/') + 1);
-        }
-        if (/\/tier-\d\/?$/.test(p)) {
-            p = p.replace(/\/tier-\d\/?$/, '/');
-        }
-        if (!p.endsWith('/')) {
-            p += '/';
-        }
-        if (tierNum === 1) window.location.href = p + 'tier1.html';
-        else if (tierNum === 2) window.location.href = p + 'tier2.html';
-        else if (tierNum === 3) window.location.href = p + 'index.html';
-    }
-    </script>
-    <!-- End Package Tier Switcher -->
-    
-
-
-    
+    <!-- Global Package Switcher Pill (Pure Direct Links) -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-black/95 backdrop-blur-md border border-white/20 shadow-2xl text-xs font-mono">
+        <span class="pl-2.5 pr-1 text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">PACKAGE DEMO:</span>
+        <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-bold shadow-md shadow-amber-500/20">Tier 1: Essential ($497)</span>
+        <a href="tier2.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 2: 3D Growth ($997)</a>
+        <a href="tier3.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 3: 3D Hyper-Elite ($1,997)</a>
+    </header>
 
     <!-- Top Announcement Bar -->
     <div class="mt-16 bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
         <div class="max-w-6xl mx-auto flex items-center justify-between text-xs text-zinc-300 flex-wrap gap-2">
             <div class="flex items-center gap-2">
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="font-medium text-white">East Austin Roastery Open Today:</span> 7:00 AM – 5:00 PM
+                <span class="font-medium text-white">East Austin Roastery Open Today:</span> 7:00 AM – 5:00 PM Daily
             </div>
             <div class="flex items-center gap-4 text-zinc-400">
                 <span>📍 1611 E Cesar Chavez St</span>
@@ -92,11 +70,11 @@
             <div class="hidden md:flex items-center gap-8 text-sm text-zinc-300 font-medium">
                 <a href="#menu" class="hover:text-amber-400 transition">Menu Highlights</a>
                 <a href="#pass" class="hover:text-amber-400 transition">Explorer Pass</a>
-                <a href="#hours" class="hover:text-amber-400 transition">Hours & Location</a>
-                <a href="#inquiry" class="hover:text-amber-400 transition">Order Ahead / Inquiry</a>
+                <a href="#location" class="hover:text-amber-400 transition">Location & Map</a>
+                <a href="#contact" class="hover:text-amber-400 transition">Contact & Inquiry</a>
             </div>
             <a href="tel:5125406033" class="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition shadow-lg shadow-amber-500/25 flex items-center gap-2">
-                <span>Call to Order</span>
+                <span>📞 Call (512) 540-6033</span>
             </a>
         </div>
     </nav>
@@ -121,8 +99,8 @@
                     <a href="tel:5125406033" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2">
                         <span>📞 Call Ahead (512) 540-6033</span>
                     </a>
-                    <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" class="px-6 py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-semibold text-sm transition flex items-center gap-2">
-                        <span>📍 Get Driving Directions</span>
+                    <a href="#location" class="px-6 py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-semibold text-sm transition flex items-center gap-2">
+                        <span>📍 View Map & Hours</span>
                     </a>
                 </div>
                 <div class="pt-4 grid grid-cols-3 gap-4 border-t border-borderMuted">
@@ -237,67 +215,169 @@
         </div>
     </section>
 
-    <!-- Hours, Location & Inquiry Form -->
-    <section id="hours" class="py-16 bg-surface/30 border-t border-borderMuted">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-6 space-y-6">
-                <div>
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-2">Visit Flat Track</h3>
-                    <h4 class="text-3xl font-extrabold font-heading text-white">East Austin Roastery</h4>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted space-y-4">
-                    <div class="flex items-start gap-4">
-                        <span class="text-2xl">📍</span>
-                        <div>
-                            <div class="font-bold text-white text-sm">Physical Address</div>
-                            <div class="text-zinc-300 text-sm">1611 E Cesar Chavez St, Austin, TX 78702</div>
-                            <div class="text-xs text-zinc-500 mt-1">Convenient street and bike parking available</div>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 pt-3 border-t border-borderMuted">
-                        <span class="text-2xl">🕒</span>
-                        <div>
-                            <div class="font-bold text-white text-sm">Operating Hours</div>
-                            <div class="text-zinc-300 text-sm">Monday – Sunday: 7:00 AM – 5:00 PM</div>
-                            <div class="text-xs text-emerald-400 font-mono mt-1 font-semibold">● Open Every Day for Austin Coffee Lovers</div>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 pt-3 border-t border-borderMuted">
-                        <span class="text-2xl">📞</span>
-                        <div>
-                            <div class="font-bold text-white text-sm">Phone Line</div>
-                            <a href="tel:5125406033" class="text-amber-400 hover:underline font-mono font-bold text-sm">(512) 540-6033</a>
-                        </div>
-                    </div>
-                </div>
-                <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" class="block w-full text-center py-3 rounded-lg bg-surfaceHover hover:bg-zinc-800 border border-borderMuted text-white text-sm font-semibold transition">
-                    Open in Google Maps / Navigation ↗
-                </a>
+    <!-- COMPREHENSIVE LOCATION & MAP SECTION -->
+    <section id="location" class="py-16 bg-surface/40 border-t border-borderMuted">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">East Austin Flagship</span>
+                <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">Location & Directions</h3>
+                <p class="text-zinc-400 text-sm mt-2">Find us on East Cesar Chavez in the vibrant Holly neighborhood of East Austin.</p>
             </div>
 
-            <div id="inquiry" class="lg:col-span-6">
-                <div class="p-8 rounded-2xl bg-surface border border-borderMuted shadow-xl">
-                    <h4 class="text-xl font-bold font-heading text-white mb-2">Send Direct Inquiry</h4>
-                    <p class="text-xs text-zinc-400 mb-6">Have a catering request, bean order, or question? Drop a message directly to the Flat Track counter.</p>
-                    <form id="tier1Form" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); this.reset();">
-                        <div>
-                            <label class="block text-xs font-mono text-zinc-400 mb-1">YOUR NAME</label>
-                            <input required type="text" placeholder="Alex Morgan" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left: Interactive Google Map Embed -->
+                <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-borderMuted bg-surface shadow-2xl relative min-h-[350px]">
+                    <iframe 
+                        title="Flat Track Coffee Roasters Location Map"
+                        src="https://maps.google.com/maps?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full min-h-[350px] border-0"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Right: Detailed Location Info & Arrival Guide -->
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+                    <div class="p-6 rounded-2xl bg-surface border border-borderMuted space-y-4 shadow-xl">
+                        <div class="flex items-start gap-4">
+                            <span class="text-2xl">📍</span>
+                            <div>
+                                <h4 class="font-bold text-white text-base font-heading">Physical Address</h4>
+                                <div class="text-amber-300 font-mono text-sm mt-0.5">1611 E Cesar Chavez St</div>
+                                <div class="text-xs text-zinc-400">Austin, TX 78702 (Holly / East Austin)</div>
+                                <div class="text-[11px] text-zinc-500 mt-1">Cross Streets: Between Comal St & Chicon St</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-borderMuted flex items-start gap-4">
+                            <span class="text-2xl">🕒</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Operating Hours</h4>
+                                <div class="text-zinc-300 text-sm mt-0.5">Monday – Sunday: <strong>7:00 AM – 5:00 PM</strong></div>
+                                <div class="text-xs text-emerald-400 font-mono mt-1 flex items-center gap-1.5 font-bold">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                                    Open Every Single Day
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-borderMuted flex items-start gap-4">
+                            <span class="text-2xl">🚗</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Parking & Accessibility</h4>
+                                <div class="text-xs text-zinc-400 leading-relaxed mt-0.5">
+                                    • Free street parking along Cesar Chavez St<br>
+                                    • Dedicated motorcycle and bicycle racks in front<br>
+                                    • Shaded dog-friendly outdoor patio with water bowls
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Navigation CTAs -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
+                            Google Maps ↗
+                        </a>
+                        <a href="http://maps.apple.com/?daddr=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-bold text-xs uppercase tracking-wider transition">
+                            Apple Maps ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPREHENSIVE CONTACT & INQUIRY FORM SECTION -->
+    <section id="contact" class="py-16 bg-surface/20 border-t border-borderMuted">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Left: Direct Contact Information -->
+            <div class="lg:col-span-5 space-y-6">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Get In Touch</span>
+                    <h3 class="text-3xl font-extrabold font-heading text-white mt-1">Contact Flat Track</h3>
+                    <p class="text-zinc-400 text-sm mt-2">Whether you need whole-bean wholesale, catering for an Austin event, or have a question, reach out directly.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <a href="tel:5125406033" class="p-5 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition flex items-center justify-between group">
+                        <div class="flex items-center gap-3.5">
+                            <span class="text-2xl">📞</span>
+                            <div>
+                                <div class="text-xs text-zinc-400 uppercase font-mono">Barista Counter Direct</div>
+                                <div class="text-base font-bold text-white group-hover:text-amber-400 transition font-mono">(512) 540-6033</div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-amber-400 font-bold">Call Now →</span>
+                    </a>
+
+                    <div class="p-5 rounded-xl bg-surface border border-borderMuted flex items-center justify-between">
+                        <div class="flex items-center gap-3.5">
+                            <span class="text-2xl">✉️</span>
+                            <div>
+                                <div class="text-xs text-zinc-400 uppercase font-mono">General Inquiries</div>
+                                <div class="text-sm font-bold text-white font-mono">info@flattrackcoffee.com</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://instagram.com/flattrackcoffee" target="_blank" class="p-5 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition flex items-center justify-between group">
+                        <div class="flex items-center gap-3.5">
+                            <span class="text-2xl">📸</span>
+                            <div>
+                                <div class="text-xs text-zinc-400 uppercase font-mono">Follow on Instagram</div>
+                                <div class="text-sm font-bold text-white group-hover:text-amber-400 transition font-mono">@flattrackcoffee</div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-amber-400 font-bold">View ↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Contact & Catering Form -->
+            <div class="lg:col-span-7">
+                <div class="p-8 rounded-2xl bg-surface border border-borderMuted shadow-2xl">
+                    <h4 class="text-2xl font-bold font-heading text-white mb-1">Send a Direct Message</h4>
+                    <p class="text-xs text-zinc-400 mb-6">Drop a note to the Flat Track roastery team. We respond within a few hours.</p>
+                    
+                    <form id="tier1ContactForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('tier1Success').classList.remove('hidden'); this.reset();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">YOUR NAME</label>
+                                <input required type="text" placeholder="Alex Rivera" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">INQUIRY TYPE</label>
+                                <select class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                                    <option>General Question</option>
+                                    <option>Order Ahead Pickup</option>
+                                    <option>Bulk Whole Bean (5lb / 12oz)</option>
+                                    <option>Austin Catering / Event</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">PHONE NUMBER</label>
+                                <input required type="tel" placeholder="(512) 000-0000" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-zinc-400 mb-1">EMAIL ADDRESS</label>
+                                <input required type="email" placeholder="alex@gmail.com" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-mono text-zinc-400 mb-1">PHONE OR EMAIL</label>
-                            <input required type="text" placeholder="(512) 000-0000 / alex@gmail.com" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                            <label class="block text-xs font-mono text-zinc-400 mb-1">MESSAGE / ORDER DETAILS</label>
+                            <textarea rows="3" required placeholder="Let us know what you need (e.g. 2 whole bean bags, cold brew growlers for a Saturday meeting)..." class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition"></textarea>
                         </div>
-                        <div>
-                            <label class="block text-xs font-mono text-zinc-400 mb-1">INQUIRY / ORDER DETAILS</label>
-                            <textarea rows="3" required placeholder="Interested in a 5lb Dogspeed bag or table reservation..." class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-lg shadow-amber-500/20">
-                            Submit Inquiry
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-lg shadow-amber-500/20">
+                            Send Direct Message
                         </button>
                     </form>
-                    <div id="formSuccess" class="hidden mt-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center">
-                        ✓ Thank you! Flat Track team will respond promptly.
+
+                    <div id="tier1Success" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center space-y-1">
+                        <div class="font-bold">✓ Message Sent: Ticket #FT-AUSTIN-892</div>
+                        <div class="text-[11px] text-zinc-400">Flat Track counter notified. We will call or text your number promptly.</div>
                     </div>
                 </div>
             </div>

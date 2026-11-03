@@ -189,32 +189,16 @@
     </style>
 </head>
 <body class="selection:bg-amber-500 selection:text-black">
+        <!-- Global Direct Navigation Package Switcher (Subfolder Relative) -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-black/95 backdrop-blur-md border border-white/20 shadow-2xl text-xs font-mono">
+        <span class="pl-2.5 pr-1 text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">PACKAGE DEMO:</span>
+        <a href="../tier1.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 1: Essential ($497)</a>
+        <a href="../tier2.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 2: 3D Growth ($997)</a>
+        <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-bold shadow-md shadow-amber-500/20">Tier 3: 3D Hyper-Elite ($1,997)</span>
+    </header>
 
-    <!-- Global Bulletproof Package Tier Switcher -->
-    <aside id="global-package-switcher" style="position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:999999; display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:9999px; background:rgba(10,10,12,0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 20px 45px rgba(0,0,0,0.85); font-family:ui-monospace, monospace; font-size:11px;">
-        <span style="color:#71717a; font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em; padding-right:4px;">PACKAGE:</span>
-        <a href="javascript:void(0)" onclick="goToTier(1)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 1: Essential ($497)</a>
-        <a href="javascript:void(0)" onclick="goToTier(2)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 2: 3D Growth ($997)</a>
-        <span style="background:#f59e0b; color:#000; font-weight:800; padding:5px 14px; border-radius:9999px; box-shadow:0 0 15px rgba(245,158,11,0.45); cursor:default;">Tier 3: 3D Hyper-Elite ($1,997)</span>
-    </aside>
-    <script>
-    function goToTier(tierNum) {
-        var p = window.location.pathname;
-        if (p.endsWith('.html')) {
-            p = p.substring(0, p.lastIndexOf('/') + 1);
-        }
-        if (/\/tier-\d\/?$/.test(p)) {
-            p = p.replace(/\/tier-\d\/?$/, '/');
-        }
-        if (!p.endsWith('/')) {
-            p += '/';
-        }
-        if (tierNum === 1) window.location.href = p + 'tier1.html';
-        else if (tierNum === 2) window.location.href = p + 'tier2.html';
-        else if (tierNum === 3) window.location.href = p + 'index.html';
-    }
-    </script>
-    <!-- End Package Tier Switcher -->
+
+    
 
     <!-- Interactive 3D Physics Canvas -->
     <canvas id="physicsCanvas"></canvas>
