@@ -1,398 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flat Track Coffee Roasters | East Austin, TX | Specialty Micro-Roastery & Cafe</title>
-    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch specialty coffee on Cesar Chavez. Order ahead, directions, and hours.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        void: '#0c0a09',
-                        surface: '#171513',
-                        surfaceHover: '#231f1c',
-                        borderMuted: '#2e2824',
-                        amberGlow: '#f59e0b',
-                        amberDeep: '#d97706',
-                    },
-                    fontFamily: {
-                        heading: ['Space Grotesk', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #0c0a09; color: #f5f5f4; font-family: 'Inter', sans-serif; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flat Track Coffee Roasters | Austin TX | Specialty Coffee</title>
+<meta name="description" content="Austin's premier specialty coffee roaster. Ethiopian pour-overs, 24-hr nitro cold brew, breakfast tacos. 1611 E Cesar Chavez St, Austin TX 78702.">
+<meta name="keywords" content="coffee Austin TX, specialty coffee roaster, Flat Track Coffee, East Austin coffee, nitro cold brew Austin">
+<link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html">
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CoffeShop",
+  "name": "Flat Track Coffee Roasters",
+  "address": {"@type":"PostalAddress","streetAddress":"1611 E Cesar Chavez St","addressLocality":"Austin","addressRegion":"TX","postalCode":"78702","addressCountry":"US"},
+  "telephone": "(512) 540-6033",
+  "openingHours": "Mo-Su 07:00-17:00",
+  "aggregateRating": {"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"750"},
+  "priceRange": "$"
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0a09;
+    --bg2: #111010;
+    --bg3: #181614;
+    --gold: #c8a96e;
+    --gold2: #e8c98e;
+    --cream: #f5f0e8;
+    --muted: #888;
+    --border: rgba(200,169,110,0.15);
+    --text: #e8e0d0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+  /* Tier Switcher */
+  .tier-switcher {
+    position: fixed; top: 16px; right: 16px; z-index: 1000;
+    display: flex; gap: 6px; background: rgba(12,10,9,0.9);
+    border: 1px solid var(--border); border-radius: 50px; padding: 6px 10px;
+    backdrop-filter: blur(20px);
+  }
+  .tier-switcher a {
+    text-decoration: none; font-size: 11px; font-weight: 600; font-family: 'Space Grotesk', sans-serif;
+    padding: 5px 12px; border-radius: 50px; transition: all 0.3s;
+    color: var(--muted);
+  }
+  .tier-switcher a.active { background: var(--gold); color: #0c0a09; }
+  .tier-switcher a:not(.active):hover { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px 24px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(200,169,110,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, #0c0a09 0%, #111010 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border); border-radius: 50px; padding: 6px 16px;
+    font-size: 12px; color: var(--gold); margin-bottom: 28px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.6rem, 7vw, 5rem);
+    font-weight: 700; line-height: 1.05; margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 60%, #c8a96e 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero p { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin: 0 auto 36px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #0c0a09; font-weight: 700; font-size: 15px;
+    padding: 14px 32px; border-radius: 50px; text-decoration: none;
+    transition: all 0.3s; border: none; cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,169,110,0.35); }
+  .btn-secondary {
+    background: transparent; color: var(--text); font-weight: 500; font-size: 15px;
+    padding: 14px 32px; border-radius: 50px; text-decoration: none;
+    transition: all 0.3s; border: 1px solid var(--border); cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 60px; padding: 40px 24px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    background: var(--bg2); flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* Section */
+  section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 12px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 16px; }
+  .section-sub { color: var(--muted); max-width: 540px; }
+  .divider { width: 40px; height: 2px; background: var(--gold); margin: 20px 0 40px; }
+
+  /* Menu */
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+  .menu-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    transition: all 0.3s;
+  }
+  .menu-card:hover { border-color: rgba(200,169,110,0.4); transform: translateY(-4px); }
+  .menu-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .menu-card-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.05rem; }
+  .menu-card-price { color: var(--gold); font-weight: 700; font-size: 1rem; }
+  .menu-card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+  .menu-badge { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(200,169,110,0.1); color: var(--gold); border-radius: 50px; padding: 3px 10px; margin-top: 10px; }
+
+  /* Pass */
+  .pass-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
+    padding: 36px; max-width: 480px; margin: 40px auto 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .pass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .pass-price { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; color: var(--gold); }
+  .pass-price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+  .pass-name { font-size: 1.2rem; font-weight: 600; margin: 8px 0 4px; }
+  .pass-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+  .pass-features { list-style: none; text-align: left; margin-bottom: 28px; }
+  .pass-features li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; gap: 10px; }
+  .pass-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+  /* Reviews */
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+  .review-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .review-stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; }
+  .review-text { font-size: 0.9rem; color: var(--text); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
+  .review-author { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+  .review-source { font-size: 0.75rem; color: var(--muted); }
+
+  /* Map + Contact */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(200,169,110,0.1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 4px; }
+  .contact-value { font-weight: 500; color: var(--text); }
+  .contact-value a { color: var(--gold); text-decoration: none; }
+  .map-container { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .map-container iframe { width: 100%; height: 300px; border: none; display: block; }
+  .map-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .map-btn { flex: 1; text-align: center; padding: 12px; border-radius: 12px; background: var(--bg3); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s; }
+  .map-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Hours */
+  .hours-table { width: 100%; margin-top: 16px; }
+  .hours-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .hours-today { color: var(--gold); font-weight: 600; }
+  .open-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; font-size: 12px; font-weight: 600; border-radius: 50px; padding: 4px 14px; margin-bottom: 20px; }
+  .open-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+  /* Contact Form */
+  .contact-form { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 36px; margin-top: 60px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field.full { grid-column: 1/-1; }
+  .form-field label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .form-field input, .form-field textarea, .form-field select {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    color: var(--text); font-size: 15px; padding: 12px 16px; font-family: inherit;
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { height: 110px; resize: vertical; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+  .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 13px; color: var(--muted); margin-top: 20px; }
+
+  /* Tier badge in hero */
+  .tier-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.25); border-radius: 8px; padding: 8px 16px; font-size: 13px; color: var(--gold); margin-bottom: 32px; }
+  .tier-badge strong { color: var(--cream); }
+
+  @media (max-width: 600px) {
+    .stats-bar { gap: 30px; }
+    section { padding: 50px 16px; }
+  }
+</style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
+<body>
 
-    
+<!-- Tier Switcher -->
+<div class="tier-switcher">
+  <a href="tier1.html" class="active">Tier 1</a>
+  <a href="tier2.html">Tier 2</a>
+  <a href="tier3.html">Tier 3</a>
+</div>
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
-        <div class="max-w-6xl mx-auto flex items-center justify-between text-xs text-zinc-300 flex-wrap gap-2">
-            <div class="flex items-center gap-2">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="font-medium text-white">East Austin Roastery Open Today:</span> 7:00 AM – 5:00 PM Daily
-            </div>
-            <div class="flex items-center gap-4 text-zinc-400">
-                <span>📍 1611 E Cesar Chavez St</span>
-                <a href="tel:5125406033" class="text-amber-400 hover:underline font-mono font-bold">📞 (512) 540-6033</a>
-            </div>
-        </div>
+<!-- HERO -->
+<header class="hero">
+  <div class="tier-badge">
+    <span>🥉</span>
+    <strong>Essential Digital Storefront</strong>
+    <span>— One-Time $497</span>
+  </div>
+  <div class="hero-badge">☕ East Austin · Since 2014 · 4.8★ Rated</div>
+  <h1>Flat Track Coffee<br>Roasters</h1>
+  <p>Austin's premier specialty coffee roaster. Ethiopian pour-overs, 24-hr nitro cold brew, and breakfast tacos — all under one roof on East Cesar Chavez.</p>
+  <div class="hero-actions">
+    <a href="#menu" class="btn-primary">View Our Menu</a>
+    <a href="#contact" class="btn-secondary">Find Us</a>
+  </div>
+</header>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">4.8★</div>
+    <div class="stat-label">Google Rating</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">750+</div>
+    <div class="stat-label">Reviews</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Years in Austin</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Single Origin</div>
+  </div>
+</div>
+
+<!-- Menu -->
+<section id="menu">
+  <div class="section-label">What We Serve</div>
+  <h2 class="section-title">Our Menu</h2>
+  <p class="section-sub">Hand-crafted drinks, small-batch roasted beans, and locally sourced food — made fresh daily.</p>
+  <div class="divider"></div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">Dogspeed Espresso Blend</span>
+        <span class="menu-card-price">$4.50</span>
+      </div>
+      <p class="menu-card-desc">Our signature house espresso — bright, chocolatey, and built for everyday drinking. Available as double shot or latte.</p>
+      <span class="menu-badge">Signature</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">24-Hour Nitro Cold Brew</span>
+        <span class="menu-card-price">$5.50</span>
+      </div>
+      <p class="menu-card-desc">Steeped for a full 24 hours, nitrogen-charged for a velvety texture. Silky smooth with zero bitterness.</p>
+      <span class="menu-badge">Fan Favorite</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">Ethiopian Pour-Over</span>
+        <span class="menu-card-price">$5.75</span>
+      </div>
+      <p class="menu-card-desc">Single-origin Ethiopian beans, hand-poured to order. Jasmine floral notes with wild blueberry finish.</p>
+      <span class="menu-badge">Single Origin</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">Breakfast Taco</span>
+        <span class="menu-card-price">$3.75</span>
+      </div>
+      <p class="menu-card-desc">Austin's favorite morning ritual. Scrambled eggs, cheddar, and your choice of protein on a fresh flour tortilla.</p>
+      <span class="menu-badge">Austin Classic</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">Single-Origin Whole Bean (12oz)</span>
+        <span class="menu-card-price">$18.00</span>
+      </div>
+      <p class="menu-card-desc">Take home our freshest roast. Rotates monthly — from Colombian to Guatemalan highlands.</p>
+      <span class="menu-badge">Take Home</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header">
+        <span class="menu-card-name">Seasonal Latte</span>
+        <span class="menu-card-price">$5.25</span>
+      </div>
+      <p class="menu-card-desc">Ask your barista about today's house-made seasonal syrup. Rotating flavors made in-house with local ingredients.</p>
+      <span class="menu-badge">Seasonal</span>
+    </div>
+  </div>
+</section>
+
+<!-- Customer Pass -->
+<section id="pass" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; padding: 80px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">Customer Loyalty</div>
+    <h2 class="section-title">The Weekend Explorer Pass</h2>
+    <p class="section-sub">One flat fee. Unlimited weekend coffee. Zero guesswork.</p>
+    <div class="divider"></div>
+    <div class="pass-card">
+      <div class="pass-price">$35 <span>/ one-time</span></div>
+      <div class="pass-name">Weekend Explorer Pass</div>
+      <div class="pass-desc">Your all-access pass to Austin's best coffee every Saturday & Sunday.</div>
+      <ul class="pass-features">
+        <li>Unlimited drip & pour-over coffee on weekends</li>
+        <li>10% off all food items Saturday & Sunday</li>
+        <li>Priority seating during peak hours</li>
+        <li>Shareable with one guest on Sundays</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:block; width:100%;">Claim Your Pass</a>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="section-label">What Austinites Say</div>
+  <h2 class="section-title">Google Reviews</h2>
+  <p class="section-sub">Real customers, real opinions — 4.8 stars on 750+ reviews.</p>
+  <div class="divider"></div>
+  <div style="text-align:center; margin-bottom: 30px;">
+    <div style="font-size: 2.5rem; font-weight: 700; font-family: 'Space Grotesk'; color: var(--gold);">4.8 ★★★★★</div>
+    <div style="color: var(--muted); font-size: 14px;">Based on 750+ Google & Yelp reviews</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best coffee in Austin — period. The nitro cold brew is life-changing. I come every Saturday morning and it never disappoints."</p>
+      <div class="review-author">Sarah M.</div>
+      <div class="review-source">Google Review · 3 weeks ago</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Ethiopian pour-over is just incredible. You can tell they actually care about sourcing. This is what specialty coffee should taste like."</p>
+      <div class="review-author">James K.</div>
+      <div class="review-source">Google Review · 1 month ago</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Love the vibe on East Cesar Chavez. Great outdoor seating, dog-friendly, and the breakfast tacos hit different at 8am."</p>
+      <div class="review-author">Priya R.</div>
+      <div class="review-source">Yelp Review · 2 weeks ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- Location & Contact -->
+<section id="contact" style="background: var(--bg2); border-top: 1px solid var(--border); max-width: 100%; padding: 80px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">Location & Hours</h2>
+    <div class="divider"></div>
+
+    <div id="openStatus" class="open-badge">
+      <span class="dot"></span>
+      <span id="statusText">Checking hours...</span>
     </div>
 
-    <!-- Navigation -->
-    <nav class="border-b border-borderMuted bg-void/80 backdrop-blur sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-amber-500/20">FT</div>
-                <div>
-                    <h1 class="text-lg font-bold tracking-tight font-heading leading-tight">FLAT TRACK</h1>
-                    <p class="text-[10px] text-zinc-400 uppercase tracking-widest font-mono">Coffee Roasters • Austin, TX</p>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm text-zinc-300 font-medium">
-                <a href="#menu" class="hover:text-amber-400 transition">Menu Highlights</a>
-                <a href="#pass" class="hover:text-amber-400 transition">Explorer Pass</a>
-                <a href="#location" class="hover:text-amber-400 transition">Location & Map</a>
-                <a href="#contact" class="hover:text-amber-400 transition">Contact & Inquiry</a>
-            </div>
-            <a href="tel:5125406033" class="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition shadow-lg shadow-amber-500/25 flex items-center gap-2">
-                <span>📞 Call (512) 540-6033</span>
-            </a>
+    <div class="contact-grid">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value">1611 E Cesar Chavez St<br>Austin, TX 78702</div>
+          </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="py-16 sm:py-20 px-6 max-w-6xl mx-auto flex-1">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-mono font-medium">
-                    <span>★ 4.8 RATED OVER 750+ REVIEWS</span>
-                    <span>•</span>
-                    <span>EAST CESAR CHAVEZ</span>
-                </div>
-                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight leading-[1.1]">
-                    Austin's Micro-Roastery <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">Crafted with Precision.</span>
-                </h2>
-                <p class="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl">
-                    Small-batch single-origin coffees roasted directly on East Cesar Chavez. Nitro cold brew on tap, artisan scratch pastries, local Austin breakfast tacos, and uncompromised quality.
-                </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="tel:5125406033" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2">
-                        <span>📞 Call Ahead (512) 540-6033</span>
-                    </a>
-                    <a href="#location" class="px-6 py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-semibold text-sm transition flex items-center gap-2">
-                        <span>📍 View Map & Hours</span>
-                    </a>
-                </div>
-                <div class="pt-4 grid grid-cols-3 gap-4 border-t border-borderMuted">
-                    <div>
-                        <div class="text-2xl font-bold font-heading text-white">4.8★</div>
-                        <div class="text-xs text-zinc-500">750+ Google Reviews</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold font-heading text-white">100%</div>
-                        <div class="text-xs text-zinc-500">In-House Batch Roasted</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold font-heading text-white">7 Days</div>
-                        <div class="text-xs text-zinc-500">Open 7:00 AM – 5:00 PM</div>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-5">
-                <div class="relative rounded-2xl overflow-hidden border border-borderMuted bg-surface p-2 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Flat Track Coffee Roasters" class="rounded-xl w-full h-[380px] object-cover">
-                    <div class="p-4 bg-surface/90 rounded-b-xl border-t border-borderMuted flex items-center justify-between text-xs text-zinc-300">
-                        <div>
-                            <div class="font-bold text-white">Flat Track Roastery & Cafe</div>
-                            <div class="text-zinc-500">1611 E Cesar Chavez St, Austin, TX</div>
-                        </div>
-                        <span class="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[11px] font-semibold">Active Roaster</span>
-                    </div>
-                </div>
-            </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:+15125406033">(512) 540-6033</a></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Curated Menu Highlights -->
-    <section id="menu" class="py-16 bg-surface/50 border-y border-borderMuted">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <h3 class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-2">Curated Menu</h3>
-                <h4 class="text-3xl font-extrabold font-heading text-white">Austin Counter Favorites</h4>
-                <p class="text-zinc-400 text-sm mt-2">Roasted fresh in East Austin. Available for dine-in or quick counter pickup.</p>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Hours</div>
+            <div class="hours-table">
+              <div class="hours-row"><span>Monday – Friday</span><span>7:00 AM – 5:00 PM</span></div>
+              <div class="hours-row"><span>Saturday</span><span>7:00 AM – 5:00 PM</span></div>
+              <div class="hours-row hours-today"><span>Sunday</span><span>7:00 AM – 5:00 PM</span></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">Dogspeed House Espresso</h5>
-                        <span class="text-amber-400 font-mono font-bold">$3.75</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Our signature espresso blend. Heavy dark chocolate, roasted almond, and bright cherry finish with velvety crema.</p>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">24-Hr Nitro Cold Brew</h5>
-                        <span class="text-amber-400 font-mono font-bold">$5.50</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Steeped slow for 24 hours. Nitrogen infused for a silky stout-like cascade with naturally sweet finish.</p>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">Single-Origin Pour-Over</h5>
-                        <span class="text-amber-400 font-mono font-bold">$6.00</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Washed Yirgacheffe Ethiopia. Delicate floral aroma, jasmine notes, and clean citrus acidity hand-dripped to order.</p>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">Cortado / Gibraltar</h5>
-                        <span class="text-amber-400 font-mono font-bold">$4.25</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Equal parts Dogspeed espresso and textured whole milk served in a classic 4.5oz Libbey glass.</p>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">Austin Breakfast Taco Duo</h5>
-                        <span class="text-amber-400 font-mono font-bold">$7.00</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Local farm eggs, crispy bacon, cheddar, fresh potato on warm artisan tortillas served with roasted salsa verde.</p>
-                </div>
-                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
-                    <div class="flex justify-between items-start mb-2">
-                        <h5 class="font-bold text-white text-lg font-heading">Dogspeed 12oz Whole Bean</h5>
-                        <span class="text-amber-400 font-mono font-bold">$18.00</span>
-                    </div>
-                    <p class="text-xs text-zinc-400 leading-relaxed">Take home our signature roast. Whole bean sealed fresh from the Cesar Chavez roaster drum.</p>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Customer Experience Pass -->
-    <section id="pass" class="py-16 max-w-4xl mx-auto px-6">
-        <div class="rounded-2xl bg-gradient-to-b from-surface to-void border border-amber-500/30 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="space-y-4">
-                    <span class="px-3 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-semibold uppercase">Single Customer Pass • One-Time Only</span>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">Weekend Explorer Pass</h3>
-                    <p class="text-zinc-400 text-sm max-w-md">Get 5 handcrafted specialty drinks of your choice + 1 scratch bakery item. Pre-load to your Apple or Google wallet with zero recurring fees.</p>
-                    <ul class="text-xs text-zinc-300 space-y-2">
-                        <li class="flex items-center gap-2">✓ 5 Specialty espresso, pour-over or nitro cold brews</li>
-                        <li class="flex items-center gap-2">✓ 1 Fresh scratch pastry or artisan taco</li>
-                        <li class="flex items-center gap-2">✓ Priority counter line pickup</li>
-                        <li class="flex items-center gap-2">✓ Never expires • 100% One-time investment</li>
-                    </ul>
-                </div>
-                <div class="text-center md:text-right shrink-0 bg-surface/80 p-6 rounded-xl border border-borderMuted w-full md:w-auto">
-                    <div class="text-xs text-zinc-400 uppercase font-mono">One-Time Price</div>
-                    <div class="text-4xl font-extrabold font-heading text-amber-400 my-1">$35</div>
-                    <div class="text-[11px] text-zinc-500 mb-4">No subscription • No auto-renewal</div>
-                    <a href="tel:5125406033" class="block px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-amber-500/20">
-                        Claim at Counter
-                    </a>
-                </div>
-            </div>
+        <div class="contact-item">
+          <div class="contact-icon">🅿️</div>
+          <div>
+            <div class="contact-label">Parking</div>
+            <div class="contact-value" style="font-size:0.9rem; color: var(--muted);">Free street parking on E Cesar Chavez and Chicon St. Bicycle racks in front. Bus stop one block west.</div>
+          </div>
         </div>
-    </section>
-
-    <!-- COMPREHENSIVE LOCATION & MAP SECTION -->
-    <section id="location" class="py-16 bg-surface/40 border-t border-borderMuted">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">East Austin Flagship</span>
-                <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">Location & Directions</h3>
-                <p class="text-zinc-400 text-sm mt-2">Find us on East Cesar Chavez in the vibrant Holly neighborhood of East Austin.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <!-- Left: Interactive Google Map Embed -->
-                <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-borderMuted bg-surface shadow-2xl relative min-h-[350px]">
-                    <iframe 
-                        title="Flat Track Coffee Roasters Location Map"
-                        src="https://maps.google.com/maps?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-                        class="w-full h-full min-h-[350px] border-0"
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-
-                <!-- Right: Detailed Location Info & Arrival Guide -->
-                <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
-                    <div class="p-6 rounded-2xl bg-surface border border-borderMuted space-y-4 shadow-xl">
-                        <div class="flex items-start gap-4">
-                            <span class="text-2xl">📍</span>
-                            <div>
-                                <h4 class="font-bold text-white text-base font-heading">Physical Address</h4>
-                                <div class="text-amber-300 font-mono text-sm mt-0.5">1611 E Cesar Chavez St</div>
-                                <div class="text-xs text-zinc-400">Austin, TX 78702 (Holly / East Austin)</div>
-                                <div class="text-[11px] text-zinc-500 mt-1">Cross Streets: Between Comal St & Chicon St</div>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-borderMuted flex items-start gap-4">
-                            <span class="text-2xl">🕒</span>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Operating Hours</h4>
-                                <div class="text-zinc-300 text-sm mt-0.5">Monday – Sunday: <strong>7:00 AM – 5:00 PM</strong></div>
-                                <div class="text-xs text-emerald-400 font-mono mt-1 flex items-center gap-1.5 font-bold">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-                                    Open Every Single Day
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-borderMuted flex items-start gap-4">
-                            <span class="text-2xl">🚗</span>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Parking & Accessibility</h4>
-                                <div class="text-xs text-zinc-400 leading-relaxed mt-0.5">
-                                    • Free street parking along Cesar Chavez St<br>
-                                    • Dedicated motorcycle and bicycle racks in front<br>
-                                    • Shaded dog-friendly outdoor patio with water bowls
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Direct Navigation CTAs -->
-                    <div class="grid grid-cols-2 gap-3">
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
-                            Google Maps ↗
-                        </a>
-                        <a href="http://maps.apple.com/?daddr=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-bold text-xs uppercase tracking-wider transition">
-                            Apple Maps ↗
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="contact-item">
+          <div class="contact-icon">🐕</div>
+          <div>
+            <div class="contact-label">Dog Friendly?</div>
+            <div class="contact-value" style="font-size:0.9rem; color: var(--muted);">Yes — dogs welcome on the patio. Water bowl available.</div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- COMPREHENSIVE CONTACT & INQUIRY FORM SECTION -->
-    <section id="contact" class="py-16 bg-surface/20 border-t border-borderMuted">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Left: Direct Contact Information -->
-            <div class="lg:col-span-5 space-y-6">
-                <div>
-                    <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Get In Touch</span>
-                    <h3 class="text-3xl font-extrabold font-heading text-white mt-1">Contact Flat Track</h3>
-                    <p class="text-zinc-400 text-sm mt-2">Whether you need whole-bean wholesale, catering for an Austin event, or have a question, reach out directly.</p>
-                </div>
-
-                <div class="space-y-4">
-                    <a href="tel:5125406033" class="p-5 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition flex items-center justify-between group">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">📞</span>
-                            <div>
-                                <div class="text-xs text-zinc-400 uppercase font-mono">Barista Counter Direct</div>
-                                <div class="text-base font-bold text-white group-hover:text-amber-400 transition font-mono">(512) 540-6033</div>
-                            </div>
-                        </div>
-                        <span class="text-xs text-amber-400 font-bold">Call Now →</span>
-                    </a>
-
-                    <div class="p-5 rounded-xl bg-surface border border-borderMuted flex items-center justify-between">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">✉️</span>
-                            <div>
-                                <div class="text-xs text-zinc-400 uppercase font-mono">General Inquiries</div>
-                                <div class="text-sm font-bold text-white font-mono">info@flattrackcoffee.com</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="https://instagram.com/flattrackcoffee" target="_blank" class="p-5 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition flex items-center justify-between group">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">📸</span>
-                            <div>
-                                <div class="text-xs text-zinc-400 uppercase font-mono">Follow on Instagram</div>
-                                <div class="text-sm font-bold text-white group-hover:text-amber-400 transition font-mono">@flattrackcoffee</div>
-                            </div>
-                        </div>
-                        <span class="text-xs text-amber-400 font-bold">View ↗</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right: Interactive Contact & Catering Form -->
-            <div class="lg:col-span-7">
-                <div class="p-8 rounded-2xl bg-surface border border-borderMuted shadow-2xl">
-                    <h4 class="text-2xl font-bold font-heading text-white mb-1">Send a Direct Message</h4>
-                    <p class="text-xs text-zinc-400 mb-6">Drop a note to the Flat Track roastery team. We respond within a few hours.</p>
-                    
-                    <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); this.reset();">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-mono text-zinc-400 mb-1">YOUR NAME</label>
-                                <input required type="text" placeholder="Alex Rivera" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-mono text-zinc-400 mb-1">INQUIRY TYPE</label>
-                                <select class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
-                                    <option>General Question</option>
-                                    <option>Order Ahead Pickup</option>
-                                    <option>Bulk Whole Bean (5lb / 12oz)</option>
-                                    <option>Austin Catering / Event</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-mono text-zinc-400 mb-1">PHONE NUMBER</label>
-                                <input required type="tel" placeholder="(512) 000-0000" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-mono text-zinc-400 mb-1">EMAIL ADDRESS</label>
-                                <input required type="email" placeholder="alex@gmail.com" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-mono text-zinc-400 mb-1">MESSAGE / ORDER DETAILS</label>
-                            <textarea rows="3" required placeholder="Let us know what you need (e.g. 2 whole bean bags, cold brew growlers for a Saturday meeting)..." class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-lg shadow-amber-500/20">
-                            Send Direct Message
-                        </button>
-                    </form>
-
-                    <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center space-y-1">
-                        <div class="font-bold">✓ Message Sent: Ticket #FT-AUSTIN-892</div>
-                        <div class="text-[11px] text-zinc-400">Flat Track counter notified. We will call or text your number promptly.</div>
-                    </div>
-                </div>
-            </div>
+      <!-- Map -->
+      <div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.1!2d-97.7168!3d30.2562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b5a4e7d0e4c9%3A0x1a2b3c4d5e6f7a8b!2s1611%20E%20Cesar%20Chavez%20St%2C%20Austin%2C%20TX%2078702!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-borderMuted py-8 px-6 bg-void text-xs text-zinc-500">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <span class="font-bold text-white font-heading">FLAT TRACK COFFEE ROASTERS</span>
-                <span>•</span>
-                <span>1611 E Cesar Chavez St, Austin, TX 78702</span>
-            </div>
-            <div class="flex items-center gap-4 text-zinc-400">
-                <span>Independent Micro-Roastery</span>
-                <span>•</span>
-                <span>East Austin, Texas</span>
-            </div>
+        <div class="map-actions">
+          <a href="https://maps.google.com/?q=Flat+Track+Coffee+Roasters+Austin+TX" target="_blank" class="map-btn">🗺 Google Maps</a>
+          <a href="https://maps.apple.com/?q=Flat+Track+Coffee+Roasters+1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" class="map-btn">🍎 Apple Maps</a>
         </div>
-    </footer>
+      </div>
+    </div>
 
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <div class="section-label">Send a Message</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.5rem; margin-bottom:8px;">Have a Question?</h3>
+      <p style="color:var(--muted); margin-bottom:28px; font-size:0.9rem;">For catering inquiries, wholesale, or general questions — we'll get back to you within 24 hours.</p>
+      <form onsubmit="handleFormSubmit(event)">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-field">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane@email.com" required>
+          </div>
+          <div class="form-field">
+            <label>Phone (Optional)</label>
+            <input type="tel" placeholder="(512) 000-0000">
+          </div>
+          <div class="form-field">
+            <label>Subject</label>
+            <select>
+              <option>General Question</option>
+              <option>Catering Inquiry</option>
+              <option>Wholesale Coffee</option>
+              <option>Events & Booking</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label>Message</label>
+            <textarea placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top:20px; width:100%;">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">☕ Flat Track Coffee Roasters</div>
+  <p style="color:var(--muted); font-size:14px;">1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+  <div class="footer-links">
+    <a href="#menu">Menu</a>
+    <a href="#pass">Passes</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:+15125406033">Call Us</a>
+  </div>
+  <div class="footer-copy">© 2024 Flat Track Coffee Roasters. All rights reserved.</div>
+</footer>
+
+<script>
+// Open/Closed Status
+(function() {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun, 6=Sat
+  const hour = now.getHours();
+  const open = hour >= 7 && hour < 17;
+  const badge = document.getElementById('openStatus');
+  const text = document.getElementById('statusText');
+  if (open) {
+    text.textContent = 'Open Now · Closes at 5:00 PM';
+    badge.style.background = 'rgba(34,197,94,0.1)';
+    badge.style.borderColor = 'rgba(34,197,94,0.2)';
+    badge.style.color = '#22c55e';
+  } else {
+    text.textContent = 'Closed · Opens at 7:00 AM';
+    badge.style.background = 'rgba(239,68,68,0.1)';
+    badge.style.borderColor = 'rgba(239,68,68,0.2)';
+    badge.style.color = '#ef4444';
+    badge.querySelector('.dot').style.background = '#ef4444';
+  }
+})();
+
+// Form Submit
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = '✓ Message Sent! We\'ll reply within 24 hours.';
+  btn.style.background = '#22c55e';
+  btn.disabled = true;
+}
+</script>
 </body>
 </html>
