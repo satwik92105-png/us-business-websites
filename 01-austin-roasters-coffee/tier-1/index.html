@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flat Track Coffee Roasters | Austin, TX (Tier 1: Essential Launch)</title>
+    <title>Flat Track Coffee Roasters | East Austin, TX | Specialty Micro-Roastery & Cafe</title>
     <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch specialty coffee on Cesar Chavez. Order ahead, directions, and hours.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,16 +35,10 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
 
-    <!-- Global Package Switcher Pill (Pure Direct Links) -->
-    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-black/95 backdrop-blur-md border border-white/20 shadow-2xl text-xs font-mono">
-        <span class="pl-2.5 pr-1 text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">PACKAGE DEMO:</span>
-        <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-bold shadow-md shadow-amber-500/20">Tier 1: Essential ($497)</span>
-        <a href="tier2.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 2: 3D Growth ($997)</a>
-        <a href="tier3.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 3: 3D Hyper-Elite ($1,997)</a>
-    </header>
+    
 
     <!-- Top Announcement Bar -->
-    <div class="mt-16 bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
+    <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
         <div class="max-w-6xl mx-auto flex items-center justify-between text-xs text-zinc-300 flex-wrap gap-2">
             <div class="flex items-center gap-2">
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -188,7 +182,7 @@
         </div>
     </section>
 
-    <!-- Single Customer Pass (Tier 1 Feature) -->
+    <!-- Customer Experience Pass -->
     <section id="pass" class="py-16 max-w-4xl mx-auto px-6">
         <div class="rounded-2xl bg-gradient-to-b from-surface to-void border border-amber-500/30 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -340,7 +334,7 @@
                     <h4 class="text-2xl font-bold font-heading text-white mb-1">Send a Direct Message</h4>
                     <p class="text-xs text-zinc-400 mb-6">Drop a note to the Flat Track roastery team. We respond within a few hours.</p>
                     
-                    <form id="tier1ContactForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('tier1Success').classList.remove('hidden'); this.reset();">
+                    <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); this.reset();">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-mono text-zinc-400 mb-1">YOUR NAME</label>
@@ -375,7 +369,7 @@
                         </button>
                     </form>
 
-                    <div id="tier1Success" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center space-y-1">
+                    <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center space-y-1">
                         <div class="font-bold">✓ Message Sent: Ticket #FT-AUSTIN-892</div>
                         <div class="text-[11px] text-zinc-400">Flat Track counter notified. We will call or text your number promptly.</div>
                     </div>
@@ -393,9 +387,9 @@
                 <span>1611 E Cesar Chavez St, Austin, TX 78702</span>
             </div>
             <div class="flex items-center gap-4 text-zinc-400">
-                <span>Tier 1: Essential Launch Demo</span>
+                <span>Independent Micro-Roastery</span>
                 <span>•</span>
-                <span>100% One-Time Investment</span>
+                <span>East Austin, Texas</span>
             </div>
         </div>
     </footer>

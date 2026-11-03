@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flat Track Coffee Roasters | Austin, TX (Tier 3: Sovereign 3D Hyper-Elite)</title>
-    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch specialty roastery on Cesar Chavez. Featuring 3D interactive physics, live telemetry HUD, sensory flavor radar, and VIP customer passes.">
+    <title>Flat Track Coffee Roasters | Austin, TX (Tier 3: Sovereign 3D Hyper-Elite Flagship)</title>
+    <meta name="description" content="Flat Track Coffee Roasters flagship digital platform. 3D Newtonian physics, holographic metal cards, sensory radar, live drum telemetry, interactive customizer lab, and Austin roastery map.">
     <meta name="keywords" content="Flat Track Coffee, Austin coffee roaster, specialty coffee Austin, East Cesar Chavez, nitro cold brew Austin">
     
     <!-- Open Graph -->
@@ -64,7 +64,7 @@
                     colors: {
                         void: '#030202',
                         obsidian: '#0a0806',
-                        glassBg: 'rgba(18, 14, 11, 0.75)',
+                        glassBg: 'rgba(18, 14, 11, 0.78)',
                         amberGlow: '#f59e0b',
                         goldFoil: '#fbbf24',
                         amberDeep: '#d97706',
@@ -108,9 +108,9 @@
             z-index: 1;
         }
 
-        /* Glassmorphism Ultra */
+        /* Glassmorphism Spatial */
         .glass-spatial {
-            background: rgba(14, 11, 8, 0.78);
+            background: rgba(14, 11, 8, 0.82);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -121,7 +121,7 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(245, 158, 11, 0.15);
         }
 
-        /* Holographic Metal Card with Dynamic Rainbow Sheen */
+        /* Holographic Metal Card with Dynamic Optical Sheen */
         .holo-card {
             position: relative;
             transform-style: preserve-3d;
@@ -136,16 +136,16 @@
             background: linear-gradient(
                 125deg,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(251, 191, 36, 0.15) 30%,
-                rgba(236, 72, 153, 0.15) 45%,
-                rgba(59, 130, 246, 0.15) 60%,
-                rgba(16, 185, 129, 0.15) 75%,
+                rgba(251, 191, 36, 0.18) 30%,
+                rgba(236, 72, 153, 0.18) 45%,
+                rgba(59, 130, 246, 0.18) 60%,
+                rgba(16, 185, 129, 0.18) 75%,
                 rgba(255, 255, 255, 0) 100%
             );
             background-size: 250% 250%;
             background-position: var(--glare-x, 50%) var(--glare-y, 50%);
             pointer-events: none;
-            opacity: 0.7;
+            opacity: 0.75;
             mix-blend-mode: overlay;
             transition: opacity 0.3s;
         }
@@ -177,28 +177,17 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Pulse glow */
-        .pulse-amber {
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
     </style>
 </head>
 <body class="selection:bg-amber-500 selection:text-black">
-    <!-- Global Direct Navigation Package Switcher -->
+
+    <!-- Global Package Switcher Pill (Pure Direct Links) -->
     <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-black/95 backdrop-blur-md border border-white/20 shadow-2xl text-xs font-mono">
         <span class="pl-2.5 pr-1 text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">PACKAGE DEMO:</span>
         <a href="tier1.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 1: Essential ($497)</a>
         <a href="tier2.html" class="px-3 py-1 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition">Tier 2: 3D Growth ($997)</a>
         <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-bold shadow-md shadow-amber-500/20">Tier 3: 3D Hyper-Elite ($1,997)</span>
     </header>
-
-
-    
 
     <!-- Interactive 3D Physics Canvas -->
     <canvas id="physicsCanvas"></canvas>
@@ -250,14 +239,20 @@
             </div>
             <div class="hidden lg:flex items-center gap-8 text-sm text-zinc-300 font-medium">
                 <a href="#radar" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Flavor Radar</a>
+                <a href="#customizer" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Customizer Lab</a>
                 <a href="#passes" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">VIP Metal Cards</a>
-                <a href="#menu" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Roastery Tap</a>
-                <a href="#story" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Moto Heritage</a>
+                <a href="#journey" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Bean Journey</a>
+                <a href="#location" class="hover:text-amber-400 transition" onmouseenter="playClickSound()">Map & ETA</a>
             </div>
             <div class="flex items-center gap-3">
                 <!-- Drop Physics Beans Button -->
-                <button onclick="spawnBeansExplosion(event)" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white font-mono text-xs transition flex items-center gap-1.5" title="Spawn tumbling physical coffee beans">
+                <button onclick="spawnBeansExplosion(event)" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white font-mono text-xs transition flex items-center gap-1.5" title="Spawn tumbling physical coffee beans">
                     <span>☕ Rain Beans</span>
+                </button>
+                <!-- Cart Button -->
+                <button onclick="toggleCart()" class="relative px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-mono text-xs transition flex items-center gap-1.5">
+                    <span>🛒</span>
+                    <span id="tier3CartBadge" class="w-5 h-5 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-[10px]">0</span>
                 </button>
                 <button onclick="openVipModal()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black font-extrabold text-sm transition shadow-lg shadow-amber-500/30 flex items-center gap-2" onmouseenter="playClickSound()">
                     <span>VIP Concierge</span>
@@ -266,10 +261,10 @@
         </div>
     </nav>
 
-    <!-- Main Content Container (relative z-10 for interactivity) -->
+    <!-- Main Content Container -->
     <main class="relative z-10">
 
-        <!-- Hero Section with 3D Card Tilt & Dynamic Lighting -->
+        <!-- Hero Section with 3D Card Tilt -->
         <section class="py-16 sm:py-24 px-6 max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-6">
@@ -284,14 +279,14 @@
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500">Meets Pure Grit.</span>
                     </h2>
                     <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
-                        Micro-batch single-origins roasted live on East Cesar Chavez. Combining vintage motorcycle culture with uncompromising roast science. Click anywhere to trigger physical roasted beans or explore our interactive sensory radar.
+                        Micro-batch single-origins roasted live on East Cesar Chavez. Combining vintage motorcycle culture with uncompromising roast science. Click anywhere to trigger physical roasted beans, custom-craft your bag, or explore our interactive sensory radar.
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2">
                         <button onclick="openVipModal()" class="px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-sm transition shadow-2xl shadow-amber-500/30 flex items-center gap-2.5" onmouseenter="playClickSound()">
                             <span>⚡ VIP Tasting & Pass Access</span>
                         </button>
-                        <a href="tel:5125406033" class="px-8 py-4 rounded-xl glass-spatial text-white hover:text-amber-400 font-bold text-sm transition flex items-center gap-2.5" onmouseenter="playClickSound()">
-                            <span>📞 Call Roastery: (512) 540-6033</span>
+                        <a href="#location" class="px-8 py-4 rounded-xl glass-spatial text-white hover:text-amber-400 font-bold text-sm transition flex items-center gap-2.5" onmouseenter="playClickSound()">
+                            <span>📍 Austin Map & ETA Calculator</span>
                         </a>
                     </div>
                     <!-- Live Stats -->
@@ -337,7 +332,9 @@
                                         <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
                                         Live Roaster Cooling Tray
                                     </span>
-                                    <button onclick="openVipModal()" class="text-amber-400 font-bold hover:underline">Claim Bag →</button>
+                                    <button onclick="addToCart('Dogspeed Signature Whole Bean (12oz)', 18.00)" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold">
+                                        + Add to Bag
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -346,7 +343,7 @@
             </div>
         </section>
 
-        <!-- Interactive Sensory Flavor Profile Radar Chart -->
+        <!-- SENSORY FLAVOR PROFILE RADAR -->
         <section id="radar" class="py-20 bg-obsidian/70 border-y border-white/10">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-2xl mx-auto mb-12">
@@ -384,18 +381,15 @@
                     <!-- Right: Morphing SVG Radar Chart -->
                     <div class="lg:col-span-7 flex flex-col items-center justify-center">
                         <div class="relative w-80 h-80 sm:w-96 sm:h-96">
-                            <!-- Background Web Circles -->
                             <svg viewBox="0 0 400 400" class="w-full h-full overflow-visible">
                                 <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
                                 <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
                                 <circle cx="200" cy="200" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
                                 
-                                <!-- Axes lines -->
                                 <line x1="200" y1="50" x2="200" y2="350" stroke="rgba(255,255,255,0.12)" stroke-dasharray="3,3" />
                                 <line x1="70" y1="125" x2="330" y2="275" stroke="rgba(255,255,255,0.12)" stroke-dasharray="3,3" />
                                 <line x1="70" y1="275" x2="330" y2="125" stroke="rgba(255,255,255,0.12)" stroke-dasharray="3,3" />
 
-                                <!-- Axis Labels -->
                                 <text x="200" y="38" text-anchor="middle" fill="#fbbf24" font-size="11" font-family="Space Mono" font-weight="bold">CHOCOLATE</text>
                                 <text x="350" y="125" text-anchor="start" fill="#fbbf24" font-size="11" font-family="Space Mono" font-weight="bold">BODY</text>
                                 <text x="350" y="280" text-anchor="start" fill="#fbbf24" font-size="11" font-family="Space Mono" font-weight="bold">SWEETNESS</text>
@@ -403,14 +397,12 @@
                                 <text x="50" y="280" text-anchor="end" fill="#fbbf24" font-size="11" font-family="Space Mono" font-weight="bold">ACIDITY</text>
                                 <text x="50" y="125" text-anchor="end" fill="#fbbf24" font-size="11" font-family="Space Mono" font-weight="bold">FLORAL</text>
 
-                                <!-- Morphing Polygon -->
                                 <polygon id="radarPolygon" points="200,60 320,150 310,260 200,320 110,240 100,160"
                                     fill="rgba(245, 158, 11, 0.25)"
                                     stroke="#fbbf24"
                                     stroke-width="2.5"
                                     style="transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);" />
                                 
-                                <!-- Center Point -->
                                 <circle cx="200" cy="200" r="4" fill="#fbbf24" />
                             </svg>
                         </div>
@@ -422,7 +414,87 @@
             </div>
         </section>
 
-        <!-- 3 VIP Holographic Metal Member Cards (The 3 Elite Customer Plans) -->
+        <!-- INTERACTIVE BEAN CUSTOMIZER LAB -->
+        <section id="customizer" class="py-20 max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Interactive Roastery Engineering</span>
+                <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">Direct Customizer Lab</h3>
+                <p class="text-zinc-400 text-sm mt-2">Dial in origin, Mahlkönig grind, and bulk bag size. Dynamic price calculation and instant cart addition.</p>
+            </div>
+
+            <div class="glass-spatial rounded-3xl p-8 sm:p-10 border border-white/15 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <label class="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">1. Origin & Roast Profile</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="selectTier3Roast('Dogspeed Espresso Blend', 18.00, this)" class="t3-roast-btn active p-3 rounded-xl border-2 border-amber-500 bg-amber-500/10 text-left text-xs transition">
+                                <div class="font-bold text-white">Dogspeed Blend</div>
+                                <div class="text-[10px] text-amber-400 font-mono">Dark Cacao • $18</div>
+                            </button>
+                            <button onclick="selectTier3Roast('Ethiopia Guji Washed', 20.00, this)" class="t3-roast-btn p-3 rounded-xl border border-white/10 bg-dark text-left text-xs transition">
+                                <div class="font-bold text-white">Ethiopia Guji</div>
+                                <div class="text-[10px] text-zinc-400 font-mono">Jasmine • $20</div>
+                            </button>
+                            <button onclick="selectTier3Roast('Colombia Pink Bourbon', 22.00, this)" class="t3-roast-btn p-3 rounded-xl border border-white/10 bg-dark text-left text-xs transition">
+                                <div class="font-bold text-white">Colombia Bourbon</div>
+                                <div class="text-[10px] text-zinc-400 font-mono">Honey/Berry • $22</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">2. Commercial Grind Specification</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button onclick="selectTier3Grind('Whole Bean (Unopened)', this)" class="t3-grind-btn active p-2.5 rounded-lg border border-amber-500/60 bg-white/5 text-center text-xs font-medium text-white">Whole Bean</button>
+                            <button onclick="selectTier3Grind('French Press (Coarse)', this)" class="t3-grind-btn p-2.5 rounded-lg border border-white/10 bg-dark text-center text-xs font-medium text-zinc-400">French Press</button>
+                            <button onclick="selectTier3Grind('Drip / Chemex (Medium)', this)" class="t3-grind-btn p-2.5 rounded-lg border border-white/10 bg-dark text-center text-xs font-medium text-zinc-400">Chemex / Drip</button>
+                            <button onclick="selectTier3Grind('Espresso (Fine)', this)" class="t3-grind-btn p-2.5 rounded-lg border border-white/10 bg-dark text-center text-xs font-medium text-zinc-400">Espresso Fine</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">3. Package Size</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="selectTier3BagSize('12oz Standard Bag', 1, this)" class="t3-size-btn active p-3 rounded-xl border border-amber-500/60 bg-white/5 text-center text-xs font-medium text-white">12oz Retail</button>
+                            <button onclick="selectTier3BagSize('2lb Roastery Bag', 2.3, this)" class="t3-size-btn p-3 rounded-xl border border-white/10 bg-dark text-center text-xs font-medium text-zinc-400">2lb Bag</button>
+                            <button onclick="selectTier3BagSize('5lb Roastery Bulk', 5, this)" class="t3-size-btn p-3 rounded-xl border border-white/10 bg-dark text-center text-xs font-medium text-zinc-400">5lb Wholesale</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-dark/95 rounded-2xl p-6 border border-white/10 space-y-4 shadow-2xl">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <span class="text-xs font-mono uppercase text-zinc-400">Craft Configurator</span>
+                        <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-bold">100% Turnkey</span>
+                    </div>
+                    <div class="space-y-1.5 text-xs text-zinc-300">
+                        <div class="flex justify-between">
+                            <span class="text-zinc-500">Roast Profile:</span>
+                            <span id="t3SummaryRoast" class="font-bold text-white">Dogspeed Espresso Blend</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-zinc-500">Grind Spec:</span>
+                            <span id="t3SummaryGrind" class="font-bold text-white">Whole Bean (Unopened)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-zinc-500">Weight:</span>
+                            <span id="t3SummarySize" class="font-bold text-white">12oz Standard Bag</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 flex justify-between items-end">
+                        <div>
+                            <div class="text-[10px] font-mono text-zinc-500 uppercase">Total Price</div>
+                            <div id="t3SummaryPrice" class="text-3xl font-black font-heading text-amber-400">$18.00</div>
+                        </div>
+                        <button onclick="addCustomBagTier3()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
+                            Add To Bag →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 VIP HOLOGRAPHIC METAL MEMBER CARDS -->
         <section id="passes" class="py-24 max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs uppercase font-bold tracking-widest">
@@ -453,8 +525,8 @@
                             <li class="flex items-center gap-2">✓ Apple & Google Wallet digital pass</li>
                         </ul>
                     </div>
-                    <button onclick="openVipModal('Weekend Explorer Pass ($35)')" class="mt-8 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition text-center" onmouseenter="playClickSound()">
-                        Claim Explorer Pass
+                    <button onclick="addToCart('Weekend Explorer Pass ($35)', 35.00)" class="mt-8 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition text-center" onmouseenter="playClickSound()">
+                        + Add Pass to Bag ($35)
                     </button>
                 </div>
 
@@ -481,8 +553,8 @@
                             <li class="flex items-center gap-2">✓ <strong>15% Off</strong> all Flat Track apparel and gear</li>
                         </ul>
                     </div>
-                    <button onclick="openVipModal('Roaster Tasting Reserve ($68)')" class="mt-8 w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-amber-500/30" onmouseenter="playClickSound()">
-                        Claim Tasting Reserve
+                    <button onclick="addToCart('Roaster Tasting Reserve Pass ($68)', 68.00)" class="mt-8 w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-amber-500/30" onmouseenter="playClickSound()">
+                        + Add Reserve to Bag ($68)
                     </button>
                 </div>
 
@@ -501,41 +573,142 @@
                         </div>
                         <ul class="text-xs text-zinc-300 space-y-2.5">
                             <li class="flex items-center gap-2">✓ <strong>6 x 12oz Whole Bean Bags</strong> (Custom selected single-origins)</li>
-                            <li class="flex items-center gap-2">✓ <strong>64oz Stainless Steel Growler</strong> + 3 Free Nitro Cold Brew refills</li>
+                            <li class="flex items-center gap-2">✓ <strong>64oz Stainless Steel Growler</strong> + 3 Free Nitro refills</li>
                             <li class="flex items-center gap-2">✓ <strong>12 Scratch Pastries & Breakfast Tacos</strong></li>
                             <li class="flex items-center gap-2">✓ <strong>Private 1-on-1 Roastery Cupping Session</strong> with Head Roaster</li>
                         </ul>
                     </div>
-                    <button onclick="openVipModal('Founders Crate ($185)')" class="mt-8 w-full py-3.5 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-black font-extrabold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-yellow-500/20" onmouseenter="playClickSound()">
-                        Claim Founder's Crate
+                    <button onclick="addToCart('Founders Master Crate ($185)', 185.00)" class="mt-8 w-full py-3.5 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-black font-extrabold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-yellow-500/20" onmouseenter="playClickSound()">
+                        + Add Founder Crate ($185)
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- East Austin Moto Heritage & Roastery Story -->
-        <section id="story" class="py-20 bg-obsidian border-t border-white/10">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-6 space-y-6">
-                    <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">East Austin Moto Culture</span>
-                    <h3 class="text-3xl sm:text-4xl font-black font-heading text-white">Born on the Track. Perfected in the Drum.</h3>
-                    <p class="text-zinc-300 text-sm leading-relaxed">
-                        Flat Track Coffee started with a simple vision: marry the gritty, independent spirit of vintage motorcycle flat track racing with obsessive craft coffee roasting.
-                    </p>
-                    <p class="text-zinc-400 text-sm leading-relaxed">
-                        Located at 1611 E Cesar Chavez, our cafe serves as the beating heart for Austin's creative and motorcycle community. Whether you're pulling up on two wheels or walking over for morning cortados, our team treats coffee like engineering: dialed-in, consistent, and unapologetically bold.
-                    </p>
-                    <div class="pt-2 flex items-center gap-4 text-xs font-mono text-zinc-400">
-                        <span>📍 1611 E Cesar Chavez St</span>
-                        <span>•</span>
-                        <span>Austin, TX 78702</span>
-                        <span>•</span>
-                        <span>Open 7AM–5PM Daily</span>
+        <!-- INTERACTIVE 4-STEP BEAN JOURNEY TIMELINE -->
+        <section id="journey" class="py-20 bg-obsidian/90 border-y border-white/10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Micro-Lot Roasting Transparency</span>
+                    <h3 class="text-3xl sm:text-4xl font-black font-heading text-white mt-1">The 4-Step Bean Journey</h3>
+                    <p class="text-zinc-400 text-sm mt-2">From high-altitude volcanic soils directly to the East Austin extraction drum.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="glass-spatial rounded-2xl p-6 border border-white/10 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-sm">01</div>
+                        <h4 class="font-bold text-white text-base">Direct Highland Harvest</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Hand-picked at 2,000+ meters in Huila, Colombia & Yirgacheffe, Ethiopia. 100% fair direct-trade farm pricing.</p>
+                    </div>
+
+                    <div class="glass-spatial rounded-2xl p-6 border border-white/10 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-sm">02</div>
+                        <h4 class="font-bold text-white text-base">Green Bean Arrival</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Arrives directly at 1611 E Cesar Chavez St in GrainPro lined burlap sacks, moisture and density tested.</p>
+                    </div>
+
+                    <div class="glass-spatial rounded-2xl p-6 border border-white/10 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-sm">03</div>
+                        <h4 class="font-bold text-white text-base">San Franciscan Drum Roast</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Precision flame-roasted in our cast iron drum. First crack logged, monitored via thermal PID curves.</p>
+                    </div>
+
+                    <div class="glass-spatial rounded-2xl p-6 border border-white/10 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-sm">04</div>
+                        <h4 class="font-bold text-white text-base">Nitro Tap & Crema Pull</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Extracted on dual Synesso MVP pumps or cold-steeped for 24 hours and poured on nitro tap.</p>
                     </div>
                 </div>
-                <div class="lg:col-span-6">
-                    <div class="relative rounded-3xl overflow-hidden border border-white/10 p-2 bg-glassBg shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" alt="Roastery Atmosphere" class="rounded-2xl w-full h-[360px] object-cover">
+            </div>
+        </section>
+
+        <!-- COMPREHENSIVE MAP & AUSTIN DISTANCE / ETA CALCULATOR -->
+        <section id="location" class="py-20 max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Austin Roastery Destination</span>
+                <h3 class="text-3xl sm:text-5xl font-black font-heading text-white mt-1">Roastery Map & ETA Calculator</h3>
+                <p class="text-zinc-400 text-sm mt-3">Interactive Google Map embed plus live Austin distance & driving ETA calculator.</p>
+            </div>
+
+            <!-- Distance & ETA Interactive Calculator -->
+            <div class="max-w-2xl mx-auto mb-10 glass-spatial rounded-2xl p-6 border border-amber-500/30 shadow-xl">
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <div class="flex-1 w-full">
+                        <label class="block text-xs font-mono text-zinc-400 mb-1">ENTER YOUR AUSTIN ZIP CODE</label>
+                        <input id="userZipInput" type="text" placeholder="e.g. 78701, 78704, 78745, 78751..." class="w-full px-4 py-2.5 rounded-xl bg-void border border-white/15 text-sm text-white font-mono focus:outline-none focus:border-amber-400">
+                    </div>
+                    <button onclick="calculateEta()" class="w-full sm:w-auto mt-4 sm:mt-5 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/25">
+                        Calculate Route
+                    </button>
+                </div>
+                <div id="etaResult" class="hidden mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+                    <div class="text-zinc-300">
+                        <span>Distance: <strong id="etaDistance" class="text-white">--</strong></span>
+                        <span class="mx-2">|</span>
+                        <span>Estimated Drive: <strong id="etaTime" class="text-amber-400">--</strong></span>
+                    </div>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-amber-400 hover:underline font-bold">Start GPS →</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Google Map Embed -->
+                <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 glass-spatial shadow-2xl min-h-[400px]">
+                    <iframe 
+                        title="Flat Track Coffee Roastery Location Map"
+                        src="https://maps.google.com/maps?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full min-h-[400px] border-0"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Arrival & Contact Details -->
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+                    <div class="glass-spatial rounded-3xl p-7 border border-white/10 space-y-5 shadow-2xl">
+                        <div class="flex items-start gap-4">
+                            <span class="text-3xl">📍</span>
+                            <div>
+                                <h4 class="font-bold text-white text-base font-heading">Physical Address</h4>
+                                <div class="text-amber-400 font-mono text-base font-bold mt-0.5">1611 E Cesar Chavez St</div>
+                                <div class="text-xs text-zinc-400">Austin, TX 78702 (Holly / East Austin)</div>
+                                <div class="text-[11px] text-zinc-500 mt-1">Cross Streets: Comal St & Chicon St</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex items-start gap-4">
+                            <span class="text-3xl">🕒</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Operating Hours</h4>
+                                <div class="text-zinc-300 text-sm mt-0.5 font-medium">Monday – Sunday: <strong>7:00 AM – 5:00 PM</strong></div>
+                                <div class="text-xs text-emerald-400 font-mono mt-1 font-bold flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                                    Open 7 Days a Week
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex items-start gap-4">
+                            <span class="text-3xl">🏍️</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Parking & Dogs</h4>
+                                <div class="text-xs text-zinc-400 leading-relaxed mt-0.5">
+                                    • Free street parking along Cesar Chavez St<br>
+                                    • Dedicated motorcycle and bicycle parking racks<br>
+                                    • Shaded dog-friendly patio with fresh water bowls
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct GPS Buttons -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs uppercase tracking-wider transition shadow-xl shadow-amber-500/25">
+                            Google Maps ↗
+                        </a>
+                        <a href="http://maps.apple.com/?daddr=1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" class="text-center py-4 rounded-xl glass-spatial text-white hover:text-amber-400 font-bold text-xs uppercase tracking-wider transition">
+                            Apple Maps ↗
+                        </a>
                     </div>
                 </div>
             </div>
@@ -543,13 +716,51 @@
 
     </main>
 
+    <!-- SLIDE-OVER BAG / CART DRAWER -->
+    <div id="cartDrawer" class="hidden fixed inset-0 z-50 overflow-hidden">
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-[#0a0806] border-l border-white/15 p-6 flex flex-col justify-between shadow-2xl">
+                <div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                        <h4 class="text-xl font-bold font-heading text-white">Roastery Order Bag</h4>
+                        <button onclick="toggleCart()" class="text-zinc-400 hover:text-white text-xl">✕</button>
+                    </div>
+                    <div id="cartItemsList" class="space-y-3 max-h-[60vh] overflow-y-auto">
+                        <div class="text-center py-12 text-zinc-500 text-sm font-mono" id="emptyCartMsg">
+                            Your bag is currently empty.<br>Add beans, passes, or drinks above.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-white/10 pt-4 space-y-3">
+                    <div class="flex justify-between text-sm font-mono text-zinc-300">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal" class="font-bold text-white">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-xs font-mono text-zinc-500">
+                        <span>Austin Local Tax (8.25%):</span>
+                        <span id="cartTax">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-base font-mono font-bold text-white border-t border-white/10 pt-2">
+                        <span>Total:</span>
+                        <span id="cartTotal" class="text-amber-400">$0.00</span>
+                    </div>
+                    <button onclick="checkoutCart()" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider transition shadow-xl shadow-amber-500/25">
+                        One-Click Counter Pickup Ticket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- VIP Concierge Modal -->
     <div id="vipModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
         <div class="glass-spatial rounded-3xl p-8 max-w-lg w-full border border-white/20 shadow-2xl relative">
             <button onclick="closeVipModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">✕</button>
             <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 font-mono text-xs uppercase font-bold">VIP Concierge</span>
             <h4 class="text-2xl font-bold font-heading text-white mt-2 mb-1">Reserve Pass or Roastery Table</h4>
-            <p class="text-xs text-zinc-400 mb-6">Enter your details to generate your VIP reservation ticket for Flat Track Coffee.</p>
+            <p class="text-xs text-zinc-400 mb-6">Generate your VIP reservation ticket for Flat Track Coffee.</p>
             
             <form id="vipForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('vipTicketResult').classList.remove('hidden'); playClickSound();">
                 <div>
@@ -596,7 +807,7 @@
     <!-- Interactive JavaScript Engine -->
     <script>
         // ========================================================
-        // 1. WEB AUDIO API SYNTHESIZER (Spatial Click & Ambience)
+        // 1. WEB AUDIO API SYNTHESIZER
         // ========================================================
         let audioCtx = null;
         let isAudioOn = false;
@@ -649,7 +860,6 @@
 
         function startAmbience() {
             if (!audioCtx) return;
-            // Warm brown noise generator simulating distant roastery warmth & espresso extraction
             const bufferSize = audioCtx.sampleRate * 2;
             const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const data = buffer.getChannelData(0);
@@ -664,7 +874,6 @@
             ambienceNoise.buffer = buffer;
             ambienceNoise.loop = true;
 
-            // Low-pass filter for cozy warmth
             const filter = audioCtx.createBiquadFilter();
             filter.type = 'lowpass';
             filter.frequency.value = 450;
@@ -712,7 +921,7 @@
                 this.friction = 0.985;
                 this.alpha = 1.0;
                 this.life = 0;
-                this.maxLife = 600; // frames
+                this.maxLife = 600;
             }
 
             update() {
@@ -723,14 +932,12 @@
                 this.rotation += this.vRot;
                 this.life++;
 
-                // Floor bounce
                 if (this.y + this.size > height) {
                     this.y = height - this.size;
                     this.vy = -this.vy * this.bounce;
                     this.vRot *= 0.8;
                 }
 
-                // Wall bounce
                 if (this.x - this.size < 0) {
                     this.x = this.size;
                     this.vx = -this.vx * this.bounce;
@@ -750,18 +957,15 @@
                 ctx.rotate(this.rotation);
                 ctx.globalAlpha = Math.max(0, this.alpha);
 
-                // Roasted coffee bean geometry
                 ctx.fillStyle = '#261b12';
                 ctx.beginPath();
                 ctx.ellipse(0, 0, this.size, this.size * 0.65, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Roasted sheen edge
                 ctx.strokeStyle = '#d97706';
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // Crease through center
                 ctx.strokeStyle = '#120d08';
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
@@ -774,8 +978,6 @@
         }
 
         const physicsBeans = [];
-
-        // Initial ambient beans
         for (let i = 0; i < 18; i++) {
             physicsBeans.push(new PhysicsBean(
                 Math.random() * width,
@@ -803,9 +1005,8 @@
             }
         }
 
-        // Click anywhere on window to drop a bean
         window.addEventListener('click', (e) => {
-            if (e.target.closest('button, a, input, select, textarea, aside')) return;
+            if (e.target.closest('button, a, input, select, textarea, aside, iframe')) return;
             physicsBeans.push(new PhysicsBean(
                 e.clientX,
                 e.clientY,
@@ -818,7 +1019,6 @@
 
         function animatePhysics() {
             ctx.clearRect(0, 0, width, height);
-
             for (let i = physicsBeans.length - 1; i >= 0; i--) {
                 const b = physicsBeans[i];
                 b.update();
@@ -827,7 +1027,6 @@
                     physicsBeans.splice(i, 1);
                 }
             }
-
             requestAnimationFrame(animatePhysics);
         }
         animatePhysics();
@@ -847,7 +1046,6 @@
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-            // Holographic rainbow glare coordinates
             const pctX = (x / rect.width) * 100;
             const pctY = (y / rect.height) * 100;
             card.style.setProperty('--glare-x', `${pctX}%`);
@@ -903,7 +1101,143 @@
         }, 2200);
 
         // ========================================================
-        // 6. VIP CONCIERGE MODAL
+        // 6. TIER 3 CUSTOMIZER & CART DRAWER
+        // ========================================================
+        const cart = [];
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            playClickSound();
+            document.getElementById('cartDrawer').classList.remove('hidden');
+        }
+
+        function updateCartUI() {
+            document.getElementById('tier3CartBadge').innerText = cart.length;
+            const list = document.getElementById('cartItemsList');
+            const emptyMsg = document.getElementById('emptyCartMsg');
+            
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                list.innerHTML = '';
+                list.appendChild(emptyMsg);
+            } else {
+                emptyMsg.style.display = 'none';
+                list.innerHTML = '';
+                let subtotal = 0;
+                cart.forEach((item, index) => {
+                    subtotal += item.price;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 text-xs';
+                    itemEl.innerHTML = `
+                        <div>
+                            <div class="font-bold text-white">${item.name}</div>
+                            <div class="text-[10px] text-zinc-400 font-mono">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-zinc-500 hover:text-red-400">✕</button>
+                    `;
+                    list.appendChild(itemEl);
+                });
+
+                const tax = subtotal * 0.0825;
+                const total = subtotal + tax;
+                document.getElementById('cartSubtotal').innerText = `$${subtotal.toFixed(2)}`;
+                document.getElementById('cartTax').innerText = `$${tax.toFixed(2)}`;
+                document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`;
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) return alert('Your bag is empty!');
+            alert('VIP Order Confirmed! Ticket #FT-98421 generated for Flat Track counter at 1611 E Cesar Chavez St.');
+            cart.length = 0;
+            updateCartUI();
+            toggleCart();
+        }
+
+        let t3Roast = { name: 'Dogspeed Espresso Blend', basePrice: 18.00 };
+        let t3Grind = 'Whole Bean (Unopened)';
+        let t3Size = { name: '12oz Standard Bag', mult: 1 };
+
+        function selectTier3Roast(name, price, btn) {
+            document.querySelectorAll('.t3-roast-btn').forEach(b => {
+                b.classList.remove('border-2', 'border-amber-500', 'bg-amber-500/10');
+                b.classList.add('border', 'border-white/10', 'bg-dark');
+            });
+            btn.classList.add('border-2', 'border-amber-500', 'bg-amber-500/10');
+            btn.classList.remove('border-white/10', 'bg-dark');
+            t3Roast = { name, basePrice: price };
+            updateTier3CustomizerUI();
+        }
+
+        function selectTier3Grind(grind, btn) {
+            document.querySelectorAll('.t3-grind-btn').forEach(b => {
+                b.classList.remove('border-amber-500/60', 'bg-white/5', 'text-white');
+                b.classList.add('border-white/10', 'bg-dark', 'text-zinc-400');
+            });
+            btn.classList.add('border-amber-500/60', 'bg-white/5', 'text-white');
+            btn.classList.remove('border-white/10', 'bg-dark', 'text-zinc-400');
+            t3Grind = grind;
+            updateTier3CustomizerUI();
+        }
+
+        function selectTier3BagSize(size, mult, btn) {
+            document.querySelectorAll('.t3-size-btn').forEach(b => {
+                b.classList.remove('border-amber-500/60', 'bg-white/5', 'text-white');
+                b.classList.add('border-white/10', 'bg-dark', 'text-zinc-400');
+            });
+            btn.classList.add('border-amber-500/60', 'bg-white/5', 'text-white');
+            btn.classList.remove('border-white/10', 'bg-dark', 'text-zinc-400');
+            t3Size = { name: size, mult };
+            updateTier3CustomizerUI();
+        }
+
+        function updateTier3CustomizerUI() {
+            document.getElementById('t3SummaryRoast').innerText = t3Roast.name;
+            document.getElementById('t3SummaryGrind').innerText = t3Grind;
+            document.getElementById('t3SummarySize').innerText = t3Size.name;
+            const price = t3Roast.basePrice * t3Size.mult;
+            document.getElementById('t3SummaryPrice').innerText = `$${price.toFixed(2)}`;
+        }
+
+        function addCustomBagTier3() {
+            const price = t3Roast.basePrice * t3Size.mult;
+            const desc = `${t3Roast.name} (${t3Size.name} - ${t3Grind})`;
+            addToCart(desc, price);
+        }
+
+        // ========================================================
+        // 7. AUSTIN DISTANCE & ETA CALCULATOR
+        // ========================================================
+        const zipTable = {
+            '78701': { miles: '1.4 mi', min: '6 mins (Downtown Austin)' },
+            '78702': { miles: '0.4 mi', min: '2 mins (East Cesar Chavez / Local)' },
+            '78703': { miles: '3.8 mi', min: '12 mins (Clarksville / West Austin)' },
+            '78704': { miles: '2.6 mi', min: '9 mins (South Congress / SoCo)' },
+            '78705': { miles: '3.1 mi', min: '10 mins (UT Campus / West Campus)' },
+            '78745': { miles: '6.2 mi', min: '14 mins (South Austin / Menchaca)' },
+            '78751': { miles: '4.5 mi', min: '13 mins (Hyde Park)' },
+        };
+
+        function calculateEta() {
+            const zip = (document.getElementById('userZipInput').value || '').trim();
+            const res = zipTable[zip] || { miles: '4.2 mi', min: '12 mins (Greater Austin Metro)' };
+            document.getElementById('etaDistance').innerText = res.miles;
+            document.getElementById('etaTime').innerText = res.min;
+            document.getElementById('etaResult').classList.remove('hidden');
+            playClickSound();
+        }
+
+        // ========================================================
+        // 8. VIP CONCIERGE MODAL
         // ========================================================
         function openVipModal(passName) {
             playClickSound();
