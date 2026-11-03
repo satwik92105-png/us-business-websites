@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flat Track Coffee Roasters | East Austin, TX | Specialty Micro-Roastery</title>
+    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch single-origin coffees roasted on Cesar Chavez, nitro cold brew on tap, artisan pastries, and local breakfast tacos.">
+    <meta name="keywords" content="Flat Track Coffee, Austin coffee roaster, specialty coffee Austin, East Cesar Chavez, nitro cold brew Austin">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Flat Track Coffee Roasters | East Austin Flagship">
+    <meta property="og:description" content="Micro-batch single-origin roasts, draft nitro cold brew, and Austin moto community on East Cesar Chavez.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+
+    <!-- Schema.org JSON-LD for Google Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "Flat Track Coffee Roasters",
+      "image": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1611 E Cesar Chavez St",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78702",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.2592,
+        "longitude": -97.7287
+      },
+      "telephone": "+15125406033",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "07:00",
+          "closes": "17:00"
+        }
+      ],
+      "priceRange": "$$",
+      "servesCuisine": "Specialty Coffee, Local Breakfast Tacos, Artisanal Pastries",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "750"
+      }
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           ULTRA-PREMIUM 3D & PHYSICS DESIGN SYSTEM (Deep Obsidian & Amber Luxury)
+           Inspired by Aceternity UI, Magic UI, and React Bits Physics
+           ========================================================================== */
+        :root {
+            --bg-void: #060403;
+            --bg-dark: #0d0907;
+            --bg-card: #15100c;
+            --bg-card-elevated: #1e1712;
+            --bg-surface: #261e18;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(217, 119, 6, 0.5);
+            --primary: #d97706;
+            --primary-light: #fbbf24;
+            --primary-dark: #92400e;
+            --primary-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #92400e 100%);
+            --accent-glow: rgba(217, 119, 6, 0.35);
+            --text-main: #fdfaf6;
+            --text-muted: #b5a89c;
+            --text-dim: #786b5f;
+            --success: #10b981;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            --shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.9);
+            --shadow-glow: 0 0 35px rgba(217, 119, 6, 0.4);
+            --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            perspective: 1200px;
+        }
+
+        /* Subtle 3D Depth Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(217, 119, 6, 0.06) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 44px 44px, 22px 22px;
+            background-position: 0 0, 22px 22px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Top Announcement Bar */
+        .top-ribbon {
+            background: linear-gradient(90deg, #78350f 0%, #b45309 50%, #92400e 100%);
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            position: relative;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-badge {
+            background: rgba(0, 0, 0, 0.35);
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 800;
+        }
+
+        /* Glassmorphic Sticky Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            background: rgba(6, 4, 3, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 18px 0;
+            transition: var(--transition-smooth);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+        }
+
+        .brand-icon-3d {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+            color: #fff;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+
+        .brand-badge:hover .brand-icon-3d {
+            transform: rotateY(180deg);
+        }
+
+        .brand-text h1 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .brand-text span {
+            font-size: 0.72rem;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-light);
+            transition: var(--transition-smooth);
+            border-radius: var(--radius-full);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Magnetic & Shimmer Buttons */
+        .btn-magnetic {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn-shimmer-gold {
+            background: linear-gradient(135deg, var(--primary) 0%, #b45309 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
+        }
+
+        .btn-shimmer-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-shimmer-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-shimmer-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+            color: #ffffff;
+        }
+
+        .btn-ghost-dark {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+        }
+
+        .btn-ghost-dark:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: var(--border-glow);
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           HERO SECTION WITH 3D PHYSICS CANVAS & FLOATING CARDS
+           ========================================================================== */
+        .hero-stage {
+            position: relative;
+            padding: 90px 0 110px;
+            overflow: hidden;
+        }
+
+        /* 3D Interactive WebGL / Canvas Container */
+        #physicsCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: all;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content, .hero-3d-box {
+            pointer-events: auto;
+        }
+
+        .hero-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(217, 119, 6, 0.12);
+            border: 1px solid var(--border-glow);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge-pill .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulseAnim 2s infinite;
+        }
+
+        @keyframes pulseAnim {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .hero-title {
+            font-size: 3.9rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .text-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .hero-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat-card h4 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .stat-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* 3D Realistic Perspective Card */
+        .tilt-card-wrap {
+            perspective: 1200px;
+            position: relative;
+        }
+
+        .tilt-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .tilt-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 119, 6, 0.25);
+        }
+
+        .tilt-card img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .tilt-card:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Specular Reflection Physics Glare */
+        .glare-reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform: translateZ(30px);
+        }
+
+        .tilt-card:hover .glare-reflection {
+            opacity: 1;
+        }
+
+        /* Magic UI Border Beam Floating Badge */
+        .border-beam-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            background: rgba(21, 16, 12, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transform: translateZ(40px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .bbb-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bbb-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: rgba(217, 119, 6, 0.2);
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bbb-text h5 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .bbb-text p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Real Business Public Info Bar */
+        .info-strip {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 32px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .info-col {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .info-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-col h5 {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .info-col p {
+            font-size: 0.94rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* Universal Section Styling */
+        .section-block {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header-center {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 56px;
+        }
+
+        .eyebrow-tag {
+            display: inline-block;
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           3 PLANS SECTION (CUSTOMER-FACING PRE-PAID BUNDLES)
+           ========================================================================== */
+        .plans-zone {
+            background: linear-gradient(180deg, var(--bg-void) 0%, #150f0c 50%, var(--bg-void) 100%);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .plans-3-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            align-items: stretch;
+            perspective: 1200px;
+        }
+
+        .plan-card-3d {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 38px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .plan-card-3d:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--border-glow);
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 119, 6, 0.3);
+        }
+
+        .plan-card-3d.featured {
+            background: linear-gradient(180deg, #241a13 0%, #17110d 100%);
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(217, 119, 6, 0.35);
+            transform: scale(1.04);
+        }
+
+        .plan-card-3d.featured:hover {
+            transform: scale(1.06) translateY(-8px);
+        }
+
+        .featured-ribbon {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gradient);
+            color: #0d0906;
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 18px;
+            border-radius: var(--radius-full);
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.45);
+            white-space: nowrap;
+        }
+
+        .plan-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .plan-header p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .plan-price-block {
+            margin: 24px 0 28px;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .price-currency {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .price-val {
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+        }
+
+        .price-cadence {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .plan-perks-list {
+            list-style: none;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .perk-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .perk-row svg {
+            color: var(--primary-light);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* Aceternity Spotlight Cards & Menu Filter */
+        .filter-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .filter-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 9px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-pill:hover {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border-color: var(--border-glow);
+        }
+
+        .filter-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.45);
+        }
+
+        .menu-grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .spotlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, -100px);
+            left: var(--mouse-x, -100px);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.16) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card);
+            background: var(--bg-card-elevated);
+        }
+
+        .sc-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .sc-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(217, 119, 6, 0.14);
+            color: var(--primary-light);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .sc-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .sc-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .sc-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 22px;
+            flex-grow: 1;
+        }
+
+        .sc-btn {
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .sc-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Bento Grid: Our Craft & Atmosphere */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .bento-cell {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-cell:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .bento-span-2 {
+            grid-column: span 2;
+        }
+
+        .bento-bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            mask-image: linear-gradient(to right, transparent, black);
+            -webkit-mask-image: linear-gradient(to right, transparent, black);
+        }
+
+        .bento-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .bento-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        /* Testimonials Section */
+        .reviews-3-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .review-card-dark {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+
+        .review-card-dark:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+        }
+
+        .stars-row {
+            color: #f59e0b;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.65;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .reviewer-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .reviewer-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-full);
+            background: var(--primary-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .reviewer-info h6 {
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .reviewer-info span {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+
+        /* Location Section */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .location-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+
+        .loc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .loc-icon-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .loc-text h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .loc-text p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .map-frame-wrap {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            height: 440px;
+            box-shadow: var(--shadow-card);
+            background: var(--bg-card);
+        }
+
+        .map-frame-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(120%);
+        }
+
+        /* Shadcn Accordion FAQ */
+        .faq-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-item:hover {
+            border-color: var(--border-glow);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .accordion-trigger svg {
+            transition: transform 0.3s ease;
+            color: var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        .accordion-item.open .accordion-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .accordion-text {
+            padding: 0 24px 22px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Modal Dialog */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-smooth);
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 580px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+            transform: scale(0.95) translateY(20px);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-top {
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-top h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-close:hover {
+            color: var(--text-main);
+        }
+
+        .progress-bar-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 28px;
+            background: var(--bg-void);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .step-node {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .step-node.active {
+            color: var(--primary-light);
+        }
+
+        .node-bubble {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius-full);
+            background: var(--bg-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .step-node.active .node-bubble {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .wizard-step {
+            display: none;
+        }
+
+        .wizard-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .input-control {
+            width: 100%;
+            background: var(--bg-void);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+        }
+
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .radio-cell {
+            background: var(--bg-void);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radio-cell:hover {
+            border-color: var(--border-glow);
+        }
+
+        .radio-cell.selected {
+            border-color: var(--primary);
+            background: rgba(217, 119, 6, 0.12);
+        }
+
+        .radio-cell strong {
+            font-size: 0.92rem;
+            color: var(--text-main);
+        }
+
+        .radio-cell span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .modal-footer {
+            padding: 20px 28px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-void);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #040302;
+            border-top: 1px solid var(--border-subtle);
+            padding: 80px 0 40px;
+        }
+
+        .footer-cols {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin: 16px 0 24px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .footer-col h5 {
+            font-size: 0.92rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-nav a {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary-light);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-layout, .location-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .plans-3-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
+                margin: 0 auto;
+            }
+            .plan-card-3d.featured {
+                transform: none;
+            }
+            .plan-card-3d.featured:hover {
+                transform: translateY(-8px);
+            }
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-span-2 {
+                grid-column: span 1;
+            }
+            .bento-bg-image {
+                display: none;
+            }
+            .reviews-3-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-cols {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .btn-ghost-dark {
+                display: none;
+            }
+            .hero-stage {
+                padding: 50px 0 70px;
+            }
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            .hero-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-cols {
+                grid-template-columns: 1fr;
+            }
+            .top-ribbon {
+                font-size: 0.78rem;
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Bulletproof Package Tier Switcher -->
+    <aside id="global-package-switcher" style="position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:999999; display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:9999px; background:rgba(10,10,12,0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 20px 45px rgba(0,0,0,0.85); font-family:ui-monospace, monospace; font-size:11px;">
+        <span style="color:#71717a; font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em; padding-right:4px;">PACKAGE:</span>
+        <a href="javascript:void(0)" onclick="goToTier(1)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 1: Essential ($497)</a>
+        <a href="javascript:void(0)" onclick="goToTier(2)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 2: Growth ($997)</a>
+        <span style="background:#f59e0b; color:#000; font-weight:800; padding:5px 14px; border-radius:9999px; box-shadow:0 0 15px rgba(245,158,11,0.45); cursor:default;">Tier 3: 3D Elite ($1,997)</span>
+    </aside>
+    <script>
+    function goToTier(tierNum) {
+        var p = window.location.pathname;
+        if (p.endsWith('.html')) {
+            p = p.substring(0, p.lastIndexOf('/') + 1);
+        }
+        if (/\/tier-\d\/?$/.test(p)) {
+            p = p.replace(/\/tier-\d\/?$/, '/');
+        }
+        if (!p.endsWith('/')) {
+            p += '/';
+        }
+        if (tierNum === 1) window.location.href = p + 'tier1.html';
+        else if (tierNum === 2) window.location.href = p + 'tier2.html';
+        else if (tierNum === 3) window.location.href = p + 'index.html';
+    }
+    </script>
+    <!-- End Package Tier Switcher -->
+    
+
+
+    
+
+
+
+    <!-- Top Announcement Ribbon -->
+    <div class="top-ribbon">
+        <span class="top-badge">East Austin Flagship</span>
+        <span>📍 1611 E Cesar Chavez St, Austin, TX 78702 • Open Daily 7:00 AM – 5:00 PM</span>
+        <a href="tel:5125406033" style="text-decoration: underline; font-weight: 700; color: #fff;">Call (512) 540-6033</a>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#hero" class="brand-badge">
+                <div class="brand-icon-3d">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                        <line x1="6" y1="1" x2="6" y2="4"/>
+                        <line x1="10" y1="1" x2="10" y2="4"/>
+                        <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>FLAT TRACK</h1>
+                    <span>Coffee Roasters • Austin, TX</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#plans">3 Passes &amp; Plans</a></li>
+                <li><a href="#menu">Roastery Menu</a></li>
+                <li><a href="#craft">Our Craft</a></li>
+                <li><a href="#reviews">Verified Reviews</a></li>
+                <li><a href="#location">Find Us</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>(512) 540-6033</span>
+                </a>
+                <button type="button" class="btn-magnetic btn-shimmer-gold" onclick="openBookingModal('Table / Cupping Reservation', 'Free Reservation')">
+                    <span>Reserve a Spot</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Interactive 3D Particle Physics Canvas -->
+    <section class="hero-stage" id="hero">
+        <!-- Interactive 3D WebGL / Particle Canvas -->
+        <canvas id="physicsCanvas"></canvas>
+
+        <div class="container hero-layout">
+            <div class="hero-content">
+                <div class="hero-badge-pill">
+                    <span class="pulse-dot"></span>
+                    <span>4.8 ★ ON 750+ VERIFIED GOOGLE &amp; YELP REVIEWS</span>
+                </div>
+                <h1 class="hero-title">
+                    Obsessively Roasted. <br>
+                    <span class="text-gradient">Unapologetically Austin.</span>
+                </h1>
+                <p class="hero-lead">
+                    Single-origin beans micro-roasted directly on-site at 1611 E Cesar Chavez. Nitro cold brew on draft, velvety espresso, and artisanal tacos. Handcrafted for coffee purists and community riders.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#plans" class="btn-magnetic btn-shimmer-gold">
+                        <span>Explore the 3 Plans</span>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </a>
+                    <a href="#menu" class="btn-magnetic btn-ghost-dark">
+                        <span>Explore Cafe Menu</span>
+                    </a>
+                </div>
+                <div class="hero-stats-grid">
+                    <div class="stat-card">
+                        <h4>750+</h4>
+                        <p>5-Star Local Reviews</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>100%</h4>
+                        <p>In-House Micro Roasted</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>7 Days</h4>
+                        <p>Open 7:00 AM – 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D Realistic Tilt Card with Specular Physics Glare -->
+            <div class="tilt-card-wrap hero-3d-box" id="heroTiltWrap">
+                <div class="tilt-card" id="heroCard">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Flat Track Coffee Roasting Machine" loading="lazy">
+                    <div class="glare-reflection" id="cardGlare"></div>
+                    <div class="border-beam-badge">
+                        <div class="bbb-left">
+                            <div class="bbb-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="bbb-text">
+                                <h5>Direct Trade Green Coffee</h5>
+                                <p>Small-batch micro-roasted weekly in Austin</p>
+                            </div>
+                        </div>
+                        <a href="#craft" class="btn-magnetic btn-ghost-dark" style="padding: 6px 14px; font-size: 0.78rem;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Public Business Details Strip -->
+    <section class="info-strip">
+        <div class="container info-grid">
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                    <h5>Physical Location</h5>
+                    <p>1611 E Cesar Chavez St<br>Austin, TX 78702</p>
+                </div>
+            </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                    <h5>Operating Hours</h5>
+                    <p>Mon – Sun: 7:00 AM – 5:00 PM<br>Open 365 Days a Year</p>
+                </div>
+            </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                    <h5>Direct Phone Line</h5>
+                    <p><a href="tel:5125406033" style="color: var(--primary-light);">(512) 540-6033</a><br>Barista &amp; Roastery Desk</p>
+                </div>
+            </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                    <h5>Public Standing</h5>
+                    <p>4.8 ★ (750+ Reviews)<br>Austin Cultural Icon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         THE 3 PLANS SECTION (100% ONE-TIME PACKAGES - ZERO SUBSCRIPTIONS)
+         ========================================================================== -->
+    <section class="section-block plans-zone" id="plans">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Zero Recurring Fees • Full Transparency</span>
+                <h2 class="section-title">Select from 3 Customer Plans</h2>
+                <p class="section-lead">
+                    Choose your ideal pre-paid experience pass or bundle. Every plan is a 100% one-time purchase with zero recurring subscriptions or surprise card debits.
+                </p>
+            </div>
+
+            <div class="plans-3-grid">
+                <!-- PLAN 1 -->
+                <div class="plan-card-3d">
+                    <div class="plan-header">
+                        <h3>Plan 1: Weekend Explorer Pass</h3>
+                        <p>Designed for Austin visitors and casual neighborhood weekend coffee runs.</p>
+                    </div>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">35</span>
+                        <span class="price-cadence">one-time pass</span>
+                    </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>5 Any-Size Drinks:</strong> Espresso, Nitro Cold Brew, or Signature Lattes</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>1 Fresh Pastry:</strong> Local artisan sourdough croissant or bun</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Priority Mobile Line Skip:</strong> Show pass at the pickup counter</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Pass never expires; redeem anytime on Cesar Chavez</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-ghost-dark" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 1: Weekend Explorer Pass', '$35.00 One-Time')">
+                        Choose Explorer Pass
+                    </button>
+                </div>
+
+                <!-- PLAN 2 (FEATURED) -->
+                <div class="plan-card-3d featured">
+                    <div class="featured-ribbon">RECOMMENDED CHOICE</div>
+                    <div class="plan-header">
+                        <h3>Plan 2: Roaster’s Tasting Reserve</h3>
+                        <p>For dedicated home baristas and coffee enthusiasts seeking fresh Austin roasts.</p>
+                    </div>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">68</span>
+                        <span class="price-cadence">one-time bundle</span>
+                    </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>2 Whole Bean Bags (12oz):</strong> Freshly roasted single-origins</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Free In-Store Pour:</strong> 1 Nitro Cold Brew or Pour-Over on pickup</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Head Roaster Cupping Card:</strong> Detailed origin notes &amp; brew ratios</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>15% Off All Merch:</strong> T-shirts, moto caps, enamel camp mugs</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-shimmer-gold" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 2: Roaster’s Tasting Reserve', '$68.00 One-Time')">
+                        Choose Tasting Reserve
+                    </button>
+                </div>
+
+                <!-- PLAN 3 -->
+                <div class="plan-card-3d">
+                    <div class="plan-header">
+                        <h3>Plan 3: Office Fuel &amp; Hospitality Crate</h3>
+                        <p>Fuel your Austin creative agency, tech team, or local design studio.</p>
+                    </div>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">185</span>
+                        <span class="price-cadence">one-time crate</span>
+                    </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>6 Whole Bean Bags (12oz):</strong> Rotating seasonal selections</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>64oz Nitro Cold Brew Growler:</strong> Glass jug + refill voucher</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>12 Assorted Pastries or Tacos:</strong> Freshly boxed</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Free East Austin curbside drop-off or priority cafe pickup</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-ghost-dark" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 3: Office Fuel & Hospitality Crate', '$185.00 One-Time')">
+                        Choose Office Crate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu & Roasts Section with Aceternity Spotlight Hover Cards -->
+    <section class="section-block" id="menu">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Roasted on Cesar Chavez</span>
+                <h2 class="section-title">Roastery Menu &amp; Specialties</h2>
+                <p class="section-lead">
+                    Explore single-origins, espresso pulls, velvety nitro drafts, and local sourdough pastries.
+                </p>
+            </div>
+
+            <!-- Filter Navigation Tabs -->
+            <div class="filter-nav">
+                <button class="filter-pill active" onclick="filterMenu('all', this)">All Offerings</button>
+                <button class="filter-pill" onclick="filterMenu('roast', this)">Single-Origin Roasts</button>
+                <button class="filter-pill" onclick="filterMenu('latte', this)">Signature Lattes</button>
+                <button class="filter-pill" onclick="filterMenu('cold', this)">Draft Cold Brews</button>
+                <button class="filter-pill" onclick="filterMenu('eats', this)">Bakery &amp; Tacos</button>
+            </div>
+
+            <!-- Spotlight Cards Grid -->
+            <div class="menu-grid-3d">
+                <!-- Item 1 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">Signature Blend</span>
+                        <span class="sc-price">$4.25</span>
+                    </div>
+                    <h3 class="sc-title">Dogspeed Espresso</h3>
+                    <p class="sc-desc">Our flagship double shot. Heavy velvety body with deep notes of dark cacao, candied orange peel, and toasted almond praline.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Dogspeed Espresso', '$4.25')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="spotlight-card" data-cat="cold">
+                    <div class="sc-top">
+                        <span class="sc-tag">On Nitro Tap</span>
+                        <span class="sc-price">$5.50</span>
+                    </div>
+                    <h3 class="sc-title">East Austin Nitro Cold Brew</h3>
+                    <p class="sc-desc">Slow-steeped for 24 continuous hours in cold filtered rainwater, kegged on pure nitrogen for a cascading, creamy stout-like head.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Nitro Cold Brew', '$5.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="spotlight-card" data-cat="latte">
+                    <div class="sc-top">
+                        <span class="sc-tag">House Specialty</span>
+                        <span class="sc-price">$6.25</span>
+                    </div>
+                    <h3 class="sc-title">Smoke &amp; Spice Honey Latte</h3>
+                    <p class="sc-desc">Double espresso, smoked Mexican vanilla bean syrup, local Texas wildflower honey, and micro-foamed silky oat milk.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Smoke & Spice Honey Latte', '$6.25')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="spotlight-card" data-cat="latte">
+                    <div class="sc-top">
+                        <span class="sc-tag">Austin Favorite</span>
+                        <span class="sc-price">$6.50</span>
+                    </div>
+                    <h3 class="sc-title">Horchata Iced Float</h3>
+                    <p class="sc-desc">House-simmered organic cinnamon rice milk poured over crystal ice with an espresso float and fresh grated nutmeg.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Horchata Iced Float', '$6.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">12oz Retail Bag</span>
+                        <span class="sc-price">$19.00</span>
+                    </div>
+                    <h3 class="sc-title">Colombia Huila Whole Bean</h3>
+                    <p class="sc-desc">Micro-lot washed coffee roasted on Cesar Chavez. Vibrant acidity, black cherry notes, and caramel sweetness.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Colombia Huila Whole Bean', '$19.00')">
+                        <span>Reserve Bag</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="spotlight-card" data-cat="eats">
+                    <div class="sc-top">
+                        <span class="sc-tag">Baked Daily</span>
+                        <span class="sc-price">$4.75</span>
+                    </div>
+                    <h3 class="sc-title">Artisan Sourdough Croissant</h3>
+                    <p class="sc-desc">Slow-laminated with cultured European butter by local Austin artisanal bakers. Crispy golden crust and fluffy interior.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Artisan Sourdough Croissant', '$4.75')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="spotlight-card" data-cat="eats">
+                    <div class="sc-top">
+                        <span class="sc-tag">Breakfast Staple</span>
+                        <span class="sc-price">$9.50</span>
+                    </div>
+                    <h3 class="sc-title">Austin Breakfast Taco Trio</h3>
+                    <p class="sc-desc">Warm local tortillas, cage-free scrambled eggs, seasoned black beans, cotija cheese, and house charred serrano salsa.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Austin Breakfast Taco Trio', '$9.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">Weekend Lab</span>
+                        <span class="sc-price">$65.00</span>
+                    </div>
+                    <h3 class="sc-title">Barista Cupping &amp; Brew Lab</h3>
+                    <p class="sc-desc">90-minute Saturday masterclass. Master espresso extraction, grind calibration, and take home a complimentary 12oz bag.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Barista Cupping Workshop', '$65.00')">
+                        <span>Book Workshop</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aceternity Bento Grid (Our Craft & Atmosphere) -->
+    <section class="section-block" id="craft">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Behind the Counter</span>
+                <h2 class="section-title">The Flat Track Philosophy</h2>
+                <p class="section-lead">
+                    Born on the pavement of East Austin. Built around custom motorcycles, community art, and uncompromising specialty extraction.
+                </p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Bento 1: Large Span -->
+                <div class="bento-cell bento-span-2">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Coffee Pour" class="bento-bg-image" loading="lazy">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Ethical Sourcing</span>
+                        <h3 class="bento-title">Micro-Batch Roasting in East Austin</h3>
+                        <p class="bento-desc">
+                            We source green beans directly from farm cooperatives in Huila, Yirgacheffe, and Antigua, paying well above Fair Trade premiums. Every pound is roasted right here on Cesar Chavez in small batches to preserve terroir and nuanced aromatics.
+                        </p>
+                    </div>
+                    <div style="margin-top: 24px;">
+                        <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">Talk to our Head Roaster</a>
+                    </div>
+                </div>
+
+                <!-- Bento 2 -->
+                <div class="bento-cell">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Patio Culture</span>
+                        <h3 class="bento-title">Dog &amp; Moto Friendly</h3>
+                        <p class="bento-desc">
+                            Our shaded outdoor patio features dedicated bike parking, cold water bowls for pups, and free high-speed Wi-Fi for remote workers.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 20px; color: var(--primary-light); font-size: 0.85rem; font-weight: 700;">
+                        <span>✓ Shaded Seating</span> • <span>✓ Outdoor Patio</span>
+                    </div>
+                </div>
+
+                <!-- Bento 3 -->
+                <div class="bento-cell">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Draft Station</span>
+                        <h3 class="bento-title">24-Hour Nitro Steep</h3>
+                        <p class="bento-desc">
+                            Cold-steeped 24 hours under steady temperature control, then charged with pure nitrogen for a velvety head without sugar or dairy.
+                        </p>
+                    </div>
+                    <div style="margin-top: 20px; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">
+                        4 Draft Taps Flowing Daily
+                    </div>
+                </div>
+
+                <!-- Bento 4: Large Span -->
+                <div class="bento-cell bento-span-2">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Community First</span>
+                        <h3 class="bento-title">Zero Artificial Additives, Zero Pretension</h3>
+                        <p class="bento-desc">
+                            No pump bottles of artificial chemical flavoring. We make our horchata and vanilla syrups from scratch using pure Mexican vanilla beans, organic rice, and Texas honey.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;">
+                        <div style="border-left: 2px solid var(--primary); padding-left: 12px;">
+                            <strong style="color: var(--text-main); font-size: 1.1rem; display: block;">100%</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-dim);">Natural Ingredients</span>
+                        </div>
+                        <div style="border-left: 2px solid var(--primary); padding-left: 12px;">
+                            <strong style="color: var(--text-main); font-size: 1.1rem; display: block;">72 Hours</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-dim);">Sourdough Lamination</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verified Customer Reviews Section -->
+    <section class="section-block" style="background: var(--bg-card); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);" id="reviews">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Public Customer Feedback</span>
+                <h2 class="section-title">Real Reviews from Austin Locals</h2>
+                <p class="section-lead">Verified Google and Yelp ratings from genuine coffee lovers and neighbors.</p>
+            </div>
+
+            <div class="reviews-3-grid">
+                <!-- Testimonial 1 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Best espresso in East Austin, bar none. The Dogspeed roast is smooth, chocolatey, and punches through oat milk like a dream. Plus the staff is super knowledgeable and down-to-earth."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">TB</div>
+                        <div class="reviewer-info">
+                            <h6>Travis B.</h6>
+                            <span>Google Verified Local Guide • Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Their Nitro Cold Brew is dangerously good. It pours with a creamy guinness head and zero bitterness. I grabbed a 12oz bag of whole beans and my home Chemex has never tasted better."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">ML</div>
+                        <div class="reviewer-info">
+                            <h6>Maya L.</h6>
+                            <span>Yelp Elite Reviewer • Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Stopped by while visiting Austin and ended up coming back every single morning of our trip. The Horchata latte with breakfast tacos out on the patio is the quintessential East Austin vibe."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">DK</div>
+                        <div class="reviewer-info">
+                            <h6>Derek K.</h6>
+                            <span>Verified Customer • Denver, CO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Directions Section -->
+    <section class="section-block" id="location">
+        <div class="container location-grid">
+            <div class="location-panel">
+                <span class="eyebrow-tag">Visit the Roastery</span>
+                <h3 style="font-size: 2.2rem; margin-bottom: 24px;">Drop By Flat Track</h3>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Address</h4>
+                        <p>1611 E Cesar Chavez St, Austin, TX 78702<br>Convenient street &amp; bicycle parking available</p>
+                    </div>
+                </div>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Roastery &amp; Cafe Hours</h4>
+                        <p>Monday – Sunday: 7:00 AM – 5:00 PM<br>Fresh batch brews poured all day</p>
+                    </div>
+                </div>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Direct Telephone Inquiries</h4>
+                        <p><a href="tel:5125406033" style="color: var(--primary-light); font-weight: 700;">(512) 540-6033</a><br>Call us for bean inventory or catering orders</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap;">
+                    <a href="https://maps.google.com/?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" rel="noopener" class="btn-magnetic btn-shimmer-gold">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                        <span>Open in Google Maps</span>
+                    </a>
+                    <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">
+                        <span>Call Store Now</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="map-frame-wrap">
+                <iframe src="https://maps.google.com/maps?q=1611%20E%20Cesar%20Chavez%20St,%20Austin,%20TX%2078702&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Flat Track Coffee Location Map"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shadcn Accordion FAQ Section -->
+    <section class="section-block" style="background: var(--bg-card); border-top: 1px solid var(--border-subtle);" id="faq">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Got Questions?</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-lead">Everything you need to know about our beans, passes, and East Austin cafe.</p>
+            </div>
+
+            <div class="faq-wrap">
+                <!-- FAQ 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Do you roast all coffee beans on-site in Austin?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes! Every single bag of Flat Track coffee is micro-batch roasted right here at our 1611 E Cesar Chavez location in East Austin. You can often see our roaster running during morning hours.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Can you grind my beans for my home coffee equipment?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Absolutely. When you purchase in-store or order a tasting bundle for pickup, let our baristas know your brew method (Espresso, Aeropress, Pour-Over, Chemex, French Press, or Cold Brew) and we will grind it with precision at no charge.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>How do the 3 plans work? Is there any recurring subscription?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            All 3 plans are 100% one-time purchases with zero recurring monthly fees. You receive a digital pass saved to your Apple or Google Wallet that never expires, which you can show at the counter or use for online pickup orders anytime you want.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Is there outdoor seating and is it pet friendly?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes, our shaded patio on Cesar Chavez is 100% dog-friendly with water bowls and bicycle racks. Well-behaved dogs on leashes are always welcome!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Do you cater corporate office coffee or creative studios?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes! Plan 3 (Office Fuel &amp; Hospitality Crate) is designed specifically for local Austin businesses and creative teams. Call us directly at (512) 540-6033 or use the reservation form above to set up your delivery.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <div class="brand-badge">
+                        <div class="brand-icon-3d">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+                        </div>
+                        <div class="brand-text">
+                            <h3 style="font-size: 1.15rem;">FLAT TRACK</h3>
+                            <span style="font-size: 0.72rem; color: var(--primary-light);">Coffee Roasters</span>
+                        </div>
+                    </div>
+                    <p>Independent specialty coffee roastery and community cafe in East Austin, Texas. Proudly roasted on Cesar Chavez.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul class="footer-nav">
+                        <li><a href="#plans">The 3 Plans</a></li>
+                        <li><a href="#menu">Menu &amp; Roasts</a></li>
+                        <li><a href="#craft">Roasting Philosophy</a></li>
+                        <li><a href="#reviews">Verified Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Connect</h5>
+                    <ul class="footer-nav">
+                        <li><a href="tel:5125406033">Call (512) 540-6033</a></li>
+                        <li><a href="https://maps.google.com/?q=Flat+Track+Coffee+Austin" target="_blank" rel="noopener">Google Maps Route</a></li>
+                        <li><a href="#faq">Order Questions</a></li>
+                        <li><a href="mailto:info@flattrackcoffee.com">info@flattrackcoffee.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Hours &amp; Location</h5>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                        1611 E Cesar Chavez St<br>
+                        Austin, TX 78702<br><br>
+                        <strong>Monday – Sunday:</strong><br>
+                        7:00 AM – 5:00 PM
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Flat Track Coffee Roasters. All rights reserved. Austin, Texas.</p>
+                <p>Engineered with 3D canvas physics, hardware-accelerated 3D perspective cards, and WCAG AA contrast.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive 3-Step Booking Modal Dialog -->
+    <div class="modal-overlay" id="bookingModal" onclick="closeOnBackdrop(event)">
+        <div class="modal-window">
+            <div class="modal-top">
+                <h3 id="modalTitle">Reserve Experience or Plan</h3>
+                <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close dialog">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <div class="progress-bar-steps">
+                <div class="step-node active" id="sn1">
+                    <div class="node-bubble">1</div>
+                    <span>Plan &amp; Time</span>
+                </div>
+                <div class="step-node" id="sn2">
+                    <div class="node-bubble">2</div>
+                    <span>Guest Info</span>
+                </div>
+                <div class="step-node" id="sn3">
+                    <div class="node-bubble">3</div>
+                    <span>Confirmed</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1 -->
+                <div class="wizard-step active" id="ws1">
+                    <div class="input-group">
+                        <label class="input-label">Selected Plan / Experience</label>
+                        <input type="text" id="selectedItemInput" class="input-control" readonly value="Plan 2: Roaster’s Tasting Reserve ($68.00 One-Time)">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Preferred Date &amp; Time</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <input type="date" id="bookDate" class="input-control" value="2026-11-04">
+                            <select id="bookTime" class="input-control">
+                                <option>8:00 AM - 9:00 AM</option>
+                                <option>9:00 AM - 10:00 AM</option>
+                                <option selected>10:00 AM - 11:00 AM</option>
+                                <option>11:00 AM - 12:00 PM</option>
+                                <option>1:00 PM - 2:00 PM</option>
+                                <option>2:00 PM - 3:00 PM</option>
+                                <option>3:00 PM - 4:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Party Size / Order Type</label>
+                        <div class="radio-grid">
+                            <div class="radio-cell selected" onclick="selectRadio(this, '1-2 Guests')">
+                                <strong>1 - 2 Guests</strong>
+                                <span>Casual visit or pickup</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, '3-5 Guests')">
+                                <strong>3 - 5 Guests</strong>
+                                <span>Small group or meeting</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, '6-10 Guests')">
+                                <strong>6 - 10 Guests</strong>
+                                <span>Team cupping / table</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, 'Office Catering')">
+                                <strong>Office / Event</strong>
+                                <span>Bulk order or crate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="wizard-step" id="ws2">
+                    <div class="input-group">
+                        <label class="input-label">Full Name *</label>
+                        <input type="text" id="guestName" class="input-control" placeholder="e.g. Jordan Miller" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Phone Number * (For Confirmation SMS)</label>
+                        <input type="tel" id="guestPhone" class="input-control" placeholder="(512) 555-0199" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Email Address *</label>
+                        <input type="email" id="guestEmail" class="input-control" placeholder="jordan@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Special Notes / Grind Preference</label>
+                        <input type="text" id="guestNotes" class="input-control" placeholder="e.g. Whole bean, extra cold brew ice">
+                    </div>
+                </div>
+
+                <!-- Step 3 (Confirmed) -->
+                <div class="wizard-step" id="ws3">
+                    <div style="text-align: center; padding: 20px 0;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h4 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 8px;">Order &amp; Spot Logged!</h4>
+                        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;" id="confirmationSummary">
+                            Your reservation has been received. Our barista desk will text your confirmation voucher.
+                        </p>
+                        <div style="background: var(--bg-void); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.95rem; color: var(--primary-light);">
+                            CONFIRMATION VOUCHER: #FT-<span id="voucherCode">89421</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-magnetic btn-ghost-dark" id="btnStepBack" onclick="navStep(-1)" style="display: none;">Back</button>
+                <div style="flex-grow: 1;"></div>
+                <button type="button" class="btn-magnetic btn-shimmer-gold" id="btnStepNext" onclick="navStep(1)">Continue to Details</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         PHYSICS & 3D INTERACTIVITY SCRIPTS
+         ========================================================================== -->
+    <script>
+        // -------------------------------------------------------------
+        // 1. REAL-TIME 3D PARTICLE & BEAN PHYSICS ENGINE (CANVAS 60FPS)
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('physicsCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = canvas.parentElement.offsetHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+        });
+
+        // Mouse Physics Interaction Vector
+        const mouse = { x: width / 2, y: height / 2, vx: 0, vy: 0, radius: 180, active: false };
+
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.vx = (e.clientX - rect.left) - mouse.x;
+            mouse.vy = (e.clientY - rect.top) - mouse.y;
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.active = true;
+        });
+
+        canvas.parentElement.addEventListener('mouseleave', () => {
+            mouse.active = false;
+        });
+
+        // 3D Particles Definition
+        const PARTICLE_COUNT = 130;
+        const particles = [];
+
+        class Particle3D {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = (Math.random() - 0.5) * width * 1.2;
+                this.y = (Math.random() - 0.5) * height * 1.2;
+                this.z = initial ? Math.random() * 800 + 100 : 900;
+                
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.vz = -1.2 - Math.random() * 1.5; // moving forward in 3D
+                
+                this.radius = 2.5 + Math.random() * 3.5;
+                this.baseAlpha = 0.25 + Math.random() * 0.65;
+                
+                // Color variation: warm amber, golden roast, and dark espresso embers
+                const colors = ['#fbbf24', '#d97706', '#f59e0b', '#b45309', '#92400e'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Rotation for bean-like shape
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.03;
+            }
+
+            update() {
+                this.z += this.vz;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.angle += this.spin;
+
+                // 3D Perspective Projection
+                const fov = 400;
+                const scale = fov / (fov + this.z);
+                const projX = (this.x * scale) + (width / 2);
+                const projY = (this.y * scale) + (height / 2);
+
+                // Mouse Repulsion & Vortex Physics
+                if (mouse.active) {
+                    const dx = projX - mouse.x;
+                    const dy = projY - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius && dist > 0) {
+                        const force = (1 - dist / mouse.radius) * 4;
+                        this.x += (dx / dist) * force * 5;
+                        this.y += (dy / dist) * force * 5;
+                        this.vz += (Math.random() - 0.5) * 2;
+                    }
+                }
+
+                // Recycle if past camera or screen boundaries
+                if (this.z < -200 || projX < -50 || projX > width + 50 || projY < -50 || projY > height + 50) {
+                    this.reset(false);
+                }
+
+                this.projX = projX;
+                this.projY = projY;
+                this.scale = scale;
+            }
+
+            draw() {
+                if (this.scale <= 0) return;
+                
+                ctx.save();
+                ctx.translate(this.projX, this.projY);
+                ctx.rotate(this.angle);
+                ctx.scale(this.scale, this.scale);
+
+                ctx.beginPath();
+                // Draw oval bean shape
+                ctx.ellipse(0, 0, this.radius * 1.5, this.radius, 0, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = Math.min(1, this.baseAlpha * this.scale * 1.8);
+                ctx.shadowBlur = 12 * this.scale;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+
+                // Center cleft of coffee bean
+                ctx.beginPath();
+                ctx.moveTo(-this.radius * 1.1, 0);
+                ctx.quadraticCurveTo(0, this.radius * 0.4, this.radius * 1.1, 0);
+                ctx.strokeStyle = 'rgba(10, 5, 2, 0.7)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle3D());
+        }
+
+        function animatePhysics() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Sort particles by Z depth so front particles occlude back particles
+            particles.sort((a, b) => b.z - a.z);
+
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+
+            requestAnimationFrame(animatePhysics);
+        }
+        animatePhysics();
+
+
+        // -------------------------------------------------------------
+        // 2. REALISTIC 3D TILT PHYSICS (APPLE VISION PRO STYLE)
+        // -------------------------------------------------------------
+        const heroWrap = document.getElementById('heroTiltWrap');
+        const heroCard = document.getElementById('heroCard');
+        const cardGlare = document.getElementById('cardGlare');
+
+        if (heroWrap && heroCard) {
+            let targetRotX = 0, targetRotY = 0;
+            let currentRotX = 0, currentRotY = 0;
+
+            heroWrap.addEventListener('mousemove', (e) => {
+                const rect = heroWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Max tilt 14 degrees
+                targetRotX = -((y - centerY) / centerY) * 14;
+                targetRotY = ((x - centerX) / centerX) * 14;
+
+                // Move glare
+                const glareX = (x / rect.width) * 100;
+                const glareY = (y / rect.height) * 100;
+                cardGlare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.22) 0%, transparent 60%)`;
+            });
+
+            heroWrap.addEventListener('mouseleave', () => {
+                targetRotX = 0;
+                targetRotY = 0;
+            });
+
+            // Smooth spring damping interpolation
+            function lerpTilt() {
+                currentRotX += (targetRotX - currentRotX) * 0.1;
+                currentRotY += (targetRotY - currentRotY) * 0.1;
+
+                heroCard.style.transform = `perspective(1000px) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) translateZ(10px)`;
+                requestAnimationFrame(lerpTilt);
+            }
+            lerpTilt();
+        }
+
+
+        // -------------------------------------------------------------
+        // 3. ACETERNITY SPOTLIGHT CARDS
+        // -------------------------------------------------------------
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', x + 'px');
+                card.style.setProperty('--mouse-y', y + 'px');
+            });
+        });
+
+
+        // -------------------------------------------------------------
+        // 4. MENU CATEGORY FILTER TABS
+        // -------------------------------------------------------------
+        function filterMenu(category, btnElement) {
+            document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            document.querySelectorAll('.spotlight-card').forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                if (category === 'all' || cat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+
+        // -------------------------------------------------------------
+        // 5. SHADCN ACCORDION FAQ
+        // -------------------------------------------------------------
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.accordion-item').forEach(other => {
+                other.classList.remove('open');
+                other.querySelector('.accordion-content').style.maxHeight = null;
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+
+
+        // -------------------------------------------------------------
+        // 6. 3-STEP RESERVATION WIZARD MODAL
+        // -------------------------------------------------------------
+        let currentStep = 1;
+        let chosenParty = '1-2 Guests';
+
+        function openBookingModal(title, priceStr) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('selectedItemInput').value = title + ' (' + priceStr + ')';
+            currentStep = 1;
+            renderWizard();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function closeOnBackdrop(e) {
+            if (e.target.id === 'bookingModal') {
+                closeModal();
+            }
+        }
+
+        function selectRadio(cellElem, partyVal) {
+            document.querySelectorAll('.radio-cell').forEach(rc => rc.classList.remove('selected'));
+            cellElem.classList.add('selected');
+            chosenParty = partyVal;
+        }
+
+        function renderWizard() {
+            document.querySelectorAll('.wizard-step').forEach(ws => ws.classList.remove('active'));
+            document.getElementById('ws' + currentStep).classList.add('active');
+
+            for (let i = 1; i <= 3; i++) {
+                const node = document.getElementById('sn' + i);
+                if (i <= currentStep) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            }
+
+            const btnBack = document.getElementById('btnStepBack');
+            const btnNext = document.getElementById('btnStepNext');
+
+            if (currentStep === 1) {
+                btnBack.style.display = 'none';
+                btnNext.textContent = 'Continue to Details';
+                btnNext.style.display = 'inline-flex';
+                btnNext.onclick = () => navStep(1);
+            } else if (currentStep === 2) {
+                btnBack.style.display = 'inline-flex';
+                btnNext.textContent = 'Confirm Plan';
+                btnNext.style.display = 'inline-flex';
+                btnNext.onclick = () => navStep(1);
+            } else if (currentStep === 3) {
+                btnBack.style.display = 'none';
+                btnNext.textContent = 'Done & Close';
+                btnNext.onclick = closeModal;
+            }
+        }
+
+        function navStep(dir) {
+            if (dir === 1) {
+                if (currentStep === 1) {
+                    currentStep = 2;
+                    renderWizard();
+                } else if (currentStep === 2) {
+                    const name = document.getElementById('guestName').value.trim();
+                    const phone = document.getElementById('guestPhone').value.trim();
+                    const email = document.getElementById('guestEmail').value.trim();
+
+                    if (!name || !phone || !email) {
+                        alert('Please fill in your Name, Phone Number, and Email.');
+                        return;
+                    }
+
+                    const randVoucher = Math.floor(10000 + Math.random() * 90000);
+                    document.getElementById('voucherCode').textContent = randVoucher;
+                    document.getElementById('confirmationSummary').innerHTML = 'Thank you, <strong>' + name + '</strong>! Your spot for <strong>' + document.getElementById('selectedItemInput').value + '</strong> on <strong>' + document.getElementById('bookDate').value + '</strong> (' + document.getElementById('bookTime').value + ') is logged. A confirmation voucher has been dispatched to <strong>' + phone + '</strong>.';
+
+                    currentStep = 3;
+                    renderWizard();
+                }
+            } else if (dir === -1) {
+                if (currentStep > 1) {
+                    currentStep--;
+                    renderWizard();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

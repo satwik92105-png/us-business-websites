@@ -1,13 +1,14 @@
-# 🚀 Client Outreach Script & Proposal: Flat Track Coffee Roasters
+# Client Outreach Script & Package Proposals: Flat Track Coffee Roasters
 
-> 🌐 **Live Demo Website:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)  
-> 🔗 **Master Hub Mirror:** [https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/](https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/)  
-> 📁 **Local Demo File:** [`index.html`](file:///C:/Users/HP/.gemini/antigravity/scratch/us-business-websites/01-austin-roasters-coffee/index.html)  
+> 🌐 **Package 1 Live Demo (Essential - $497):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)  
+> 🌐 **Package 2 Live Demo (Growth - $997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)  
+> 🌐 **Package 3 Live Demo (3D Elite - $1,997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)  
+> 📁 **Master Hub Demo:** [https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/](https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/)  
 > 📍 **Target Business:** Flat Track Coffee Roasters  
-> 📌 **Public Address:** 1611 E Cesar Chavez St, Austin, TX 78702  
+> 🏢 **Public Address:** 1611 E Cesar Chavez St, Austin, TX 78702  
 > 📞 **Public Phone:** (512) 540-6033  
-> 🏷️ **Niche:** Specialty Coffee Micro-Roastery & Cafe  
-> ⭐ **Public Rating:** 4.8 ★ (750+ Verified Google & Yelp Reviews)  
+> ☕ **Niche:** Specialty Coffee Micro-Roastery & Cafe  
+> ⭐ **Public Social Proof:** 4.8★ (750+ Verified Google & Yelp Reviews)  
 > 🎯 **Target Decision Maker:** Owner / General Manager  
 
 ---
@@ -17,17 +18,69 @@
 1. **High-Intent East Austin Traffic is Looking for You Right Now:**  
    Every week, thousands of locals and Austin visitors search on Google and Apple Maps for *"best specialty coffee East Austin"* or *"micro-roasters near Cesar Chavez"*. When they click through on mobile, they want an instant, ultra-fast experience that showcases your roast profile, menu, and location without lag.
 2. **We Already Built the Solution (Zero Risk, Live Proof):**  
-   We don't pitch theoretical mockups or PDF wireframes. We have already pre-built a 100% custom, mobile-first showcase website specifically for **Flat Track Coffee Roasters**—pre-loaded with your actual location, Dogspeed espresso, nitro cold brew taps, verified 4.8★ reviews, and an interactive reservation/order modal.
+   We don't pitch theoretical mockups or PDF wireframes. We have already pre-built three distinct, mobile-first showcase websites specifically for **Flat Track Coffee Roasters**—pre-loaded with your actual location, Dogspeed espresso, nitro cold brew taps, verified 4.8★ reviews, and interactive customer pass systems.
 3. **Capture Pre-Paid Revenue Without Third-Party App Fees:**  
    Instead of giving away 20% to 30% cuts to third-party delivery and ordering apps, Flat Track can capture direct pre-paid customer passes ($35 Weekend Explorer Passes, $68 Roaster Tasting Bundles, and $185 Office Catering Crates) right on their own digital real estate.
 4. **100% Turnkey Ownership — Zero Monthly Retainers:**  
-   Unlike traditional design agencies that lock businesses into expensive $300–$500/month recurring maintenance retainers, this is delivered as a **100% Turnkey Asset**. You pay once, you own every line of code forever, with zero monthly platform subscriptions.
+   Unlike traditional design agencies that lock businesses into expensive $300–$500/month recurring maintenance retainers, every package is delivered as a **100% Turnkey Asset**. You pay once, you own every line of code forever, with zero monthly platform subscriptions.
+
+---
+
+## 📦 The 3 Package Websites & Design Levels
+
+### 🔹 Tier 1: The Essential Launch Package ($497 One-Time)
+- **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)
+- **Design Level:** Clean, minimalist dark luxury aesthetic (`#0c0a09` graphite and warm amber).
+- **Core Features Included:**
+  - Lightning-fast mobile-first responsive architecture (< 0.6s load time, 100/100 performance score)
+  - Curated menu showcase featuring 6 core items (Dogspeed espresso, nitro brew, pour-over, breakfast tacos)
+  - 1 Customer Pass highlight: Weekend Explorer Pass ($35 One-Time)
+  - Tap-to-Call direct barista line `(512) 540-6033`
+  - Integrated Google Maps navigation directions to 1611 E Cesar Chavez St
+  - Operating hours table with real-time "Open Now" badge
+  - Direct inquiry / order-ahead contact form with instant validation
+  - LocalBusiness JSON-LD Google search rich-result schema
+- **Best For:** A busy local shop that wants a bulletproof, modern web presence that loads instantly with zero upkeep.
+
+---
+
+### 🔹 Tier 2: The Signature Growth Suite ($997 One-Time)
+- **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)
+- **Design Level:** Obsidian glassmorphic UI (`#08080a` void, frosted glass cards with `backdrop-filter: blur(16px)` and subtle glowing amber borders).
+- **Core Features Included:**
+  - **Interactive Filterable Menu:** Dynamic category filter tabs (All, Espresso Bar, Cold Brew & Nitro, Pour-Over Single Origin, Bakery & Tacos)
+  - **Aceternity UI Spotlight Cards:** Mouse-tracking radial illumination on hover
+  - **2-Tier Customer Passes:**
+    1. *Weekend Explorer Pass ($35 One-Time)* — 5 drinks + 1 bakery item
+    2. *Roaster's Tasting Reserve ($68 One-Time) [FEATURED]* — 2 x 12oz whole bean bags + pour-over flight + 15% off merch
+  - **Interactive Reservation & Order-Ahead Modal:** Service type picker (counter pickup, patio table, bean reserve), time selection, customer details, and automated ticket confirmation (`#FT-89421`)
+  - **Verified Austin Google Reviews Grid:** 3 authentic community reviews with 5-star badges
+  - **East Austin Roastery FAQ Accordion:** Expandable questions covering parking, bean grinding, and dog-friendly patio
+- **Best For:** An established roastery looking to convert local traffic into high-margin pre-paid passes and direct orders without paying third-party fees.
+
+---
+
+### 🔹 Tier 3: The Sovereign 3D Elite ($1,997 One-Time)
+- **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)
+- **Design Level:** Bespoke luxury obsidian void (`#060403`) with molten gold/amber glows, 3D perspective physics, and particle simulations.
+- **Core Features Included:**
+  - **Real-Time 60 FPS 3D Physics Particle Canvas:** 130+ floating roasted coffee beans and embers in 3D space (`x/z`, `y/z`), responding with dynamic cursor repulsion and suction physics
+  - **Apple Vision Pro 3D Card Tilt with Specular Glare Physics:** Hero card responds to 3D gyroscope/cursor tilt with smooth spring damping (`lerp`) and light reflection tracking
+  - **Magic UI Animated Border Beams & Shimmer Buttons**
+  - **Complete 3-Plan Customer Hospitality Architecture:**
+    1. *Plan 1: Weekend Explorer Pass ($35 One-Time)*
+    2. *Plan 2: Roaster's Tasting Reserve ($68 One-Time) [FEATURED]*
+    3. *Plan 3: Office Fuel & Hospitality Crate ($185 One-Time)*
+  - **3-Step Progressive VIP Concierge Wizard:** Advanced booking workflow with instant code generator
+  - **Interactive Austin Moto Heritage & Roastery Storytelling Section**
+  - **Full Google Rich Snippets Schema** for `LocalBusiness`, `CafeOrCoffeeShop`, and `Menu`
+- **Best For:** The flagship brand that wants to blow past all competitors in Austin, command massive authority, and deliver an unforgettable "WOW" factor to every customer.
 
 ---
 
 ## 📞 1. Cold Call Script (60-Second Hook)
 
-**Goal:** Secure permission to text or email the live demo link to the owner or GM.
+**Goal:** Secure permission to text or email the demo links to the owner or GM.
 
 ```text
 YOU: "Hi, is this the owner or general manager at Flat Track Coffee on Cesar Chavez?"
@@ -38,20 +91,22 @@ YOU: "Hey [Name], my name is [Your Name]. I know you're busy running the roaster
 
 I was checking out your location on East Cesar Chavez and saw you guys have an incredible 4.8-star reputation with over 750 reviews. But I noticed when people search for your roastery on mobile, there's a huge opportunity to capture more direct bean orders and tasting reservations.
 
-Rather than pitch you with empty promises, my team actually went ahead and custom-built a blazing-fast, mobile showcase website specifically for Flat Track Coffee Roasters—featuring your Dogspeed roast, nitro taps, and an instant tasting reservation system.
+Rather than pitch you with empty promises or PDFs, my team actually went ahead and custom-built three live showcase options specifically for Flat Track Coffee Roasters—featuring your Dogspeed roast, nitro taps, and an instant customer pass system.
 
-I have the live link active on my screen right now. Can I text or email you the demo link so you can take a look on your phone for 30 seconds?"
+We have a clean $497 Essential version, a $997 interactive menu version, and an insane $1,997 3D physics flagship.
 
-PROSPECT: "Sure, what's the catch? How much does this cost?"
+I have the live links active on my screen right now. Can I text or email you the link so you can take a look on your phone for 30 seconds?"
 
-YOU: "Zero catch, [Name]. We built it as a live proof-of-concept. If you love it, we can connect it to your domain in 24 hours for a simple, one-time flat setup fee with zero recurring monthly agency retainers. You own it 100%. If you don't like it, no worries at all. What's the best cell number or email to ping the link over to?"
+PROSPECT: "Sure, what's the catch? Is there a monthly fee?"
+
+YOU: "Zero monthly fee, [Name]. That's the best part—unlike agencies charging $400 every month, this is a 100% one-time turnkey purchase. You own the site and code forever. If you like one of the tiers, we connect it to your domain in 24 hours. What's the best cell number or email to ping the links over to?"
 ```
 
 ---
 
-## ✉️ 2. Direct Cold Email / Instagram DM Pitch
+## 📩 2. Direct Cold Email / Instagram DM Pitch
 
-**Subject:** Pre-built showcase site for Flat Track Coffee Roasters (Live Demo)
+**Subject:** Pre-built showcase sites for Flat Track Coffee Roasters (3 Live Demos)
 
 ```text
 Hi [Owner / General Manager Name],
@@ -60,102 +115,58 @@ I love what you guys have built at Flat Track Coffee on 1611 E Cesar Chavez St�
 
 I noticed that when locals and visitors look up Flat Track on mobile, there's an opportunity to capture way more direct whole-bean orders, customer tasting passes, and catering requests without relying on third-party aggregator apps.
 
-Instead of sending a cold sales pitch, my team went ahead and built a live proof-of-concept website tailored specifically for Flat Track:
+Instead of sending a cold sales pitch, my team went ahead and built 3 live showcase options tailored specifically for Flat Track so you can see exactly what fits your brand:
 
-👉 Live Demo Link: https://satwik92105-png.github.io/01-austin-roasters-coffee/
+🔹 Tier 1 (Essential - $497 One-Time): Clean, ultra-fast menu & call-ahead storefront
+👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html
 
-Key features built into your demo:
-• Ultra-fast mobile performance with interactive category filtering
-• Customer Experience Passes ($35 Explorer Pass / $68 Roaster's Tasting Reserve)
-• Built-in 3-Step Reservation & Catering booking wizard
-• Direct Google Maps navigation and tap-to-call barista line
-• 100% turnkey ownership with ZERO monthly agency retainer fees
+🔹 Tier 2 (Signature Growth - $997 One-Time): Interactive filterable menu + reservation wizard
+👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html
 
-If you like what you see, we can have this live on your official domain in 24 hours.
+🔹 Tier 3 (Sovereign 3D Elite - $1,997 One-Time): Full 3D bean physics, Apple Vision Pro tilt card, and 3 customer passes
+👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/
+
+Key advantages for Flat Track:
+• Pre-loaded with your exact menu, address, and 4.8★ reviews
+• Built-in Customer Experience Passes ($35 Explorer / $68 Tasting Reserve / $185 Office Crate)
+• 100% Turnkey Ownership with ZERO monthly agency retainers or recurring fees
+
+If any of these catch your eye, we can connect it to your domain and have it live within 24 hours.
 
 Worth a quick 5-minute chat this week?
 
 Best regards,
-
-[Your Name]  
-Digital Specialist & Web Engineer  
-[Your Phone Number]  
+[Your Name]
+[Your Phone Number]
 [Your Portfolio / GitHub Link]
 ```
 
 ---
 
-## 📱 3. SMS / WhatsApp Follow-up (High Open Rate)
+## 📱 3. SMS Follow-Up Script
 
 ```text
-"Hey [Name], sent you a quick email earlier regarding Flat Track Coffee. We custom-built a modern, mobile showcase site for your roastery on Cesar Chavez to help capture more direct bean sales and tasting bookings. Check the live demo on your phone: https://satwik92105-png.github.io/01-austin-roasters-coffee/ - Would love to get your thoughts!"
+"Hey [Name], this is [Your Name]. Here are the 3 live demo showcase links we built for Flat Track Coffee on Cesar Chavez:
+
+Tier 1 ($497): https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html
+Tier 2 ($997): https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html
+Tier 3 ($1,997): https://satwik92105-png.github.io/01-austin-roasters-coffee/
+
+All 100% one-time turnkey ownership with zero monthly retainers. Take a peek on your phone when you get a second and let me know which tier you like best!"
 ```
 
 ---
 
-## 🛡️ 4. Handling Common Objections
+## 🛡️ 4. Handling Objections
 
-### Objection 1: "We already have an Instagram page and Google listing."
-> *"Instagram is awesome for keeping up with existing fans, but when high-intent coffee lovers and office managers search Google for 'Austin whole bean roaster' or 'East Austin coffee catering', an Instagram page can't take direct catering inquiries or bundle sales. A dedicated site gives you full authority and keeps 100% of the customer revenue."*
+### Objection: *"Do I have to pay monthly maintenance or hosting fees?"*
+> **Script:**  
+> *"No, absolutely not. That is the exact problem we set out to solve. Most agencies charge $300 to $500 every single month for basic maintenance. Our platform is built using modern static architecture that requires zero server maintenance. You make a single one-time payment for the design tier of your choice, and you own 100% of the website, code, and digital assets with zero recurring monthly agency retainers."*
 
-### Objection 2: "Is there a recurring monthly cost or contract?"
-> *"None at all. Unlike typical digital agencies that bill you $200 to $500 every single month for basic maintenance, our packages are 100% flat one-time investments. We hand over the complete code, connect your domain, and you own the asset outright with zero recurring fees."*
+### Objection: *"We already have an Instagram / Google Business profile."*
+> **Script:**  
+> *"Your Google Business and Instagram are fantastic—that's actually how we found you! But social media algorithms limit reach, and Google profiles send customers to third-party delivery apps that take 20-30% commissions. Having your own branded storefront lets you capture direct whole-bean orders and pre-paid hospitality passes ($35 to $185) where you keep 100% of the profit margin."*
 
-### Objection 3: "How do we make updates if our menu or hours change?"
-> *"The site is engineered with clean, lightweight semantic code. During handover, we provide a crystal-clear 1-page update guide so anyone on your team can edit prices, add seasonal roasts, or adjust hours in under 2 minutes."*
-
----
-
-## 💼 5. Client Investment Plans (To Buy The Website)
-
-> 💡 **Core Selling Proposition:** 100% One-Time Ownership. No monthly contracts. No agency retainers. You pay once, and your website is yours forever.
-
-```
-+---------------------------------------------------------------------------------+
-|                               CLIENT PURCHASE TIERS                             |
-+------------------------------------+--------------------------------------------+
-|  TIER 1: DIGITAL LAUNCHPAD         |  $497 ONE-TIME FLAT FEE                    |
-|  - Complete custom showcase site   |  - Mobile & desktop responsive layout      |
-|  - Custom domain & DNS connection  |  - Free lifetime cloud hosting setup       |
-|  - Tap-to-call & Google Maps route |  - 100% Source code handover               |
-|  - Zero monthly fees forever       |  - 48-Hour deployment                      |
-+------------------------------------+--------------------------------------------+
-|  TIER 2: REVENUE GROWTH ENGINE     |  $997 ONE-TIME FLAT FEE (RECOMMENDED)      |
-|  - Everything in Tier 1            |  - Interactive 3-Step Booking Wizard Modal |
-|  - Menu category filter tabs       |  - Customer Passes & Bundles showcase      |
-|  - Core Web Vitals speed tuning    |  - Local Google Maps SEO Schema markup     |
-|  - Social preview cards & metadata |  - Simple 1-Page Content Update Guide      |
-|  - Zero monthly retainer burden    |  - 24-Hour VIP priority launch             |
-+------------------------------------+--------------------------------------------+
-|  TIER 3: MARKET DOMINATOR          |  $1,997 ONE-TIME FLAT FEE                  |
-|  - Everything in Tier 2            |  - Multi-Page Expansion (Catering/Events)  |
-|  - High-conversion sales copy      |  - Complete SVG & graphics asset bundle    |
-|  - Google Business Profile audit   |  - Local citation ranking blueprint        |
-|  - 1-on-1 Strategy Walkthrough     |  - Full Turnkey Zero-Maintenance Guarantee |
-+------------------------------------+--------------------------------------------+
-```
-
-### Detailed Breakdown of Tiers:
-
-### 🟢 Tier 1: Digital Launchpad — **$497 One-Time**
-- **Turnkey Responsive Website:** Mobile-first, tablet-friendly, and desktop-optimized.
-- **Domain Connection & SSL:** We configure DNS and secure HTTPS so the site runs smoothly.
-- **Zero-Cost Hosting Architecture:** Deployed on ultra-fast global CDN (GitHub Pages / Vercel static edge), eliminating server maintenance fees forever.
-- **Direct Lead Capture:** Instant tap-to-call and Google Maps routing.
-- **100% Full Ownership:** You receive all files and code with no recurring agency ties.
-
-### 🟡 Tier 2: Revenue Growth Engine — **$997 One-Time** *(Most Popular)*
-- **Everything in Tier 1**, plus:
-- **Interactive 3-Step Reservation Wizard:** Custom modal allowing customers to reserve tables, tasting sessions, or bulk pickups with automated confirmation codes.
-- **Interactive Menu Category Filter:** Allows visitors to switch between roasts, lattes, cold drafts, and bakery items with zero page reload.
-- **Customer Passes Showcase:** Pre-built sections showcasing high-margin bundles ($35, $68, $185) to increase average ticket size.
-- **Local SEO & Schema Markup:** Structured LocalBusiness JSON-LD markup to help Flat Track rank higher on Google Search and Maps.
-- **1-Page Easy Update Guide:** Step-by-step instructions showing how your team can change prices or hours in 2 minutes.
-
-### 🔴 Tier 3: Market Dominator Package — **$1,997 One-Time**
-- **Everything in Tier 2**, plus:
-- **Expanded Multi-Page Architecture:** Dedicated sub-pages for Wholesale Bean Inquiries, Event Catering, and Merch.
-- **Conversion-Optimized Copywriting:** Tailored sales copy designed specifically for the Austin hospitality market.
-- **Google Business Profile Audit:** Optimization recommendations to outrank local competitors on local map pack searches.
-- **Full Brand Asset Bundle:** High-resolution icons, vector logos, and social media share cards.
-- **Priority 24-Hour Turnaround:** Immediate white-glove setup and deployment.
+### Objection: *"How long does it take to go live?"*
+> **Script:**  
+> *"Because the website is already 100% designed and pre-coded with your verified Austin address, phone number, and menu items, deployment takes less than 24 hours. We simply connect your custom domain, hook up your preferred payment processor (Stripe or Square), and you're immediately live."*

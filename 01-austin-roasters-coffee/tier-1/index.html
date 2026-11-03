@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flat Track Coffee Roasters | Austin, TX (Tier 1: Essential Launch)</title>
+    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch specialty coffee on Cesar Chavez. Order ahead, directions, and hours.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#0c0a09',
+                        surface: '#171513',
+                        surfaceHover: '#231f1c',
+                        borderMuted: '#2e2824',
+                        amberGlow: '#f59e0b',
+                        amberDeep: '#d97706',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0c0a09; color: #f5f5f4; font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- Global Bulletproof Package Tier Switcher -->
+    <aside id="global-package-switcher" style="position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:999999; display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:9999px; background:rgba(10,10,12,0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 20px 45px rgba(0,0,0,0.85); font-family:ui-monospace, monospace; font-size:11px;">
+        <span style="color:#71717a; font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em; padding-right:4px;">PACKAGE:</span>
+        <span style="background:#f59e0b; color:#000; font-weight:800; padding:5px 14px; border-radius:9999px; box-shadow:0 0 15px rgba(245,158,11,0.45); cursor:default;">Tier 1: Essential ($497)</span>
+        <a href="javascript:void(0)" onclick="goToTier(2)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 2: Growth ($997)</a>
+        <a href="javascript:void(0)" onclick="goToTier(3)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 3: 3D Elite ($1,997)</a>
+    </aside>
+    <script>
+    function goToTier(tierNum) {
+        var p = window.location.pathname;
+        if (p.endsWith('.html')) {
+            p = p.substring(0, p.lastIndexOf('/') + 1);
+        }
+        if (/\/tier-\d\/?$/.test(p)) {
+            p = p.replace(/\/tier-\d\/?$/, '/');
+        }
+        if (!p.endsWith('/')) {
+            p += '/';
+        }
+        if (tierNum === 1) window.location.href = p + 'tier1.html';
+        else if (tierNum === 2) window.location.href = p + 'tier2.html';
+        else if (tierNum === 3) window.location.href = p + 'index.html';
+    }
+    </script>
+    <!-- End Package Tier Switcher -->
+    
+
+
+    
+
+    <!-- Top Announcement Bar -->
+    <div class="mt-16 bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
+        <div class="max-w-6xl mx-auto flex items-center justify-between text-xs text-zinc-300 flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-medium text-white">East Austin Roastery Open Today:</span> 7:00 AM – 5:00 PM
+            </div>
+            <div class="flex items-center gap-4 text-zinc-400">
+                <span>📍 1611 E Cesar Chavez St</span>
+                <a href="tel:5125406033" class="text-amber-400 hover:underline font-mono font-bold">📞 (512) 540-6033</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="border-b border-borderMuted bg-void/80 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-amber-500/20">FT</div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight font-heading leading-tight">FLAT TRACK</h1>
+                    <p class="text-[10px] text-zinc-400 uppercase tracking-widest font-mono">Coffee Roasters • Austin, TX</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm text-zinc-300 font-medium">
+                <a href="#menu" class="hover:text-amber-400 transition">Menu Highlights</a>
+                <a href="#pass" class="hover:text-amber-400 transition">Explorer Pass</a>
+                <a href="#hours" class="hover:text-amber-400 transition">Hours & Location</a>
+                <a href="#inquiry" class="hover:text-amber-400 transition">Order Ahead / Inquiry</a>
+            </div>
+            <a href="tel:5125406033" class="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition shadow-lg shadow-amber-500/25 flex items-center gap-2">
+                <span>Call to Order</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-16 sm:py-20 px-6 max-w-6xl mx-auto flex-1">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-mono font-medium">
+                    <span>★ 4.8 RATED OVER 750+ REVIEWS</span>
+                    <span>•</span>
+                    <span>EAST CESAR CHAVEZ</span>
+                </div>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight leading-[1.1]">
+                    Austin's Micro-Roastery <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">Crafted with Precision.</span>
+                </h2>
+                <p class="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl">
+                    Small-batch single-origin coffees roasted directly on East Cesar Chavez. Nitro cold brew on tap, artisan scratch pastries, local Austin breakfast tacos, and uncompromised quality.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="tel:5125406033" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-xl shadow-amber-500/20 flex items-center gap-2">
+                        <span>📞 Call Ahead (512) 540-6033</span>
+                    </a>
+                    <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" class="px-6 py-3.5 rounded-xl bg-surface hover:bg-surfaceHover border border-borderMuted text-white font-semibold text-sm transition flex items-center gap-2">
+                        <span>📍 Get Driving Directions</span>
+                    </a>
+                </div>
+                <div class="pt-4 grid grid-cols-3 gap-4 border-t border-borderMuted">
+                    <div>
+                        <div class="text-2xl font-bold font-heading text-white">4.8★</div>
+                        <div class="text-xs text-zinc-500">750+ Google Reviews</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold font-heading text-white">100%</div>
+                        <div class="text-xs text-zinc-500">In-House Batch Roasted</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold font-heading text-white">7 Days</div>
+                        <div class="text-xs text-zinc-500">Open 7:00 AM – 5:00 PM</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-5">
+                <div class="relative rounded-2xl overflow-hidden border border-borderMuted bg-surface p-2 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Flat Track Coffee Roasters" class="rounded-xl w-full h-[380px] object-cover">
+                    <div class="p-4 bg-surface/90 rounded-b-xl border-t border-borderMuted flex items-center justify-between text-xs text-zinc-300">
+                        <div>
+                            <div class="font-bold text-white">Flat Track Roastery & Cafe</div>
+                            <div class="text-zinc-500">1611 E Cesar Chavez St, Austin, TX</div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[11px] font-semibold">Active Roaster</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curated Menu Highlights -->
+    <section id="menu" class="py-16 bg-surface/50 border-y border-borderMuted">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h3 class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-2">Curated Menu</h3>
+                <h4 class="text-3xl font-extrabold font-heading text-white">Austin Counter Favorites</h4>
+                <p class="text-zinc-400 text-sm mt-2">Roasted fresh in East Austin. Available for dine-in or quick counter pickup.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">Dogspeed House Espresso</h5>
+                        <span class="text-amber-400 font-mono font-bold">$3.75</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Our signature espresso blend. Heavy dark chocolate, roasted almond, and bright cherry finish with velvety crema.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">24-Hr Nitro Cold Brew</h5>
+                        <span class="text-amber-400 font-mono font-bold">$5.50</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Steeped slow for 24 hours. Nitrogen infused for a silky stout-like cascade with naturally sweet finish.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">Single-Origin Pour-Over</h5>
+                        <span class="text-amber-400 font-mono font-bold">$6.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Washed Yirgacheffe Ethiopia. Delicate floral aroma, jasmine notes, and clean citrus acidity hand-dripped to order.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">Cortado / Gibraltar</h5>
+                        <span class="text-amber-400 font-mono font-bold">$4.25</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Equal parts Dogspeed espresso and textured whole milk served in a classic 4.5oz Libbey glass.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">Austin Breakfast Taco Duo</h5>
+                        <span class="text-amber-400 font-mono font-bold">$7.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Local farm eggs, crispy bacon, cheddar, fresh potato on warm artisan tortillas served with roasted salsa verde.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted hover:border-amber-500/50 transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-white text-lg font-heading">Dogspeed 12oz Whole Bean</h5>
+                        <span class="text-amber-400 font-mono font-bold">$18.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">Take home our signature roast. Whole bean sealed fresh from the Cesar Chavez roaster drum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Single Customer Pass (Tier 1 Feature) -->
+    <section id="pass" class="py-16 max-w-4xl mx-auto px-6">
+        <div class="rounded-2xl bg-gradient-to-b from-surface to-void border border-amber-500/30 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4">
+                    <span class="px-3 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-semibold uppercase">Single Customer Pass • One-Time Only</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">Weekend Explorer Pass</h3>
+                    <p class="text-zinc-400 text-sm max-w-md">Get 5 handcrafted specialty drinks of your choice + 1 scratch bakery item. Pre-load to your Apple or Google wallet with zero recurring fees.</p>
+                    <ul class="text-xs text-zinc-300 space-y-2">
+                        <li class="flex items-center gap-2">✓ 5 Specialty espresso, pour-over or nitro cold brews</li>
+                        <li class="flex items-center gap-2">✓ 1 Fresh scratch pastry or artisan taco</li>
+                        <li class="flex items-center gap-2">✓ Priority counter line pickup</li>
+                        <li class="flex items-center gap-2">✓ Never expires • 100% One-time investment</li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right shrink-0 bg-surface/80 p-6 rounded-xl border border-borderMuted w-full md:w-auto">
+                    <div class="text-xs text-zinc-400 uppercase font-mono">One-Time Price</div>
+                    <div class="text-4xl font-extrabold font-heading text-amber-400 my-1">$35</div>
+                    <div class="text-[11px] text-zinc-500 mb-4">No subscription • No auto-renewal</div>
+                    <a href="tel:5125406033" class="block px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-amber-500/20">
+                        Claim at Counter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours, Location & Inquiry Form -->
+    <section id="hours" class="py-16 bg-surface/30 border-t border-borderMuted">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-6 space-y-6">
+                <div>
+                    <h3 class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-2">Visit Flat Track</h3>
+                    <h4 class="text-3xl font-extrabold font-heading text-white">East Austin Roastery</h4>
+                </div>
+                <div class="p-6 rounded-xl bg-surface border border-borderMuted space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="text-2xl">📍</span>
+                        <div>
+                            <div class="font-bold text-white text-sm">Physical Address</div>
+                            <div class="text-zinc-300 text-sm">1611 E Cesar Chavez St, Austin, TX 78702</div>
+                            <div class="text-xs text-zinc-500 mt-1">Convenient street and bike parking available</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 pt-3 border-t border-borderMuted">
+                        <span class="text-2xl">🕒</span>
+                        <div>
+                            <div class="font-bold text-white text-sm">Operating Hours</div>
+                            <div class="text-zinc-300 text-sm">Monday – Sunday: 7:00 AM – 5:00 PM</div>
+                            <div class="text-xs text-emerald-400 font-mono mt-1 font-semibold">● Open Every Day for Austin Coffee Lovers</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 pt-3 border-t border-borderMuted">
+                        <span class="text-2xl">📞</span>
+                        <div>
+                            <div class="font-bold text-white text-sm">Phone Line</div>
+                            <a href="tel:5125406033" class="text-amber-400 hover:underline font-mono font-bold text-sm">(512) 540-6033</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" class="block w-full text-center py-3 rounded-lg bg-surfaceHover hover:bg-zinc-800 border border-borderMuted text-white text-sm font-semibold transition">
+                    Open in Google Maps / Navigation ↗
+                </a>
+            </div>
+
+            <div id="inquiry" class="lg:col-span-6">
+                <div class="p-8 rounded-2xl bg-surface border border-borderMuted shadow-xl">
+                    <h4 class="text-xl font-bold font-heading text-white mb-2">Send Direct Inquiry</h4>
+                    <p class="text-xs text-zinc-400 mb-6">Have a catering request, bean order, or question? Drop a message directly to the Flat Track counter.</p>
+                    <form id="tier1Form" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); this.reset();">
+                        <div>
+                            <label class="block text-xs font-mono text-zinc-400 mb-1">YOUR NAME</label>
+                            <input required type="text" placeholder="Alex Morgan" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-zinc-400 mb-1">PHONE OR EMAIL</label>
+                            <input required type="text" placeholder="(512) 000-0000 / alex@gmail.com" class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-zinc-400 mb-1">INQUIRY / ORDER DETAILS</label>
+                            <textarea rows="3" required placeholder="Interested in a 5lb Dogspeed bag or table reservation..." class="w-full px-4 py-2.5 rounded-lg bg-void border border-borderMuted text-sm text-white focus:outline-none focus:border-amber-400 transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-lg shadow-amber-500/20">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                    <div id="formSuccess" class="hidden mt-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center">
+                        ✓ Thank you! Flat Track team will respond promptly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-borderMuted py-8 px-6 bg-void text-xs text-zinc-500">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-white font-heading">FLAT TRACK COFFEE ROASTERS</span>
+                <span>•</span>
+                <span>1611 E Cesar Chavez St, Austin, TX 78702</span>
+            </div>
+            <div class="flex items-center gap-4 text-zinc-400">
+                <span>Tier 1: Essential Launch Demo</span>
+                <span>•</span>
+                <span>100% One-Time Investment</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

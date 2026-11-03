@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flat Track Coffee Roasters | East Austin, TX (Tier 2: Signature Growth Suite)</title>
+    <meta name="description" content="Flat Track Coffee Roasters - Signature interactive digital platform. Interactive filterable menu, reservation wizard, customer passes, and verified Austin reviews.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#08080a',
+                        obsidian: '#121217',
+                        cardSurface: '#16161e',
+                        amberBrand: '#f59e0b',
+                        amberGold: '#fbbf24',
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #08080a; color: #f4f4f5; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(22, 22, 30, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel:hover {
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: var(--y, 50%);
+            left: var(--x, 50%);
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- Global Bulletproof Package Tier Switcher -->
+    <aside id="global-package-switcher" style="position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:999999; display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:9999px; background:rgba(10,10,12,0.94); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 20px 45px rgba(0,0,0,0.85); font-family:ui-monospace, monospace; font-size:11px;">
+        <span style="color:#71717a; font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em; padding-right:4px;">PACKAGE:</span>
+        <a href="javascript:void(0)" onclick="goToTier(1)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 1: Essential ($497)</a>
+        <span style="background:#f59e0b; color:#000; font-weight:800; padding:5px 14px; border-radius:9999px; box-shadow:0 0 15px rgba(245,158,11,0.45); cursor:default;">Tier 2: Growth ($997)</span>
+        <a href="javascript:void(0)" onclick="goToTier(3)" style="color:#d4d4d8; text-decoration:none; padding:5px 12px; border-radius:9999px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#d4d4d8'">Tier 3: 3D Elite ($1,997)</a>
+    </aside>
+    <script>
+    function goToTier(tierNum) {
+        var p = window.location.pathname;
+        if (p.endsWith('.html')) {
+            p = p.substring(0, p.lastIndexOf('/') + 1);
+        }
+        if (/\/tier-\d\/?$/.test(p)) {
+            p = p.replace(/\/tier-\d\/?$/, '/');
+        }
+        if (!p.endsWith('/')) {
+            p += '/';
+        }
+        if (tierNum === 1) window.location.href = p + 'tier1.html';
+        else if (tierNum === 2) window.location.href = p + 'tier2.html';
+        else if (tierNum === 3) window.location.href = p + 'index.html';
+    }
+    </script>
+    <!-- End Package Tier Switcher -->
+    
+
+
+    
+
+    <!-- Top Announcement Bar -->
+    <div class="mt-16 bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 text-center">
+        <div class="max-w-7xl mx-auto flex items-center justify-between text-xs text-zinc-300 flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-medium text-white">East Austin Roastery & Bar Open:</span> 7:00 AM – 5:00 PM Daily
+            </div>
+            <div class="flex items-center gap-4 text-zinc-400">
+                <span>📍 1611 E Cesar Chavez St, Austin</span>
+                <span class="text-amber-400 font-bold">⭐ 4.8★ (750+ Reviews)</span>
+                <a href="tel:5125406033" class="text-amber-400 hover:underline font-mono font-bold">(512) 540-6033</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Glass Navigation -->
+    <nav class="border-b border-white/10 bg-dark/80 backdrop-blur-xl sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center font-extrabold text-black text-xl shadow-lg shadow-amber-500/25">FT</div>
+                <div>
+                    <h1 class="text-xl font-extrabold font-heading tracking-tight leading-tight">FLAT TRACK</h1>
+                    <p class="text-[10px] text-amber-400 font-mono tracking-widest uppercase">Roastery & Coffee Bar • Austin, TX</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm text-zinc-300 font-medium">
+                <a href="#interactive-menu" class="hover:text-amber-400 transition">Interactive Menu</a>
+                <a href="#passes" class="hover:text-amber-400 transition">Customer Passes</a>
+                <a href="#reviews" class="hover:text-amber-400 transition">Verified Reviews</a>
+                <a href="#faq" class="hover:text-amber-400 transition">FAQ</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="document.getElementById('bookingModal').classList.remove('hidden')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-bold text-sm transition shadow-lg shadow-amber-500/25 flex items-center gap-2">
+                    <span>⚡ Reserve / Order Ahead</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Interactive Preview -->
+    <section class="py-16 sm:py-24 px-6 max-w-7xl mx-auto flex-1">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-mono font-medium">
+                    <span>🔥 EAST AUSTIN FLAGSHIP ROASTERY</span>
+                    <span>•</span>
+                    <span>EST. 2012</span>
+                </div>
+                <h2 class="text-4xl sm:text-6xl font-black font-heading tracking-tight leading-[1.08]">
+                    Engineered for <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">Coffee Purists.</span>
+                </h2>
+                <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+                    Direct-trade green coffees roasted in small micro-batches on Cesar Chavez. From precision espresso flights to 24-hour nitro cold brew cascades, we serve Austin's most dedicated craft coffee community.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <button onclick="document.getElementById('bookingModal').classList.remove('hidden')" class="px-7 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition shadow-xl shadow-amber-500/25 flex items-center gap-2">
+                        <span>⚡ Reserve Ahead / Pickup</span>
+                    </button>
+                    <a href="tel:5125406033" class="px-7 py-3.5 rounded-xl glass-panel text-white hover:text-amber-400 font-semibold text-sm transition flex items-center gap-2">
+                        <span>📞 (512) 540-6033</span>
+                    </a>
+                </div>
+                <!-- Metrics Bar -->
+                <div class="pt-6 grid grid-cols-3 gap-6 border-t border-white/10 max-w-lg">
+                    <div>
+                        <div class="text-3xl font-extrabold font-heading text-white">4.8 / 5.0</div>
+                        <div class="text-xs text-zinc-400">750+ Google Ratings</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold font-heading text-white">12+ Yrs</div>
+                        <div class="text-xs text-zinc-400">Austin Roasting Legacy</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold font-heading text-white">100%</div>
+                        <div class="text-xs text-zinc-400">Direct Farm Sourced</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Card -->
+            <div class="lg:col-span-5">
+                <div class="spotlight-card glass-panel rounded-3xl p-6 relative shadow-2xl border border-white/10" onmousemove="updateSpotlight(event, this)">
+                    <div class="relative h-64 rounded-2xl overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Flat Track Roastery" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-500 text-black font-bold text-xs font-mono">DOGSPEED BLEND</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-extrabold font-heading text-white text-xl">Flat Track Signature Roast</h3>
+                            <span class="text-amber-400 font-mono font-bold text-lg">$18.00 / 12oz</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Full-bodied notes of Peruvian cacao nibs, candied pecan, and dark cherry. Roasted weekly in small batches on Cesar Chavez.
+                        </p>
+                        <div class="pt-2 flex items-center justify-between border-t border-white/10 text-xs">
+                            <span class="text-emerald-400 font-mono flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                                Freshly Roasted This Week
+                            </span>
+                            <button onclick="document.getElementById('bookingModal').classList.remove('hidden')" class="text-amber-400 hover:underline font-bold">Quick Reserve →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Filterable Menu Section -->
+    <section id="interactive-menu" class="py-20 bg-obsidian/60 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Interactive Roastery Menu</span>
+                <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">Direct from the Drum & Tap</h3>
+                <p class="text-zinc-400 text-sm mt-2">Filter between espresso bar, single-origin pour-overs, nitro cold brews, and Austin bakery staples.</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="filterMenu('all', this)" class="menu-tab-btn active px-5 py-2.5 rounded-xl bg-amber-500 text-black font-bold text-xs transition">All Offerings</button>
+                <button onclick="filterMenu('espresso', this)" class="menu-tab-btn px-5 py-2.5 rounded-xl glass-panel text-zinc-300 hover:text-white font-semibold text-xs transition">Espresso Bar</button>
+                <button onclick="filterMenu('cold', this)" class="menu-tab-btn px-5 py-2.5 rounded-xl glass-panel text-zinc-300 hover:text-white font-semibold text-xs transition">Cold Brew & Nitro</button>
+                <button onclick="filterMenu('pourover', this)" class="menu-tab-btn px-5 py-2.5 rounded-xl glass-panel text-zinc-300 hover:text-white font-semibold text-xs transition">Pour-Over Single Origin</button>
+                <button onclick="filterMenu('food', this)" class="menu-tab-btn px-5 py-2.5 rounded-xl glass-panel text-zinc-300 hover:text-white font-semibold text-xs transition">Bakery & Tacos</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid">
+                <!-- Item 1 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="espresso" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Espresso</span>
+                        <span class="text-amber-400 font-mono font-bold">$3.75</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">Dogspeed House Espresso</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">Double shot of Dogspeed blend. Thick crema with velvety cacao, sweet brown sugar, and cherry stone fruit.</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="espresso" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Espresso</span>
+                        <span class="text-amber-400 font-mono font-bold">$4.25</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">Cortado (Gibraltar)</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">1:1 balance of ristretto Dogspeed espresso and textured whole milk in a 4.5oz tempered glass.</p>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="cold" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Cold Brew</span>
+                        <span class="text-amber-400 font-mono font-bold">$5.50</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">24-Hour Nitro Draft</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">Poured on pure nitrogen. Creamy head, zero bitterness, natural vanilla undertones with cascade effect.</p>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="pourover" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Pour-Over</span>
+                        <span class="text-amber-400 font-mono font-bold">$6.00</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">Ethiopia Yirgacheffe Washed</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">Hand-poured on Kalita Wave. Jasmine blossoms, lemon verbena, and crisp bergamot tea finish.</p>
+                </div>
+                <!-- Item 5 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="pourover" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Pour-Over</span>
+                        <span class="text-amber-400 font-mono font-bold">$6.50</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">Colombia Huila Geisha Reserve</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">Micro-lot natural process. Wild strawberry, tropical mango acidity, and silky honey mouthfeel.</p>
+                </div>
+                <!-- Item 6 -->
+                <div class="menu-item spotlight-card glass-panel rounded-2xl p-6" data-category="food" onmousemove="updateSpotlight(event, this)">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 text-[10px] font-mono uppercase">Austin Kitchen</span>
+                        <span class="text-amber-400 font-mono font-bold">$7.00</span>
+                    </div>
+                    <h4 class="font-bold text-white text-lg font-heading">Austin Breakfast Taco Duo</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">Farm fresh eggs, thick-cut smoked bacon, sharp cheddar, and crispy potatoes on hot artisan tortillas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2 Customer Pass Tiers (Tier 2 Feature) -->
+    <section id="passes" class="py-20 max-w-5xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">100% One-Time Passes</span>
+            <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">Pre-Paid Roastery Passes</h3>
+            <p class="text-zinc-400 text-sm mt-2">Zero subscriptions. No recurring charges. Pre-paid VIP hospitality cards that never expire.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Pass 1 -->
+            <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-amber-500/40 transition flex flex-col justify-between">
+                <div>
+                    <span class="px-3 py-1 rounded-full bg-white/5 text-zinc-300 font-mono text-xs">TIER 1 PASS</span>
+                    <h4 class="text-2xl font-bold font-heading text-white mt-3">Weekend Explorer Pass</h4>
+                    <p class="text-xs text-zinc-400 mt-2">Perfect for casual visitors and coffee enthusiasts touring East Austin.</p>
+                    <div class="my-6">
+                        <div class="text-4xl font-black font-heading text-white">$35</div>
+                        <div class="text-xs text-zinc-500">One-time payment • Never expires</div>
+                    </div>
+                    <ul class="text-xs text-zinc-300 space-y-2.5">
+                        <li class="flex items-center gap-2">✓ <strong>5 Specialty Drinks</strong> (Espresso, Nitro Cold Brew, or Pour-Over)</li>
+                        <li class="flex items-center gap-2">✓ <strong>1 Fresh Pastry</strong> or artisan taco</li>
+                        <li class="flex items-center gap-2">✓ Priority counter line skip</li>
+                        <li class="flex items-center gap-2">✓ Digital wallet pass (Apple / Google)</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('bookingModal').classList.remove('hidden')" class="mt-8 w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition text-center">
+                    Purchase Explorer Pass
+                </button>
+            </div>
+
+            <!-- Pass 2 -->
+            <div class="glass-panel rounded-3xl p-8 border-2 border-amber-500/50 bg-gradient-to-b from-amber-500/10 to-transparent flex flex-col justify-between relative shadow-2xl">
+                <div class="absolute -top-3 right-6 px-3 py-1 rounded-full bg-amber-500 text-black font-bold text-[10px] uppercase font-mono tracking-wider shadow-lg shadow-amber-500/30">
+                    Most Popular
+                </div>
+                <div>
+                    <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 font-mono text-xs">TIER 2 PASS</span>
+                    <h4 class="text-2xl font-bold font-heading text-white mt-3">Roaster's Tasting Reserve</h4>
+                    <p class="text-xs text-zinc-400 mt-2">Designed for home baristas and serious coffee lovers wanting whole beans and flights.</p>
+                    <div class="my-6">
+                        <div class="text-4xl font-black font-heading text-amber-400">$68</div>
+                        <div class="text-xs text-zinc-500">One-time payment • Includes 2 Whole Bean Bags</div>
+                    </div>
+                    <ul class="text-xs text-zinc-300 space-y-2.5">
+                        <li class="flex items-center gap-2">✓ <strong>2 x 12oz Whole Bean Bags</strong> (Roasted on Cesar Chavez)</li>
+                        <li class="flex items-center gap-2">✓ <strong>1 Free Pour-Over Flight</strong> (3 distinct single-origins)</li>
+                        <li class="flex items-center gap-2">✓ Exclusive roaster tasting notes & brewing guide</li>
+                        <li class="flex items-center gap-2">✓ <strong>15% Off</strong> all Flat Track merchandise</li>
+                    </ul>
+                </div>
+                <button onclick="document.getElementById('bookingModal').classList.remove('hidden')" class="mt-8 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition text-center shadow-lg shadow-amber-500/25">
+                    Purchase Tasting Reserve
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verified Austin Google Reviews -->
+    <section id="reviews" class="py-20 bg-dark border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Austin Community Feedback</span>
+                <h3 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-1">4.8★ Across 750+ Reviews</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-2xl p-6 border border-white/5 space-y-4">
+                    <div class="flex text-amber-400 text-sm">★★★★★</div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">"Flat Track is quintessential East Austin. The Dogspeed espresso has ruined regular coffee for me. Super chill moto vibe, friendly baristas, and the nitro is unmatched."</p>
+                    <div class="pt-2 border-t border-white/5 flex items-center justify-between text-xs">
+                        <span class="font-bold text-white">David K.</span>
+                        <span class="text-zinc-500 font-mono text-[11px]">Google Verified</span>
+                    </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6 border border-white/5 space-y-4">
+                    <div class="flex text-amber-400 text-sm">★★★★★</div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">"Best pour-over selection in town. You can smell the roaster working in the back while sipping an Ethiopian natural. The breakfast tacos on the patio make weekend mornings perfect."</p>
+                    <div class="pt-2 border-t border-white/5 flex items-center justify-between text-xs">
+                        <span class="font-bold text-white">Sarah M.</span>
+                        <span class="text-zinc-500 font-mono text-[11px]">Yelp Austin Elite</span>
+                    </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6 border border-white/5 space-y-4">
+                    <div class="flex text-amber-400 text-sm">★★★★★</div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">"I grab their 12oz beans every two weeks without fail. The consistency of the roast is incredible. Fast service even when the line is out the door on Saturday mornings."</p>
+                    <div class="pt-2 border-t border-white/5 flex items-center justify-between text-xs">
+                        <span class="font-bold text-white">Marcus T.</span>
+                        <span class="text-zinc-500 font-mono text-[11px]">Google Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section id="faq" class="py-20 max-w-4xl mx-auto px-6">
+        <div class="text-center mb-10">
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">Frequently Asked Questions</span>
+            <h3 class="text-3xl font-extrabold font-heading text-white mt-1">Visiting Flat Track Austin</h3>
+        </div>
+        <div class="space-y-4">
+            <details class="glass-panel rounded-xl p-5 border border-white/10 group">
+                <summary class="font-bold text-white text-sm cursor-pointer flex justify-between items-center">
+                    <span>What are your roastery operating hours?</span>
+                    <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+                    We are open 7 days a week, Monday through Sunday, from 7:00 AM to 5:00 PM at 1611 E Cesar Chavez St, Austin, TX 78702.
+                </p>
+            </details>
+            <details class="glass-panel rounded-xl p-5 border border-white/10 group">
+                <summary class="font-bold text-white text-sm cursor-pointer flex justify-between items-center">
+                    <span>Can I buy whole bean bags ground for my home brewer?</span>
+                    <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+                    Yes! Our baristas can grind any 12oz whole bean bag on our commercial Mahlkönig EK43 grinder to your exact brewer specification (French Press, Chemex, Aeropress, Moka Pot, or Espresso).
+                </p>
+            </details>
+            <details class="glass-panel rounded-xl p-5 border border-white/10 group">
+                <summary class="font-bold text-white text-sm cursor-pointer flex justify-between items-center">
+                    <span>Is Flat Track dog friendly?</span>
+                    <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+                    Absolutely. Dogs on leashes are warmly welcomed on our shaded outdoor patio and inside the counter pickup area. We even offer dog treats at the counter.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Interactive Booking / Reservation Modal -->
+    <div id="bookingModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-8 max-w-lg w-full border border-white/20 shadow-2xl relative">
+            <button onclick="document.getElementById('bookingModal').classList.add('hidden')" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">✕</button>
+            <h4 class="text-2xl font-bold font-heading text-white mb-1">Reserve or Order Ahead</h4>
+            <p class="text-xs text-zinc-400 mb-6">Select your visit details. We'll hold your drinks or reserve your roastery table.</p>
+            <form id="tier2BookingForm" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('bookingConfirm').classList.remove('hidden');">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-mono text-zinc-400 mb-1">SERVICE TYPE</label>
+                        <select class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/10 text-xs text-white">
+                            <option>Counter Pickup</option>
+                            <option>Patio Table (2-4 People)</option>
+                            <option>Whole Bean Reserve</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-zinc-400 mb-1">ESTIMATED TIME</label>
+                        <select class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/10 text-xs text-white">
+                            <option>Today: Within 30 mins</option>
+                            <option>Today: 8:00 AM – 10:00 AM</option>
+                            <option>Today: 10:00 AM – 1:00 PM</option>
+                            <option>Tomorrow Morning</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-zinc-400 mb-1">FULL NAME</label>
+                    <input required type="text" placeholder="Sarah Jenkins" class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/10 text-xs text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-zinc-400 mb-1">MOBILE NUMBER (FOR SMS TICKET)</label>
+                    <input required type="tel" placeholder="(512) 555-0199" class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/10 text-xs text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-zinc-400 mb-1">ORDER / NOTES</label>
+                    <input type="text" placeholder="e.g. 2 Nitro Cold Brews + 1 Dogspeed Whole Bean bag" class="w-full px-3 py-2 rounded-lg bg-obsidian border border-white/10 text-xs text-white">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/25">
+                    Confirm Reservation (#FT-89421)
+                </button>
+            </form>
+            <div id="bookingConfirm" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center space-y-1">
+                <div class="font-bold">✓ Booking Confirmed: Code #FT-89421</div>
+                <div class="text-[11px] text-zinc-400">Flat Track barista counter notified. Show this screen or your phone number upon arrival.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-white/10 py-8 px-6 bg-dark text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-white font-heading">FLAT TRACK COFFEE ROASTERS</span>
+                <span>•</span>
+                <span>1611 E Cesar Chavez St, Austin, TX 78702</span>
+            </div>
+            <div class="flex items-center gap-4 text-zinc-400">
+                <span>Tier 2: Signature Growth Suite Demo</span>
+                <span>•</span>
+                <span>100% One-Time Turnkey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        function updateSpotlight(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        }
+
+        function filterMenu(category, btn) {
+            document.querySelectorAll('.menu-tab-btn').forEach(b => {
+                b.classList.remove('bg-amber-500', 'text-black');
+                b.classList.add('glass-panel', 'text-zinc-300');
+            });
+            btn.classList.add('bg-amber-500', 'text-black');
+            btn.classList.remove('glass-panel', 'text-zinc-300');
+
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
