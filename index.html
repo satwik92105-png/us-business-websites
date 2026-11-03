@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Business Websites & Sales Outreach Hub | 50 Production Showcases</title>
+    <meta name="description" content="Portfolio of 50 bespoke showcase websites with tiered plans & sales scripts for high-ticket US local businesses.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #131c2e;
+            --surface-card: #182238;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --accent: #f59e0b;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.5);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .portal-hero {
+            padding: 90px 0 60px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 60%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .portal-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .portal-title {
+            font-family: var(--font-display);
+            font-size: 3.6rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .portal-title span {
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portal-lead {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 760px;
+            margin: 0 auto 40px;
+        }
+
+        .stats-summary {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Controls */
+        .controls-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 13, 22, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .controls-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box-wrap {
+            position: relative;
+            flex-grow: 1;
+            max-width: 480px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 14px 20px 14px 44px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        /* Grid */
+        .stores-grid-section {
+            padding: 60px 0 100px;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+        }
+
+        .store-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .store-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-thumb-wrap {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .store-card:hover .card-thumb {
+            transform: scale(1.05);
+        }
+
+        .card-num-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            color: var(--primary);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .card-loc-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .card-content {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-cat {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            padding: 14px 0;
+            border-top: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-card-demo {
+            background: linear-gradient(135deg, var(--primary), #38bdf8);
+            color: #090d16;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-card-demo:hover {
+            filter: brightness(1.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-card-script {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-card-script:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .portal-title { font-size: 2.6rem; }
+            .stores-grid { grid-template-columns: 1fr; }
+            .controls-inner { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <header class="portal-hero">
+        <div class="container">
+            <div class="portal-pill">🇺🇸 US Market Expansion Initiative</div>
+            <h1 class="portal-title">US Local Business <span>Showcase Hub</span></h1>
+            <p class="portal-lead">50 bespoke, high-converting websites engineered for high-ticket US small businesses. Equipped with interactive pricing plans, verified customer proof, and tailored sales scripts.</p>
+            
+            <div class="stats-summary">
+                <div class="stat-item">
+                    <div class="stat-number">50</div>
+                    <div class="stat-label">Production Websites</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Major US Metros</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mobile Responsive</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$497 - $1,997</div>
+                    <div class="stat-label">Client Offer Tiers</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+        <div class="container controls-inner">
+            <div class="search-box-wrap">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" class="search-input" id="searchFilter" placeholder="Search by city (Austin, Miami...) or niche (Coffee, Dental, Gym...)" oninput="filterStores()">
+            </div>
+            <div class="filter-pills">
+                <button type="button" class="filter-btn active" onclick="setCategoryFilter('all', this)">All (50)</button>
+                <button type="button" class="filter-btn" onclick="setCategoryFilter('dining', this)">Dining & Food</button>
+                <button type="button" class="filter-btn" onclick="setCategoryFilter('wellness', this)">Health & Wellness</button>
+                <button type="button" class="filter-btn" onclick="setCategoryFilter('services', this)">Home & Services</button>
+                <button type="button" class="filter-btn" onclick="setCategoryFilter('luxury', this)">Luxury & Auto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <main class="stores-grid-section">
+        <div class="container">
+            <div class="stores-grid" id="storesGrid">
+                
+    <div class="store-card" data-cat="specialty coffee roaster & cafe" data-city="austin, tx" data-name="austin roasters craft coffee">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Austin Roasters Craft Coffee" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#01</span>
+            <span class="card-loc-badge">Austin, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Specialty Coffee Roaster & Cafe</div>
+            <h3 class="card-title">Austin Roasters Craft Coffee</h3>
+            <p class="card-desc">Single-Origin Roasted Beans, Nitro Cold Brew & Artisan Pastries</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (480+ Reviews)</span>
+                <span class="card-phone">(512) 842-1920</span>
+            </div>
+            <div class="card-actions">
+                <a href="./01-austin-roasters-coffee/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./01-austin-roasters-coffee/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="premium men's grooming lounge" data-city="miami, fl" data-name="vice city luxe barbershop">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80" alt="Vice City Luxe Barbershop" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#02</span>
+            <span class="card-loc-badge">Miami, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Premium Men's Grooming Lounge</div>
+            <h3 class="card-title">Vice City Luxe Barbershop</h3>
+            <p class="card-desc">Master Fades, Hot Towel Straight Razor Shaves & Executive Grooming</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (390+ Reviews)</span>
+                <span class="card-phone">(305) 555-0142</span>
+            </div>
+            <div class="card-actions">
+                <a href="./02-miami-luxe-barbershop/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./02-miami-luxe-barbershop/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique fitness & crossfit box" data-city="denver, co" data-name="peak altitude crossfit & training">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80" alt="Peak Altitude CrossFit & Training" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#03</span>
+            <span class="card-loc-badge">Denver, CO</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Fitness & CrossFit Box</div>
+            <h3 class="card-title">Peak Altitude CrossFit & Training</h3>
+            <p class="card-desc">High-Intensity Functional Fitness, Olympic Lifting & Performance Coaching</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (310+ Reviews)</span>
+                <span class="card-phone">(303) 719-4402</span>
+            </div>
+            <div class="card-actions">
+                <a href="./03-denver-peak-crossfit/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./03-denver-peak-crossfit/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="luxury medical aesthetics & medspa" data-city="scottsdale, az" data-name="desert glow medspa & aesthetics">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=80" alt="Desert Glow MedSpa & Aesthetics" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#04</span>
+            <span class="card-loc-badge">Scottsdale, AZ</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Luxury Medical Aesthetics & MedSpa</div>
+            <h3 class="card-title">Desert Glow MedSpa & Aesthetics</h3>
+            <p class="card-desc">Advanced Botox, Dermal Fillers, Hydrafacial & Laser Skin Resurfacing</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 5.0 ★ (260+ Reviews)</span>
+                <span class="card-phone">(480) 612-8820</span>
+            </div>
+            <div class="card-actions">
+                <a href="./04-scottsdale-glow-medspa/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./04-scottsdale-glow-medspa/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="authentic pitmaster bbq & catering" data-city="nashville, tn" data-name="cumberland smokehouse bbq">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=1200&q=80" alt="Cumberland Smokehouse BBQ" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#05</span>
+            <span class="card-loc-badge">Nashville, TN</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Authentic Pitmaster BBQ & Catering</div>
+            <h3 class="card-title">Cumberland Smokehouse BBQ</h3>
+            <p class="card-desc">14-Hour Hickory Smoked Prime Brisket, Pulled Pork & Southern Scratch Sides</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (750+ Reviews)</span>
+                <span class="card-phone">(615) 891-2390</span>
+            </div>
+            <div class="card-actions">
+                <a href="./05-nashville-smoked-bbq/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./05-nashville-smoked-bbq/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="modern cosmetic & family dental practice" data-city="charlotte, nc" data-name="queen city precision dental">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" alt="Queen City Precision Dental" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#06</span>
+            <span class="card-loc-badge">Charlotte, NC</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Modern Cosmetic & Family Dental Practice</div>
+            <h3 class="card-title">Queen City Precision Dental</h3>
+            <p class="card-desc">Gentle Family, Cosmetic Dentistry, Invisalign & Same-Day Crowns</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (340+ Reviews)</span>
+                <span class="card-phone">(704) 523-8890</span>
+            </div>
+            <div class="card-actions">
+                <a href="./06-charlotte-precision-dental/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./06-charlotte-precision-dental/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique floral design & event florist" data-city="seattle, wa" data-name="emerald city bloom studio">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1200&q=80" alt="Emerald City Bloom Studio" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#07</span>
+            <span class="card-loc-badge">Seattle, WA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Floral Design & Event Florist</div>
+            <h3 class="card-title">Emerald City Bloom Studio</h3>
+            <p class="card-desc">Artisanal Floral Arrangements, Luxury Weddings & Weekly Subscriptions</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (280+ Reviews)</span>
+                <span class="card-phone">(206) 624-9104</span>
+            </div>
+            <div class="card-actions">
+                <a href="./07-seattle-bloom-florals/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./07-seattle-bloom-florals/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="wood-fired neapolitan pizzeria & trattoria" data-city="chicago, il" data-name="west loop artisan pizza co.">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80" alt="West Loop Artisan Pizza Co." class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#08</span>
+            <span class="card-loc-badge">Chicago, IL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Wood-Fired Neapolitan Pizzeria & Trattoria</div>
+            <h3 class="card-title">West Loop Artisan Pizza Co.</h3>
+            <p class="card-desc">Wood-Fired Neapolitan Pizza, Fresh Burrata & Italian Spritzes</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (820+ Reviews)</span>
+                <span class="card-phone">(312) 829-4110</span>
+            </div>
+            <div class="card-actions">
+                <a href="./08-chicago-artisan-pizzeria/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./08-chicago-artisan-pizzeria/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="oceanfront yoga studio & surf school" data-city="san diego, ca" data-name="pacific beach yoga & surf club">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80" alt="Pacific Beach Yoga & Surf Club" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#09</span>
+            <span class="card-loc-badge">San Diego, CA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Oceanfront Yoga Studio & Surf School</div>
+            <h3 class="card-title">Pacific Beach Yoga & Surf Club</h3>
+            <p class="card-desc">Oceanfront Vinyasa, Hot Power Flow, Sound Baths & Surf Lessons</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (410+ Reviews)</span>
+                <span class="card-phone">(858) 488-9642</span>
+            </div>
+            <div class="card-actions">
+                <a href="./09-san-diego-coastal-surf-yoga/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./09-san-diego-coastal-surf-yoga/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="high-end automotive detailing & paint protection" data-city="houston, tx" data-name="apex ceramic & detailing studio">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1200&q=80" alt="Apex Ceramic & Detailing Studio" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#10</span>
+            <span class="card-loc-badge">Houston, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">High-End Automotive Detailing & Paint Protection</div>
+            <h3 class="card-title">Apex Ceramic & Detailing Studio</h3>
+            <p class="card-desc">5-Year Ceramic Coatings, Paint Correction, PPF & Exotic Detailing</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 5.0 ★ (290+ Reviews)</span>
+                <span class="card-phone">(713) 862-2739</span>
+            </div>
+            <div class="card-actions">
+                <a href="./10-houston-apex-auto-detailing/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./10-houston-apex-auto-detailing/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique pet grooming & daycare" data-city="tampa, fl" data-name="bayshore canine club & luxury spa">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Bayshore Canine Club & Luxury Spa" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#11</span>
+            <span class="card-loc-badge">Tampa, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Pet Grooming & Daycare</div>
+            <h3 class="card-title">Bayshore Canine Club & Luxury Spa</h3>
+            <p class="card-desc">Luxury Dog Grooming, Daycare Suites, Hydrotherapy & Boarding</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (310+ Reviews)</span>
+                <span class="card-phone">(813) 835-7387</span>
+            </div>
+            <div class="card-actions">
+                <a href="./11-tampa-bay-canine-club/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./11-tampa-bay-canine-club/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="residential hvac & air conditioning" data-city="phoenix, az" data-name="valley sun hvac & emergency cooling">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80" alt="Valley Sun HVAC & Emergency Cooling" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#12</span>
+            <span class="card-loc-badge">Phoenix, AZ</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Residential HVAC & Air Conditioning</div>
+            <h3 class="card-title">Valley Sun HVAC & Emergency Cooling</h3>
+            <p class="card-desc">Same-Day AC Repair, Heat Pump Installation & 24/7 Service</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (520+ Reviews)</span>
+                <span class="card-phone">(602) 955-4822</span>
+            </div>
+            <div class="card-actions">
+                <a href="./12-phoenix-desert-hvac/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./12-phoenix-desert-hvac/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="roofing & exterior contractor" data-city="atlanta, ga" data-name="peachtree summit roofing & restoration">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=1200&q=80" alt="Peachtree Summit Roofing & Restoration" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#13</span>
+            <span class="card-loc-badge">Atlanta, GA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Roofing & Exterior Contractor</div>
+            <h3 class="card-title">Peachtree Summit Roofing & Restoration</h3>
+            <p class="card-desc">Architectural Shingles, Storm Damage Restoration & Free Roof Inspections</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (380+ Reviews)</span>
+                <span class="card-phone">(404) 237-7663</span>
+            </div>
+            <div class="card-actions">
+                <a href="./13-atlanta-summit-roofing/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./13-atlanta-summit-roofing/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique optometry & luxury optical" data-city="dallas, tx" data-name="solaris boutique vision & eyewear">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1200&q=80" alt="Solaris Boutique Vision & Eyewear" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#14</span>
+            <span class="card-loc-badge">Dallas, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Optometry & Luxury Optical</div>
+            <h3 class="card-title">Solaris Boutique Vision & Eyewear</h3>
+            <p class="card-desc">Comprehensive Eye Exams, Designer Eyewear & Dry Eye Therapy</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (290+ Reviews)</span>
+                <span class="card-phone">(214) 720-2020</span>
+            </div>
+            <div class="card-actions">
+                <a href="./14-dallas-solaris-optometry/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./14-dallas-solaris-optometry/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="eco-friendly cleaning company" data-city="boulder, co" data-name="flatirons eco-clean services">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80" alt="Flatirons Eco-Clean Services" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#15</span>
+            <span class="card-loc-badge">Boulder, CO</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Eco-Friendly Cleaning Company</div>
+            <h3 class="card-title">Flatirons Eco-Clean Services</h3>
+            <p class="card-desc">100% Non-Toxic Residential, Move-Out & Commercial Cleaning</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (240+ Reviews)</span>
+                <span class="card-phone">(303) 442-3260</span>
+            </div>
+            <div class="card-actions">
+                <a href="./15-boulder-green-cleaners/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./15-boulder-green-cleaners/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="craft brewery & taproom" data-city="portland, or" data-name="willamette craft brewery & taproom">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Willamette Craft Brewery & Taproom" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#16</span>
+            <span class="card-loc-badge">Portland, OR</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Craft Brewery & Taproom</div>
+            <h3 class="card-title">Willamette Craft Brewery & Taproom</h3>
+            <p class="card-desc">Hazy IPAs, Oak-Aged Sours, Pacific Northwest Gastropub & Beer Garden</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (610+ Reviews)</span>
+                <span class="card-phone">(503) 232-4727</span>
+            </div>
+            <div class="card-actions">
+                <a href="./16-portland-urban-taproom/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./16-portland-urban-taproom/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="pediatric healthcare practice" data-city="orlando, fl" data-name="sunshine kids pediatric clinic">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Sunshine Kids Pediatric Clinic" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#17</span>
+            <span class="card-loc-badge">Orlando, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Pediatric Healthcare Practice</div>
+            <h3 class="card-title">Sunshine Kids Pediatric Clinic</h3>
+            <p class="card-desc">Compassionate Well-Child Visits, Same-Day Sick Care & Telehealth</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (420+ Reviews)</span>
+                <span class="card-phone">(407) 351-5437</span>
+            </div>
+            <div class="card-actions">
+                <a href="./17-orlando-sunshine-pediatrics/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./17-orlando-sunshine-pediatrics/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="sports chiropractic & physical rehab" data-city="san jose, ca" data-name="silicon valley spine & sports rehab">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Silicon Valley Spine & Sports Rehab" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#18</span>
+            <span class="card-loc-badge">San Jose, CA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Sports Chiropractic & Physical Rehab</div>
+            <h3 class="card-title">Silicon Valley Spine & Sports Rehab</h3>
+            <p class="card-desc">Non-Surgical Spinal Decompression, Active Release & Sports Recovery</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (310+ Reviews)</span>
+                <span class="card-phone">(408) 247-4700</span>
+            </div>
+            <div class="card-actions">
+                <a href="./18-san-jose-apex-chiropractic/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./18-san-jose-apex-chiropractic/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="fine casual american bistro" data-city="boston, ma" data-name="beacon hill heritage bistro">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Beacon Hill Heritage Bistro" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#19</span>
+            <span class="card-loc-badge">Boston, MA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Fine Casual American Bistro</div>
+            <h3 class="card-title">Beacon Hill Heritage Bistro</h3>
+            <p class="card-desc">New England Farm-to-Table, Fresh Maine Lobster & Craft Cocktail Parlor</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.7 ★ (580+ Reviews)</span>
+                <span class="card-phone">(617) 227-2580</span>
+            </div>
+            <div class="card-actions">
+                <a href="./19-boston-beacon-bistro/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./19-boston-beacon-bistro/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="vehicle wraps & auto restyling" data-city="las vegas, nv" data-name="sin city custom wraps & ceramic tint">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Sin City Custom Wraps & Ceramic Tint" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#20</span>
+            <span class="card-loc-badge">Las Vegas, NV</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Vehicle Wraps & Auto Restyling</div>
+            <h3 class="card-title">Sin City Custom Wraps & Ceramic Tint</h3>
+            <p class="card-desc">Commercial Fleet Wraps, Color Change Vinyl & Ceramic Heat Window Tint</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (330+ Reviews)</span>
+                <span class="card-phone">(702) 736-8468</span>
+            </div>
+            <div class="card-actions">
+                <a href="./20-las-vegas-elite-tint-wrap/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./20-las-vegas-elite-tint-wrap/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="landscape architecture & outdoor living" data-city="austin, tx" data-name="greenbelt eco landscapes & pools">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Greenbelt Eco Landscapes & Pools" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#21</span>
+            <span class="card-loc-badge">Austin, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Landscape Architecture & Outdoor Living</div>
+            <h3 class="card-title">Greenbelt Eco Landscapes & Pools</h3>
+            <p class="card-desc">Texas Native Xeriscaping, Custom Stonework, Outdoor Kitchens & Turf</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (210+ Reviews)</span>
+                <span class="card-phone">(512) 444-5296</span>
+            </div>
+            <div class="card-actions">
+                <a href="./21-austin-greenbelt-landscaping/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./21-austin-greenbelt-landscaping/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="sunless tanning & body aesthetics" data-city="miami, fl" data-name="south beach bronze & glow lounge">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="South Beach Bronze & Glow Lounge" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#22</span>
+            <span class="card-loc-badge">Miami, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Sunless Tanning & Body Aesthetics</div>
+            <h3 class="card-title">South Beach Bronze & Glow Lounge</h3>
+            <p class="card-desc">Custom Organic Spray Tanning, Red Light Therapy & Body Contouring</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (270+ Reviews)</span>
+                <span class="card-phone">(305) 538-4569</span>
+            </div>
+            <div class="card-actions">
+                <a href="./22-miami-glow-tan-spa/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./22-miami-glow-tan-spa/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="full-service residential plumbing" data-city="denver, co" data-name="mile high express plumbing & drains">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Mile High Express Plumbing & Drains" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#23</span>
+            <span class="card-loc-badge">Denver, CO</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Full-Service Residential Plumbing</div>
+            <h3 class="card-title">Mile High Express Plumbing & Drains</h3>
+            <p class="card-desc">24/7 Emergency Plumbing, Tankless Water Heaters & Trenchless Repiping</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (460+ Reviews)</span>
+                <span class="card-phone">(303) 292-1240</span>
+            </div>
+            <div class="card-actions">
+                <a href="./23-denver-mile-high-plumbing/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./23-denver-mile-high-plumbing/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique reformer pilates studio" data-city="scottsdale, az" data-name="sonoran reformer pilates studio">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Sonoran Reformer Pilates Studio" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#24</span>
+            <span class="card-loc-badge">Scottsdale, AZ</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Reformer Pilates Studio</div>
+            <h3 class="card-title">Sonoran Reformer Pilates Studio</h3>
+            <p class="card-desc">Classical Allegro 2 Reformer Classes, Core Athletic Conditioning & Privates</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (250+ Reviews)</span>
+                <span class="card-phone">(480) 585-7873</span>
+            </div>
+            <div class="card-actions">
+                <a href="./24-scottsdale-pure-pilates/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./24-scottsdale-pure-pilates/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="artisan bakery & specialty cafe" data-city="nashville, tn" data-name="music city dough & espresso">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Music City Dough & Espresso" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#25</span>
+            <span class="card-loc-badge">Nashville, TN</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Artisan Bakery & Specialty Cafe</div>
+            <h3 class="card-title">Music City Dough & Espresso</h3>
+            <p class="card-desc">Small-Batch Brioche Gourmet Donuts, Nitro Cold Brew & Breakfast Sandwiches</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (510+ Reviews)</span>
+                <span class="card-phone">(615) 226-3684</span>
+            </div>
+            <div class="card-actions">
+                <a href="./25-nashville-artisan-donuts/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./25-nashville-artisan-donuts/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="residential & commercial pest defense" data-city="charlotte, nc" data-name="carolina shield pest defense">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Carolina Shield Pest Defense" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#26</span>
+            <span class="card-loc-badge">Charlotte, NC</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Residential & Commercial Pest Defense</div>
+            <h3 class="card-title">Carolina Shield Pest Defense</h3>
+            <p class="card-desc">Eco-Friendly Termite Inspections, Mosquito Yard Guards & Rodent Removal</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (390+ Reviews)</span>
+                <span class="card-phone">(704) 554-7378</span>
+            </div>
+            <div class="card-actions">
+                <a href="./26-charlotte-pro-pest-control/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./26-charlotte-pro-pest-control/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="therapeutic massage & wellness clinic" data-city="seattle, wa" data-name="puget sound therapeutic bodywork">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Puget Sound Therapeutic Bodywork" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#27</span>
+            <span class="card-loc-badge">Seattle, WA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Therapeutic Massage & Wellness Clinic</div>
+            <h3 class="card-title">Puget Sound Therapeutic Bodywork</h3>
+            <p class="card-desc">Deep Tissue Massage, Ashiatsu, Sports Rehab & Hot Himalayan Stone Therapy</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (320+ Reviews)</span>
+                <span class="card-phone">(206) 441-3920</span>
+            </div>
+            <div class="card-actions">
+                <a href="./27-seattle-sound-massage/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./27-seattle-sound-massage/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="luxury custom clothier & tailor" data-city="chicago, il" data-name="michigan avenue heritage tailors">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Michigan Avenue Heritage Tailors" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#28</span>
+            <span class="card-loc-badge">Chicago, IL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Luxury Custom Clothier & Tailor</div>
+            <h3 class="card-title">Michigan Avenue Heritage Tailors</h3>
+            <p class="card-desc">Handcrafted Bespoke Suits, Custom Wedding Tuxedos & Master Alterations</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (260+ Reviews)</span>
+                <span class="card-phone">(312) 944-4800</span>
+            </div>
+            <div class="card-actions">
+                <a href="./28-chicago-heritage-tailors/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./28-chicago-heritage-tailors/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="residential clean energy & solar" data-city="san diego, ca" data-name="pacific coast solar & power storage">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Pacific Coast Solar & Power Storage" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#29</span>
+            <span class="card-loc-badge">San Diego, CA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Residential Clean Energy & Solar</div>
+            <h3 class="card-title">Pacific Coast Solar & Power Storage</h3>
+            <p class="card-desc">Tier-1 Rooftop Solar Panels, Tesla Powerwall Batteries & $0 Down Installs</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (440+ Reviews)</span>
+                <span class="card-phone">(858) 560-7652</span>
+            </div>
+            <div class="card-actions">
+                <a href="./29-san-diego-bluewater-solar/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./29-san-diego-bluewater-solar/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="authentic cajun seafood & po' boys" data-city="houston, tx" data-name="bayou boil & cajun kitchen">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Bayou Boil & Cajun Kitchen" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#30</span>
+            <span class="card-loc-badge">Houston, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Authentic Cajun Seafood & Po' Boys</div>
+            <h3 class="card-title">Bayou Boil & Cajun Kitchen</h3>
+            <p class="card-desc">Live Louisiana Crawfish, Fried Catfish Baskets, Seafood Gumbo & Beignets</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (730+ Reviews)</span>
+                <span class="card-phone">(713) 654-8288</span>
+            </div>
+            <div class="card-actions">
+                <a href="./30-houston-bayou-cajun-kitchen/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./30-houston-bayou-cajun-kitchen/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="licensed electrical contractors" data-city="tampa, fl" data-name="gulf breeze master electricians">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Gulf Breeze Master Electricians" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#31</span>
+            <span class="card-loc-badge">Tampa, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Licensed Electrical Contractors</div>
+            <h3 class="card-title">Gulf Breeze Master Electricians</h3>
+            <p class="card-desc">200A Electrical Panel Upgrades, Tesla EV Chargers & Whole-Home Generators</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (370+ Reviews)</span>
+                <span class="card-phone">(813) 223-3532</span>
+            </div>
+            <div class="card-actions">
+                <a href="./31-tampa-gulf-coast-electric/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./31-tampa-gulf-coast-electric/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="residential pool service & equipment" data-city="phoenix, az" data-name="saguaro crystal pool & spa care">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Saguaro Crystal Pool & Spa Care" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#32</span>
+            <span class="card-loc-badge">Phoenix, AZ</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Residential Pool Service & Equipment</div>
+            <h3 class="card-title">Saguaro Crystal Pool & Spa Care</h3>
+            <p class="card-desc">Weekly Chemical Balancing, Salt Cell Upgrades, Green-to-Clean & Acid Washes</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (330+ Reviews)</span>
+                <span class="card-phone">(480) 893-7665</span>
+            </div>
+            <div class="card-actions">
+                <a href="./32-phoenix-southwest-pool-care/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./32-phoenix-southwest-pool-care/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="outpatient orthopedic physical therapy" data-city="atlanta, ga" data-name="midtown movement physical therapy">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Midtown Movement Physical Therapy" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#33</span>
+            <span class="card-loc-badge">Atlanta, GA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Outpatient Orthopedic Physical Therapy</div>
+            <h3 class="card-title">Midtown Movement Physical Therapy</h3>
+            <p class="card-desc">Dry Needling, Post-Surgical Orthopedic Rehab & Runner Gait Analysis</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 5.0 ★ (280+ Reviews)</span>
+                <span class="card-phone">(404) 872-4680</span>
+            </div>
+            <div class="card-actions">
+                <a href="./33-atlanta-peachtree-physical-therapy/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./33-atlanta-peachtree-physical-therapy/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="24/7 emergency mobile locksmith" data-city="dallas, tx" data-name="lone star 24/7 mobile locksmith">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Lone Star 24/7 Mobile Locksmith" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#34</span>
+            <span class="card-loc-badge">Dallas, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">24/7 Emergency Mobile Locksmith</div>
+            <h3 class="card-title">Lone Star 24/7 Mobile Locksmith</h3>
+            <p class="card-desc">15-Minute Emergency Car Lockout, Smart Lock Installation & High-Security Rekey</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (490+ Reviews)</span>
+                <span class="card-phone">(214) 748-5625</span>
+            </div>
+            <div class="card-actions">
+                <a href="./34-dallas-lone-star-locksmith/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./34-dallas-lone-star-locksmith/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="mountain gear rental & pro shop" data-city="boulder, co" data-name="front range mountain & ski outfitter">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Front Range Mountain & Ski Outfitter" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#35</span>
+            <span class="card-loc-badge">Boulder, CO</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Mountain Gear Rental & Pro Shop</div>
+            <h3 class="card-title">Front Range Mountain & Ski Outfitter</h3>
+            <p class="card-desc">Backcountry Ski Rentals, Ultralight Backpacking Gear & Boot Fitting Experts</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (310+ Reviews)</span>
+                <span class="card-phone">(303) 449-7669</span>
+            </div>
+            <div class="card-actions">
+                <a href="./35-boulder-trailhead-outdoor-gear/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./35-boulder-trailhead-outdoor-gear/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="artisan ceramics & pottery school" data-city="portland, or" data-name="rose city ceramic & pottery studio">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Rose City Ceramic & Pottery Studio" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#36</span>
+            <span class="card-loc-badge">Portland, OR</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Artisan Ceramics & Pottery School</div>
+            <h3 class="card-title">Rose City Ceramic & Pottery Studio</h3>
+            <p class="card-desc">Wheel Throwing Workshops, Open Studio Memberships & Artisan Stoneware</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (230+ Reviews)</span>
+                <span class="card-phone">(503) 287-7388</span>
+            </div>
+            <div class="card-actions">
+                <a href="./36-portland-stumptown-pottery/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./36-portland-stumptown-pottery/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="vacation rental & luxury cleaning" data-city="orlando, fl" data-name="citrus maid luxury home care">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Citrus Maid Luxury Home Care" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#37</span>
+            <span class="card-loc-badge">Orlando, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Vacation Rental & Luxury Cleaning</div>
+            <h3 class="card-title">Citrus Maid Luxury Home Care</h3>
+            <p class="card-desc">5-Star Airbnb Turnover Cleaning, Deep Spring Cleaning & Move-in Detailing</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (350+ Reviews)</span>
+                <span class="card-phone">(407) 363-7880</span>
+            </div>
+            <div class="card-actions">
+                <a href="./37-orlando-citrus-maid-cleaning/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./37-orlando-citrus-maid-cleaning/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="licensed acupuncture & chinese medicine" data-city="san jose, ca" data-name="willow glen integrative acupuncture">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Willow Glen Integrative Acupuncture" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#38</span>
+            <span class="card-loc-badge">San Jose, CA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Licensed Acupuncture & Chinese Medicine</div>
+            <h3 class="card-title">Willow Glen Integrative Acupuncture</h3>
+            <p class="card-desc">Chronic Pain Relief, Stress Acu-Detox, Cupping Therapy & Herbal Medicine</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 5.0 ★ (260+ Reviews)</span>
+                <span class="card-phone">(408) 298-8889</span>
+            </div>
+            <div class="card-actions">
+                <a href="./38-san-jose-silicon-acupuncture/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./38-san-jose-silicon-acupuncture/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="luxury private boat & yacht charter" data-city="boston, ma" data-name="boston light private yacht charters">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Boston Light Private Yacht Charters" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#39</span>
+            <span class="card-loc-badge">Boston, MA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Luxury Private Boat & Yacht Charter</div>
+            <h3 class="card-title">Boston Light Private Yacht Charters</h3>
+            <p class="card-desc">Private Harbor Sunset Sails, Corporate Events & Island Harbor Cruises</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (210+ Reviews)</span>
+                <span class="card-phone">(617) 439-7000</span>
+            </div>
+            <div class="card-actions">
+                <a href="./39-boston-harbor-charters/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./39-boston-harbor-charters/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="full-service event catering & production" data-city="las vegas, nv" data-name="mirage events & gourmet catering">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Mirage Events & Gourmet Catering" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#40</span>
+            <span class="card-loc-badge">Las Vegas, NV</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Full-Service Event Catering & Production</div>
+            <h3 class="card-title">Mirage Events & Gourmet Catering</h3>
+            <p class="card-desc">Custom Plated Wedding Menus, Corporate Conventions & Cocktail Mixology</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (340+ Reviews)</span>
+                <span class="card-phone">(702) 458-2233</span>
+            </div>
+            <div class="card-actions">
+                <a href="./40-las-vegas-neon-events-catering/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./40-las-vegas-neon-events-catering/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boutique wine bar & charcuterie" data-city="austin, tx" data-name="hill country cellars & tapas lounge">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Hill Country Cellars & Tapas Lounge" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#41</span>
+            <span class="card-loc-badge">Austin, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boutique Wine Bar & Charcuterie</div>
+            <h3 class="card-title">Hill Country Cellars & Tapas Lounge</h3>
+            <p class="card-desc">Natural & Biodynamic Wines, Artisan Charcuterie Boards & Spanish Tapas</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (410+ Reviews)</span>
+                <span class="card-phone">(512) 474-9463</span>
+            </div>
+            <div class="card-actions">
+                <a href="./41-austin-hill-country-wine-bar/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./41-austin-hill-country-wine-bar/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="private personal training studio" data-city="miami, fl" data-name="brickell elite strength & conditioning">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Brickell Elite Strength & Conditioning" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#42</span>
+            <span class="card-loc-badge">Miami, FL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Private Personal Training Studio</div>
+            <h3 class="card-title">Brickell Elite Strength & Conditioning</h3>
+            <p class="card-desc">1-on-1 Executive Personal Training, Nutrition Coaching & Body Transformation</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 5.0 ★ (240+ Reviews)</span>
+                <span class="card-phone">(305) 374-8844</span>
+            </div>
+            <div class="card-actions">
+                <a href="./42-miami-brickell-personal-training/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./42-miami-brickell-personal-training/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="seamless gutters & exterior remodeling" data-city="denver, co" data-name="rocky mountain gutters & exterior siding">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Rocky Mountain Gutters & Exterior Siding" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#43</span>
+            <span class="card-loc-badge">Denver, CO</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Seamless Gutters & Exterior Remodeling</div>
+            <h3 class="card-title">Rocky Mountain Gutters & Exterior Siding</h3>
+            <p class="card-desc">Seamless Aluminum Gutters, Leaf Guards, James Hardie Siding & Hail Repairs</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (290+ Reviews)</span>
+                <span class="card-phone">(303) 758-6200</span>
+            </div>
+            <div class="card-actions">
+                <a href="./43-denver-elevate-roofing-gutters/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./43-denver-elevate-roofing-gutters/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="full-service veterinary hospital" data-city="scottsdale, az" data-name="pinnacle peak animal hospital">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Pinnacle Peak Animal Hospital" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#44</span>
+            <span class="card-loc-badge">Scottsdale, AZ</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Full-Service Veterinary Hospital</div>
+            <h3 class="card-title">Pinnacle Peak Animal Hospital</h3>
+            <p class="card-desc">Compassionate Small Animal Medicine, Ultrasound Diagnostics & Laser Surgery</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (460+ Reviews)</span>
+                <span class="card-phone">(480) 585-8387</span>
+            </div>
+            <div class="card-actions">
+                <a href="./44-scottsdale-desert-paw-vet/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./44-scottsdale-desert-paw-vet/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="premier music school & songwriting academy" data-city="nashville, tn" data-name="music row academy of music">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Music Row Academy of Music" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#45</span>
+            <span class="card-loc-badge">Nashville, TN</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Premier Music School & Songwriting Academy</div>
+            <h3 class="card-title">Music Row Academy of Music</h3>
+            <p class="card-desc">Private Guitar, Piano, Vocal Coaching & Professional Songwriting Lessons</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (320+ Reviews)</span>
+                <span class="card-phone">(615) 255-7697</span>
+            </div>
+            <div class="card-actions">
+                <a href="./45-nashville-music-city-music-school/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./45-nashville-music-city-music-school/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="complete auto repair & maintenance" data-city="charlotte, nc" data-name="south end master auto care">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="South End Master Auto Care" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#46</span>
+            <span class="card-loc-badge">Charlotte, NC</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Complete Auto Repair & Maintenance</div>
+            <h3 class="card-title">South End Master Auto Care</h3>
+            <p class="card-desc">Brake Service, Diagnostics, AC Recharge & Transmission Repair for All Makes</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (510+ Reviews)</span>
+                <span class="card-phone">(704) 334-1188</span>
+            </div>
+            <div class="card-actions">
+                <a href="./46-charlotte-queen-city-auto-repair/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./46-charlotte-queen-city-auto-repair/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="comprehensive audiology clinic" data-city="seattle, wa" data-name="sound hearing & audiology center">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Sound Hearing & Audiology Center" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#47</span>
+            <span class="card-loc-badge">Seattle, WA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Comprehensive Audiology Clinic</div>
+            <h3 class="card-title">Sound Hearing & Audiology Center</h3>
+            <p class="card-desc">Diagnostic Hearing Evaluations, Invisible Hearing Aids & Tinnitus Management</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (230+ Reviews)</span>
+                <span class="card-phone">(206) 292-4327</span>
+            </div>
+            <div class="card-actions">
+                <a href="./47-seattle-pacific-sound-audiology/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./47-seattle-pacific-sound-audiology/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="boxing gym & athletic conditioning" data-city="chicago, il" data-name="iron glove boxing & athletic conditioning">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Iron Glove Boxing & Athletic Conditioning" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#48</span>
+            <span class="card-loc-badge">Chicago, IL</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Boxing Gym & Athletic Conditioning</div>
+            <h3 class="card-title">Iron Glove Boxing & Athletic Conditioning</h3>
+            <p class="card-desc">Authentic Heavy Bag Boxing, High-Intensity Interval Conditioning & Sparring</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (340+ Reviews)</span>
+                <span class="card-phone">(773) 278-2699</span>
+            </div>
+            <div class="card-actions">
+                <a href="./48-chicago-windy-city-boxing/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./48-chicago-windy-city-boxing/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="organic acai bowl & juice bar" data-city="san diego, ca" data-name="encinitas acai bowls & superfoods">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Encinitas Acai Bowls & Superfoods" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#49</span>
+            <span class="card-loc-badge">San Diego, CA</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Organic Acai Bowl & Juice Bar</div>
+            <h3 class="card-title">Encinitas Acai Bowls & Superfoods</h3>
+            <p class="card-desc">Organic Amazon Acai Bowls, Cold-Pressed Juices, Pitaya & Superfood Smoothies</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.9 ★ (490+ Reviews)</span>
+                <span class="card-phone">(760) 942-8822</span>
+            </div>
+            <div class="card-actions">
+                <a href="./49-san-diego-sun-surf-smoothies/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./49-san-diego-sun-surf-smoothies/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="store-card" data-cat="luxury nail lounge & day spa" data-city="houston, tx" data-name="galleria velvet nail lounge & spa">
+        <div class="card-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Galleria Velvet Nail Lounge & Spa" class="card-thumb" loading="lazy">
+            <span class="card-num-badge">#50</span>
+            <span class="card-loc-badge">Houston, TX</span>
+        </div>
+        <div class="card-content">
+            <div class="card-cat">Luxury Nail Lounge & Day Spa</div>
+            <h3 class="card-title">Galleria Velvet Nail Lounge & Spa</h3>
+            <p class="card-desc">Luxury Gel Manicures, Milk & Honey Spa Pedicures, Apres Gel-X & Nail Art</p>
+            <div class="card-meta">
+                <span class="card-rating">⭐ 4.8 ★ (580+ Reviews)</span>
+                <span class="card-phone">(713) 627-1888</span>
+            </div>
+            <div class="card-actions">
+                <a href="./50-houston-galleria-nail-lounge/" class="btn-card-demo" target="_blank">
+                    Live Demo
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <a href="./50-houston-galleria-nail-lounge/script.md" class="btn-card-script">
+                    Sales Script
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentCat = 'all';
+
+        function setCategoryFilter(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCat = cat;
+            filterStores();
+        }
+
+        function filterStores() {
+            const query = document.getElementById('searchFilter').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.store-card');
+            
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                const city = card.getAttribute('data-city');
+                const name = card.getAttribute('data-name');
+                
+                let matchesCat = (currentCat === 'all');
+                if (currentCat === 'dining' && (cat.includes('coffee') || cat.includes('bbq') || cat.includes('pizza') || cat.includes('bistro') || cat.includes('cajun') || cat.includes('doughnut') || cat.includes('brewery') || cat.includes('wine') || cat.includes('acai') || cat.includes('bakery'))) {
+                    matchesCat = true;
+                } else if (currentCat === 'wellness' && (cat.includes('dental') || cat.includes('medspa') || cat.includes('crossfit') || cat.includes('yoga') || cat.includes('pediatric') || cat.includes('chiropractic') || cat.includes('pilates') || cat.includes('massage') || cat.includes('physical therapy') || cat.includes('audiology') || cat.includes('boxing') || cat.includes('acupuncture'))) {
+                    matchesCat = true;
+                } else if (currentCat === 'services' && (cat.includes('hvac') || cat.includes('roofing') || cat.includes('clean') || cat.includes('plumbing') || cat.includes('pest') || cat.includes('solar') || cat.includes('electric') || cat.includes('pool') || cat.includes('locksmith') || cat.includes('gutters') || cat.includes('landscaping') || cat.includes('auto repair'))) {
+                    matchesCat = true;
+                } else if (currentCat === 'luxury' && (cat.includes('barber') || cat.includes('detailing') || cat.includes('floral') || cat.includes('optometry') || cat.includes('wraps') || cat.includes('tanning') || cat.includes('tailor') || cat.includes('charter') || cat.includes('catering') || cat.includes('nail') || cat.includes('pet'))) {
+                    matchesCat = true;
+                }
+
+                const matchesSearch = !query || name.includes(query) || city.includes(query) || cat.includes(query);
+                
+                if (matchesCat && matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

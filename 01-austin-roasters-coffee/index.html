@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Roasters Craft Coffee | Specialty Coffee Roaster & Cafe in Austin, TX</title>
+    <meta name="description" content="Austin Roasters Craft Coffee offers premier specialty coffee roaster & cafe in Austin, TX. Single-Origin Roasted Beans, Nitro Cold Brew & Artisan Pastries. Call (512) 842-1920 or book online today!">
+    <meta name="theme-color" content="#18120c">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #d97706;
+            --primary-light: #fbbf24;
+            --secondary: #92400e;
+            --bg-dark: #18120c;
+            --bg-surface: #231b14;
+            --bg-surface-light: #2e241c;
+            --text-main: #fdfbf7;
+            --text-muted: #b8a99a;
+            --accent: #f59e0b;
+            --font-head: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-subtle: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 25px #d9770640;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Announcement Bar */
+        .top-bar {
+            background: linear-gradient(90deg, var(--bg-surface), var(--bg-surface-light));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .top-bar-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .top-bar-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-bar-item i {
+            color: var(--primary);
+        }
+
+        /* Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-main);
+        }
+
+        .brand-logo i {
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 90px 0 80px;
+            position: relative;
+            background: radial-gradient(circle at 80% 20%, #d9770615 0%, transparent 60%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: 3.4rem;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #09090b;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 16px 30px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .trust-item i {
+            color: #22c55e;
+        }
+
+        .hero-image-wrap {
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 18px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .floating-badge-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        /* Trust Stats Bar */
+        .stats-bar {
+            background: var(--bg-surface);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Section Commons */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 60px;
+        }
+
+        .section-eyebrow {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .service-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            gap: 12px;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .service-price {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .service-btn {
+            color: var(--primary-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            margin-top: auto;
+        }
+
+        .service-btn:hover {
+            gap: 12px;
+            color: #fff;
+        }
+
+        /* Plans Section (Customer-Facing Memberships) */
+        .plans-wrap {
+            background: linear-gradient(180deg, var(--bg-dark), var(--bg-surface));
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 44px 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .plan-card.popular {
+            background: var(--bg-surface-light);
+            border: 2px solid var(--primary);
+            box-shadow: 0 15px 40px -10px var(--primary)35;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #000;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 6px 16px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+
+        .plan-price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 30px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .plan-price {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .plan-period {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 36px;
+            flex-grow: 1;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .plan-features li i {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .plan-btn {
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            font-weight: 700;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: var(--transition);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plan-card.popular .plan-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #000;
+            border: none;
+        }
+
+        .plan-btn:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* About & Story */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pillar-list {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .pillar-item {
+            background: var(--bg-surface);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .pillar-item i {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .pillar-title {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .pillar-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Reviews */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .review-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .review-quote {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .reviewer-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .reviewer-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+        }
+
+        .reviewer-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .reviewer-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact & Location */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .contact-val {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px #d9770630;
+        }
+
+        .form-submit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #000;
+            font-weight: 700;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #090d16;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 60px 0 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand i {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-surface);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-md);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .services-grid, .plans-grid, .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="top-bar-item">
+                <i class="fa-solid fa-star"></i>
+                <span>4.9 ★ (480+ Reviews) in Austin, TX</span>
+            </div>
+            <div class="top-bar-item">
+                <i class="fa-regular fa-clock"></i>
+                <span>Mon-Fri: 6:30 AM – 6:00 PM | Sat-Sun: 7:00 AM – 7:00 PM</span>
+            </div>
+            <div class="top-bar-item">
+                <i class="fa-solid fa-phone"></i>
+                <a href="tel:5128421920">Call Now: (512) 842-1920</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#" class="brand-logo">
+                <i class="fa-solid fa-gem"></i>
+                <span>Austin Roasters</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#plans">Plans & Pricing</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Location & Hours</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">
+                <i class="fa-solid fa-calendar-check"></i> Book Online
+            </a>
+            <button class="menu-toggle" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <div class="hero-badge">
+                    <i class="fa-solid fa-location-dot"></i> Premier Specialty Coffee Roaster & Cafe in Austin, TX
+                </div>
+                <h1 class="hero-title">Austin <span>Roasters</span></h1>
+                <p class="hero-lead">Single-Origin Roasted Beans, Nitro Cold Brew & Artisan Pastries. We combine master craftsmanship, top-tier customer care, and transparent pricing for local residents and visitors across Austin, TX.</p>
+                <div class="hero-actions">
+                    <a href="#plans" class="btn-primary">
+                        <i class="fa-solid fa-tag"></i> View Plans & Pricing
+                    </a>
+                    <a href="tel:5128421920" class="btn-outline">
+                        <i class="fa-solid fa-phone-volume"></i> (512) 842-1920
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <div class="trust-item"><i class="fa-solid fa-check-circle"></i> Licensed & Verified</div>
+                    <div class="trust-item"><i class="fa-solid fa-check-circle"></i> 5-Star Rated Experience</div>
+                    <div class="trust-item"><i class="fa-solid fa-check-circle"></i> 100% Satisfaction Guarantee</div>
+                </div>
+            </div>
+            <div class="hero-image-wrap">
+                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Austin Roasters Craft Coffee" class="hero-img">
+                <div class="floating-badge">
+                    <div class="floating-badge-icon"><i class="fa-solid fa-award"></i></div>
+                    <div>
+                        <div style="font-weight: 800; font-size: 1.1rem;">Top Rated in Austin</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">4.9 ★ (480+ Reviews)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Stats -->
+    <div class="stats-bar">
+        <div class="container stats-grid">
+            <div>
+                <div class="stat-num">4.9 ★</div>
+                <div class="stat-label">Google & Yelp Reviews</div>
+            </div>
+            <div>
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Customer Satisfaction</div>
+            </div>
+            <div>
+                <div class="stat-num">5,000+</div>
+                <div class="stat-label">Happy Local Clients</div>
+            </div>
+            <div>
+                <div class="stat-num">Same-Day</div>
+                <div class="stat-label">Appointments Available</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container about-grid">
+            <div>
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="About Austin Roasters Craft Coffee" class="about-img">
+            </div>
+            <div>
+                <span class="section-eyebrow">ABOUT OUR STORE</span>
+                <h2 class="section-title">Built with Passion for Austin, TX</h2>
+                <p class="section-desc" style="margin-bottom: 20px;">At Austin Roasters Craft Coffee, we take pride in delivering gold-standard specialty coffee roaster & cafe. Whether you are visiting our storefront at 1204 S Congress Ave, Austin, TX 78704 or booking an appointment online, our commitment to excellence is second to none.</p>
+                <div class="pillar-list">
+                    <div class="pillar-item">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                        <h4 class="pillar-title">Transparent Pricing</h4>
+                        <p class="pillar-desc">No hidden charges or surprise invoices. Upfront plans and clear rates.</p>
+                    </div>
+                    <div class="pillar-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h4 class="pillar-title">Uncompromising Quality</h4>
+                        <p class="pillar-desc">Using only premium industry-grade materials, ingredients, and equipment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Catalog Section -->
+    <section class="section" id="services" style="background: var(--bg-surface);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">OUR SPECIALTIES</span>
+                <h2 class="section-title">Featured Services & Offerings</h2>
+                <p class="section-desc">Explore our top-rated services designed with precision and care for the Austin, TX community.</p>
+            </div>
+            <div class="services-grid">
+                
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Single-Origin Pour Over</h3>
+                <span class="service-price">$6.50</span>
+            </div>
+            <p class="service-desc">Ethiopian Yirgacheffe & Colombian Supremo hand-poured to order.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Single-Origin Pour Over')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Nitro Cold Brew</h3>
+                <span class="service-price">$5.75</span>
+            </div>
+            <p class="service-desc">Slow-steeped 24 hours, infused with pure nitrogen for velvety micro-foam.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Nitro Cold Brew')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Signature Lavender Oat Latte</h3>
+                <span class="service-price">$6.25</span>
+            </div>
+            <p class="service-desc">House-extracted double espresso, organic lavender syrup & steamed oat milk.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Signature Lavender Oat Latte')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Artisanal Sourdough Croissants</h3>
+                <span class="service-price">$4.95</span>
+            </div>
+            <p class="service-desc">Baked fresh daily with European cultured butter & flaky layers.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Artisanal Sourdough Croissants')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Whole Bean 12oz Bags</h3>
+                <span class="service-price">$18.50</span>
+            </div>
+            <p class="service-desc">Freshly roasted in-house weekly. Medium & dark roast profiles available.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Whole Bean 12oz Bags')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card">
+            <div class="service-top">
+                <h3 class="service-title">Barista Brewing Masterclass</h3>
+                <span class="service-price">$75.00</span>
+            </div>
+            <p class="service-desc">2-hour weekend hands-on espresso extraction & latte art workshop.</p>
+            <a href="#contact" class="service-btn" onclick="prefillService('Barista Brewing Masterclass')">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Plans Section -->
+    <section class="plans-wrap" id="plans">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">PACKAGES & PLANS</span>
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p class="section-desc">Flexible packages tailored for individuals, families, and regular clients looking for maximum savings and VIP service.</p>
+            </div>
+            <div class="plans-grid">
+                
+        <div class="plan-card ">
+            
+            <h3 class="plan-name">Roaster's Choice</h3>
+            <div class="plan-price-wrap">
+                <span class="plan-price">$22</span>
+                <span class="plan-period">/ month</span>
+            </div>
+            <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 1 Bag (12oz) Fresh Roasted Beans</li><li><i class="fa-solid fa-circle-check"></i> Free In-Store Drip Coffee Daily</li><li><i class="fa-solid fa-circle-check"></i> 10% Off All Cafe Drinks</li><li><i class="fa-solid fa-circle-check"></i> Tasting Notes & Origin Card</li>
+            </ul>
+            <a href="#contact" class="plan-btn" onclick="prefillPlan('Roaster's Choice')">Select Plan <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+        <div class="plan-card popular">
+            <div class="popular-badge">MOST POPULAR</div>
+            <h3 class="plan-name">Espresso Enthusiast</h3>
+            <div class="plan-price-wrap">
+                <span class="plan-price">$39</span>
+                <span class="plan-period">/ month</span>
+            </div>
+            <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 2 Bags (12oz) Rotating Single Origins</li><li><i class="fa-solid fa-circle-check"></i> Unlimited Cold Brew Refills</li><li><i class="fa-solid fa-circle-check"></i> 15% Off All Merch & Gear</li><li><i class="fa-solid fa-circle-check"></i> Early Access to Rare Micro-Lots</li><li><i class="fa-solid fa-circle-check"></i> Free Monthly Brewing Workshop</li>
+            </ul>
+            <a href="#contact" class="plan-btn" onclick="prefillPlan('Espresso Enthusiast')">Select Plan <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+        <div class="plan-card ">
+            
+            <h3 class="plan-name">Office Fuel Bundle</h3>
+            <div class="plan-price-wrap">
+                <span class="plan-price">$129</span>
+                <span class="plan-period">/ month</span>
+            </div>
+            <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 8 Bags (12oz) Fresh Beans Delivered</li><li><i class="fa-solid fa-circle-check"></i> Free Cold Brew Growler Refills (4x)</li><li><i class="fa-solid fa-circle-check"></i> Dedicated Roaster Support</li><li><i class="fa-solid fa-circle-check"></i> Free Coffee Cupping for 10 People</li><li><i class="fa-solid fa-circle-check"></i> Priority Bulk Pricing</li>
+            </ul>
+            <a href="#contact" class="plan-btn" onclick="prefillPlan('Office Fuel Bundle')">Select Plan <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">TESTIMONIALS</span>
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-desc">Real verified reviews from our patrons across Austin, TX.</p>
+            </div>
+            <div class="reviews-grid">
+                
+        <div class="review-card">
+            <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">"Hands down the cleanest roast in South Congress. The pour-over is perfection and the vibe is unbeatable."</p>
+            <div class="reviewer-meta">
+                <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                <div>
+                    <h4 class="reviewer-name">Marcus Vance</h4>
+                    <span class="reviewer-role">Austin Tech Founder</span>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">"I subscribed to their monthly beans club and will never buy grocery store coffee again. Incredible quality!"</p>
+            <div class="reviewer-meta">
+                <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                <div>
+                    <h4 class="reviewer-name">Elena Torres</h4>
+                    <span class="reviewer-role">Local Designer</span>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">"Fast service, friendly baristas, and the nitro cold brew keeps me fueled all day. Best coffee spot in Austin."</p>
+            <div class="reviewer-meta">
+                <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                <div>
+                    <h4 class="reviewer-name">David Miller</h4>
+                    <span class="reviewer-role">Daily Regular</span>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location Section -->
+    <section class="section" id="contact" style="background: var(--bg-surface-light);">
+        <div class="container">
+            <div class="contact-grid">
+                <div>
+                    <span class="section-eyebrow">VISIT OR INQUIRE</span>
+                    <h2 class="section-title">Book an Appointment or Table</h2>
+                    <p class="section-desc">Have questions or want to secure your spot? Fill out the quick form or call our front desk directly.</p>
+                    <ul class="contact-info-list">
+                        <li class="contact-info-item">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <div class="contact-label">Address</div>
+                                <div class="contact-val">1204 S Congress Ave, Austin, TX 78704</div>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <div class="contact-label">Phone Support</div>
+                                <div class="contact-val"><a href="tel:5128421920">(512) 842-1920</a></div>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <div class="contact-label">Email Inquiries</div>
+                                <div class="contact-val">info@austinroasterscoffee.com</div>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+                            <div>
+                                <div class="contact-label">Hours of Operation</div>
+                                <div class="contact-val">Mon-Fri: 6:30 AM – 6:00 PM | Sat-Sun: 7:00 AM – 7:00 PM</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-control" required placeholder="(555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Select Service or Plan</label>
+                            <input type="text" id="selectedServiceInput" class="form-control" placeholder="Select a service or plan">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes or Special Requests</label>
+                            <textarea class="form-control" rows="3" placeholder="Tell us more about your visit..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Send Booking Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <i class="fa-solid fa-gem"></i>
+                        <span>Austin Roasters Craft Coffee</span>
+                    </div>
+                    <p style="max-width: 320px; line-height: 1.6;">Serving Austin, TX with highest standards in specialty coffee roaster & cafe. Locally owned, customer focused.</p>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 16px;">Quick Links</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                        <li><a href="#about">About Our Store</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#plans">Packages & Plans</a></li>
+                        <li><a href="#contact">Contact & Hours</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 16px;">Location</h4>
+                    <p style="margin-bottom: 8px;">1204 S Congress Ave, Austin, TX 78704</p>
+                    <p style="margin-bottom: 8px;">(512) 842-1920</p>
+                    <p>info@austinroasterscoffee.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Austin Roasters Craft Coffee. All Rights Reserved.</p>
+                <p>Designed for local excellence in Austin, TX.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div style="font-size: 3rem; color: #22c55e; margin-bottom: 16px;"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Request Received!</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you for contacting Austin Roasters Craft Coffee. Our team will review your inquiry and reach back out within 1 business hour.</p>
+            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function prefillService(serviceName) {
+            const input = document.getElementById('selectedServiceInput');
+            if (input) {
+                input.value = 'Service: ' + serviceName;
+            }
+        }
+
+        function prefillPlan(planName) {
+            const input = document.getElementById('selectedServiceInput');
+            if (input) {
+                input.value = 'Plan: ' + planName;
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-links');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '76px';
+                nav.style.left = '0';
+                nav.style.right = '0';
+                nav.style.background = '#0f172a';
+                nav.style.padding = '20px';
+                nav.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+            }
+        }
+    </script>
+</body>
+</html>
