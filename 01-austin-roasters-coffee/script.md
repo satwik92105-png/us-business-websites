@@ -1,8 +1,8 @@
 # Client Outreach Script & Package Proposals: Flat Track Coffee Roasters
 
 > 🌐 **Package 1 Live Demo (Essential - $497):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html)  
-> 🌐 **Package 2 Live Demo (Growth - $997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)  
-> 🌐 **Package 3 Live Demo (3D Elite - $1,997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)  
+> 🌐 **Package 2 Live Demo (3D Growth - $997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)  
+> 🌐 **Package 3 Live Demo (3D Hyper-Elite Flagship - $1,997):** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)  
 > 📁 **Master Hub Demo:** [https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/](https://satwik92105-png.github.io/us-business-websites/01-austin-roasters-coffee/)  
 > 📍 **Target Business:** Flat Track Coffee Roasters  
 > 🏢 **Public Address:** 1611 E Cesar Chavez St, Austin, TX 78702  
@@ -44,37 +44,40 @@
 
 ---
 
-### 🔹 Tier 2: The Signature Growth Suite ($997 One-Time)
+### 🔹 Tier 2: The Signature 3D Growth Suite ($997 One-Time)
 - **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html](https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html)
-- **Design Level:** Obsidian glassmorphic UI (`#08080a` void, frosted glass cards with `backdrop-filter: blur(16px)` and subtle glowing amber borders).
+- **Design Level:** Deep obsidian luxury with floating 3D particle canvas, Apple Vision Pro card tilt, and interactive reservation engine.
 - **Core Features Included:**
-  - **Interactive Filterable Menu:** Dynamic category filter tabs (All, Espresso Bar, Cold Brew & Nitro, Pour-Over Single Origin, Bakery & Tacos)
-  - **Aceternity UI Spotlight Cards:** Mouse-tracking radial illumination on hover
-  - **2-Tier Customer Passes:**
+  - **Interactive 60 FPS 3D Particle Canvas:** 130+ floating roasted coffee bean particles floating with depth perspective projection (`x/z`, `y/z`), dynamic mouse velocity repulsion, and glowing embers.
+  - **Apple Vision Pro Style 3D Card Tilt with Specular Glare Physics:** Hero showcase card tilts in 3D perspective with smooth spring damping (`lerp`) and light reflection tracking.
+  - **Magic UI Border Beam & Aceternity UI Spotlight Cards:** Luminous animated light beam sweeping across cards.
+  - **Interactive Filterable Menu:** Dynamic category filter tabs (All, Espresso Bar, Cold Brew & Nitro, Pour-Over Single Origin, Bakery & Tacos).
+  - **3 Customer Passes Built Directly on Site:**
     1. *Weekend Explorer Pass ($35 One-Time)* — 5 drinks + 1 bakery item
     2. *Roaster's Tasting Reserve ($68 One-Time) [FEATURED]* — 2 x 12oz whole bean bags + pour-over flight + 15% off merch
-  - **Interactive Reservation & Order-Ahead Modal:** Service type picker (counter pickup, patio table, bean reserve), time selection, customer details, and automated ticket confirmation (`#FT-89421`)
-  - **Verified Austin Google Reviews Grid:** 3 authentic community reviews with 5-star badges
-  - **East Austin Roastery FAQ Accordion:** Expandable questions covering parking, bean grinding, and dog-friendly patio
-- **Best For:** An established roastery looking to convert local traffic into high-margin pre-paid passes and direct orders without paying third-party fees.
+    3. *Office Fuel & Hospitality Crate ($185 One-Time)* — 6 x 12oz bags + 64oz growler + 12 pastries/tacos
+  - **Interactive 3-Step Reservation & Order-Ahead Wizard:** Service type picker, date/time pickers, customer details, and automated ticket confirmation (`#FT-89421`).
+  - **Verified Austin Google Reviews Showcase:** 4.8★ rating with authentic community quotes.
+- **Best For:** An established roastery looking for interactive 3D aesthetics, customer passes, and reservation booking without paying monthly agency retainers.
 
 ---
 
-### 🔹 Tier 3: The Sovereign 3D Elite ($1,997 One-Time)
+### 🔹 Tier 3: The Sovereign 3D Hyper-Elite Flagship ($1,997 One-Time)
 - **Live Demo Link:** [https://satwik92105-png.github.io/01-austin-roasters-coffee/](https://satwik92105-png.github.io/01-austin-roasters-coffee/)
-- **Design Level:** Bespoke luxury obsidian void (`#060403`) with molten gold/amber glows, 3D perspective physics, and particle simulations.
+- **Design Level:** Ultra-luxury Spatial UI with Newtonian gravity physics engine, holographic metal member cards, sensory radar morphing, and Web Audio API spatial soundscapes.
 - **Core Features Included:**
-  - **Real-Time 60 FPS 3D Physics Particle Canvas:** 130+ floating roasted coffee beans and embers in 3D space (`x/z`, `y/z`), responding with dynamic cursor repulsion and suction physics
-  - **Apple Vision Pro 3D Card Tilt with Specular Glare Physics:** Hero card responds to 3D gyroscope/cursor tilt with smooth spring damping (`lerp`) and light reflection tracking
-  - **Magic UI Animated Border Beams & Shimmer Buttons**
-  - **Complete 3-Plan Customer Hospitality Architecture:**
-    1. *Plan 1: Weekend Explorer Pass ($35 One-Time)*
-    2. *Plan 2: Roaster's Tasting Reserve ($68 One-Time) [FEATURED]*
-    3. *Plan 3: Office Fuel & Hospitality Crate ($185 One-Time)*
-  - **3-Step Progressive VIP Concierge Wizard:** Advanced booking workflow with instant code generator
-  - **Interactive Austin Moto Heritage & Roastery Storytelling Section**
+  - **Interactive Newtonian Gravity & Rigid-Body Physics Playground:** Users can click anywhere on the screen or click "☕ Rain Beans" to drop physical 3D roasted coffee beans that bounce with real gravity, bounce damping, angular velocity, and collide against floating cards.
+  - **Apple Vision Pro Spatial Holographic Metal Member Cards:** 3D perspective cards with dynamic rainbow diffraction holographic foil shader (`hsl`) that glints as you move your mouse.
+  - **Interactive 6-Axis Sensory Flavor Profile Radar:** Dynamic SVG polygon morphing between single-origin roasts (Dogspeed Espresso, Ethiopia Guji, Colombia Pink Bourbon) showing flavor notes in real time.
+  - **Live Roastery Drum Telemetry HUD:** Real-time PID temperature fluctuation monitor (`DRUM: 418.6°F • BATCH #892: ETHIOPIA GUJI`) giving a high-tech micro-roastery command center feel.
+  - **Web Audio API Spatial Soundscape & Haptic Synthesizer:** Pure native browser audio synth featuring cozy roastery analog ambience and crisp acoustic micro-clicks on card hovers (opt-in toggle with live frequency visualizer).
+  - **3 Ultra-Prestige Customer Hospitality Passes:**
+    1. *Steel Card: Weekend Explorer Pass ($35 One-Time)*
+    2. *Titanium Black Card: Roaster's Tasting Reserve ($68 One-Time) [MOST POPULAR]*
+    3. *24K Sovereign Gold Card: Founder's Master Crate & Private Cupping ($185 One-Time)*
+  - **VIP Concierge Modal with Instant Holographic Code Generation (`#FT-98421-SOVEREIGN`)**
   - **Full Google Rich Snippets Schema** for `LocalBusiness`, `CafeOrCoffeeShop`, and `Menu`
-- **Best For:** The flagship brand that wants to blow past all competitors in Austin, command massive authority, and deliver an unforgettable "WOW" factor to every customer.
+- **Best For:** The flagship brand that wants to blow past every coffee shop in Texas, command massive prestige, and deliver an unforgettable "WOW" factor to every visitor.
 
 ---
 
@@ -93,7 +96,7 @@ I was checking out your location on East Cesar Chavez and saw you guys have an i
 
 Rather than pitch you with empty promises or PDFs, my team actually went ahead and custom-built three live showcase options specifically for Flat Track Coffee Roasters—featuring your Dogspeed roast, nitro taps, and an instant customer pass system.
 
-We have a clean $497 Essential version, a $997 interactive menu version, and an insane $1,997 3D physics flagship.
+We have a clean $497 Essential version, an interactive $997 3D particle version, and an insane $1,997 3D physics flagship with real gravity and a sensory flavor radar.
 
 I have the live links active on my screen right now. Can I text or email you the link so you can take a look on your phone for 30 seconds?"
 
@@ -120,15 +123,15 @@ Instead of sending a cold sales pitch, my team went ahead and built 3 live showc
 🔹 Tier 1 (Essential - $497 One-Time): Clean, ultra-fast menu & call-ahead storefront
 👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier1.html
 
-🔹 Tier 2 (Signature Growth - $997 One-Time): Interactive filterable menu + reservation wizard
+🔹 Tier 2 (3D Growth - $997 One-Time): Interactive 3D particle canvas + Apple Vision Pro card tilt + booking wizard
 👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html
 
-🔹 Tier 3 (Sovereign 3D Elite - $1,997 One-Time): Full 3D bean physics, Apple Vision Pro tilt card, and 3 customer passes
+🔹 Tier 3 (3D Hyper-Elite Flagship - $1,997 One-Time): Newtonian gravity bean physics, holographic metal member cards, sensory flavor radar & ambient soundscape
 👉 https://satwik92105-png.github.io/01-austin-roasters-coffee/
 
 Key advantages for Flat Track:
 • Pre-loaded with your exact menu, address, and 4.8★ reviews
-• Built-in Customer Experience Passes ($35 Explorer / $68 Tasting Reserve / $185 Office Crate)
+• Built-in Customer Experience Passes ($35 Explorer / $68 Tasting Reserve / $185 Founder's Crate)
 • 100% Turnkey Ownership with ZERO monthly agency retainers or recurring fees
 
 If any of these catch your eye, we can connect it to your domain and have it live within 24 hours.
