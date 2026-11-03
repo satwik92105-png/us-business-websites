@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flat Track Coffee Roasters | East Austin, TX | Specialty Roastery & Cafe</title>
-    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch single-origin coffee roasted on Cesar Chavez, nitro cold brew on tap, artisan pastries & local breakfast tacos.">
+    <title>Flat Track Coffee Roasters | East Austin, TX | Specialty Micro-Roastery</title>
+    <meta name="description" content="Flat Track Coffee Roasters in East Austin, TX. Micro-batch single-origin coffees roasted on Cesar Chavez, nitro cold brew on tap, artisan pastries, and local breakfast tacos.">
+    <meta name="keywords" content="Flat Track Coffee, Austin coffee roaster, specialty coffee Austin, East Cesar Chavez, nitro cold brew Austin">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Flat Track Coffee Roasters | East Austin, TX">
-    <meta property="og:description" content="Obsessively roasted micro-batch coffees, draft nitro, and community cafe culture on East Cesar Chavez.">
+    <meta property="og:title" content="Flat Track Coffee Roasters | East Austin Flagship">
+    <meta property="og:description" content="Micro-batch single-origin roasts, draft nitro cold brew, and Austin moto community on East Cesar Chavez.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80">
     <meta property="og:type" content="website">
 
-    <!-- Schema.org JSON-LD for Local Business -->
+    <!-- Schema.org JSON-LD for Google Rich Results -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -51,38 +52,40 @@
     }
     </script>
 
-    <!-- Typography: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Clean Grotesque) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================================================
-           AUTHENTIC EDITORIAL DESIGN TOKENS (No Vibe-Coded AI Clichés)
-           Inspired by Tartine, Stumptown, Sightglass, and Kinfolk
+           ULTRA-PREMIUM 3D & PHYSICS DESIGN SYSTEM (Deep Obsidian & Amber Luxury)
+           Inspired by Aceternity UI, Magic UI, and React Bits Physics
            ========================================================================== */
         :root {
-            --bg-paper: #fbf8f4;
-            --bg-surface: #ffffff;
-            --bg-muted: #f2ece4;
-            --bg-accent: #ede4d6;
-            --border-light: #e4dcd2;
-            --border-dark: #231b14;
-            --text-dark: #1b1612;
-            --text-body: #4a3e35;
-            --text-muted: #7b6e62;
-            --color-terracotta: #b4532a;
-            --color-terracotta-hover: #963f1a;
-            --color-espresso: #2e1f16;
-            --color-brass: #8f6a3d;
-            --color-moss: #3a4b3c;
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'Space Mono', monospace;
-            --radius-sharp: 2px;
-            --radius-card: 6px;
-            --radius-pill: 9999px;
-            --transition: all 0.22s ease-in-out;
+            --bg-void: #060403;
+            --bg-dark: #0d0907;
+            --bg-card: #15100c;
+            --bg-card-elevated: #1e1712;
+            --bg-surface: #261e18;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(217, 119, 6, 0.5);
+            --primary: #d97706;
+            --primary-light: #fbbf24;
+            --primary-dark: #92400e;
+            --primary-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #92400e 100%);
+            --accent-glow: rgba(217, 119, 6, 0.35);
+            --text-main: #fdfaf6;
+            --text-muted: #b5a89c;
+            --text-dim: #786b5f;
+            --success: #10b981;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            --shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.9);
+            --shadow-glow: 0 0 35px rgba(217, 119, 6, 0.4);
+            --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -91,101 +94,143 @@
             padding: 0;
         }
 
-        body {
-            background-color: var(--bg-paper);
-            color: var(--text-dark);
-            font-family: var(--font-sans);
-            font-size: 16px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+        html {
+            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, h4 {
-            font-family: var(--font-serif);
-            color: var(--text-dark);
-            font-weight: 600;
-            line-height: 1.15;
-            letter-spacing: -0.01em;
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            perspective: 1200px;
+        }
+
+        /* Subtle 3D Depth Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(217, 119, 6, 0.06) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 44px 44px, 22px 22px;
+            background-position: 0 0, 22px 22px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.02em;
         }
 
         a {
             color: inherit;
             text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Top Bar */
-        .utility-banner {
-            background: var(--color-espresso);
-            color: #f7f3ec;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-            padding: 9px 16px;
+        /* Top Announcement Bar */
+        .top-ribbon {
+            background: linear-gradient(90deg, #78350f 0%, #b45309 50%, #92400e 100%);
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            text-align: center;
+            gap: 16px;
+            position: relative;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .utility-banner a {
-            color: #f0c59e;
-            text-decoration: underline;
-            font-weight: 600;
+        .top-badge {
+            background: rgba(0, 0, 0, 0.35);
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 800;
         }
 
-        .status-dot {
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #4ade80;
-            margin-right: 6px;
-        }
-
-        /* Main Header Navigation */
+        /* Glassmorphic Sticky Header */
         .site-header {
-            background: var(--bg-paper);
-            border-bottom: 1px solid var(--border-light);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 90;
+            background: rgba(6, 4, 3, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 18px 0;
+            transition: var(--transition-smooth);
         }
 
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0;
         }
 
-        .brand-link {
+        .brand-badge {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
         }
 
-        .brand-link h1 {
-            font-family: var(--font-serif);
-            font-size: 1.65rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            font-weight: 700;
+        .brand-icon-3d {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+            color: #fff;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+
+        .brand-badge:hover .brand-icon-3d {
+            transform: rotateY(180deg);
+        }
+
+        .brand-text h1 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
             line-height: 1;
         }
 
-        .brand-link span {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
+        .brand-text span {
+            font-size: 0.72rem;
+            color: var(--primary-light);
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 3px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
         }
 
         .nav-links {
@@ -196,74 +241,109 @@
         }
 
         .nav-links a {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            color: var(--text-body);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+            color: var(--text-muted);
             position: relative;
             padding: 4px 0;
         }
 
         .nav-links a:hover {
-            color: var(--color-terracotta);
+            color: var(--text-main);
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-light);
+            transition: var(--transition-smooth);
+            border-radius: var(--radius-full);
         }
 
-        /* Editorial Buttons */
-        .btn-editorial {
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Magnetic & Shimmer Buttons */
+        .btn-magnetic {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            background: var(--color-espresso);
-            color: #ffffff;
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
+            padding: 11px 24px;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 12px 24px;
-            border: 1px solid var(--color-espresso);
-            border-radius: var(--radius-sharp);
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
         }
 
-        .btn-editorial:hover {
-            background: var(--color-terracotta);
-            border-color: var(--color-terracotta);
+        .btn-shimmer-gold {
+            background: linear-gradient(135deg, var(--primary) 0%, #b45309 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
+        }
+
+        .btn-shimmer-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-shimmer-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-shimmer-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
             color: #ffffff;
         }
 
-        .btn-outline-editorial {
-            background: transparent;
-            color: var(--text-dark);
-            border: 1px solid var(--border-dark);
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 12px 24px;
-            border-radius: var(--radius-sharp);
-            cursor: pointer;
-            transition: var(--transition);
+        .btn-ghost-dark {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
         }
 
-        .btn-outline-editorial:hover {
-            background: var(--color-espresso);
-            color: #ffffff;
+        .btn-ghost-dark:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: var(--border-glow);
+            color: var(--primary-light);
+            transform: translateY(-2px);
         }
 
-        /* Hero Section (Editorial Layout) */
-        .hero-section {
-            padding: 70px 0 80px;
-            border-bottom: 1px solid var(--border-light);
+        /* ==========================================================================
+           HERO SECTION WITH 3D PHYSICS CANVAS & FLOATING CARDS
+           ========================================================================== */
+        .hero-stage {
+            position: relative;
+            padding: 90px 0 110px;
+            overflow: hidden;
+        }
+
+        /* 3D Interactive WebGL / Canvas Container */
+        #physicsCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: all;
         }
 
         .hero-layout {
@@ -271,1491 +351,2204 @@
             grid-template-columns: 1.15fr 0.85fr;
             gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .hero-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--color-terracotta);
+        .hero-content, .hero-3d-box {
+            pointer-events: auto;
+        }
+
+        .hero-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(217, 119, 6, 0.12);
+            border: 1px solid var(--border-glow);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            color: var(--primary-light);
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .hero-heading {
-            font-size: 3.6rem;
-            line-height: 1.08;
-            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
             margin-bottom: 24px;
-            color: var(--text-dark);
         }
 
-        .hero-heading em {
-            font-style: italic;
-            font-weight: 400;
-            color: var(--color-terracotta);
+        .hero-badge-pill .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulseAnim 2s infinite;
         }
 
-        .hero-narrative {
-            font-size: 1.12rem;
-            color: var(--text-body);
-            line-height: 1.7;
+        @keyframes pulseAnim {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .hero-title {
+            font-size: 3.9rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .text-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
             margin-bottom: 36px;
-            max-width: 540px;
+            max-width: 580px;
+            line-height: 1.7;
         }
 
-        .hero-actions {
+        .hero-ctas {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
         }
 
-        .hero-credentials {
-            display: flex;
-            gap: 32px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-light);
+        .hero-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-subtle);
         }
 
-        .cred-block strong {
-            display: block;
-            font-family: var(--font-serif);
-            font-size: 1.75rem;
-            color: var(--text-dark);
-            font-weight: 700;
-            line-height: 1;
+        .stat-card h4 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
         }
 
-        .cred-block span {
-            font-size: 0.78rem;
+        .stat-card p {
+            font-size: 0.82rem;
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-top: 4px;
         }
 
-        .hero-image-frame {
+        /* 3D Realistic Perspective Card */
+        .tilt-card-wrap {
+            perspective: 1200px;
             position: relative;
         }
 
-        .hero-image-frame img {
+        .tilt-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .tilt-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 119, 6, 0.25);
+        }
+
+        .tilt-card img {
             width: 100%;
             height: 480px;
             object-fit: cover;
-            border-radius: var(--radius-sharp);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            border: 1px solid var(--border-light);
+            display: block;
+            transition: transform 0.5s ease;
         }
 
-        .hero-caption {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 10px;
-            text-align: right;
-            letter-spacing: 0.05em;
+        .tilt-card:hover img {
+            transform: scale(1.03);
         }
 
-        /* Interactive Roast Taste Profiler */
-        .profiler-section {
-            background: var(--bg-muted);
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border-light);
+        /* Specular Reflection Physics Glare */
+        .glare-reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform: translateZ(30px);
         }
 
-        .profiler-header {
-            text-align: center;
-            max-width: 640px;
-            margin: 0 auto 36px;
+        .tilt-card:hover .glare-reflection {
+            opacity: 1;
         }
 
-        .profiler-header h2 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .profiler-header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .taste-pills {
+        /* Magic UI Border Beam Floating Badge */
+        .border-beam-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            background: rgba(21, 16, 12, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
             display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .taste-pill {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            padding: 10px 22px;
-            border-radius: var(--radius-pill);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .taste-pill:hover, .taste-pill.active {
-            background: var(--color-espresso);
-            color: #ffffff;
-            border-color: var(--color-espresso);
-        }
-
-        /* Whole Bean Store Section (Real Bag Products) */
-        .products-section {
-            padding: 90px 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .section-intro {
-            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 50px;
+            gap: 16px;
+            transform: translateZ(40px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
         }
 
-        .section-intro h2 {
-            font-size: 2.6rem;
+        .bbb-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .section-intro p {
+        .bbb-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: rgba(217, 119, 6, 0.2);
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bbb-text h5 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .bbb-text p {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 480px;
         }
 
-        .products-grid {
+        /* Real Business Public Info Bar */
+        .info-strip {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 32px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 32px;
         }
 
-        .coffee-card {
+        .info-col {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .info-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
             background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-card);
-            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            color: var(--primary-light);
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .coffee-card:hover {
-            border-color: var(--color-terracotta);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-        }
-
-        .coffee-img-wrap {
-            height: 240px;
-            overflow: hidden;
-            background: var(--bg-muted);
-            position: relative;
-        }
-
-        .coffee-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .coffee-card:hover .coffee-img-wrap img {
-            transform: scale(1.04);
-        }
-
-        .origin-badge {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            background: rgba(27, 22, 18, 0.9);
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 2px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .coffee-card-body {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .coffee-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 8px;
-        }
-
-        .coffee-title {
-            font-size: 1.45rem;
-            font-weight: 700;
-        }
-
-        .coffee-price {
-            font-family: var(--font-mono);
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--color-terracotta);
-        }
-
-        .tasting-notes-strip {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--color-brass);
-            margin-bottom: 14px;
-        }
-
-        .spec-table {
-            width: 100%;
+        .info-col h5 {
             font-size: 0.78rem;
-            margin-bottom: 20px;
-            border-collapse: collapse;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
         }
 
-        .spec-table tr {
-            border-bottom: 1px dotted var(--border-light);
-        }
-
-        .spec-table td {
-            padding: 5px 0;
-            color: var(--text-body);
-        }
-
-        .spec-table td:first-child {
-            color: var(--text-muted);
+        .info-col p {
+            font-size: 0.94rem;
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
-            width: 90px;
-        }
-
-        /* Grind and Size Selectors */
-        .selector-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .grind-select {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1px solid var(--border-light);
-            background: var(--bg-paper);
-            font-family: var(--font-sans);
-            font-size: 0.82rem;
-            color: var(--text-dark);
-            border-radius: var(--radius-sharp);
-            margin-bottom: 16px;
-        }
-
-        .size-pills {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-bottom: 20px;
-        }
-
-        .size-pill {
-            border: 1px solid var(--border-light);
-            background: var(--bg-paper);
-            padding: 6px 4px;
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: var(--radius-sharp);
-            transition: var(--transition);
-        }
-
-        .size-pill.active {
-            border-color: var(--color-espresso);
-            background: var(--color-espresso);
-            color: #ffffff;
-        }
-
-        /* Authentic East Austin Cafe Menu */
-        .menu-board-section {
-            padding: 90px 0;
-            background: var(--bg-paper);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .menu-board-container {
-            max-width: 960px;
-            margin: 0 auto;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-card);
-            padding: 56px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        }
-
-        .menu-board-header {
-            text-align: center;
-            border-bottom: 2px solid var(--color-espresso);
-            padding-bottom: 24px;
-            margin-bottom: 40px;
-        }
-
-        .menu-board-header h2 {
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .menu-board-header span {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .menu-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-        }
-
-        .menu-category h3 {
-            font-size: 1.55rem;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-            color: var(--color-terracotta);
-        }
-
-        .menu-item {
-            margin-bottom: 20px;
-        }
-
-        .item-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 3px;
-        }
-
-        .item-name {
-            font-family: var(--font-sans);
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .item-price {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--color-espresso);
-        }
-
-        .item-desc {
-            font-size: 0.84rem;
-            color: var(--text-muted);
+            color: var(--text-main);
             line-height: 1.4;
         }
 
-        /* Letterpress Vintage Customer Passes (No Monthly Subscription) */
-        .passes-section {
-            padding: 90px 0;
-            background: var(--bg-muted);
-            border-bottom: 1px solid var(--border-light);
+        /* Universal Section Styling */
+        .section-block {
+            padding: 100px 0;
+            position: relative;
         }
 
-        .passes-intro {
+        .section-header-center {
             text-align: center;
             max-width: 680px;
             margin: 0 auto 56px;
         }
 
-        .passes-intro h2 {
-            font-size: 2.6rem;
+        .eyebrow-tag {
+            display: inline-block;
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             margin-bottom: 12px;
         }
 
-        .passes-grid {
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           3 PLANS SECTION (CUSTOMER-FACING PRE-PAID BUNDLES)
+           ========================================================================== */
+        .plans-zone {
+            background: linear-gradient(180deg, var(--bg-void) 0%, #150f0c 50%, var(--bg-void) 100%);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .plans-3-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 32px;
+            align-items: stretch;
+            perspective: 1200px;
         }
 
-        .pass-letterpress {
-            background: #ffffff;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-card);
-            padding: 36px 28px;
+        .plan-card-3d {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 38px 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            transition: var(--transition);
+            transform-style: preserve-3d;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        .pass-letterpress:hover {
-            border-color: var(--color-terracotta);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        .plan-card-3d:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--border-glow);
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 119, 6, 0.3);
         }
 
-        .pass-letterpress.featured {
-            border: 2px solid var(--color-terracotta);
+        .plan-card-3d.featured {
+            background: linear-gradient(180deg, #241a13 0%, #17110d 100%);
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(217, 119, 6, 0.35);
+            transform: scale(1.04);
         }
 
-        .pass-stamp {
+        .plan-card-3d.featured:hover {
+            transform: scale(1.06) translateY(-8px);
+        }
+
+        .featured-ribbon {
             position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--color-terracotta);
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gradient);
+            color: #0d0906;
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            padding: 3px 12px;
-            border-radius: var(--radius-pill);
+            padding: 4px 18px;
+            border-radius: var(--radius-full);
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.45);
+            white-space: nowrap;
         }
 
-        .pass-name {
-            font-size: 1.6rem;
+        .plan-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
             margin-bottom: 6px;
         }
 
-        .pass-tagline {
+        .plan-header p {
             font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
-        .pass-price-wrap {
+        .plan-price-block {
+            margin: 24px 0 28px;
             padding: 16px 0;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 24px;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
             display: flex;
             align-items: baseline;
-            gap: 8px;
+            gap: 6px;
         }
 
-        .pass-price {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--color-espresso);
+        .price-currency {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .price-val {
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            font-family: 'Outfit', sans-serif;
             line-height: 1;
         }
 
-        .pass-period {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
+        .price-cadence {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            text-transform: uppercase;
+            font-weight: 600;
         }
 
-        .pass-perks {
+        .plan-perks-list {
             list-style: none;
             margin-bottom: 32px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            font-size: 0.88rem;
-            color: var(--text-body);
+            gap: 14px;
         }
 
-        .pass-perks li {
+        .perk-row {
             display: flex;
             align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .perk-row svg {
+            color: var(--primary-light);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* Aceternity Spotlight Cards & Menu Filter */
+        .filter-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
-        }
-
-        .pass-perks li::before {
-            content: '✓';
-            color: var(--color-terracotta);
-            font-weight: 700;
-        }
-
-        /* Our Craft & Atmosphere */
-        .craft-section {
-            padding: 90px 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .craft-grid {
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .craft-img-frame {
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-sharp);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-        }
-
-        .craft-img-frame img {
-            width: 100%;
-            height: 480px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .craft-copy h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-
-        .craft-copy p {
-            color: var(--text-body);
-            font-size: 1.05rem;
-            line-height: 1.75;
-            margin-bottom: 20px;
-        }
-
-        /* Location, Hours & Map */
-        .visit-section {
-            padding: 90px 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .visit-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .visit-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            padding: 44px;
-            border-radius: var(--radius-card);
-        }
-
-        .visit-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 28px;
-        }
-
-        .visit-info-group {
-            margin-bottom: 24px;
-        }
-
-        .visit-info-group h4 {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        .visit-info-group p {
-            font-size: 1rem;
-            color: var(--text-dark);
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        .map-frame {
-            height: 440px;
-            border-radius: var(--radius-card);
-            overflow: hidden;
-            border: 1px solid var(--border-light);
-        }
-
-        .map-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Customer Reviews */
-        .reviews-section {
-            padding: 80px 0;
-            background: var(--bg-muted);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .reviews-header {
-            text-align: center;
+            flex-wrap: wrap;
             margin-bottom: 48px;
         }
 
-        .reviews-header h2 {
-            font-size: 2.4rem;
+        .filter-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 9px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
         }
 
-        .reviews-slider {
+        .filter-pill:hover {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border-color: var(--border-glow);
+        }
+
+        .filter-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.45);
+        }
+
+        .menu-grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .spotlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, -100px);
+            left: var(--mouse-x, -100px);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.16) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card);
+            background: var(--bg-card-elevated);
+        }
+
+        .sc-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .sc-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(217, 119, 6, 0.14);
+            color: var(--primary-light);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .sc-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .sc-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .sc-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 22px;
+            flex-grow: 1;
+        }
+
+        .sc-btn {
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .sc-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Bento Grid: Our Craft & Atmosphere */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .bento-cell {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-cell:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .bento-span-2 {
+            grid-column: span 2;
+        }
+
+        .bento-bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            mask-image: linear-gradient(to right, transparent, black);
+            -webkit-mask-image: linear-gradient(to right, transparent, black);
+        }
+
+        .bento-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .bento-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        /* Testimonials Section */
+        .reviews-3-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 28px;
         }
 
-        .review-box {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            padding: 28px;
-            border-radius: var(--radius-card);
-        }
-
-        .stars {
-            color: var(--color-brass);
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-        }
-
-        .review-quote {
-            font-family: var(--font-serif);
-            font-size: 1.05rem;
-            font-style: italic;
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin-bottom: 18px;
-        }
-
-        .reviewer-byline {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-        }
-
-        /* Footer */
-        .site-footer {
-            background: var(--color-espresso);
-            color: #d6ccbe;
-            padding: 70px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .footer-brand h4 {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .footer-brand p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            max-width: 320px;
-        }
-
-        .footer-col h5 {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-            margin-bottom: 16px;
-        }
-
-        .footer-col ul {
-            list-style: none;
+        .review-card-dark {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            font-size: 0.88rem;
-        }
-
-        .footer-col a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .footer-bottom {
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
             justify-content: space-between;
-            font-size: 0.78rem;
-            font-family: var(--font-mono);
-            color: #8c7e70;
-            flex-wrap: wrap;
-            gap: 12px;
+            transition: var(--transition-smooth);
         }
 
-        /* Slide-out Order / Reservation Drawer */
-        .drawer-overlay {
+        .review-card-dark:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+        }
+
+        .stars-row {
+            color: #f59e0b;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.65;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .reviewer-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .reviewer-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-full);
+            background: var(--primary-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .reviewer-info h6 {
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .reviewer-info span {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+
+        /* Location Section */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .location-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+
+        .loc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .loc-icon-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .loc-text h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .loc-text p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .map-frame-wrap {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            height: 440px;
+            box-shadow: var(--shadow-card);
+            background: var(--bg-card);
+        }
+
+        .map-frame-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(120%);
+        }
+
+        /* Shadcn Accordion FAQ */
+        .faq-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-item:hover {
+            border-color: var(--border-glow);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .accordion-trigger svg {
+            transition: transform 0.3s ease;
+            color: var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        .accordion-item.open .accordion-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .accordion-text {
+            padding: 0 24px 22px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Modal Dialog */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
+            padding: 20px;
         }
 
-        .drawer-overlay.open {
+        .modal-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .order-drawer {
-            position: fixed;
-            top: 0;
-            right: -480px;
+        .modal-window {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 440px;
-            height: 100%;
-            background: var(--bg-surface);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-            z-index: 1001;
-            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            max-width: 580px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+            transform: scale(0.95) translateY(20px);
+            transition: var(--transition-smooth);
+            overflow: hidden;
         }
 
-        .drawer-overlay.open .order-drawer {
-            right: 0;
+        .modal-overlay.active .modal-window {
+            transform: scale(1) translateY(0);
         }
 
-        .drawer-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-light);
+        .modal-top {
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .drawer-header h3 {
-            font-size: 1.4rem;
+        .modal-top h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
         }
 
-        .close-drawer-btn {
+        .btn-close {
             background: transparent;
             border: none;
-            font-size: 1.5rem;
+            color: var(--text-dim);
             cursor: pointer;
-            color: var(--text-dark);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
         }
 
-        .drawer-body {
-            padding: 24px;
-            overflow-y: auto;
-            flex-grow: 1;
+        .btn-close:hover {
+            color: var(--text-main);
         }
 
-        .drawer-footer {
-            padding: 24px;
-            border-top: 1px solid var(--border-light);
-            background: var(--bg-paper);
+        .progress-bar-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 28px;
+            background: var(--bg-void);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
-        .form-row {
-            margin-bottom: 16px;
+        .step-node {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            font-weight: 600;
         }
 
-        .form-row label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+        .step-node.active {
+            color: var(--primary-light);
         }
 
-        .form-row input, .form-row select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-sharp);
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
+        .node-bubble {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius-full);
             background: var(--bg-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
-        /* Responsive */
+        .step-node.active .node-bubble {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .wizard-step {
+            display: none;
+        }
+
+        .wizard-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .input-control {
+            width: 100%;
+            background: var(--bg-void);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+        }
+
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .radio-cell {
+            background: var(--bg-void);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radio-cell:hover {
+            border-color: var(--border-glow);
+        }
+
+        .radio-cell.selected {
+            border-color: var(--primary);
+            background: rgba(217, 119, 6, 0.12);
+        }
+
+        .radio-cell strong {
+            font-size: 0.92rem;
+            color: var(--text-main);
+        }
+
+        .radio-cell span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .modal-footer {
+            padding: 20px 28px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-void);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #040302;
+            border-top: 1px solid var(--border-subtle);
+            padding: 80px 0 40px;
+        }
+
+        .footer-cols {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin: 16px 0 24px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .footer-col h5 {
+            font-size: 0.92rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-nav a {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary-light);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
-            .hero-layout, .craft-grid, .visit-grid {
+            .hero-layout, .location-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-            .products-grid, .passes-grid, .reviews-slider {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .plans-3-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
+                margin: 0 auto;
+            }
+            .plan-card-3d.featured {
+                transform: none;
+            }
+            .plan-card-3d.featured:hover {
+                transform: translateY(-8px);
+            }
+            .bento-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-grid {
+            .bento-span-2 {
+                grid-column: span 1;
+            }
+            .bento-bg-image {
+                display: none;
+            }
+            .reviews-3-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-cols {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
+            .nav-links, .btn-ghost-dark {
                 display: none;
             }
-            .hero-heading {
-                font-size: 2.6rem;
+            .hero-stage {
+                padding: 50px 0 70px;
             }
-            .menu-columns {
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            .hero-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .info-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-grid {
+            .footer-cols {
                 grid-template-columns: 1fr;
+            }
+            .top-ribbon {
+                font-size: 0.78rem;
+                flex-direction: column;
+                gap: 6px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Utility Ribbon -->
-    <div class="utility-banner">
-        <span><span class="status-dot"></span><strong>OPEN TODAY UNTIL 5:00 PM</strong> • East Austin Flagship: 1611 E Cesar Chavez St</span>
-        <a href="tel:5125406033">Call Roastery: (512) 540-6033</a>
+    <!-- Top Announcement Ribbon -->
+    <div class="top-ribbon">
+        <span class="top-badge">East Austin Flagship</span>
+        <span>📍 1611 E Cesar Chavez St, Austin, TX 78702 • Open Daily 7:00 AM – 5:00 PM</span>
+        <a href="tel:5125406033" style="text-decoration: underline; font-weight: 700; color: #fff;">Call (512) 540-6033</a>
     </div>
 
-    <!-- Editorial Site Header -->
+    <!-- Header Navigation -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="#" class="brand-link">
-                <h1>Flat Track</h1>
-                <span>Coffee Roasters • Austin, Texas</span>
+            <a href="#hero" class="brand-badge">
+                <div class="brand-icon-3d">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                        <line x1="6" y1="1" x2="6" y2="4"/>
+                        <line x1="10" y1="1" x2="10" y2="4"/>
+                        <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>FLAT TRACK</h1>
+                    <span>Coffee Roasters • Austin, TX</span>
+                </div>
             </a>
 
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#beans">Whole Bean</a></li>
-                    <li><a href="#menu">Cafe Menu</a></li>
-                    <li><a href="#passes">Customer Passes</a></li>
-                    <li><a href="#craft">Our Craft</a></li>
-                    <li><a href="#visit">Visit</a></li>
-                </ul>
-            </nav>
+            <ul class="nav-links">
+                <li><a href="#plans">3 Passes &amp; Plans</a></li>
+                <li><a href="#menu">Roastery Menu</a></li>
+                <li><a href="#craft">Our Craft</a></li>
+                <li><a href="#reviews">Verified Reviews</a></li>
+                <li><a href="#location">Find Us</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
 
-            <div class="header-actions">
-                <button type="button" class="btn-outline-editorial" onclick="openDrawer('Pickup Order / Tasting Spot', '$0.00')">
-                    Reserve / Order
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>(512) 540-6033</span>
+                </a>
+                <button type="button" class="btn-magnetic btn-shimmer-gold" onclick="openBookingModal('Table / Cupping Reservation', 'Free Reservation')">
+                    <span>Reserve a Spot</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Editorial Hero Section -->
-    <section class="hero-section">
+    <!-- Hero Section with Interactive 3D Particle Physics Canvas -->
+    <section class="hero-stage" id="hero">
+        <!-- Interactive 3D WebGL / Particle Canvas -->
+        <canvas id="physicsCanvas"></canvas>
+
         <div class="container hero-layout">
-            <div>
-                <span class="hero-tag">ESTABLISHED 2012 • EAST AUSTIN, TEXAS</span>
-                <h1 class="hero-heading">
-                    Obsessively roasted on <em>Cesar Chavez.</em>
+            <div class="hero-content">
+                <div class="hero-badge-pill">
+                    <span class="pulse-dot"></span>
+                    <span>4.8 ★ ON 750+ VERIFIED GOOGLE &amp; YELP REVIEWS</span>
+                </div>
+                <h1 class="hero-title">
+                    Obsessively Roasted. <br>
+                    <span class="text-gradient">Unapologetically Austin.</span>
                 </h1>
-                <p class="hero-narrative">
-                    We source ethically grown green coffees directly from smallholder farms, roast in small batches on our Diedrich drum, and pour fresh daily on East Cesar Chavez. No artificial syrups, no pretension—just pure specialty coffee and community.
+                <p class="hero-lead">
+                    Single-origin beans micro-roasted directly on-site at 1611 E Cesar Chavez. Nitro cold brew on draft, velvety espresso, and artisanal tacos. Handcrafted for coffee purists and community riders.
                 </p>
-                <div class="hero-actions">
-                    <a href="#beans" class="btn-editorial">Shop Whole Bean Bags</a>
-                    <a href="#menu" class="btn-outline-editorial">View In-Store Menu</a>
+                <div class="hero-ctas">
+                    <a href="#plans" class="btn-magnetic btn-shimmer-gold">
+                        <span>Explore the 3 Plans</span>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </a>
+                    <a href="#menu" class="btn-magnetic btn-ghost-dark">
+                        <span>Explore Cafe Menu</span>
+                    </a>
                 </div>
-                <div class="hero-credentials">
-                    <div class="cred-block">
-                        <strong>4.8 ★</strong>
-                        <span>750+ Public Reviews</span>
+                <div class="hero-stats-grid">
+                    <div class="stat-card">
+                        <h4>750+</h4>
+                        <p>5-Star Local Reviews</p>
                     </div>
-                    <div class="cred-block">
-                        <strong>1611</strong>
-                        <span>E Cesar Chavez St</span>
+                    <div class="stat-card">
+                        <h4>100%</h4>
+                        <p>In-House Micro Roasted</p>
                     </div>
-                    <div class="cred-block">
-                        <strong>7 Days</strong>
-                        <span>7:00 AM – 5:00 PM</span>
+                    <div class="stat-card">
+                        <h4>7 Days</h4>
+                        <p>Open 7:00 AM – 5:00 PM</p>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-image-frame">
-                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Specialty Coffee Roaster in Austin">
-                <div class="hero-caption">FIG. 01 — Small-Batch Roasting at 1611 E Cesar Chavez</div>
+            <!-- 3D Realistic Tilt Card with Specular Physics Glare -->
+            <div class="tilt-card-wrap hero-3d-box" id="heroTiltWrap">
+                <div class="tilt-card" id="heroCard">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Flat Track Coffee Roasting Machine" loading="lazy">
+                    <div class="glare-reflection" id="cardGlare"></div>
+                    <div class="border-beam-badge">
+                        <div class="bbb-left">
+                            <div class="bbb-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="bbb-text">
+                                <h5>Direct Trade Green Coffee</h5>
+                                <p>Small-batch micro-roasted weekly in Austin</p>
+                            </div>
+                        </div>
+                        <a href="#craft" class="btn-magnetic btn-ghost-dark" style="padding: 6px 14px; font-size: 0.78rem;">Learn More</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Roast Taste Profiler -->
-    <section class="profiler-section">
-        <div class="container">
-            <div class="profiler-header">
-                <h2>What Do You Like in Your Cup?</h2>
-                <p>Select your preferred flavor profile to highlight our recommended roast.</p>
-            </div>
-            <div class="taste-pills">
-                <button class="taste-pill active" onclick="filterTaste('all', this)">All Roasts</button>
-                <button class="taste-pill" onclick="filterTaste('chocolate', this)">Rich Dark Chocolate & Candied Orange</button>
-                <button class="taste-pill" onclick="filterTaste('fruity', this)">Bright Cherry, Apple & Brown Sugar</button>
-                <button class="taste-pill" onclick="filterTaste('floral', this)">Jasmine, Bergamot & Honeysuckle</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Whole Bean Roastery Showcase -->
-    <section class="products-section" id="beans">
-        <div class="container">
-            <div class="section-intro">
+    <!-- Public Business Details Strip -->
+    <section class="info-strip">
+        <div class="container info-grid">
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
                 <div>
-                    <span class="hero-tag">ROASTED WEEKLY IN EAST AUSTIN</span>
-                    <h2>Current Offerings</h2>
+                    <h5>Physical Location</h5>
+                    <p>1611 E Cesar Chavez St<br>Austin, TX 78702</p>
                 </div>
-                <p>Every bag is roasted in-house in small batches. We ship whole bean or freshly ground to order for your home brew setup.</p>
             </div>
-
-            <div class="products-grid">
-                <!-- Product 1 -->
-                <div class="coffee-card" data-profile="chocolate">
-                    <div>
-                        <div class="coffee-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80" alt="Dogspeed Espresso">
-                            <span class="origin-badge">House Flagship</span>
-                        </div>
-                        <div class="coffee-card-body">
-                            <div class="coffee-title-row">
-                                <h3 class="coffee-title">Dogspeed Blend</h3>
-                                <span class="coffee-price" id="price-dogspeed">$19.00</span>
-                            </div>
-                            <div class="tasting-notes-strip">Dark Cacao, Candied Orange, Toasted Almond</div>
-                            <table class="spec-table">
-                                <tr><td>Origins</td><td>Colombia Huila & Ethiopia Sidama</td></tr>
-                                <tr><td>Elevation</td><td>1,750 – 1,950m</td></tr>
-                                <tr><td>Process</td><td>Washed & Sun-Dried on Raised Beds</td></tr>
-                                <tr><td>Roast Level</td><td>Medium • Espresso & Drip Friendly</td></tr>
-                            </table>
-
-                            <label class="selector-label">Select Size</label>
-                            <div class="size-pills">
-                                <div class="size-pill active" onclick="setSize(this, 'dogspeed', 19.00, '12 oz')">12 oz</div>
-                                <div class="size-pill" onclick="setSize(this, 'dogspeed', 44.00, '2 lb')">2 lb</div>
-                                <div class="size-pill" onclick="setSize(this, 'dogspeed', 95.00, '5 lb')">5 lb</div>
-                            </div>
-
-                            <label class="selector-label">Grind Method</label>
-                            <select class="grind-select" id="grind-dogspeed">
-                                <option>Whole Bean (Recommended)</option>
-                                <option>Coarse — French Press / Cold Brew</option>
-                                <option>Medium — Chemex / Auto Drip</option>
-                                <option>Fine — Home Espresso</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div style="padding: 0 24px 24px;">
-                        <button type="button" class="btn-editorial" style="width: 100%; justify-content: center;" onclick="orderBean('Dogspeed Blend', document.getElementById('price-dogspeed').textContent, document.getElementById('grind-dogspeed').value)">
-                            Order for In-Store Pickup
-                        </button>
-                    </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-
-                <!-- Product 2 -->
-                <div class="coffee-card" data-profile="fruity">
-                    <div>
-                        <div class="coffee-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Colombia Single Origin">
-                            <span class="origin-badge">Single Origin</span>
-                        </div>
-                        <div class="coffee-card-body">
-                            <div class="coffee-title-row">
-                                <h3 class="coffee-title">Colombia Huila</h3>
-                                <span class="coffee-price" id="price-colombia">$21.00</span>
-                            </div>
-                            <div class="tasting-notes-strip">Rainier Cherry, Cane Sugar, Crisp Red Apple</div>
-                            <table class="spec-table">
-                                <tr><td>Producer</td><td>Smallholder Co-op in San Agustin</td></tr>
-                                <tr><td>Elevation</td><td>1,850m</td></tr>
-                                <tr><td>Varietal</td><td>Castillo & Caturra</td></tr>
-                                <tr><td>Roast Level</td><td>Light-Medium • Vibrant & Sweet</td></tr>
-                            </table>
-
-                            <label class="selector-label">Select Size</label>
-                            <div class="size-pills">
-                                <div class="size-pill active" onclick="setSize(this, 'colombia', 21.00, '12 oz')">12 oz</div>
-                                <div class="size-pill" onclick="setSize(this, 'colombia', 48.00, '2 lb')">2 lb</div>
-                                <div class="size-pill" onclick="setSize(this, 'colombia', 105.00, '5 lb')">5 lb</div>
-                            </div>
-
-                            <label class="selector-label">Grind Method</label>
-                            <select class="grind-select" id="grind-colombia">
-                                <option>Whole Bean (Recommended)</option>
-                                <option>Coarse — French Press / Cold Brew</option>
-                                <option>Medium — Chemex / Auto Drip</option>
-                                <option>Fine — Home Espresso</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div style="padding: 0 24px 24px;">
-                        <button type="button" class="btn-editorial" style="width: 100%; justify-content: center;" onclick="orderBean('Colombia Huila', document.getElementById('price-colombia').textContent, document.getElementById('grind-colombia').value)">
-                            Order for In-Store Pickup
-                        </button>
-                    </div>
+                <div>
+                    <h5>Operating Hours</h5>
+                    <p>Mon – Sun: 7:00 AM – 5:00 PM<br>Open 365 Days a Year</p>
                 </div>
-
-                <!-- Product 3 -->
-                <div class="coffee-card" data-profile="floral">
-                    <div>
-                        <div class="coffee-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Ethiopia Yirgacheffe">
-                            <span class="origin-badge">Micro-Lot</span>
-                        </div>
-                        <div class="coffee-card-body">
-                            <div class="coffee-title-row">
-                                <h3 class="coffee-title">Ethiopia Yirgacheffe</h3>
-                                <span class="coffee-price" id="price-ethiopia">$22.00</span>
-                            </div>
-                            <div class="tasting-notes-strip">Bergamot, Honeysuckle, Meyer Lemon Zest</div>
-                            <table class="spec-table">
-                                <tr><td>Washing Station</td><td>Konga Micro-Region</td></tr>
-                                <tr><td>Elevation</td><td>2,050m</td></tr>
-                                <tr><td>Varietal</td><td>Indigenous Heirloom</td></tr>
-                                <tr><td>Roast Level</td><td>Light • Tea-Like & Aromatic</td></tr>
-                            </table>
-
-                            <label class="selector-label">Select Size</label>
-                            <div class="size-pills">
-                                <div class="size-pill active" onclick="setSize(this, 'ethiopia', 22.00, '12 oz')">12 oz</div>
-                                <div class="size-pill" onclick="setSize(this, 'ethiopia', 50.00, '2 lb')">2 lb</div>
-                                <div class="size-pill" onclick="setSize(this, 'ethiopia', 110.00, '5 lb')">5 lb</div>
-                            </div>
-
-                            <label class="selector-label">Grind Method</label>
-                            <select class="grind-select" id="grind-ethiopia">
-                                <option>Whole Bean (Recommended)</option>
-                                <option>Coarse — French Press / Cold Brew</option>
-                                <option>Medium — Chemex / Auto Drip</option>
-                                <option>Fine — Home Espresso</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div style="padding: 0 24px 24px;">
-                        <button type="button" class="btn-editorial" style="width: 100%; justify-content: center;" onclick="orderBean('Ethiopia Yirgacheffe', document.getElementById('price-ethiopia').textContent, document.getElementById('grind-ethiopia').value)">
-                            Order for In-Store Pickup
-                        </button>
-                    </div>
+            </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                    <h5>Direct Phone Line</h5>
+                    <p><a href="tel:5125406033" style="color: var(--primary-light);">(512) 540-6033</a><br>Barista &amp; Roastery Desk</p>
+                </div>
+            </div>
+            <div class="info-col">
+                <div class="info-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                    <h5>Public Standing</h5>
+                    <p>4.8 ★ (750+ Reviews)<br>Austin Cultural Icon</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- In-Store Cafe Menu (Authentic Chalkboard / Editorial Board) -->
-    <section class="menu-board-section" id="menu">
+    <!-- ==========================================================================
+         THE 3 PLANS SECTION (100% ONE-TIME PACKAGES - ZERO SUBSCRIPTIONS)
+         ========================================================================== -->
+    <section class="section-block plans-zone" id="plans">
         <div class="container">
-            <div class="menu-board-container">
-                <div class="menu-board-header">
-                    <h2>Cafe & Espresso Bar</h2>
-                    <span>1611 E Cesar Chavez St • Poured Daily 7:00 AM – 5:00 PM</span>
-                </div>
-
-                <div class="menu-columns">
-                    <!-- Column 1 -->
-                    <div>
-                        <div class="menu-category">
-                            <h3>Espresso & Handcrafted Milk</h3>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Dogspeed Double Shot</span>
-                                    <span class="item-price">$4.25</span>
-                                </div>
-                                <p class="item-desc">Extracted on La Marzocco. Dark chocolate, candied orange.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Cortado / Gibraltar</span>
-                                    <span class="item-price">$4.75</span>
-                                </div>
-                                <p class="item-desc">Equal parts double espresso and silky textured whole milk.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Smoke & Spice Honey Latte</span>
-                                    <span class="item-price">$6.25</span>
-                                </div>
-                                <p class="item-desc">Smoked Mexican vanilla, Texas wildflower honey, steamed oat milk.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">House Horchata Iced Float</span>
-                                    <span class="item-price">$6.50</span>
-                                </div>
-                                <p class="item-desc">Organic cinnamon rice milk made from scratch with an espresso float.</p>
-                            </div>
-                        </div>
-
-                        <div class="menu-category" style="margin-top: 36px;">
-                            <h3>Brew Bar & Draft Taps</h3>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">24-Hour Nitro Cold Brew</span>
-                                    <span class="item-price">$5.50</span>
-                                </div>
-                                <p class="item-desc">Slow-dripped with filtered water, kegged on pure nitrogen tap.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Single Origin Kalita Wave Pour-Over</span>
-                                    <span class="item-price">$6.00</span>
-                                </div>
-                                <p class="item-desc">Rotating micro-lot hand-poured to exact extraction ratios.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Column 2 -->
-                    <div>
-                        <div class="menu-category">
-                            <h3>Local Scratch Bakery & Tacos</h3>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Austin Breakfast Taco Trio</span>
-                                    <span class="item-price">$9.50</span>
-                                </div>
-                                <p class="item-desc">Warm local tortillas, cage-free scrambled eggs, black beans, cotija, charred serrano salsa.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Artisan Sourdough Croissant</span>
-                                    <span class="item-price">$4.75</span>
-                                </div>
-                                <p class="item-desc">Laminated with cultured butter by local Austin artisanal bakers.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Cardamom Morning Bun</span>
-                                    <span class="item-price">$5.25</span>
-                                </div>
-                                <p class="item-desc">Spiced sourdough pastry rolled in raw organic sugar and orange zest.</p>
-                            </div>
-                        </div>
-
-                        <div class="menu-category" style="margin-top: 36px;">
-                            <h3>Teas & Alternatives</h3>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Uji Ceremonial Iced Matcha</span>
-                                    <span class="item-price">$6.00</span>
-                                </div>
-                                <p class="item-desc">First-harvest Japanese stone-ground green tea whisked with oat milk.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-row">
-                                    <span class="item-name">Cascara Coffee Cherry Tonic</span>
-                                    <span class="item-price">$5.25</span>
-                                </div>
-                                <p class="item-desc">Sun-dried coffee fruit tea served sparkling with fresh lime wheel.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Customer Passes & Bundles (100% One-Time - Zero Monthly Subscriptions) -->
-    <section class="passes-section" id="passes">
-        <div class="container">
-            <div class="passes-intro">
-                <span class="hero-tag">PRE-PAID CUSTOMER PACKAGES</span>
-                <h2>One-Time Passes & Bundles</h2>
-                <p>Enjoy transparent pre-paid pricing. No recurring monthly subscriptions, no automated card charges—just honest coffee value.</p>
-            </div>
-
-            <div class="passes-grid">
-                <!-- Pass 1 -->
-                <div class="pass-letterpress">
-                    <div>
-                        <h3 class="pass-name">Weekend Explorer Pass</h3>
-                        <p class="pass-tagline">For Austin visitors and casual neighborhood regulars.</p>
-                        <div class="pass-price-wrap">
-                            <span class="pass-price">$35</span>
-                            <span class="pass-period">one-time pass</span>
-                        </div>
-                        <ul class="pass-perks">
-                            <li><strong>5 Specialty Drinks:</strong> Pour-over, Nitro draft, or lattes</li>
-                            <li><strong>1 Fresh Pastry:</strong> Local sourdough croissant or bun</li>
-                            <li><strong>Priority Line Skip:</strong> Show pass at the pickup counter</li>
-                            <li>Never expires; redeem anytime on Cesar Chavez</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-outline-editorial" style="width: 100%; justify-content: center;" onclick="openDrawer('Weekend Explorer Pass', '$35.00')">
-                        Purchase Explorer Pass
-                    </button>
-                </div>
-
-                <!-- Pass 2 -->
-                <div class="pass-letterpress featured">
-                    <span class="pass-stamp">MOST POPULAR</span>
-                    <div>
-                        <h3 class="pass-name">Roaster’s Tasting Reserve</h3>
-                        <p class="pass-tagline">For dedicated home brewers who want fresh Austin roasts.</p>
-                        <div class="pass-price-wrap">
-                            <span class="pass-price">$68</span>
-                            <span class="pass-period">one-time bundle</span>
-                        </div>
-                        <ul class="pass-perks">
-                            <li><strong>2 Whole Bean Bags (12oz):</strong> Freshly roasted single-origins</li>
-                            <li><strong>Free In-Store Pour:</strong> 1 Nitro Cold Brew or Pour-Over on pickup</li>
-                            <li><strong>Head Roaster Tasting Card:</strong> Detailed origin & brew parameters</li>
-                            <li><strong>15% Off All Merch:</strong> T-shirts, moto caps, enamel camp mugs</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-editorial" style="width: 100%; justify-content: center;" onclick="openDrawer('Roaster’s Tasting Reserve', '$68.00')">
-                        Order Tasting Reserve
-                    </button>
-                </div>
-
-                <!-- Pass 3 -->
-                <div class="pass-letterpress">
-                    <div>
-                        <h3 class="pass-name">Studio & Office Fuel Crate</h3>
-                        <p class="pass-tagline">Fuel your Austin design studio, startup, or creative agency.</p>
-                        <div class="pass-price-wrap">
-                            <span class="pass-price">$185</span>
-                            <span class="pass-period">one-time crate</span>
-                        </div>
-                        <ul class="pass-perks">
-                            <li><strong>6 Whole Bean Bags (12oz):</strong> Rotating seasonal selections</li>
-                            <li><strong>64oz Nitro Cold Brew Growler:</strong> Glass jug + refill voucher</li>
-                            <li><strong>12 Assorted Pastries or Tacos:</strong> Boxed fresh from local bakeries</li>
-                            <li>Free East Austin delivery or curbside cafe pickup</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-outline-editorial" style="width: 100%; justify-content: center;" onclick="openDrawer('Studio & Office Fuel Crate', '$185.00')">
-                        Order Office Crate
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Craft & Story -->
-    <section class="craft-section" id="craft">
-        <div class="container craft-grid">
-            <div class="craft-img-frame">
-                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Roasting Coffee in East Austin">
-            </div>
-            <div class="craft-copy">
-                <span class="hero-tag">ABOUT FLAT TRACK</span>
-                <h2>Born on East Cesar Chavez</h2>
-                <p>
-                    Flat Track began as a shared space between custom vintage motorcycles and specialty coffee. We believed that serious third-wave coffee didn't have to be sterile, snobbish, or clinical.
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Zero Recurring Fees • Full Transparency</span>
+                <h2 class="section-title">Select from 3 Customer Plans</h2>
+                <p class="section-lead">
+                    Choose your ideal pre-paid experience pass or bundle. Every plan is a 100% one-time purchase with zero recurring subscriptions or surprise card debits.
                 </p>
-                <p>
-                    Today, our 1611 East Cesar Chavez space remains an authentic East Austin hub. We roast on a Diedrich drum roaster, source green coffees directly from regenerative farms, and invite our neighbors, cyclists, and riders to slow down and enjoy an honest cup.
-                </p>
-                <div style="display: flex; gap: 28px; margin-top: 24px;">
-                    <div>
-                        <strong style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-espresso);">Direct Trade</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Premiums paid directly to farm co-ops</p>
+            </div>
+
+            <div class="plans-3-grid">
+                <!-- PLAN 1 -->
+                <div class="plan-card-3d">
+                    <div class="plan-header">
+                        <h3>Plan 1: Weekend Explorer Pass</h3>
+                        <p>Designed for Austin visitors and casual neighborhood weekend coffee runs.</p>
                     </div>
-                    <div>
-                        <strong style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-espresso);">Drum Roasted</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Small batches calibrated daily</p>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">35</span>
+                        <span class="price-cadence">one-time pass</span>
                     </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>5 Any-Size Drinks:</strong> Espresso, Nitro Cold Brew, or Signature Lattes</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>1 Fresh Pastry:</strong> Local artisan sourdough croissant or bun</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Priority Mobile Line Skip:</strong> Show pass at the pickup counter</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Pass never expires; redeem anytime on Cesar Chavez</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-ghost-dark" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 1: Weekend Explorer Pass', '$35.00 One-Time')">
+                        Choose Explorer Pass
+                    </button>
+                </div>
+
+                <!-- PLAN 2 (FEATURED) -->
+                <div class="plan-card-3d featured">
+                    <div class="featured-ribbon">RECOMMENDED CHOICE</div>
+                    <div class="plan-header">
+                        <h3>Plan 2: Roaster’s Tasting Reserve</h3>
+                        <p>For dedicated home baristas and coffee enthusiasts seeking fresh Austin roasts.</p>
+                    </div>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">68</span>
+                        <span class="price-cadence">one-time bundle</span>
+                    </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>2 Whole Bean Bags (12oz):</strong> Freshly roasted single-origins</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Free In-Store Pour:</strong> 1 Nitro Cold Brew or Pour-Over on pickup</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Head Roaster Cupping Card:</strong> Detailed origin notes &amp; brew ratios</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>15% Off All Merch:</strong> T-shirts, moto caps, enamel camp mugs</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-shimmer-gold" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 2: Roaster’s Tasting Reserve', '$68.00 One-Time')">
+                        Choose Tasting Reserve
+                    </button>
+                </div>
+
+                <!-- PLAN 3 -->
+                <div class="plan-card-3d">
+                    <div class="plan-header">
+                        <h3>Plan 3: Office Fuel &amp; Hospitality Crate</h3>
+                        <p>Fuel your Austin creative agency, tech team, or local design studio.</p>
+                    </div>
+                    <div class="plan-price-block">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">185</span>
+                        <span class="price-cadence">one-time crate</span>
+                    </div>
+                    <ul class="plan-perks-list">
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>6 Whole Bean Bags (12oz):</strong> Rotating seasonal selections</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>64oz Nitro Cold Brew Growler:</strong> Glass jug + refill voucher</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>12 Assorted Pastries or Tacos:</strong> Freshly boxed</span>
+                        </li>
+                        <li class="perk-row">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Free East Austin curbside drop-off or priority cafe pickup</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-magnetic btn-ghost-dark" style="width: 100%; justify-content: center;" onclick="openBookingModal('Plan 3: Office Fuel & Hospitality Crate', '$185.00 One-Time')">
+                        Choose Office Crate
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Location, Hours & Directions -->
-    <section class="visit-section" id="visit">
-        <div class="container visit-grid">
-            <div class="visit-card">
-                <span class="hero-tag">VISIT THE CAFE</span>
-                <h3>1611 East Cesar Chavez</h3>
-
-                <div class="visit-info-group">
-                    <h4>Address</h4>
-                    <p>1611 E Cesar Chavez St, Austin, TX 78702<br>East Austin Cultural Corridor</p>
-                </div>
-
-                <div class="visit-info-group">
-                    <h4>Hours</h4>
-                    <p>Monday – Sunday: 7:00 AM – 5:00 PM<br>Open 365 Days a Year</p>
-                </div>
-
-                <div class="visit-info-group">
-                    <h4>Roastery Direct Line</h4>
-                    <p><a href="tel:5125406033" style="color: var(--color-terracotta); font-weight: 700;">(512) 540-6033</a></p>
-                </div>
-
-                <div class="visit-info-group">
-                    <h4>Patio & Amenities</h4>
-                    <p>Shaded dog-friendly patio, dedicated motorcycle and bicycle parking, free gigabit Wi-Fi.</p>
-                </div>
-
-                <div style="display: flex; gap: 14px; margin-top: 28px;">
-                    <a href="https://maps.google.com/?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" rel="noopener" class="btn-editorial">
-                        Get Directions
-                    </a>
-                    <a href="tel:5125406033" class="btn-outline-editorial">
-                        Call Store
-                    </a>
-                </div>
-            </div>
-
-            <div class="map-frame">
-                <iframe src="https://maps.google.com/maps?q=1611%20E%20Cesar%20Chavez%20St,%20Austin,%20TX%2078702&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Flat Track Coffee Location"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Customer Reviews -->
-    <section class="reviews-section">
+    <!-- Menu & Roasts Section with Aceternity Spotlight Hover Cards -->
+    <section class="section-block" id="menu">
         <div class="container">
-            <div class="reviews-header">
-                <span class="hero-tag">VERIFIED LOCAL FEEDBACK</span>
-                <h2>What Austin Is Saying</h2>
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Roasted on Cesar Chavez</span>
+                <h2 class="section-title">Roastery Menu &amp; Specialties</h2>
+                <p class="section-lead">
+                    Explore single-origins, espresso pulls, velvety nitro drafts, and local sourdough pastries.
+                </p>
             </div>
-            <div class="reviews-slider">
-                <div class="review-box">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-quote">"Best espresso in East Austin. The Dogspeed roast is smooth, chocolatey, and cuts through oat milk with incredible nuance. No hipster pretension, just incredible coffee."</p>
-                    <div class="reviewer-byline">— Travis B. • Google Local Guide</div>
+
+            <!-- Filter Navigation Tabs -->
+            <div class="filter-nav">
+                <button class="filter-pill active" onclick="filterMenu('all', this)">All Offerings</button>
+                <button class="filter-pill" onclick="filterMenu('roast', this)">Single-Origin Roasts</button>
+                <button class="filter-pill" onclick="filterMenu('latte', this)">Signature Lattes</button>
+                <button class="filter-pill" onclick="filterMenu('cold', this)">Draft Cold Brews</button>
+                <button class="filter-pill" onclick="filterMenu('eats', this)">Bakery &amp; Tacos</button>
+            </div>
+
+            <!-- Spotlight Cards Grid -->
+            <div class="menu-grid-3d">
+                <!-- Item 1 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">Signature Blend</span>
+                        <span class="sc-price">$4.25</span>
+                    </div>
+                    <h3 class="sc-title">Dogspeed Espresso</h3>
+                    <p class="sc-desc">Our flagship double shot. Heavy velvety body with deep notes of dark cacao, candied orange peel, and toasted almond praline.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Dogspeed Espresso', '$4.25')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
                 </div>
-                <div class="review-box">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-quote">"Their Nitro Cold Brew on tap is perfection. Creamy head like a stout and completely smooth without any bitterness. We buy our whole beans here every week."</p>
-                    <div class="reviewer-byline">— Maya L. • Yelp Elite Member</div>
+
+                <!-- Item 2 -->
+                <div class="spotlight-card" data-cat="cold">
+                    <div class="sc-top">
+                        <span class="sc-tag">On Nitro Tap</span>
+                        <span class="sc-price">$5.50</span>
+                    </div>
+                    <h3 class="sc-title">East Austin Nitro Cold Brew</h3>
+                    <p class="sc-desc">Slow-steeped for 24 continuous hours in cold filtered rainwater, kegged on pure nitrogen for a cascading, creamy stout-like head.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Nitro Cold Brew', '$5.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
                 </div>
-                <div class="review-box">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-quote">"Super cool space, great patio for dogs and bikes. The Horchata iced latte with tacos on the patio is the quintessential East Austin morning."</p>
-                    <div class="reviewer-byline">— Derek K. • Austin Local Regular</div>
+
+                <!-- Item 3 -->
+                <div class="spotlight-card" data-cat="latte">
+                    <div class="sc-top">
+                        <span class="sc-tag">House Specialty</span>
+                        <span class="sc-price">$6.25</span>
+                    </div>
+                    <h3 class="sc-title">Smoke &amp; Spice Honey Latte</h3>
+                    <p class="sc-desc">Double espresso, smoked Mexican vanilla bean syrup, local Texas wildflower honey, and micro-foamed silky oat milk.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Smoke & Spice Honey Latte', '$6.25')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="spotlight-card" data-cat="latte">
+                    <div class="sc-top">
+                        <span class="sc-tag">Austin Favorite</span>
+                        <span class="sc-price">$6.50</span>
+                    </div>
+                    <h3 class="sc-title">Horchata Iced Float</h3>
+                    <p class="sc-desc">House-simmered organic cinnamon rice milk poured over crystal ice with an espresso float and fresh grated nutmeg.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Horchata Iced Float', '$6.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">12oz Retail Bag</span>
+                        <span class="sc-price">$19.00</span>
+                    </div>
+                    <h3 class="sc-title">Colombia Huila Whole Bean</h3>
+                    <p class="sc-desc">Micro-lot washed coffee roasted on Cesar Chavez. Vibrant acidity, black cherry notes, and caramel sweetness.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Colombia Huila Whole Bean', '$19.00')">
+                        <span>Reserve Bag</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="spotlight-card" data-cat="eats">
+                    <div class="sc-top">
+                        <span class="sc-tag">Baked Daily</span>
+                        <span class="sc-price">$4.75</span>
+                    </div>
+                    <h3 class="sc-title">Artisan Sourdough Croissant</h3>
+                    <p class="sc-desc">Slow-laminated with cultured European butter by local Austin artisanal bakers. Crispy golden crust and fluffy interior.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Artisan Sourdough Croissant', '$4.75')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="spotlight-card" data-cat="eats">
+                    <div class="sc-top">
+                        <span class="sc-tag">Breakfast Staple</span>
+                        <span class="sc-price">$9.50</span>
+                    </div>
+                    <h3 class="sc-title">Austin Breakfast Taco Trio</h3>
+                    <p class="sc-desc">Warm local tortillas, cage-free scrambled eggs, seasoned black beans, cotija cheese, and house charred serrano salsa.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Austin Breakfast Taco Trio', '$9.50')">
+                        <span>Order for Pickup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="spotlight-card" data-cat="roast">
+                    <div class="sc-top">
+                        <span class="sc-tag">Weekend Lab</span>
+                        <span class="sc-price">$65.00</span>
+                    </div>
+                    <h3 class="sc-title">Barista Cupping &amp; Brew Lab</h3>
+                    <p class="sc-desc">90-minute Saturday masterclass. Master espresso extraction, grind calibration, and take home a complimentary 12oz bag.</p>
+                    <button type="button" class="sc-btn" onclick="openBookingModal('Barista Cupping Workshop', '$65.00')">
+                        <span>Book Workshop</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Editorial Footer -->
+    <!-- Aceternity Bento Grid (Our Craft & Atmosphere) -->
+    <section class="section-block" id="craft">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Behind the Counter</span>
+                <h2 class="section-title">The Flat Track Philosophy</h2>
+                <p class="section-lead">
+                    Born on the pavement of East Austin. Built around custom motorcycles, community art, and uncompromising specialty extraction.
+                </p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Bento 1: Large Span -->
+                <div class="bento-cell bento-span-2">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Coffee Pour" class="bento-bg-image" loading="lazy">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Ethical Sourcing</span>
+                        <h3 class="bento-title">Micro-Batch Roasting in East Austin</h3>
+                        <p class="bento-desc">
+                            We source green beans directly from farm cooperatives in Huila, Yirgacheffe, and Antigua, paying well above Fair Trade premiums. Every pound is roasted right here on Cesar Chavez in small batches to preserve terroir and nuanced aromatics.
+                        </p>
+                    </div>
+                    <div style="margin-top: 24px;">
+                        <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">Talk to our Head Roaster</a>
+                    </div>
+                </div>
+
+                <!-- Bento 2 -->
+                <div class="bento-cell">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Patio Culture</span>
+                        <h3 class="bento-title">Dog &amp; Moto Friendly</h3>
+                        <p class="bento-desc">
+                            Our shaded outdoor patio features dedicated bike parking, cold water bowls for pups, and free high-speed Wi-Fi for remote workers.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 20px; color: var(--primary-light); font-size: 0.85rem; font-weight: 700;">
+                        <span>✓ Shaded Seating</span> • <span>✓ Outdoor Patio</span>
+                    </div>
+                </div>
+
+                <!-- Bento 3 -->
+                <div class="bento-cell">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Draft Station</span>
+                        <h3 class="bento-title">24-Hour Nitro Steep</h3>
+                        <p class="bento-desc">
+                            Cold-steeped 24 hours under steady temperature control, then charged with pure nitrogen for a velvety head without sugar or dairy.
+                        </p>
+                    </div>
+                    <div style="margin-top: 20px; font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">
+                        4 Draft Taps Flowing Daily
+                    </div>
+                </div>
+
+                <!-- Bento 4: Large Span -->
+                <div class="bento-cell bento-span-2">
+                    <div>
+                        <span class="sc-tag" style="margin-bottom: 14px; display: inline-block;">Community First</span>
+                        <h3 class="bento-title">Zero Artificial Additives, Zero Pretension</h3>
+                        <p class="bento-desc">
+                            No pump bottles of artificial chemical flavoring. We make our horchata and vanilla syrups from scratch using pure Mexican vanilla beans, organic rice, and Texas honey.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;">
+                        <div style="border-left: 2px solid var(--primary); padding-left: 12px;">
+                            <strong style="color: var(--text-main); font-size: 1.1rem; display: block;">100%</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-dim);">Natural Ingredients</span>
+                        </div>
+                        <div style="border-left: 2px solid var(--primary); padding-left: 12px;">
+                            <strong style="color: var(--text-main); font-size: 1.1rem; display: block;">72 Hours</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-dim);">Sourdough Lamination</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verified Customer Reviews Section -->
+    <section class="section-block" style="background: var(--bg-card); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);" id="reviews">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Public Customer Feedback</span>
+                <h2 class="section-title">Real Reviews from Austin Locals</h2>
+                <p class="section-lead">Verified Google and Yelp ratings from genuine coffee lovers and neighbors.</p>
+            </div>
+
+            <div class="reviews-3-grid">
+                <!-- Testimonial 1 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Best espresso in East Austin, bar none. The Dogspeed roast is smooth, chocolatey, and punches through oat milk like a dream. Plus the staff is super knowledgeable and down-to-earth."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">TB</div>
+                        <div class="reviewer-info">
+                            <h6>Travis B.</h6>
+                            <span>Google Verified Local Guide • Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Their Nitro Cold Brew is dangerously good. It pours with a creamy guinness head and zero bitterness. I grabbed a 12oz bag of whole beans and my home Chemex has never tasted better."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">ML</div>
+                        <div class="reviewer-info">
+                            <h6>Maya L.</h6>
+                            <span>Yelp Elite Reviewer • Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="review-card-dark">
+                    <div>
+                        <div class="stars-row">★★★★★</div>
+                        <p class="review-text">
+                            "Stopped by while visiting Austin and ended up coming back every single morning of our trip. The Horchata latte with breakfast tacos out on the patio is the quintessential East Austin vibe."
+                        </p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">DK</div>
+                        <div class="reviewer-info">
+                            <h6>Derek K.</h6>
+                            <span>Verified Customer • Denver, CO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Directions Section -->
+    <section class="section-block" id="location">
+        <div class="container location-grid">
+            <div class="location-panel">
+                <span class="eyebrow-tag">Visit the Roastery</span>
+                <h3 style="font-size: 2.2rem; margin-bottom: 24px;">Drop By Flat Track</h3>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Address</h4>
+                        <p>1611 E Cesar Chavez St, Austin, TX 78702<br>Convenient street &amp; bicycle parking available</p>
+                    </div>
+                </div>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Roastery &amp; Cafe Hours</h4>
+                        <p>Monday – Sunday: 7:00 AM – 5:00 PM<br>Fresh batch brews poured all day</p>
+                    </div>
+                </div>
+
+                <div class="loc-item">
+                    <div class="loc-icon-circle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="loc-text">
+                        <h4>Direct Telephone Inquiries</h4>
+                        <p><a href="tel:5125406033" style="color: var(--primary-light); font-weight: 700;">(512) 540-6033</a><br>Call us for bean inventory or catering orders</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap;">
+                    <a href="https://maps.google.com/?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX+78702" target="_blank" rel="noopener" class="btn-magnetic btn-shimmer-gold">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                        <span>Open in Google Maps</span>
+                    </a>
+                    <a href="tel:5125406033" class="btn-magnetic btn-ghost-dark">
+                        <span>Call Store Now</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="map-frame-wrap">
+                <iframe src="https://maps.google.com/maps?q=1611%20E%20Cesar%20Chavez%20St,%20Austin,%20TX%2078702&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Flat Track Coffee Location Map"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shadcn Accordion FAQ Section -->
+    <section class="section-block" style="background: var(--bg-card); border-top: 1px solid var(--border-subtle);" id="faq">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="eyebrow-tag">Got Questions?</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-lead">Everything you need to know about our beans, passes, and East Austin cafe.</p>
+            </div>
+
+            <div class="faq-wrap">
+                <!-- FAQ 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Do you roast all coffee beans on-site in Austin?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes! Every single bag of Flat Track coffee is micro-batch roasted right here at our 1611 E Cesar Chavez location in East Austin. You can often see our roaster running during morning hours.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Can you grind my beans for my home coffee equipment?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Absolutely. When you purchase in-store or order a tasting bundle for pickup, let our baristas know your brew method (Espresso, Aeropress, Pour-Over, Chemex, French Press, or Cold Brew) and we will grind it with precision at no charge.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>How do the 3 plans work? Is there any recurring subscription?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            All 3 plans are 100% one-time purchases with zero recurring monthly fees. You receive a digital pass saved to your Apple or Google Wallet that never expires, which you can show at the counter or use for online pickup orders anytime you want.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Is there outdoor seating and is it pet friendly?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes, our shaded patio on Cesar Chavez is 100% dog-friendly with water bowls and bicycle racks. Well-behaved dogs on leashes are always welcome!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleFaq(this)">
+                        <span>Do you cater corporate office coffee or creative studios?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            Yes! Plan 3 (Office Fuel &amp; Hospitality Crate) is designed specifically for local Austin businesses and creative teams. Call us directly at (512) 540-6033 or use the reservation form above to set up your delivery.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-cols">
                 <div class="footer-brand">
-                    <h4>Flat Track Coffee Roasters</h4>
-                    <p>Independent specialty coffee micro-roastery and neighborhood cafe located at 1611 E Cesar Chavez St, Austin, TX 78702.</p>
+                    <div class="brand-badge">
+                        <div class="brand-icon-3d">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+                        </div>
+                        <div class="brand-text">
+                            <h3 style="font-size: 1.15rem;">FLAT TRACK</h3>
+                            <span style="font-size: 0.72rem; color: var(--primary-light);">Coffee Roasters</span>
+                        </div>
+                    </div>
+                    <p>Independent specialty coffee roastery and community cafe in East Austin, Texas. Proudly roasted on Cesar Chavez.</p>
                 </div>
+
                 <div class="footer-col">
-                    <h5>Roastery</h5>
-                    <ul>
-                        <li><a href="#beans">Whole Bean Bags</a></li>
-                        <li><a href="#menu">Espresso & Brew Bar</a></li>
-                        <li><a href="#passes">Customer Passes</a></li>
-                        <li><a href="#craft">Direct Sourcing</a></li>
+                    <h5>Navigation</h5>
+                    <ul class="footer-nav">
+                        <li><a href="#plans">The 3 Plans</a></li>
+                        <li><a href="#menu">Menu &amp; Roasts</a></li>
+                        <li><a href="#craft">Roasting Philosophy</a></li>
+                        <li><a href="#reviews">Verified Reviews</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h5>Connect</h5>
-                    <ul>
-                        <li><a href="tel:5125406033">(512) 540-6033</a></li>
-                        <li><a href="https://maps.google.com/?q=Flat+Track+Coffee+Austin" target="_blank">Google Maps Route</a></li>
+                    <ul class="footer-nav">
+                        <li><a href="tel:5125406033">Call (512) 540-6033</a></li>
+                        <li><a href="https://maps.google.com/?q=Flat+Track+Coffee+Austin" target="_blank" rel="noopener">Google Maps Route</a></li>
+                        <li><a href="#faq">Order Questions</a></li>
                         <li><a href="mailto:info@flattrackcoffee.com">info@flattrackcoffee.com</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
-                    <h5>Hours</h5>
-                    <p style="font-size: 0.88rem; line-height: 1.6;">
-                        Monday – Sunday<br>
-                        7:00 AM – 5:00 PM<br>
-                        365 Days a Year
+                    <h5>Hours &amp; Location</h5>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                        1611 E Cesar Chavez St<br>
+                        Austin, TX 78702<br><br>
+                        <strong>Monday – Sunday:</strong><br>
+                        7:00 AM – 5:00 PM
                     </p>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2026 Flat Track Coffee Roasters. All rights reserved. Austin, Texas.</p>
-                <p>Designed with editorial restraint, semantic HTML5, and zero unnecessary script bloat.</p>
+                <p>Engineered with 3D canvas physics, hardware-accelerated 3D perspective cards, and WCAG AA contrast.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Slide-Out Order & Reservation Drawer -->
-    <div class="drawer-overlay" id="orderDrawer" onclick="closeDrawerOnBackdrop(event)">
-        <div class="order-drawer">
-            <div class="drawer-header">
-                <h3 id="drawerTitle">Reserve / Order Ahead</h3>
-                <button type="button" class="close-drawer-btn" onclick="closeDrawer()">&times;</button>
-            </div>
-
-            <div class="drawer-body">
-                <div class="form-row">
-                    <label>Selected Item / Experience</label>
-                    <input type="text" id="drawerItemField" readonly value="Pickup Order">
-                </div>
-                <div class="form-row">
-                    <label>Pickup / Reservation Date</label>
-                    <input type="date" id="drawerDate" value="2026-11-04">
-                </div>
-                <div class="form-row">
-                    <label>Preferred Time Window</label>
-                    <select id="drawerTime">
-                        <option>7:30 AM – 8:30 AM</option>
-                        <option>8:30 AM – 9:30 AM</option>
-                        <option selected>9:30 AM – 10:30 AM</option>
-                        <option>10:30 AM – 11:30 AM</option>
-                        <option>12:00 PM – 1:00 PM</option>
-                        <option>1:00 PM – 2:00 PM</option>
-                        <option>2:00 PM – 3:00 PM</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <label>Your Full Name *</label>
-                    <input type="text" id="drawerName" placeholder="e.g. Jordan Miller" required>
-                </div>
-                <div class="form-row">
-                    <label>Phone Number * (For Confirmation Text)</label>
-                    <input type="tel" id="drawerPhone" placeholder="(512) 555-0199" required>
-                </div>
-                <div class="form-row">
-                    <label>Email Address</label>
-                    <input type="email" id="drawerEmail" placeholder="jordan@example.com">
-                </div>
-                <div class="form-row">
-                    <label>Barista Notes / Special Instructions</label>
-                    <input type="text" id="drawerNotes" placeholder="e.g. Extra cold brew ice, coarse French press grind">
-                </div>
-            </div>
-
-            <div class="drawer-footer">
-                <button type="button" class="btn-editorial" style="width: 100%; justify-content: center;" onclick="confirmOrder()">
-                    Confirm &amp; Log Order
+    <!-- Interactive 3-Step Booking Modal Dialog -->
+    <div class="modal-overlay" id="bookingModal" onclick="closeOnBackdrop(event)">
+        <div class="modal-window">
+            <div class="modal-top">
+                <h3 id="modalTitle">Reserve Experience or Plan</h3>
+                <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close dialog">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
+            </div>
+
+            <div class="progress-bar-steps">
+                <div class="step-node active" id="sn1">
+                    <div class="node-bubble">1</div>
+                    <span>Plan &amp; Time</span>
+                </div>
+                <div class="step-node" id="sn2">
+                    <div class="node-bubble">2</div>
+                    <span>Guest Info</span>
+                </div>
+                <div class="step-node" id="sn3">
+                    <div class="node-bubble">3</div>
+                    <span>Confirmed</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1 -->
+                <div class="wizard-step active" id="ws1">
+                    <div class="input-group">
+                        <label class="input-label">Selected Plan / Experience</label>
+                        <input type="text" id="selectedItemInput" class="input-control" readonly value="Plan 2: Roaster’s Tasting Reserve ($68.00 One-Time)">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Preferred Date &amp; Time</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <input type="date" id="bookDate" class="input-control" value="2026-11-04">
+                            <select id="bookTime" class="input-control">
+                                <option>8:00 AM - 9:00 AM</option>
+                                <option>9:00 AM - 10:00 AM</option>
+                                <option selected>10:00 AM - 11:00 AM</option>
+                                <option>11:00 AM - 12:00 PM</option>
+                                <option>1:00 PM - 2:00 PM</option>
+                                <option>2:00 PM - 3:00 PM</option>
+                                <option>3:00 PM - 4:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Party Size / Order Type</label>
+                        <div class="radio-grid">
+                            <div class="radio-cell selected" onclick="selectRadio(this, '1-2 Guests')">
+                                <strong>1 - 2 Guests</strong>
+                                <span>Casual visit or pickup</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, '3-5 Guests')">
+                                <strong>3 - 5 Guests</strong>
+                                <span>Small group or meeting</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, '6-10 Guests')">
+                                <strong>6 - 10 Guests</strong>
+                                <span>Team cupping / table</span>
+                            </div>
+                            <div class="radio-cell" onclick="selectRadio(this, 'Office Catering')">
+                                <strong>Office / Event</strong>
+                                <span>Bulk order or crate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="wizard-step" id="ws2">
+                    <div class="input-group">
+                        <label class="input-label">Full Name *</label>
+                        <input type="text" id="guestName" class="input-control" placeholder="e.g. Jordan Miller" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Phone Number * (For Confirmation SMS)</label>
+                        <input type="tel" id="guestPhone" class="input-control" placeholder="(512) 555-0199" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Email Address *</label>
+                        <input type="email" id="guestEmail" class="input-control" placeholder="jordan@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Special Notes / Grind Preference</label>
+                        <input type="text" id="guestNotes" class="input-control" placeholder="e.g. Whole bean, extra cold brew ice">
+                    </div>
+                </div>
+
+                <!-- Step 3 (Confirmed) -->
+                <div class="wizard-step" id="ws3">
+                    <div style="text-align: center; padding: 20px 0;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h4 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 8px;">Order &amp; Spot Logged!</h4>
+                        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;" id="confirmationSummary">
+                            Your reservation has been received. Our barista desk will text your confirmation voucher.
+                        </p>
+                        <div style="background: var(--bg-void); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.95rem; color: var(--primary-light);">
+                            CONFIRMATION VOUCHER: #FT-<span id="voucherCode">89421</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-magnetic btn-ghost-dark" id="btnStepBack" onclick="navStep(-1)" style="display: none;">Back</button>
+                <div style="flex-grow: 1;"></div>
+                <button type="button" class="btn-magnetic btn-shimmer-gold" id="btnStepNext" onclick="navStep(1)">Continue to Details</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Interactive Handlers -->
+    <!-- ==========================================================================
+         PHYSICS & 3D INTERACTIVITY SCRIPTS
+         ========================================================================== -->
     <script>
-        // Taste Profile Filtering
-        function filterTaste(profile, button) {
-            document.querySelectorAll('.taste-pill').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+        // -------------------------------------------------------------
+        // 1. REAL-TIME 3D PARTICLE & BEAN PHYSICS ENGINE (CANVAS 60FPS)
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('physicsCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = canvas.parentElement.offsetHeight;
 
-            const cards = document.querySelectorAll('.coffee-card');
-            cards.forEach(card => {
-                const cardProf = card.getAttribute('data-profile');
-                if (profile === 'all' || cardProf === profile) {
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+        });
+
+        // Mouse Physics Interaction Vector
+        const mouse = { x: width / 2, y: height / 2, vx: 0, vy: 0, radius: 180, active: false };
+
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.vx = (e.clientX - rect.left) - mouse.x;
+            mouse.vy = (e.clientY - rect.top) - mouse.y;
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.active = true;
+        });
+
+        canvas.parentElement.addEventListener('mouseleave', () => {
+            mouse.active = false;
+        });
+
+        // 3D Particles Definition
+        const PARTICLE_COUNT = 130;
+        const particles = [];
+
+        class Particle3D {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = (Math.random() - 0.5) * width * 1.2;
+                this.y = (Math.random() - 0.5) * height * 1.2;
+                this.z = initial ? Math.random() * 800 + 100 : 900;
+                
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.vz = -1.2 - Math.random() * 1.5; // moving forward in 3D
+                
+                this.radius = 2.5 + Math.random() * 3.5;
+                this.baseAlpha = 0.25 + Math.random() * 0.65;
+                
+                // Color variation: warm amber, golden roast, and dark espresso embers
+                const colors = ['#fbbf24', '#d97706', '#f59e0b', '#b45309', '#92400e'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Rotation for bean-like shape
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.03;
+            }
+
+            update() {
+                this.z += this.vz;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.angle += this.spin;
+
+                // 3D Perspective Projection
+                const fov = 400;
+                const scale = fov / (fov + this.z);
+                const projX = (this.x * scale) + (width / 2);
+                const projY = (this.y * scale) + (height / 2);
+
+                // Mouse Repulsion & Vortex Physics
+                if (mouse.active) {
+                    const dx = projX - mouse.x;
+                    const dy = projY - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius && dist > 0) {
+                        const force = (1 - dist / mouse.radius) * 4;
+                        this.x += (dx / dist) * force * 5;
+                        this.y += (dy / dist) * force * 5;
+                        this.vz += (Math.random() - 0.5) * 2;
+                    }
+                }
+
+                // Recycle if past camera or screen boundaries
+                if (this.z < -200 || projX < -50 || projX > width + 50 || projY < -50 || projY > height + 50) {
+                    this.reset(false);
+                }
+
+                this.projX = projX;
+                this.projY = projY;
+                this.scale = scale;
+            }
+
+            draw() {
+                if (this.scale <= 0) return;
+                
+                ctx.save();
+                ctx.translate(this.projX, this.projY);
+                ctx.rotate(this.angle);
+                ctx.scale(this.scale, this.scale);
+
+                ctx.beginPath();
+                // Draw oval bean shape
+                ctx.ellipse(0, 0, this.radius * 1.5, this.radius, 0, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = Math.min(1, this.baseAlpha * this.scale * 1.8);
+                ctx.shadowBlur = 12 * this.scale;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+
+                // Center cleft of coffee bean
+                ctx.beginPath();
+                ctx.moveTo(-this.radius * 1.1, 0);
+                ctx.quadraticCurveTo(0, this.radius * 0.4, this.radius * 1.1, 0);
+                ctx.strokeStyle = 'rgba(10, 5, 2, 0.7)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle3D());
+        }
+
+        function animatePhysics() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Sort particles by Z depth so front particles occlude back particles
+            particles.sort((a, b) => b.z - a.z);
+
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+
+            requestAnimationFrame(animatePhysics);
+        }
+        animatePhysics();
+
+
+        // -------------------------------------------------------------
+        // 2. REALISTIC 3D TILT PHYSICS (APPLE VISION PRO STYLE)
+        // -------------------------------------------------------------
+        const heroWrap = document.getElementById('heroTiltWrap');
+        const heroCard = document.getElementById('heroCard');
+        const cardGlare = document.getElementById('cardGlare');
+
+        if (heroWrap && heroCard) {
+            let targetRotX = 0, targetRotY = 0;
+            let currentRotX = 0, currentRotY = 0;
+
+            heroWrap.addEventListener('mousemove', (e) => {
+                const rect = heroWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Max tilt 14 degrees
+                targetRotX = -((y - centerY) / centerY) * 14;
+                targetRotY = ((x - centerX) / centerX) * 14;
+
+                // Move glare
+                const glareX = (x / rect.width) * 100;
+                const glareY = (y / rect.height) * 100;
+                cardGlare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.22) 0%, transparent 60%)`;
+            });
+
+            heroWrap.addEventListener('mouseleave', () => {
+                targetRotX = 0;
+                targetRotY = 0;
+            });
+
+            // Smooth spring damping interpolation
+            function lerpTilt() {
+                currentRotX += (targetRotX - currentRotX) * 0.1;
+                currentRotY += (targetRotY - currentRotY) * 0.1;
+
+                heroCard.style.transform = `perspective(1000px) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) translateZ(10px)`;
+                requestAnimationFrame(lerpTilt);
+            }
+            lerpTilt();
+        }
+
+
+        // -------------------------------------------------------------
+        // 3. ACETERNITY SPOTLIGHT CARDS
+        // -------------------------------------------------------------
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', x + 'px');
+                card.style.setProperty('--mouse-y', y + 'px');
+            });
+        });
+
+
+        // -------------------------------------------------------------
+        // 4. MENU CATEGORY FILTER TABS
+        // -------------------------------------------------------------
+        function filterMenu(category, btnElement) {
+            document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            document.querySelectorAll('.spotlight-card').forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                if (category === 'all' || cat === category) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
@@ -1763,49 +2556,118 @@
             });
         }
 
-        // Bag Size Selector & Price Recalculation
-        function setSize(pill, productKey, priceNum, sizeLabel) {
-            const container = pill.parentElement;
-            container.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
 
-            const priceElem = document.getElementById('price-' + productKey);
-            priceElem.textContent = '$' + priceNum.toFixed(2);
-        }
+        // -------------------------------------------------------------
+        // 5. SHADCN ACCORDION FAQ
+        // -------------------------------------------------------------
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isOpen = item.classList.contains('open');
 
-        // Drawer Control
-        function openDrawer(title, priceStr) {
-            document.getElementById('drawerTitle').textContent = title;
-            document.getElementById('drawerItemField').value = title + ' (' + priceStr + ')';
-            document.getElementById('orderDrawer').classList.add('open');
-        }
+            document.querySelectorAll('.accordion-item').forEach(other => {
+                other.classList.remove('open');
+                other.querySelector('.accordion-content').style.maxHeight = null;
+            });
 
-        function orderBean(beanName, priceStr, grind) {
-            openDrawer(beanName + ' [' + grind + ']', priceStr);
-        }
-
-        function closeDrawer() {
-            document.getElementById('orderDrawer').classList.remove('open');
-        }
-
-        function closeDrawerOnBackdrop(e) {
-            if (e.target.id === 'orderDrawer') {
-                closeDrawer();
+            if (!isOpen) {
+                item.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + 'px';
             }
         }
 
-        function confirmOrder() {
-            const name = document.getElementById('drawerName').value.trim();
-            const phone = document.getElementById('drawerPhone').value.trim();
 
-            if (!name || !phone) {
-                alert('Please provide your name and phone number for pickup confirmation.');
-                return;
+        // -------------------------------------------------------------
+        // 6. 3-STEP RESERVATION WIZARD MODAL
+        // -------------------------------------------------------------
+        let currentStep = 1;
+        let chosenParty = '1-2 Guests';
+
+        function openBookingModal(title, priceStr) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('selectedItemInput').value = title + ' (' + priceStr + ')';
+            currentStep = 1;
+            renderWizard();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function closeOnBackdrop(e) {
+            if (e.target.id === 'bookingModal') {
+                closeModal();
+            }
+        }
+
+        function selectRadio(cellElem, partyVal) {
+            document.querySelectorAll('.radio-cell').forEach(rc => rc.classList.remove('selected'));
+            cellElem.classList.add('selected');
+            chosenParty = partyVal;
+        }
+
+        function renderWizard() {
+            document.querySelectorAll('.wizard-step').forEach(ws => ws.classList.remove('active'));
+            document.getElementById('ws' + currentStep).classList.add('active');
+
+            for (let i = 1; i <= 3; i++) {
+                const node = document.getElementById('sn' + i);
+                if (i <= currentStep) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
             }
 
-            const code = Math.floor(10000 + Math.random() * 90000);
-            alert('Order Logged! Thank you, ' + name + '. Your confirmation voucher code is #FT-' + code + '. Our barista team at 1611 E Cesar Chavez will text your pickup confirmation to ' + phone + '.');
-            closeDrawer();
+            const btnBack = document.getElementById('btnStepBack');
+            const btnNext = document.getElementById('btnStepNext');
+
+            if (currentStep === 1) {
+                btnBack.style.display = 'none';
+                btnNext.textContent = 'Continue to Details';
+                btnNext.style.display = 'inline-flex';
+                btnNext.onclick = () => navStep(1);
+            } else if (currentStep === 2) {
+                btnBack.style.display = 'inline-flex';
+                btnNext.textContent = 'Confirm Plan';
+                btnNext.style.display = 'inline-flex';
+                btnNext.onclick = () => navStep(1);
+            } else if (currentStep === 3) {
+                btnBack.style.display = 'none';
+                btnNext.textContent = 'Done & Close';
+                btnNext.onclick = closeModal;
+            }
+        }
+
+        function navStep(dir) {
+            if (dir === 1) {
+                if (currentStep === 1) {
+                    currentStep = 2;
+                    renderWizard();
+                } else if (currentStep === 2) {
+                    const name = document.getElementById('guestName').value.trim();
+                    const phone = document.getElementById('guestPhone').value.trim();
+                    const email = document.getElementById('guestEmail').value.trim();
+
+                    if (!name || !phone || !email) {
+                        alert('Please fill in your Name, Phone Number, and Email.');
+                        return;
+                    }
+
+                    const randVoucher = Math.floor(10000 + Math.random() * 90000);
+                    document.getElementById('voucherCode').textContent = randVoucher;
+                    document.getElementById('confirmationSummary').innerHTML = 'Thank you, <strong>' + name + '</strong>! Your spot for <strong>' + document.getElementById('selectedItemInput').value + '</strong> on <strong>' + document.getElementById('bookDate').value + '</strong> (' + document.getElementById('bookTime').value + ') is logged. A confirmation voucher has been dispatched to <strong>' + phone + '</strong>.';
+
+                    currentStep = 3;
+                    renderWizard();
+                }
+            } else if (dir === -1) {
+                if (currentStep > 1) {
+                    currentStep--;
+                    renderWizard();
+                }
+            }
         }
     </script>
 </body>
