@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flat Track Coffee Roasters | Austin, TX | Tier 2 Live Ordering & POS</title>
-  <meta name="description" content="East Austin's specialty micro-roastery. Order ahead, reserve your table, view our roastery map, and connect with our live owner kitchen portal.">
+  <title>Flat Track Coffee Roasters | Austin, TX | Specialty Roastery & Kitchen</title>
+  <meta name="description" content="East Austin's specialty micro-roastery. Double-pulled espresso, nitro cold brews, breakfast tacos, and outdoor patio seating on Cesar Chavez.">
   <link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,7 @@
       --red: #ef4444;
       --red-dim: rgba(239, 68, 68, 0.12);
       --orange: #f59e0b;
+      --orange-dim: rgba(245, 158, 11, 0.12);
       --blue: #3b82f6;
       --overlay: rgba(10, 9, 8, 0.85);
     }
@@ -67,39 +68,39 @@
       opacity: 0.3;
     }
 
-    /* Top Navigation Bar */
+    /* Top Navigation Bar - 100% Client-Facing */
     .top-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 60px;
+      height: 64px;
       z-index: 999;
-      background: rgba(10, 9, 8, 0.92);
+      background: rgba(10, 9, 8, 0.94);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 28px;
+      padding: 0 32px;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .nav-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--gold);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       letter-spacing: -0.01em;
     }
 
@@ -109,15 +110,15 @@
       color: var(--text-secondary);
       border: 1px solid var(--border);
       border-radius: 50px;
-      padding: 3px 10px;
+      padding: 4px 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
     .nav-center {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
     }
 
     .nav-center a {
@@ -169,27 +170,26 @@
       font-weight: 700;
     }
 
-    .owner-portal-nav-btn {
-      background: rgba(201, 168, 76, 0.1);
-      border: 1px solid var(--border-active);
-      color: var(--gold);
+    .call-us-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 50px;
       text-decoration: none;
-      display: flex;
+      transition: all 0.2s;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      white-space: nowrap;
     }
 
-    .owner-portal-nav-btn:hover {
-      background: var(--gold);
-      color: #0a0908;
+    .call-us-btn:hover {
       border-color: var(--gold);
-      box-shadow: 0 4px 14px rgba(201, 168, 76, 0.35);
+      color: var(--gold);
     }
 
     /* Hero Section */
@@ -212,7 +212,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(34, 197, 94, 0.1);
+      background: var(--green-dim);
       border: 1px solid rgba(34, 197, 94, 0.3);
       border-radius: 50px;
       padding: 6px 18px;
@@ -220,13 +220,20 @@
       color: var(--green);
       font-family: 'JetBrains Mono', monospace;
       margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .hero-status-badge.closed {
+      background: var(--orange-dim);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--orange);
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--green);
+      background: currentColor;
       animation: pulse 2s infinite ease-in-out;
     }
 
@@ -955,7 +962,7 @@
       transform: translateY(-2px);
     }
 
-    /* Direct Owner & Roastery Contact Section */
+    /* Direct Contact Section */
     #contactSection {
       position: relative;
       z-index: 1;
@@ -981,19 +988,19 @@
       margin-top: 24px;
     }
 
-    /* Footer */
+    /* Footer - Customer Facing */
     footer {
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 48px 24px 32px;
+      padding: 56px 24px 36px;
       text-align: center;
       background: var(--bg-base);
     }
 
     .footer-logo {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--gold);
       margin-bottom: 8px;
@@ -1008,15 +1015,15 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 22px;
-      margin-bottom: 20px;
+      gap: 26px;
+      margin-bottom: 22px;
       flex-wrap: wrap;
     }
 
     .footer-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 13.5px;
       transition: color 0.2s;
     }
 
@@ -1084,6 +1091,10 @@
       .map-nav-actions {
         grid-template-columns: 1fr;
       }
+      .call-us-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -1092,11 +1103,11 @@
   <!-- Ambient Particles Canvas -->
   <canvas id="ambientCanvas"></canvas>
 
-  <!-- Top Navigation -->
+  <!-- Top Navigation - Pure Customer Experience -->
   <nav class="top-nav">
     <div class="nav-left">
       <a href="#hero" class="nav-logo">☕ Flat Track</a>
-      <span class="nav-badge">Tier 2 · Live Ordering</span>
+      <span class="nav-badge">Austin, TX · Specialty Roasters</span>
     </div>
 
     <div class="nav-center">
@@ -1113,8 +1124,8 @@
         <a href="../tier2.html" class="active">Tier 2</a>
         <a href="../tier3.html">Tier 3</a>
       </div>
-      <a href="owner.html" target="_blank" class="owner-portal-nav-btn" title="Open Dedicated Owner & Kitchen Terminal in New Window">
-        <span>Owner Portal ↗</span>
+      <a href="tel:+15125406033" class="call-us-btn">
+        <span>📞 (512) 540-6033</span>
       </a>
     </div>
   </nav>
@@ -1123,7 +1134,7 @@
   <section id="hero">
     <div class="hero-status-badge" id="heroStatusBadge">
       <span class="status-dot"></span>
-      <span id="heroStatusText">Open Now · 1611 E Cesar Chavez St · Austin, TX</span>
+      <span id="heroStatusText">Checking Roastery Hours...</span>
     </div>
 
     <h1 class="hero-title">
@@ -1131,7 +1142,7 @@
     </h1>
 
     <p class="hero-tagline">
-      East Austin's specialty micro-roastery. Order ahead, reserve your table — connected live to our barista terminal.
+      East Austin's specialty micro-roastery. Order ahead for counter pickup, reserve your table, and experience handcrafted single-origin lots.
     </p>
 
     <div class="hero-actions">
@@ -1154,7 +1165,7 @@
   <section id="menuSection">
     <div class="section-label">LIVE MENU</div>
     <h2 class="section-title">Order Ahead for Counter Pickup</h2>
-    <p class="section-subtitle">Skip the queue. Items placed here go directly to our barista terminal.</p>
+    <p class="section-subtitle">Skip the queue. Freshly roasted coffee and kitchen plates prepared directly for pickup.</p>
 
     <!-- Category Tabs -->
     <div class="category-tabs" id="categoryTabs">
@@ -1165,9 +1176,9 @@
       <button class="category-tab" onclick="filterMenuByCategory('beans', this)">Whole Beans</button>
     </div>
 
-    <!-- Menu Grid -->
+    <!-- Menu Grid (Dynamically rendered & synchronized with Owner Edits) -->
     <div class="menu-grid" id="menuGrid">
-      <!-- Generated via JS -->
+      <!-- Generated via JS from live menu data -->
     </div>
   </section>
 
@@ -1230,7 +1241,7 @@
     <div class="booking-inner">
       <div class="section-label">RESERVE</div>
       <h2 class="section-title">Book a Table at Flat Track</h2>
-      <p class="section-subtitle">Reservations are instantly visible to our floor team. No app, no account needed.</p>
+      <p class="section-subtitle">Reservations are immediately transmitted to our floor host. No app or account needed.</p>
 
       <form id="bookingForm" onsubmit="handleBooking(event)">
         <div class="form-grid-2">
@@ -1344,6 +1355,7 @@
         <div class="map-wrapper">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.1!2d-97.7168!3d30.2562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b5a4e7d0e4c9%3A0x1a2b3c4d5e6f7a8b!2s1611%20E%20Cesar%20Chavez%20St%2C%20Austin%2C%20TX%2078702!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+            title="Flat Track Coffee Roasters Austin Location Map"
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade">
@@ -1361,12 +1373,12 @@
     </div>
   </section>
 
-  <!-- Direct Owner & Roastery Contact Section -->
+  <!-- Direct Contact Section -->
   <section id="contactSection">
     <div class="contact-inner">
       <div class="section-label">DIRECT CONTACT</div>
-      <h2 class="section-title">Message the Roastery Owner & Team</h2>
-      <p class="section-subtitle">Have a question, catering request, or whole-bean wholesale inquiry? Messages sync directly to the owner portal.</p>
+      <h2 class="section-title">Message Our Roastery Team</h2>
+      <p class="section-subtitle">Have a question, catering request, or whole-bean wholesale inquiry? Send us a note and we will reply promptly.</p>
 
       <form id="contactForm" onsubmit="handleContactSubmit(event)">
         <div class="form-grid-2">
@@ -1402,19 +1414,19 @@
         </div>
 
         <button type="submit" class="btn-primary" style="width:100%; padding:14px;">
-          Send Message to Owner →
+          Send Message to Team →
         </button>
       </form>
 
       <div id="contactSuccess">
         <div class="success-icon">✉️</div>
         <div class="success-title">Message Delivered!</div>
-        <div class="booking-subtext">Your inquiry has been transmitted directly to our owner portal terminal. We will respond promptly within 24 hours.</div>
+        <div class="booking-subtext">Thank you for reaching out. Our roastery team has received your message and will respond within 24 hours.</div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer - Customer Facing -->
   <footer>
     <div class="footer-logo">Flat Track Coffee Roasters</div>
     <div class="footer-contact">1611 E Cesar Chavez St, Austin TX 78702 · (512) 540-6033</div>
@@ -1423,15 +1435,15 @@
       <a href="#bookingSection">Reserve</a>
       <a href="#locationSection">Location & Map</a>
       <a href="#contactSection">Contact</a>
-      <a href="owner.html" target="_blank" style="color:var(--gold); font-weight:600;">Owner Portal (Separate Website) ↗</a>
+      <a href="tel:+15125406033">Call (512) 540-6033</a>
     </div>
-    <div class="footer-copy">© 2024 Flat Track Coffee Roasters. Tier 2 · Frontend + Backend & Real-Time POS.</div>
+    <div class="footer-copy">© 2024 Flat Track Coffee Roasters. All rights reserved. Austin, Texas.</div>
   </footer>
 
   <!-- JavaScript -->
   <script>
-    // Master Menu Items Array per blueprint Section 3
-    const MENU_ITEMS = [
+    // Default Seed Menu (used if nothing saved in localStorage yet)
+    const DEFAULT_MENU_ITEMS = [
       {
         id: 1,
         name: "Dogspeed Espresso Double",
@@ -1483,104 +1495,68 @@
     ];
 
     // State Variables
-    let cart = {};          // { "Dogspeed Espresso Double": { price: 4.50, qty: 1 } }
-    let stockState = {};    // { 1: true, 2: true, ... }
-    let ordersState = [];   // Array of orders
-    let bookingsState = []; // Array of bookings
+    let menuItems = [];
+    let cart = {};          // { [itemId]: { id, name, price, qty } }
     let currentCategory = "all";
 
-    // Cross-tab Synchronization via BroadcastChannel with owner.html
+    // Cross-tab Synchronization via BroadcastChannel & LocalStorage fallback
     const bc = new BroadcastChannel("flattrack_sync");
     bc.onmessage = (ev) => {
       const { key, val } = ev.data;
-      if (key === "orders") {
-        ordersState = val;
-        localStorage.setItem("flattrack_orders", JSON.stringify(val));
-      }
-      if (key === "bookings") {
-        bookingsState = val;
-        localStorage.setItem("flattrack_bookings", JSON.stringify(val));
-      }
-      if (key === "stock") {
-        stockState = val;
-        localStorage.setItem("flattrack_stock", JSON.stringify(val));
-        renderMenuGrid(); // updates customer view live when owner toggles stock in owner.html
+      if (key === "menu") {
+        menuItems = val;
+        localStorage.setItem("flattrack_menu", JSON.stringify(val));
+        renderMenuGrid();
       }
     };
 
-    // Initialize State from LocalStorage
+    window.addEventListener("storage", (e) => {
+      if (e.key === "flattrack_menu" && e.newValue) {
+        try {
+          menuItems = JSON.parse(e.newValue);
+          renderMenuGrid();
+        } catch (err) {}
+      }
+    });
+
+    // Initialize State
     function initData() {
-      // Stock initialization
-      const savedStock = localStorage.getItem("flattrack_stock");
-      if (savedStock) {
+      const savedMenu = localStorage.getItem("flattrack_menu");
+      if (savedMenu) {
         try {
-          stockState = JSON.parse(savedStock);
+          menuItems = JSON.parse(savedMenu);
         } catch (e) {
-          stockState = {};
-        }
-      }
-      MENU_ITEMS.forEach(item => {
-        if (typeof stockState[item.id] === "undefined") {
-          stockState[item.id] = item.inStock;
-        }
-      });
-
-      // Orders initialization
-      const savedOrders = localStorage.getItem("flattrack_orders");
-      if (savedOrders) {
-        try {
-          ordersState = JSON.parse(savedOrders);
-        } catch (e) {
-          ordersState = [];
+          menuItems = [...DEFAULT_MENU_ITEMS];
         }
       } else {
-        ordersState = [
-          {
-            id: "#FT-84920",
-            customer: "Alex Rivera",
-            items: "1x 24-Hour Nitro Cold Brew, 1x Breakfast Taco Trio",
-            total: "$17.32",
-            pickup: "Next 15 minutes",
-            status: "New",
-            created: "Just now"
-          }
-        ];
-        localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
+        menuItems = [...DEFAULT_MENU_ITEMS];
+        localStorage.setItem("flattrack_menu", JSON.stringify(menuItems));
       }
 
-      // Bookings initialization
-      const savedBookings = localStorage.getItem("flattrack_bookings");
-      if (savedBookings) {
-        try {
-          bookingsState = JSON.parse(savedBookings);
-        } catch (e) {
-          bookingsState = [];
-        }
-      } else {
-        bookingsState = [
-          {
-            id: "#BK-4019",
-            name: "Samira Patel",
-            phone: "(512) 555-0198",
-            party: "2 Guests",
-            time: "Today · 10:30 AM",
-            seating: "East Austin Shaded Patio (Dog-Friendly)",
-            status: "Confirmed",
-            created: "10 mins ago"
+      // Live backend sync attempt if API is up
+      fetch('http://127.0.0.1:8000/api/menu')
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data) && data.length > 0) {
+            menuItems = data;
+            localStorage.setItem("flattrack_menu", JSON.stringify(data));
+            renderMenuGrid();
           }
-        ];
-        localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
-      }
+        })
+        .catch(() => {});
     }
 
-    // Dynamic Open/Closed Status
+    // Dynamic Open/Closed Status with Visual Style Switch
     function updateStoreStatus() {
       const now = new Date();
       const hour = now.getHours();
+      const statusBadge = document.getElementById("heroStatusBadge");
       const statusText = document.getElementById("heroStatusText");
       if (hour >= 7 && hour < 17) {
+        statusBadge.classList.remove("closed");
         statusText.textContent = "Open Now · 1611 E Cesar Chavez St · Austin, TX";
       } else {
+        statusBadge.classList.add("closed");
         statusText.textContent = "Closed · Opens 7:00 AM · 1611 E Cesar Chavez St · Austin, TX";
       }
     }
@@ -1590,23 +1566,28 @@
       const grid = document.getElementById("menuGrid");
       grid.innerHTML = "";
 
-      const filtered = MENU_ITEMS.filter(item => {
+      const filtered = menuItems.filter(item => {
         if (currentCategory === "all") return true;
-        return item.category === currentCategory;
+        return (item.category || "").toLowerCase() === currentCategory.toLowerCase();
       });
 
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-secondary); padding: 40px 0;">No items currently available in this category.</p>`;
+        return;
+      }
+
       filtered.forEach(item => {
-        const isItemInStock = stockState[item.id] !== false;
+        const isItemInStock = item.inStock !== false;
         const card = document.createElement("div");
         card.className = "menu-item-card";
-        card.setAttribute("data-category", item.category);
+        card.setAttribute("data-category", item.category || "all");
 
         card.innerHTML = `
           <div class="card-top">
-            <h4 class="item-name">${item.name}</h4>
-            <span class="item-price">$${item.price.toFixed(2)}</span>
+            <h4 class="item-name">${escapeHtml(item.name)}</h4>
+            <span class="item-price">$${parseFloat(item.price).toFixed(2)}</span>
           </div>
-          <p class="item-desc">${item.desc}</p>
+          <p class="item-desc">${escapeHtml(item.desc || "")}</p>
           <div class="card-bottom">
             <div class="stock-tag ${isItemInStock ? 'in-stock' : 'out-of-stock'}">
               <span class="stock-indicator-dot"></span>
@@ -1614,13 +1595,18 @@
             </div>
             ${
               isItemInStock
-                ? `<button class="add-to-cart-btn" onclick="addItemToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, this)">+ Add</button>`
+                ? `<button class="add-to-cart-btn" onclick="addItemToCart(${item.id}, this)">+ Add</button>`
                 : `<span class="btn-sold-out">Unavailable</span>`
             }
           </div>
         `;
         grid.appendChild(card);
       });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
     // Category Filter Handler
@@ -1633,12 +1619,20 @@
       renderMenuGrid();
     }
 
-    // Cart Management
-    function addItemToCart(name, price, btnElement) {
-      if (cart[name]) {
-        cart[name].qty += 1;
+    // Cart Management by itemId (Injection Safe)
+    function addItemToCart(itemId, btnElement) {
+      const item = menuItems.find(i => i.id === itemId);
+      if (!item) return;
+
+      if (cart[itemId]) {
+        cart[itemId].qty += 1;
       } else {
-        cart[name] = { price: price, qty: 1 };
+        cart[itemId] = {
+          id: item.id,
+          name: item.name,
+          price: parseFloat(item.price),
+          qty: 1
+        };
       }
 
       if (btnElement) {
@@ -1657,9 +1651,9 @@
       updateFloatingCartBtn();
     }
 
-    function removeItemFromCart(name) {
-      if (cart[name]) {
-        delete cart[name];
+    function removeItemFromCart(itemId) {
+      if (cart[itemId]) {
+        delete cart[itemId];
         renderCartDrawer();
         updateFloatingCartBtn();
       }
@@ -1691,7 +1685,7 @@
     function renderCartDrawer() {
       const list = document.getElementById("cartItemsList");
       const summary = document.getElementById("cartSummary");
-      const items = Object.entries(cart);
+      const items = Object.values(cart);
 
       if (items.length === 0) {
         list.innerHTML = `<p class="cart-empty-msg">Your cart is empty. Add drinks or food above.</p>`;
@@ -1703,34 +1697,35 @@
       list.innerHTML = "";
 
       let subtotal = 0;
-      items.forEach(([name, details]) => {
-        const lineTotal = details.price * details.qty;
+      items.forEach(details => {
+        const lineTotal = Math.round(details.price * details.qty * 100) / 100;
         subtotal += lineTotal;
 
         const row = document.createElement("div");
         row.className = "cart-item-row";
         row.innerHTML = `
           <div class="cart-item-info">
-            <span class="cart-item-title">${name}</span>
+            <span class="cart-item-title">${escapeHtml(details.name)}</span>
             <span class="cart-item-meta">${details.qty} × $${details.price.toFixed(2)}</span>
           </div>
           <div class="cart-item-right">
             <span class="cart-item-total">$${lineTotal.toFixed(2)}</span>
-            <button class="cart-item-remove" onclick="removeItemFromCart('${name.replace(/'/g, "\\'")}')" title="Remove">&times;</button>
+            <button class="cart-item-remove" onclick="removeItemFromCart(${details.id})" title="Remove">&times;</button>
           </div>
         `;
         list.appendChild(row);
       });
 
-      const tax = subtotal * 0.0825;
-      const total = subtotal + tax;
+      // Standard Rounded Tax & Total Calculation (Zero 1-cent discrepancy)
+      const tax = Math.round(subtotal * 0.0825 * 100) / 100;
+      const total = Math.round((subtotal + tax) * 100) / 100;
 
       document.getElementById("cartSubtotal").textContent = `$${subtotal.toFixed(2)}`;
       document.getElementById("cartTax").textContent = `$${tax.toFixed(2)}`;
       document.getElementById("cartTotal").textContent = `$${total.toFixed(2)}`;
     }
 
-    // Place Order Handler (Syncs to owner.html in real-time)
+    // Place Order Handler (Syncs to owner terminal)
     function placeOrder() {
       const nameInput = document.getElementById("customerName");
       const customer = nameInput.value.trim();
@@ -1746,8 +1741,8 @@
       const pickupWindow = pickupSelect.value;
       const totalText = document.getElementById("cartTotal").textContent;
 
-      const itemsSummary = Object.entries(cart)
-        .map(([name, details]) => `${details.qty}x ${name}`)
+      const itemsSummary = Object.values(cart)
+        .map(details => `${details.qty}x ${details.name}`)
         .join(", ");
 
       const ticketId = "#FT-" + Math.floor(10000 + Math.random() * 90000);
@@ -1762,21 +1757,31 @@
         created: "Just now"
       };
 
-      // In a full production server: POST /api/orders
-      // fetch('/api/orders', { method: 'POST', body: JSON.stringify(newOrder) });
+      let orders = [];
+      try {
+        orders = JSON.parse(localStorage.getItem("flattrack_orders") || "[]");
+      } catch (e) { orders = []; }
 
-      ordersState.unshift(newOrder);
-      localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
+      orders.unshift(newOrder);
+      localStorage.setItem("flattrack_orders", JSON.stringify(orders));
+      bc.postMessage({ key: "orders", val: orders });
 
-      // Broadcast update across open tabs (instantly alerts owner.html)
-      bc.postMessage({ key: "orders", val: ordersState });
+      fetch('http://127.0.0.1:8000/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: ticketId,
+          customer_name: customer,
+          items: itemsSummary,
+          total: totalText,
+          pickup_time: pickupWindow
+        })
+      }).catch(() => {});
 
-      // Inline success message
       const successBanner = document.getElementById("orderSuccessBanner");
       successBanner.style.display = "block";
       successBanner.textContent = `✓ Order ${ticketId} confirmed! Ready ${pickupWindow} at the counter.`;
 
-      // Reset cart
       cart = {};
       nameInput.value = "";
       renderCartDrawer();
@@ -1788,7 +1793,7 @@
       }, 3200);
     }
 
-    // Handle Table Booking (Syncs to owner.html in real-time)
+    // Handle Table Booking (Syncs to owner terminal)
     function handleBooking(event) {
       event.preventDefault();
       const name = document.getElementById("bookName").value.trim();
@@ -1812,22 +1817,35 @@
         created: "Just now"
       };
 
-      // In a full production server: POST /api/bookings
-      // fetch('/api/bookings', { method: 'POST', body: JSON.stringify(newBooking) });
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem("flattrack_bookings") || "[]");
+      } catch (e) { bookings = []; }
 
-      bookingsState.unshift(newBooking);
-      localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
+      bookings.unshift(newBooking);
+      localStorage.setItem("flattrack_bookings", JSON.stringify(bookings));
+      bc.postMessage({ key: "bookings", val: bookings });
 
-      bc.postMessage({ key: "bookings", val: bookingsState });
+      fetch('http://127.0.0.1:8000/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: bookingId,
+          guest_name: name,
+          guest_phone: phone,
+          party_size: party,
+          booking_time: time,
+          seating: seating
+        })
+      }).catch(() => {});
 
-      // Show confirmation
       document.getElementById("bookingForm").style.display = "none";
       const successBox = document.getElementById("bookingSuccess");
       document.getElementById("bookingSuccessCode").textContent = `Code: ${bookingId}`;
       successBox.style.display = "block";
     }
 
-    // Handle Direct Contact / Inquiry Submission (Syncs to owner.html)
+    // Handle Direct Contact / Inquiry Submission (Syncs to owner terminal)
     function handleContactSubmit(event) {
       event.preventDefault();
       const name = document.getElementById("contactName").value.trim();
@@ -1851,17 +1869,24 @@
       let messages = [];
       try {
         messages = JSON.parse(localStorage.getItem("flattrack_messages") || "[]");
-      } catch (e) {
-        messages = [];
-      }
+      } catch (e) { messages = []; }
 
       messages.unshift(newMsg);
       localStorage.setItem("flattrack_messages", JSON.stringify(messages));
-
-      // Broadcast to owner.html
       bc.postMessage({ key: "messages", val: messages });
 
-      // Show confirmation
+      fetch('http://127.0.0.1:8000/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: msgId,
+          name: name,
+          email: email,
+          phone: phone,
+          subject: `[${topic}] ${msg}`
+        })
+      }).catch(() => {});
+
       document.getElementById("contactForm").style.display = "none";
       document.getElementById("contactSuccess").style.display = "block";
     }
