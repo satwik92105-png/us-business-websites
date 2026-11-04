@@ -1,951 +1,2452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flat Track Coffee Roasters | Austin TX | Ordering & Owner POS Portal</title>
-<meta name="description" content="East Austin specialty coffee roastery with live customer online ordering, table reservations, and real-time Owner Kitchen Portal.">
-<link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flat Track Coffee Roasters | Austin, TX | Tier 2 Live Ordering & POS</title>
+  <meta name="description" content="East Austin's specialty micro-roastery. Order ahead, reserve your table, and experience real-time barista kitchen portal sync.">
+  <link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html">
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <style>
+    :root {
+      --bg-base: #0a0908;
+      --bg-card: #131210;
+      --bg-elevated: #1a1816;
+      --bg-input: #1f1d1a;
+      --gold: #c9a84c;
+      --gold-dim: #a07d35;
+      --gold-text: #e8c97d;
+      --cream: #f2ede4;
+      --text-primary: #d6cfc4;
+      --text-secondary: #8a8178;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-active: rgba(201, 168, 76, 0.5);
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.12);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.12);
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --overlay: rgba(10, 9, 8, 0.85);
+    }
 
-  :root {
-    --bg: #090807;
-    --bg2: #100f0d;
-    --bg3: #181613;
-    --bg4: #201d19;
-    --gold: #d4af37;
-    --gold-light: #f5e6b8;
-    --cream: #faf7f0;
-    --text: #eae5dc;
-    --muted: #958f84;
-    --border: rgba(212, 175, 55, 0.2);
-    --border-hover: rgba(212, 175, 55, 0.5);
-    --green: #10b981;
-    --blue: #3b82f6;
-    --orange: #f59e0b;
-    --red: #ef4444;
-  }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+    }
 
-  #ambientCanvas {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 0; opacity: 0.4;
-  }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
 
-  /* Top Navigation & Role Switcher */
-  .top-nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 28px;
-    background: rgba(9, 8, 7, 0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem;
-    color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 8px;
-  }
+    /* Ambient Canvas */
+    #ambientCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+    }
 
-  .mode-switch-group {
-    display: flex; background: rgba(24, 22, 19, 0.9); border: 1px solid var(--border);
-    border-radius: 50px; padding: 4px; gap: 4px;
-  }
-  .mode-btn {
-    padding: 6px 16px; border-radius: 50px; border: none; background: transparent;
-    color: var(--muted); font-size: 12px; font-weight: 600; font-family: 'Space Grotesk';
-    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
-  }
-  .mode-btn.active { background: var(--gold); color: #090807; font-weight: 700; }
-  .badge-live-count {
-    background: var(--red); color: #fff; font-size: 10px; border-radius: 50%;
-    width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
-  }
+    /* Top Navigation Bar */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 999;
+      background: rgba(10, 9, 8, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 28px;
+    }
 
-  .tier-pill {
-    display: flex; gap: 4px; background: rgba(18, 16, 14, 0.95);
-    border: 1px solid var(--border); border-radius: 50px; padding: 4px 6px;
-  }
-  .tier-pill a {
-    text-decoration: none; font-size: 11px; font-weight: 600; font-family: 'Space Grotesk', sans-serif;
-    padding: 5px 12px; border-radius: 50px; transition: all 0.2s; color: var(--muted);
-  }
-  .tier-pill a.active { background: var(--gold); color: #090807; }
-  .tier-pill a:not(.active):hover { color: var(--gold); }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  /* Views Container */
-  .view-container { display: none; }
-  .view-container.active { display: block; }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: -0.01em;
+    }
 
-  /* ================= CUSTOMER VIEW STYLES ================= */
-  .hero-cust {
-    min-height: 85vh; display: flex; flex-direction: column; justify-content: center;
-    align-items: center; text-align: center; padding: 130px 24px 70px; position: relative; z-index: 1;
-    background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-                linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-  }
-  .tier-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(212, 175, 55, 0.08); border: 1px solid var(--border);
-    border-radius: 50px; padding: 8px 20px; font-size: 12px; color: var(--gold);
-    margin-bottom: 24px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
-  }
-  .hero-cust h1 {
-    font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.8rem, 7vw, 5.2rem);
-    font-weight: 700; line-height: 1.05; margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 50%, var(--gold) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .hero-cust p { font-size: 1.15rem; color: var(--muted); max-width: 600px; margin: 0 auto 32px; }
+    .nav-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-  .btn-gold {
-    background: linear-gradient(135deg, var(--gold), #f0d575); color: #090807;
-    font-weight: 700; font-size: 15px; padding: 14px 34px; border-radius: 50px;
-    text-decoration: none; border: none; cursor: pointer; font-family: 'Space Grotesk', sans-serif;
-    transition: all 0.3s; box-shadow: 0 8px 28px rgba(212, 175, 55, 0.35);
-  }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(212, 175, 55, 0.5); }
-  .btn-outline {
-    background: transparent; color: var(--text); font-weight: 600; font-size: 15px;
-    padding: 14px 32px; border-radius: 50px; text-decoration: none; border: 1px solid var(--border);
-    cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
 
-  /* Section Framing */
-  section { padding: 90px 24px; max-width: 1150px; margin: 0 auto; position: relative; z-index: 1; }
-  .full-width { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 100%; }
-  .full-width > .inner-sec { max-width: 1150px; margin: 0 auto; }
-  .sec-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
-  .sec-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--cream); margin-bottom: 12px; }
-  .sec-sub { color: var(--muted); font-size: 1.05rem; max-width: 580px; line-height: 1.6; margin-bottom: 36px; }
+    .nav-center a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
 
-  /* Live Ordering Grid */
-  .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
-  .search-input {
-    flex: 1; min-width: 220px; background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 50px; padding: 12px 20px; color: var(--text); font-size: 14px; outline: none;
-  }
-  .search-input:focus { border-color: var(--gold); }
-  .cat-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-  .cat-btn {
-    padding: 8px 18px; border-radius: 50px; border: 1px solid var(--border);
-    background: none; color: var(--muted); font-size: 13px; cursor: pointer; transition: all 0.2s;
-  }
-  .cat-btn.active { background: var(--gold); color: #090807; font-weight: 700; border-color: var(--gold); }
+    .nav-center a:hover {
+      color: var(--cream);
+    }
 
-  .order-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-  .order-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-    display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s;
-  }
-  .order-card:hover { transform: translateY(-3px); border-color: var(--border-hover); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  .order-card.out-of-stock { opacity: 0.55; }
-  .order-card.hidden { display: none; }
-  .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .item-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--cream); }
-  .item-price { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
-  .item-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; }
-  .card-footer-row { display: flex; justify-content: space-between; align-items: center; }
-  .stock-indicator {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .stock-indicator.in { color: var(--green); }
-  .stock-indicator.out { color: var(--red); }
-  .stock-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  .add-btn {
-    background: var(--gold); color: #090807; border: none; border-radius: 50px;
-    padding: 7px 18px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s;
-    font-family: 'Space Grotesk';
-  }
-  .add-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+    .tier-pill {
+      display: flex;
+      align-items: center;
+      background: rgba(26, 24, 22, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 3px 4px;
+      gap: 4px;
+    }
 
-  /* Table Booking Wizard */
-  .booking-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px; max-width: 780px; margin: 0 auto;
-  }
-  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr; } }
-  .input-group { display: flex; flex-direction: column; gap: 6px; }
-  .input-group label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-  .form-ctrl {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-    color: var(--text); font-size: 14px; padding: 12px 16px; outline: none; font-family: inherit;
-  }
-  .form-ctrl:focus { border-color: var(--gold); }
+    .tier-pill a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
 
-  /* Customer Cart Drawer */
-  .cart-drawer {
-    position: fixed; right: -420px; top: 0; bottom: 0; width: 400px;
-    background: var(--bg2); border-left: 1px solid var(--border); z-index: 9999;
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1); padding: 28px; overflow-y: auto;
-  }
-  .cart-drawer.open { right: 0; }
-  .cart-dimmer { position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9998; display: none; }
-  .cart-dimmer.open { display: block; }
-  .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-  .cart-close { background: none; border: 1px solid var(--border); color: var(--text); border-radius: 50%; width: 34px; height: 34px; cursor: pointer; }
-  .floating-cart-pill {
-    position: fixed; bottom: 28px; right: 28px; z-index: 9995;
-    background: linear-gradient(135deg, var(--gold), #f0d575); color: #090807;
-    border: none; border-radius: 50px; padding: 14px 24px; font-weight: 700; font-size: 15px;
-    cursor: pointer; font-family: 'Space Grotesk'; box-shadow: 0 10px 35px rgba(212,175,55,0.45);
-    display: flex; align-items: center; gap: 10px;
-  }
+    .tier-pill a:hover {
+      color: var(--cream);
+    }
 
-  /* ================= OWNER PORTAL STYLES ================= */
-  .owner-portal-wrap {
-    min-height: 100vh; padding: 90px 24px 60px; max-width: 1300px; margin: 0 auto;
-    position: relative; z-index: 1;
-  }
-  .owner-hero-bar {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px;
-    padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 30px; flex-wrap: wrap; gap: 16px;
-  }
-  .owner-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
-  @media (max-width: 900px) { .owner-kpi-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 500px) { .owner-kpi-grid { grid-template-columns: 1fr; } }
+    .tier-pill a.active {
+      background: var(--gold);
+      color: #0a0908;
+      font-weight: 700;
+    }
 
-  .kpi-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 16px;
-    padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .kpi-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
-  .kpi-value { font-family: 'Space Grotesk'; font-size: 2.2rem; font-weight: 700; color: var(--gold); }
-  .kpi-note { font-size: 11px; color: var(--green); margin-top: 4px; }
+    .owner-login-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
 
-  .owner-main-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; }
-  @media (max-width: 950px) { .owner-main-grid { grid-template-columns: 1fr; } }
+    .owner-login-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
-  .queue-panel {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 24px;
-    margin-bottom: 24px;
-  }
-  .queue-header {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;
-    padding-bottom: 12px; border-bottom: 1px solid var(--border);
-  }
-  .queue-title { font-family: 'Space Grotesk'; font-size: 1.25rem; font-weight: 700; color: var(--cream); }
+    /* Hero Section */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 70px;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% -10%, rgba(201, 168, 76, 0.14) 0%, transparent 70%),
+        linear-gradient(180deg, #0a0908 0%, #0d0c0a 100%);
+    }
 
-  .ticket-card {
-    background: var(--bg4); border: 1px solid var(--border); border-radius: 14px;
-    padding: 18px; margin-bottom: 12px; display: flex; justify-content: space-between;
-    align-items: center; gap: 16px; transition: all 0.2s;
-  }
-  .ticket-card:hover { border-color: var(--border-hover); }
-  .ticket-card.status-New { border-left: 4px solid var(--orange); }
-  .ticket-card.status-Preparing { border-left: 4px solid var(--blue); }
-  .ticket-card.status-Ready { border-left: 4px solid var(--green); }
+    .hero-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 12px;
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 24px;
+    }
 
-  .ticket-info { flex: 1; }
-  .ticket-id { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--gold); margin-bottom: 4px; }
-  .ticket-customer { font-size: 1rem; font-weight: 600; color: var(--cream); }
-  .ticket-items { font-size: 0.88rem; color: var(--muted); margin-top: 4px; }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite ease-in-out;
+    }
 
-  .status-tag {
-    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 4px 10px; border-radius: 50px; font-family: 'JetBrains Mono';
-  }
-  .status-tag.New { background: rgba(245, 158, 11, 0.15); color: var(--orange); border: 1px solid var(--orange); }
-  .status-tag.Preparing { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid var(--blue); }
-  .status-tag.Ready { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #e8c97d 55%, #c9a84c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  .owner-actions { display: flex; gap: 6px; }
-  .action-btn {
-    padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border);
-    background: var(--bg3); color: var(--text); font-size: 11px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s; font-family: 'Space Grotesk';
-  }
-  .action-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .action-btn.advance { background: var(--gold); color: #090807; border-color: var(--gold); }
+    .hero-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.12rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
 
-  /* Stock Manager in Owner View */
-  .stock-item-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;
-  }
-  .stock-toggle-btn {
-    padding: 4px 12px; border-radius: 50px; border: none; font-size: 11px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .stock-toggle-btn.in { background: rgba(16,185,129,0.2); color: var(--green); border: 1px solid var(--green); }
-  .stock-toggle-btn.out { background: rgba(239,68,68,0.2); color: var(--red); border: 1px solid var(--red); }
-</style>
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 44px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #e0bb5d);
+      color: #0a0908;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 34px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(201, 168, 76, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(201, 168, 76, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--cream);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-stat-chips {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-chip {
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: rgba(19, 18, 16, 0.6);
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-chip a, a.stat-chip {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .stat-chip:hover {
+      border-color: var(--border-active);
+      color: var(--cream);
+    }
+
+    /* Menu Ordering Section */
+    #menuSection {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 90px 24px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      max-width: 650px;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .category-tab {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .category-tab:hover {
+      border-color: var(--border-active);
+      color: var(--cream);
+    }
+
+    .category-tab.active {
+      background: var(--gold);
+      color: #0a0908;
+      font-weight: 700;
+      border-color: var(--gold);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-item-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-active);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .item-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .item-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--gold-text);
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stock-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .stock-tag.in-stock {
+      color: var(--green);
+    }
+
+    .stock-tag.out-of-stock {
+      color: var(--red);
+    }
+
+    .stock-indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .add-to-cart-btn {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 8px;
+      color: var(--gold);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: var(--gold);
+      color: #0a0908;
+      border-color: var(--gold);
+      transform: scale(1.04);
+    }
+
+    .btn-sold-out {
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 12px;
+    }
+
+    /* Cart Drawer & Overlay */
+    #cartOverlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      backdrop-filter: blur(4px);
+      z-index: 9998;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #cartOverlay.open {
+      display: block;
+      opacity: 1;
+    }
+
+    #cartDrawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      bottom: 0;
+      width: 400px;
+      max-width: 100vw;
+      background: var(--bg-elevated);
+      border-left: 1px solid var(--border);
+      z-index: 9999;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #cartDrawer.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .cart-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .cart-close-btn:hover {
+      color: var(--cream);
+    }
+
+    #cartItemsList {
+      flex-grow: 1;
+      min-height: 160px;
+    }
+
+    .cart-empty-msg {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cart-item-title {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .cart-item-meta {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .cart-item-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-item-total {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: var(--red);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 2px 6px;
+      opacity: 0.7;
+    }
+
+    .cart-item-remove:hover {
+      opacity: 1;
+    }
+
+    #cartSummary {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .summary-row.total-row {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .summary-row.total-row span:first-child {
+      color: var(--cream);
+    }
+
+    .summary-row.total-row span:last-child {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cart-form-group {
+      margin-top: 16px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--cream);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold);
+    }
+
+    .place-order-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+    }
+
+    #orderSuccessBanner {
+      display: none;
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--green);
+      font-size: 13px;
+      margin-top: 16px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Floating Cart Pill */
+    #floatingCartBtn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9994;
+      display: none;
+      background: linear-gradient(135deg, var(--gold), #e0bb5d);
+      color: #0a0908;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 28px rgba(201, 168, 76, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #floatingCartBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201, 168, 76, 0.55);
+    }
+
+    .cart-badge {
+      background: #0a0908;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Booking Section */
+    #bookingSection {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      padding: 90px 24px;
+    }
+
+    .booking-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-full-row {
+      margin-bottom: 16px;
+    }
+
+    .booking-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+    }
+
+    #bookingSuccess {
+      display: none;
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .success-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .success-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--cream);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .booking-code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .booking-subtext {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+      text-align: center;
+      background: var(--bg-base);
+    }
+
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-contact {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+
+    /* Owner PIN Modal */
+    #ownerPinModal {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #ownerPinModal.open {
+      display: flex;
+    }
+
+    .pin-modal-box {
+      position: relative;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--cream);
+    }
+
+    .pin-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .pin-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .pin-sub {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .pin-inputs-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .pin-digit {
+      width: 52px;
+      height: 60px;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .pin-digit:focus {
+      border-color: var(--gold);
+    }
+
+    .pin-digit.error {
+      border-color: var(--red) !important;
+    }
+
+    .pin-error-text {
+      color: var(--red);
+      font-size: 12px;
+      height: 18px;
+      margin-top: 4px;
+    }
+
+    /* Owner Dashboard Full-Screen Overlay */
+    #ownerDashboard {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      display: none;
+      overflow-y: auto;
+    }
+
+    .owner-topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 9, 8, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .owner-topbar-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .owner-lock-btn {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--red);
+      border-radius: 8px;
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .owner-lock-btn:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .owner-content {
+      padding: 32px 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .kpi-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+
+    .kpi-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .owner-main-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+    }
+
+    .owner-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .panel-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--cream);
+    }
+
+    .count-badge {
+      background: var(--gold);
+      color: #0a0908;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ticket-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ticket-card.status-new {
+      border-left: 4px solid var(--orange);
+    }
+
+    .ticket-card.status-preparing {
+      border-left: 4px solid var(--blue);
+    }
+
+    .ticket-card.status-ready {
+      border-left: 4px solid var(--green);
+    }
+
+    .ticket-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ticket-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+    }
+
+    .ticket-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-new {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .badge-preparing {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--blue);
+      color: var(--blue);
+    }
+
+    .badge-ready {
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+
+    .ticket-customer {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .ticket-items {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .ticket-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .ticket-total {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .ticket-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .ticket-action-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 5px 12px;
+      border: 1px solid;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-brew {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .btn-brew:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-ready {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .btn-ready:hover {
+      background: var(--green);
+      color: #0a0908;
+    }
+
+    .btn-done {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--text-secondary);
+      color: var(--text-secondary);
+    }
+
+    .btn-done:hover {
+      background: var(--text-secondary);
+      color: #0a0908;
+    }
+
+    .booking-ticket {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-ticket-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .booking-ticket-code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .booking-ticket-name {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .booking-ticket-meta {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .btn-seat {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-seat:hover {
+      background: var(--gold);
+      color: #0a0908;
+    }
+
+    .stock-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stock-row-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .stock-row-name {
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .stock-row-price {
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stock-toggle-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 5px 12px;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+
+    .stock-toggle-btn.is-instock {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .stock-toggle-btn.is-soldout {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .empty-state-text {
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 28px 0;
+      font-size: 13px;
+    }
+
+    /* Keyframes */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 900px) {
+      .nav-center {
+        display: none;
+      }
+      .owner-main-layout {
+        grid-template-columns: 1fr;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-nav {
+        padding: 0 16px;
+      }
+      .nav-badge {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.4rem;
+      }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      #cartDrawer {
+        width: 100%;
+        right: -100%;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .owner-content {
+        padding: 20px 16px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<canvas id="ambientCanvas"></canvas>
+  <!-- Ambient Particles Canvas -->
+  <canvas id="ambientCanvas"></canvas>
 
-<!-- Top Nav Bar with Live Mode Toggle -->
-<header class="top-nav">
-  <a href="#hero" class="nav-logo">☕ Flat Track Live</a>
-
-  <!-- Switch between Customer View & Owner Portal -->
-  <div class="mode-switch-group">
-    <button class="mode-btn active" id="btnCustMode" onclick="setAppMode('customer')">
-      👤 Customer Storefront
-    </button>
-    <button class="mode-btn" id="btnOwnerMode" onclick="setAppMode('owner')">
-      🧑‍🍳 Owner / Kitchen Portal
-      <span class="badge-live-count" id="activeOrderBadge">2</span>
-    </button>
-  </div>
-
-  <div class="tier-pill">
-    <a href="tier1.html">Tier 1</a>
-    <a href="tier2.html" class="active">Tier 2</a>
-    <a href="tier3.html">Tier 3</a>
-  </div>
-</header>
-
-<!-- ================= PHASE 1: CUSTOMER VIEW ================= -->
-<div class="view-container active" id="customerView">
-  <!-- Customer Cart Drawer -->
-  <div class="cart-dimmer" id="custCartDimmer" onclick="toggleCartDrawer(false)"></div>
-  <div class="cart-drawer" id="custCartDrawer">
-    <div class="cart-header">
-      <h3 style="font-family:'Space Grotesk'; font-size:1.3rem;">Order Bag 🛒</h3>
-      <button class="cart-close" onclick="toggleCartDrawer(false)">✕</button>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="#hero" class="nav-logo">☕ Flat Track</a>
+      <span class="nav-badge">Tier 2 · Live Ordering</span>
     </div>
-    <div id="custCartList" style="min-height: 200px;">
-      <div style="color:var(--muted); text-align:center; padding: 40px 0;">Your cart is empty.</div>
+
+    <div class="nav-center">
+      <a href="#menuSection">Menu</a>
+      <a href="#bookingSection">Reserve</a>
+      <a href="tel:+15125406033">Call Us</a>
     </div>
-    <div id="custCartTotals" style="display:none; border-top:1px solid var(--border); padding-top:20px; margin-top:20px;">
-      <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;"><span>Subtotal</span><span id="custSubtotalText">$0.00</span></div>
-      <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;"><span>Tax (8.25%)</span><span id="custTaxText">$0.00</span></div>
-      <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1.15rem; font-weight:700; color:var(--gold);"><span>Total</span><span id="custTotalText">$0.00</span></div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:11px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:4px;">Customer Name</label>
-        <input type="text" id="custOrderName" class="form-ctrl" placeholder="Your name (e.g. Taylor)" style="width:100%;" required>
+
+    <div class="nav-right">
+      <div class="tier-pill">
+        <a href="tier1.html">Tier 1</a>
+        <a href="tier2.html" class="active">Tier 2</a>
+        <a href="tier3.html">Tier 3</a>
       </div>
-      <div style="margin-bottom:16px;">
-        <label style="font-size:11px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:4px;">Pickup Window</label>
-        <select id="custPickupSelect" class="form-ctrl" style="width:100%;">
-          <option>Next 15 minutes</option>
-          <option>In 30 minutes</option>
-          <option>In 45 minutes</option>
-        </select>
-      </div>
-      <button class="btn-gold" style="width:100%;" onclick="submitCustomerOrder()">Send Order to Kitchen Bar →</button>
-      <div id="custOrderSuccess" style="display:none; margin-top:14px; padding:12px; background:rgba(16,185,129,0.15); border:1px solid var(--green); border-radius:8px; color:var(--green); font-size:13px; text-align:center;"></div>
-    </div>
-  </div>
-
-  <button class="floating-cart-pill" id="custFloatCart" onclick="toggleCartDrawer(true)" style="display:none;">
-    🛒 Cart <span id="custBadgeNum" style="background:#090807; color:var(--gold); border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center;">0</span>
-  </button>
-
-  <!-- Hero Customer -->
-  <div class="hero-cust" id="hero">
-    <div class="tier-badge">
-      <span>🥈</span>
-      <span>Tier 2 · Frontend + Real-Time Backend Portal · $997 One-Time</span>
-    </div>
-    <h1>Order Direct · Skip the Queue</h1>
-    <p>
-      East Austin's favorite roastery. Order drinks & tacos online, book guaranteed patio seating, and send requests directly into our barista POS portal.
-    </p>
-    <div class="hero-btns">
-      <a href="#orderSection" class="btn-gold">Order Online Ahead</a>
-      <a href="#bookingSection" class="btn-outline">Book a Table</a>
-      <button class="btn-outline" onclick="setAppMode('owner')" style="border-color:var(--gold); color:var(--gold);">
-        Open Owner Portal →
+      <button class="owner-login-btn" onclick="showOwnerPinModal()">
+        <span>Owner Login</span>
       </button>
     </div>
-  </div>
+  </nav>
 
-  <!-- Live Menu Ordering Section -->
-  <section id="orderSection">
-    <div class="sec-tag">Live Kitchen Menu</div>
-    <h2 class="sec-title">Order Ahead for Counter Pickup</h2>
-    <p class="sec-sub">Orders placed here immediately appear on the Owner Kitchen Portal in real time.</p>
-
-    <div class="filter-bar">
-      <input type="text" class="search-input" id="menuSearch" placeholder="🔍  Search drinks, breakfast tacos, beans..." oninput="filterCustomerMenu()">
-      <div class="cat-pills">
-        <button class="cat-btn active" onclick="setMenuCat('all', this)">All Items</button>
-        <button class="cat-btn" onclick="setMenuCat('espresso', this)">Espresso</button>
-        <button class="cat-btn" onclick="setMenuCat('cold', this)">Nitro & Cold</button>
-        <button class="cat-btn" onclick="setMenuCat('food', this)">Food</button>
-        <button class="cat-btn" onclick="setMenuCat('beans', this)">Whole Beans</button>
-      </div>
+  <!-- Hero Area -->
+  <section id="hero">
+    <div class="hero-status-badge" id="heroStatusBadge">
+      <span class="status-dot"></span>
+      <span id="heroStatusText">Open Now · 1611 E Cesar Chavez St · Austin, TX</span>
     </div>
 
-    <div class="order-cards-grid" id="customerMenuGrid"></div>
+    <h1 class="hero-title">
+      Flat Track Coffee<br>Roasters
+    </h1>
+
+    <p class="hero-tagline">
+      East Austin's specialty micro-roastery. Order ahead, reserve your seat — no waiting in line.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+        Order Ahead
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('bookingSection').scrollIntoView({behavior:'smooth'})">
+        Reserve a Table
+      </button>
+    </div>
+
+    <div class="hero-stat-chips">
+      <div class="stat-chip">⭐ 4.8★ &nbsp;750+ Google Reviews</div>
+      <div class="stat-chip">🕒 Mon–Sun &nbsp;7:00 AM – 5:00 PM</div>
+      <a href="tel:+15125406033" class="stat-chip">📞 (512) 540-6033</a>
+    </div>
   </section>
 
-  <!-- Table Booking Section -->
-  <div class="full-width" id="bookingSection">
-    <div class="inner-sec" style="padding:90px 24px;">
-      <div style="text-align:center;">
-        <div class="sec-tag">Reserved Seating</div>
-        <h2 class="sec-title">Book a Table at Flat Track</h2>
-        <p class="sec-sub" style="margin:0 auto 36px;">Reservations immediately notify the floor manager in the Owner Portal.</p>
+  <!-- Menu Ordering Section -->
+  <section id="menuSection">
+    <div class="section-label">LIVE MENU</div>
+    <h2 class="section-title">Order Ahead for Counter Pickup</h2>
+    <p class="section-subtitle">Skip the queue. Items placed here go directly to our barista terminal.</p>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs" id="categoryTabs">
+      <button class="category-tab active" onclick="filterMenuByCategory('all', this)">All</button>
+      <button class="category-tab" onclick="filterMenuByCategory('espresso', this)">Espresso Bar</button>
+      <button class="category-tab" onclick="filterMenuByCategory('cold', this)">Nitro & Cold</button>
+      <button class="category-tab" onclick="filterMenuByCategory('food', this)">Kitchen</button>
+      <button class="category-tab" onclick="filterMenuByCategory('beans', this)">Whole Beans</button>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="menu-grid" id="menuGrid">
+      <!-- Generated via JS -->
+    </div>
+  </section>
+
+  <!-- Cart Drawer & Overlay -->
+  <div id="cartOverlay" onclick="closeCart()"></div>
+  <aside id="cartDrawer">
+    <div class="cart-header">
+      <h3 class="cart-title">Your Order</h3>
+      <button class="cart-close-btn" onclick="closeCart()">&times;</button>
+    </div>
+
+    <div id="cartItemsList">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div id="cartSummary" style="display: none;">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax (8.25%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="summary-row total-row">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
       </div>
 
-      <div class="booking-card">
-        <form onsubmit="handleCustomerBooking(event)">
-          <div class="form-grid-2">
-            <div class="input-group">
-              <label>Your Full Name</label>
-              <input type="text" id="bookGuestName" class="form-ctrl" placeholder="Jordan Lee" required>
-            </div>
-            <div class="input-group">
-              <label>Phone Number (SMS confirmation)</label>
-              <input type="tel" id="bookGuestPhone" class="form-ctrl" placeholder="(512) 555-0144" required>
-            </div>
+      <div class="cart-form-group">
+        <label class="form-label" for="customerName">Your Name for Pickup</label>
+        <input type="text" id="customerName" class="form-input" placeholder="e.g. Jordan Miller" required>
+      </div>
+
+      <div class="cart-form-group">
+        <label class="form-label" for="pickupWindow">Pickup Window</label>
+        <select id="pickupWindow" class="form-select">
+          <option value="Next 15 minutes">Next 15 minutes</option>
+          <option value="In 30 minutes">In 30 minutes</option>
+          <option value="In 45 minutes">In 45 minutes</option>
+        </select>
+      </div>
+
+      <button class="btn-primary place-order-btn" id="placeOrderBtn" onclick="placeOrder()">
+        Send Order to Kitchen →
+      </button>
+
+      <div id="orderSuccessBanner"></div>
+    </div>
+  </aside>
+
+  <!-- Floating Cart Button -->
+  <button id="floatingCartBtn" onclick="openCart()">
+    <span>🛒 Cart</span>
+    <span class="cart-badge" id="floatingCartCount">0</span>
+  </button>
+
+  <!-- Table Reservation Section -->
+  <section id="bookingSection">
+    <div class="booking-inner">
+      <div class="section-label">RESERVE</div>
+      <h2 class="section-title">Book a Table at Flat Track</h2>
+      <p class="section-subtitle">Reservations are instantly visible to our floor team. No app, no account needed.</p>
+
+      <form id="bookingForm" onsubmit="handleBooking(event)">
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label" for="bookName">Full Name</label>
+            <input type="text" id="bookName" class="form-input" placeholder="e.g. Taylor Brooks" required>
           </div>
-          <div class="form-grid-2">
-            <div class="input-group">
-              <label>Party Size</label>
-              <select id="bookPartySize" class="form-ctrl">
-                <option value="2">2 Guests (Standard)</option>
-                <option value="4">4 Guests</option>
-                <option value="6">6 Guests (Patio Table)</option>
-                <option value="8">8+ Guests (Group)</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label>Time Window</label>
-              <select id="bookTimeSlot" class="form-ctrl">
-                <option>Today · 8:30 AM</option>
-                <option>Today · 9:30 AM</option>
-                <option>Today · 10:30 AM</option>
-                <option>Today · 11:30 AM</option>
-                <option>Tomorrow · 9:00 AM</option>
-              </select>
-            </div>
+          <div>
+            <label class="form-label" for="bookPhone">Phone Number</label>
+            <input type="tel" id="bookPhone" class="form-input" placeholder="(512) 000-0000" required>
           </div>
-          <div class="input-group" style="margin-bottom:20px;">
-            <label>Seating Preference</label>
-            <select id="bookSeatingPref" class="form-ctrl">
-              <option>East Austin Shaded Patio (Dog Friendly)</option>
-              <option>Roastery Indoor Espresso Bar</option>
+        </div>
+
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label" for="bookParty">Party Size</label>
+            <select id="bookParty" class="form-select" required>
+              <option value="1 Guest">1 Guest</option>
+              <option value="2 Guests" selected>2 Guests</option>
+              <option value="3 Guests">3 Guests</option>
+              <option value="4 Guests">4 Guests</option>
+              <option value="5 Guests">5 Guests</option>
+              <option value="6 Guests">6 Guests</option>
+              <option value="7+ (Group)">7+ (Group)</option>
             </select>
           </div>
-          <button type="submit" class="btn-gold" style="width:100%;">Confirm Reservation →</button>
-          <div id="bookingSuccessBox" style="display:none; margin-top:16px; padding:14px; background:rgba(16,185,129,0.15); border:1px solid var(--green); border-radius:10px; color:var(--green); font-size:13px; text-align:center;"></div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= PHASE 2: OWNER / KITCHEN PORTAL ================= -->
-<div class="view-container" id="ownerView">
-  <div class="owner-portal-wrap">
-    <!-- Top Action Bar -->
-    <div class="owner-hero-bar">
-      <div>
-        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); font-weight:700;">
-          Store #01 Management Terminal
-        </div>
-        <h2 style="font-family:'Space Grotesk'; font-size:1.8rem; color:var(--cream); margin:2px 0;">
-          Flat Track Coffee · Owner & Kitchen POS
-        </h2>
-        <div style="font-size:12px; color:var(--muted);">
-          1611 E Cesar Chavez St · Live Socket Sync Active · Local Python API Ready
-        </div>
-      </div>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <button class="action-btn" onclick="seedSampleOrder()">+ Simulate Test Order</button>
-        <button class="action-btn" onclick="clearAllData()">Reset Live Data</button>
-        <button class="btn-gold" onclick="setAppMode('customer')">← Back to Customer Store</button>
-      </div>
-    </div>
-
-    <!-- KPI Summary Grid -->
-    <div class="owner-kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-title">Active Orders in Queue</div>
-        <div class="kpi-value" id="kpiActiveOrders">0</div>
-        <div class="kpi-note">● Live Barista Terminal</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-title">Today's Digital Revenue</div>
-        <div class="kpi-value" id="kpiRevenue">$0.00</div>
-        <div class="kpi-note">Direct 0% Commission</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-title">Confirmed Table Bookings</div>
-        <div class="kpi-value" id="kpiBookings">0</div>
-        <div class="kpi-note">Patio & Bar Capacity</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-title">Backend Architecture</div>
-        <div class="kpi-value" style="font-size:1.4rem; color:var(--green);">FastAPI Ready</div>
-        <div class="kpi-note">SQLite + REST Endpoints</div>
-      </div>
-    </div>
-
-    <!-- Main Operational Split -->
-    <div class="owner-main-grid">
-      <!-- Left Column: Live Orders Queue -->
-      <div>
-        <div class="queue-panel">
-          <div class="queue-header">
-            <div class="queue-title">Live Kitchen Order Queue 🧾</div>
-            <div style="font-size:12px; color:var(--muted);" id="orderCountText">0 orders active</div>
-          </div>
-          <div id="ownerOrdersList">
-            <div style="color:var(--muted); text-align:center; padding:30px 0;">No active orders right now. Orders placed by customers appear here instantly.</div>
-          </div>
-        </div>
-
-        <!-- Bookings Queue -->
-        <div class="queue-panel">
-          <div class="queue-header">
-            <div class="queue-title">Upcoming Table Reservations 📅</div>
-            <div style="font-size:12px; color:var(--muted);" id="bookingCountText">0 bookings</div>
-          </div>
-          <div id="ownerBookingsList">
-            <div style="color:var(--muted); text-align:center; padding:30px 0;">No pending reservations.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: Inventory & Stock Manager -->
-      <div>
-        <div class="queue-panel">
-          <div class="queue-header">
-            <div class="queue-title">Live Menu Stock Manager 📦</div>
-            <div style="font-size:11px; color:var(--gold);">1-Tap Out-of-Stock</div>
-          </div>
-          <p style="font-size:0.85rem; color:var(--muted); margin-bottom:14px;">
-            Toggling an item "Out of Stock" here immediately disables it for customers in the storefront view.
-          </p>
-          <div id="ownerStockList"></div>
-        </div>
-
-        <div class="queue-panel">
-          <div class="queue-header">
-            <div class="queue-title">Python Backend Connection</div>
-          </div>
-          <div style="font-size:12px; color:var(--muted); line-height:1.6;">
-            <p><strong>Script included in repo:</strong> <code style="color:var(--gold);">backend_server.py</code></p>
-            <p style="margin-top:6px;">Runs a lightweight production REST API with FastAPI and SQLite, ready for containerized cloud deployment or local Raspberry Pi kitchen printer integration.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-// ==================== 1. SHARED DATA STATE & PERSISTENCE ====================
-const MENU_DATA = [
-  { id: 1, name: "Dogspeed Espresso Double", category: "espresso", price: 4.50, desc: "Double shot of house blend. Dark cacao, candied citrus.", inStock: true },
-  { id: 2, name: "24-Hour Nitro Cold Brew", category: "cold", price: 5.50, desc: "Steeped 24 hours on Cesar Chavez. Velvety nitrogen cascade.", inStock: true },
-  { id: 3, name: "Ethiopian Pour-Over", category: "pourover", price: 5.75, desc: "Single-origin Yirgacheffe. Wild blueberry, jasmine.", inStock: true },
-  { id: 4, name: "Breakfast Taco Trio", category: "food", price: 10.50, desc: "Three farm-egg tacos with chorizo & house salsa verde.", inStock: true },
-  { id: 5, name: "Dogspeed Blend (12oz Bag)", category: "beans", price: 18.00, desc: "Freshly roasted whole bean bag. Small-batch roasted.", inStock: true },
-  { id: 6, name: "Oat Milk Honey Cortado", category: "espresso", price: 5.00, desc: "1:1 espresso to steamed oat milk with local wildflower honey.", inStock: true }
-];
-
-function loadState(key, fallback) {
-  try {
-    const s = localStorage.getItem('flattrack_' + key);
-    return s ? JSON.parse(s) : fallback;
-  } catch(e) { return fallback; }
-}
-
-function saveState(key, val) {
-  try {
-    localStorage.setItem('flattrack_' + key, JSON.stringify(val));
-    // Broadcast for cross-tab instant synchronization
-    if (window.BroadcastChannel) {
-      const bc = new BroadcastChannel('flattrack_sync');
-      bc.postMessage({ key, val });
-    }
-  } catch(e) {}
-}
-
-let appMenu = loadState('menu', MENU_DATA);
-let appOrders = loadState('orders', [
-  {
-    id: "#FT-49102",
-    customer: "Maya Lin",
-    items: "1x 24-Hour Nitro Cold Brew, 1x Breakfast Taco Trio",
-    total: 16.00,
-    time: "Next 15 minutes",
-    status: "New",
-    created: "10 mins ago"
-  },
-  {
-    id: "#FT-49098",
-    customer: "David Chen",
-    items: "2x Dogspeed Espresso Double",
-    total: 9.00,
-    time: "In 30 minutes",
-    status: "Preparing",
-    created: "22 mins ago"
-  }
-]);
-
-let appBookings = loadState('bookings', [
-  {
-    id: "#BK-8491",
-    name: "Rachel Green",
-    phone: "(512) 555-0182",
-    party: 4,
-    timeSlot: "Today · 9:30 AM",
-    seating: "East Austin Shaded Patio (Dog Friendly)",
-    status: "Confirmed"
-  }
-]);
-
-// Cross-tab sync listener
-if (window.BroadcastChannel) {
-  const bc = new BroadcastChannel('flattrack_sync');
-  bc.onmessage = (ev) => {
-    if (ev.data.key === 'orders') { appOrders = ev.data.val; renderOwnerOrders(); updateKpis(); }
-    if (ev.data.key === 'bookings') { appBookings = ev.data.val; renderOwnerBookings(); updateKpis(); }
-    if (ev.data.key === 'menu') { appMenu = ev.data.val; renderCustomerMenu(); renderOwnerStock(); }
-  };
-}
-
-// ==================== 2. APP MODE TOGGLE (Customer vs Owner) ====================
-function setAppMode(mode) {
-  const isCust = mode === 'customer';
-  document.getElementById('customerView').classList.toggle('active', isCust);
-  document.getElementById('ownerView').classList.toggle('active', !isCust);
-  document.getElementById('btnCustMode').classList.toggle('active', isCust);
-  document.getElementById('btnOwnerMode').classList.toggle('active', !isCust);
-
-  if (!isCust) {
-    renderOwnerOrders();
-    renderOwnerBookings();
-    renderOwnerStock();
-    updateKpis();
-  }
-}
-
-// ==================== 3. CUSTOMER PHASE LOGIC ====================
-let currentCat = 'all';
-let cart = {};
-
-function renderCustomerMenu() {
-  const grid = document.getElementById('customerMenuGrid');
-  grid.innerHTML = appMenu.map(item => `
-    <div class="order-card${!item.inStock ? ' out-of-stock' : ''}" data-cat="${item.category}" data-name="${item.name.toLowerCase()}">
-      <div>
-        <div class="card-header-row">
-          <span class="item-title">${item.name}</span>
-          <span class="item-price">$${item.price.toFixed(2)}</span>
-        </div>
-        <p class="item-desc">${item.desc}</p>
-      </div>
-      <div class="card-footer-row">
-        <span class="stock-indicator ${item.inStock ? 'in' : 'out'}">
-          <span class="stock-dot"></span>
-          ${item.inStock ? 'In Stock' : 'Sold Out'}
-        </span>
-        ${item.inStock
-          ? `<button class="add-btn" onclick="addCustItem('${item.name}', ${item.price}, this)">+ Add</button>`
-          : `<span style="font-size:12px; color:var(--muted);">Unavailable</span>`
-        }
-      </div>
-    </div>
-  `).join('');
-}
-
-function setMenuCat(cat, btn) {
-  currentCat = cat;
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  filterCustomerMenu();
-}
-
-function filterCustomerMenu() {
-  const q = document.getElementById('menuSearch').value.toLowerCase();
-  document.querySelectorAll('.order-card').forEach(card => {
-    const cat = card.dataset.cat;
-    const name = card.dataset.name;
-    const matchCat = currentCat === 'all' || cat === currentCat;
-    const matchQuery = name.includes(q);
-    card.classList.toggle('hidden', !(matchCat && matchQuery));
-  });
-}
-
-function addCustItem(name, price, btn) {
-  if (!cart[name]) cart[name] = { price, qty: 0 };
-  cart[name].qty++;
-  if (btn) {
-    const orig = btn.textContent;
-    btn.textContent = '✓ Added';
-    btn.style.background = 'var(--green)';
-    btn.style.color = '#fff';
-    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 1000);
-  }
-  updateCustCartUI();
-  toggleCartDrawer(true);
-}
-
-function updateCustCartUI() {
-  const list = document.getElementById('custCartList');
-  const totals = document.getElementById('custCartTotals');
-  const floatBtn = document.getElementById('custFloatCart');
-  const badge = document.getElementById('custBadgeNum');
-
-  const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
-  const totalCount = keys.reduce((s, k) => s + cart[k].qty, 0);
-
-  if (totalCount > 0) {
-    floatBtn.style.display = 'flex';
-    badge.textContent = totalCount;
-    totals.style.display = 'block';
-
-    let subtotal = 0;
-    list.innerHTML = keys.map(k => {
-      const item = cart[k];
-      const itemTotal = item.qty * item.price;
-      subtotal += itemTotal;
-      return `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border);">
           <div>
-            <div style="font-weight:600; font-size:14px; color:var(--cream);">${k}</div>
-            <div style="font-size:12px; color:var(--muted);">${item.qty} × $${item.price.toFixed(2)}</div>
+            <label class="form-label" for="bookTime">Time Slot</label>
+            <select id="bookTime" class="form-select" required>
+              <option value="Today · 8:00 AM">Today · 8:00 AM</option>
+              <option value="Today · 9:00 AM">Today · 9:00 AM</option>
+              <option value="Today · 10:30 AM" selected>Today · 10:30 AM</option>
+              <option value="Today · 12:00 PM">Today · 12:00 PM</option>
+              <option value="Tomorrow · 8:00 AM">Tomorrow · 8:00 AM</option>
+              <option value="Tomorrow · 9:00 AM">Tomorrow · 9:00 AM</option>
+              <option value="Tomorrow · 11:00 AM">Tomorrow · 11:00 AM</option>
+            </select>
           </div>
-          <div style="font-family:'JetBrains Mono'; color:var(--gold); font-weight:700;">$${itemTotal.toFixed(2)}</div>
         </div>
-      `;
-    }).join('');
 
-    const tax = subtotal * 0.0825;
-    const total = subtotal + tax;
+        <div class="form-full-row">
+          <label class="form-label" for="bookSeating">Seating Preference</label>
+          <select id="bookSeating" class="form-select">
+            <option value="East Austin Shaded Patio (Dog-Friendly)">East Austin Shaded Patio (Dog-Friendly)</option>
+            <option value="Indoor Roastery Bar Seating">Indoor Roastery Bar Seating</option>
+          </select>
+        </div>
 
-    document.getElementById('custSubtotalText').textContent = '$' + subtotal.toFixed(2);
-    document.getElementById('custTaxText').textContent = '$' + tax.toFixed(2);
-    document.getElementById('custTotalText').textContent = '$' + total.toFixed(2);
-  } else {
-    floatBtn.style.display = 'none';
-    totals.style.display = 'none';
-    list.innerHTML = '<div style="color:var(--muted); text-align:center; padding: 40px 0;">Your cart is empty.</div>';
-  }
-}
+        <button type="submit" class="btn-primary booking-btn">
+          Confirm Reservation →
+        </button>
+      </form>
 
-function toggleCartDrawer(open) {
-  document.getElementById('custCartDrawer').classList.toggle('open', open);
-  document.getElementById('custCartDimmer').classList.toggle('open', open);
-}
-
-function submitCustomerOrder() {
-  const nameInput = document.getElementById('custOrderName');
-  const customerName = nameInput.value.trim() || 'Guest';
-  const pickupTime = document.getElementById('custPickupSelect').value;
-
-  const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
-  const itemsText = keys.map(k => `${cart[k].qty}x ${k}`).join(', ');
-  const subtotal = keys.reduce((s, k) => s + cart[k].qty * cart[k].price, 0);
-  const total = subtotal * 1.0825;
-
-  const newTicket = {
-    id: "#FT-" + Math.floor(10000 + Math.random() * 90000),
-    customer: customerName,
-    items: itemsText,
-    total: parseFloat(total.toFixed(2)),
-    time: pickupTime,
-    status: "New",
-    created: "Just now"
-  };
-
-  appOrders.unshift(newTicket);
-  saveState('orders', appOrders);
-
-  const succ = document.getElementById('custOrderSuccess');
-  succ.textContent = `✓ Ticket ${newTicket.id} received! Check the Owner Portal to watch your barista prepare it.`;
-  succ.style.display = 'block';
-
-  cart = {};
-  updateCustCartUI();
-
-  setTimeout(() => {
-    succ.style.display = 'none';
-    toggleCartDrawer(false);
-  }, 3500);
-}
-
-function handleCustomerBooking(e) {
-  e.preventDefault();
-  const name = document.getElementById('bookGuestName').value;
-  const phone = document.getElementById('bookGuestPhone').value;
-  const party = document.getElementById('bookPartySize').value;
-  const slot = document.getElementById('bookTimeSlot').value;
-  const seating = document.getElementById('bookSeatingPref').value;
-
-  const newBooking = {
-    id: "#BK-" + Math.floor(1000 + Math.random() * 9000),
-    name,
-    phone,
-    party: parseInt(party),
-    timeSlot: slot,
-    seating,
-    status: "Confirmed"
-  };
-
-  appBookings.unshift(newBooking);
-  saveState('bookings', appBookings);
-
-  const box = document.getElementById('bookingSuccessBox');
-  box.textContent = `✓ Table reservation confirmed! Code: ${newBooking.id}. Floor manager notified in Owner Portal.`;
-  box.style.display = 'block';
-  e.target.reset();
-}
-
-// ==================== 4. OWNER PHASE LOGIC ====================
-function renderOwnerOrders() {
-  const container = document.getElementById('ownerOrdersList');
-  const countText = document.getElementById('orderCountText');
-  countText.textContent = appOrders.length + ' orders active';
-  document.getElementById('activeOrderBadge').textContent = appOrders.length;
-
-  if (appOrders.length === 0) {
-    container.innerHTML = '<div style="color:var(--muted); text-align:center; padding:30px 0;">No active orders right now.</div>';
-    return;
-  }
-
-  container.innerHTML = appOrders.map((ord, idx) => `
-    <div class="ticket-card status-${ord.status}">
-      <div class="ticket-info">
-        <div class="ticket-id">${ord.id} · <span style="color:var(--cream);">${ord.created}</span> · ${ord.time}</div>
-        <div class="ticket-customer">${ord.customer} <span style="font-family:'JetBrains Mono'; color:var(--gold); font-size:14px; margin-left:8px;">$${ord.total.toFixed(2)}</span></div>
-        <div class="ticket-items">${ord.items}</div>
+      <div id="bookingSuccess">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Table Reserved!</div>
+        <div class="booking-code" id="bookingSuccessCode">#BK-9821</div>
+        <div class="booking-subtext">Your booking is confirmed. Our floor team has been notified.</div>
       </div>
-      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-        <span class="status-tag ${ord.status}">${ord.status}</span>
-        <div class="owner-actions">
-          ${ord.status === 'New' ? `<button class="action-btn advance" onclick="advanceOrderStatus(${idx}, 'Preparing')">Start Brew</button>` : ''}
-          ${ord.status === 'Preparing' ? `<button class="action-btn advance" onclick="advanceOrderStatus(${idx}, 'Ready')">Mark Ready</button>` : ''}
-          ${ord.status === 'Ready' ? `<button class="action-btn" onclick="removeOrder(${idx})">Complete ✓</button>` : ''}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Flat Track Coffee Roasters</div>
+    <div class="footer-contact">1611 E Cesar Chavez St, Austin TX 78702 · (512) 540-6033</div>
+    <div class="footer-links">
+      <a href="#menuSection">Menu</a>
+      <a href="#bookingSection">Reserve</a>
+      <a href="tel:+15125406033">Call Us</a>
+    </div>
+    <div class="footer-copy">© 2024 Flat Track Coffee Roasters. Tier 2 · Frontend + Backend.</div>
+  </footer>
+
+  <!-- Owner PIN Modal -->
+  <div id="ownerPinModal">
+    <div class="pin-modal-box">
+      <button class="modal-close-btn" onclick="closeOwnerPinModal()">&times;</button>
+      <div class="pin-icon">🔑</div>
+      <h3 class="pin-title">Owner Access</h3>
+      <p class="pin-sub">Enter your 4-digit PIN to access the management portal</p>
+
+      <div class="pin-inputs-row" id="pinInputsRow">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*" autofocus>
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
+      </div>
+
+      <div class="pin-error-text" id="pinErrorText"></div>
+    </div>
+  </div>
+
+  <!-- Owner Dashboard Full-Screen Overlay -->
+  <div id="ownerDashboard">
+    <div class="owner-topbar">
+      <div class="owner-topbar-title">☕ Owner Portal — Flat Track Coffee</div>
+      <button class="owner-lock-btn" onclick="closeOwnerDashboard()">Close & Lock</button>
+    </div>
+
+    <div class="owner-content">
+      <!-- KPI Row -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">Active Orders</div>
+          <div class="kpi-value" id="kpiOrders">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Today's Bookings</div>
+          <div class="kpi-value" id="kpiBookings">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Items Available</div>
+          <div class="kpi-value" id="kpiStock">6</div>
         </div>
       </div>
-    </div>
-  `).join('');
-}
 
-function advanceOrderStatus(idx, newStatus) {
-  appOrders[idx].status = newStatus;
-  saveState('orders', appOrders);
-  renderOwnerOrders();
-  updateKpis();
-}
+      <!-- Main Layout -->
+      <div class="owner-main-layout">
+        <!-- Left Column: Orders & Bookings -->
+        <div>
+          <!-- Orders Queue -->
+          <div class="owner-panel">
+            <div class="panel-header">
+              <span class="panel-heading">Live Orders</span>
+              <span class="count-badge" id="ownerOrdersCount">0</span>
+            </div>
+            <div id="ownerOrdersList">
+              <!-- Orders injected here -->
+            </div>
+          </div>
 
-function removeOrder(idx) {
-  appOrders.splice(idx, 1);
-  saveState('orders', appOrders);
-  renderOwnerOrders();
-  updateKpis();
-}
+          <!-- Bookings Queue -->
+          <div class="owner-panel">
+            <div class="panel-header">
+              <span class="panel-heading">Table Reservations</span>
+              <span class="count-badge" id="ownerBookingsCount">0</span>
+            </div>
+            <div id="ownerBookingsList">
+              <!-- Bookings injected here -->
+            </div>
+          </div>
+        </div>
 
-function renderOwnerBookings() {
-  const container = document.getElementById('ownerBookingsList');
-  const countText = document.getElementById('bookingCountText');
-  countText.textContent = appBookings.length + ' bookings';
-
-  if (appBookings.length === 0) {
-    container.innerHTML = '<div style="color:var(--muted); text-align:center; padding:30px 0;">No reservations currently.</div>';
-    return;
-  }
-
-  container.innerHTML = appBookings.map((b, idx) => `
-    <div class="ticket-card" style="border-left:4px solid var(--gold);">
-      <div class="ticket-info">
-        <div class="ticket-id">${b.id} · ${b.timeSlot}</div>
-        <div class="ticket-customer">${b.name} (${b.party} Guests)</div>
-        <div class="ticket-items">${b.seating} · ${b.phone}</div>
+        <!-- Right Column: Stock Manager -->
+        <div>
+          <div class="owner-panel">
+            <div class="panel-header">
+              <span class="panel-heading">Menu Stock</span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 18px; line-height: 1.4;">
+              Toggle items instantly. Changes update the customer storefront in real time.
+            </p>
+            <div id="ownerStockList">
+              <!-- Stock items injected here -->
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <button class="action-btn" onclick="removeBooking(${idx})">Seat Guest</button>
-      </div>
     </div>
-  `).join('');
-}
+  </div>
 
-function removeBooking(idx) {
-  appBookings.splice(idx, 1);
-  saveState('bookings', appBookings);
-  renderOwnerBookings();
-  updateKpis();
-}
+  <!-- JavaScript -->
+  <script>
+    // Hardcoded owner PIN per blueprint Section 7
+    const OWNER_PIN = "4321";
 
-function renderOwnerStock() {
-  const container = document.getElementById('ownerStockList');
-  container.innerHTML = appMenu.map((item, idx) => `
-    <div class="stock-item-row">
-      <div>
-        <div style="font-weight:600; color:var(--cream);">${item.name}</div>
-        <div style="font-size:12px; color:var(--muted);">$${item.price.toFixed(2)}</div>
-      </div>
-      <button class="stock-toggle-btn ${item.inStock ? 'in' : 'out'}" onclick="toggleItemStock(${idx})">
-        ${item.inStock ? '● In Stock' : '✕ Sold Out'}
-      </button>
-    </div>
-  `).join('');
-}
+    // Master Menu Items Array per blueprint Section 3
+    const MENU_ITEMS = [
+      {
+        id: 1,
+        name: "Dogspeed Espresso Double",
+        category: "espresso",
+        price: 4.50,
+        desc: "Double-pulled Dogspeed blend. Rich dark cacao, candied citrus, dense persistent crema. The house shot.",
+        inStock: true
+      },
+      {
+        id: 2,
+        name: "24-Hour Nitro Cold Brew",
+        category: "cold",
+        price: 5.50,
+        desc: "Steeped cold for a full 24 hours on Cesar Chavez, then nitrogen-charged on draft. Velvety, sweet, zero bitterness.",
+        inStock: true
+      },
+      {
+        id: 3,
+        name: "Ethiopian Yirgacheffe Pour-Over",
+        category: "cold",
+        price: 5.75,
+        desc: "Single-origin natural lot, hand-poured to order on V60. Wild blueberry aroma, bergamot finish, jasmine top notes.",
+        inStock: true
+      },
+      {
+        id: 4,
+        name: "Breakfast Taco Trio",
+        category: "food",
+        price: 10.50,
+        desc: "Three warm flour tortillas. Farm eggs, smoked chorizo or avocado, cheddar, and house salsa verde.",
+        inStock: true
+      },
+      {
+        id: 5,
+        name: "Oat Milk Honey Cortado",
+        category: "espresso",
+        price: 5.00,
+        desc: "Equal parts espresso and steamed oat milk. Finished with a pour of local Texas wildflower honey.",
+        inStock: true
+      },
+      {
+        id: 6,
+        name: "Dogspeed Blend Whole Bean (12oz)",
+        category: "beans",
+        price: 18.00,
+        desc: "Freshly roasted small-batch bag from our San Franciscan drum. Sealed to order on East Cesar Chavez.",
+        inStock: true
+      }
+    ];
 
-function toggleItemStock(idx) {
-  appMenu[idx].inStock = !appMenu[idx].inStock;
-  saveState('menu', appMenu);
-  renderOwnerStock();
-  renderCustomerMenu();
-}
+    // State Variables
+    let cart = {};          // { "Dogspeed Espresso Double": { price: 4.50, qty: 1 } }
+    let stockState = {};    // { 1: true, 2: true, ... }
+    let ordersState = [];   // Array of orders
+    let bookingsState = []; // Array of bookings
+    let currentCategory = "all";
 
-function updateKpis() {
-  document.getElementById('kpiActiveOrders').textContent = appOrders.length;
-  const rev = appOrders.reduce((s, o) => s + o.total, 0);
-  document.getElementById('kpiRevenue').textContent = '$' + rev.toFixed(2);
-  document.getElementById('kpiBookings').textContent = appBookings.length;
-}
+    // Cross-tab Synchronization via BroadcastChannel
+    const bc = new BroadcastChannel("flattrack_sync");
+    bc.onmessage = (ev) => {
+      const { key, val } = ev.data;
+      if (key === "orders") {
+        ordersState = val;
+        localStorage.setItem("flattrack_orders", JSON.stringify(val));
+        renderOwnerOrdersList();
+        updateKpiCounters();
+      }
+      if (key === "bookings") {
+        bookingsState = val;
+        localStorage.setItem("flattrack_bookings", JSON.stringify(val));
+        renderOwnerBookingsList();
+        updateKpiCounters();
+      }
+      if (key === "stock") {
+        stockState = val;
+        localStorage.setItem("flattrack_stock", JSON.stringify(val));
+        renderMenuGrid();
+        renderOwnerStockList();
+        updateKpiCounters();
+      }
+    };
 
-function seedSampleOrder() {
-  const names = ['Alex Rivera', 'Chloe Vance', 'Sam Austin', 'Taylor Brooks'];
-  const sample = {
-    id: "#FT-" + Math.floor(10000 + Math.random() * 90000),
-    customer: names[Math.floor(Math.random() * names.length)],
-    items: "1x Dogspeed Espresso Double, 1x Oat Milk Honey Cortado",
-    total: 9.50,
-    time: "Next 15 minutes",
-    status: "New",
-    created: "Just now"
-  };
-  appOrders.unshift(sample);
-  saveState('orders', appOrders);
-  renderOwnerOrders();
-  updateKpis();
-}
+    // Initialize State from LocalStorage
+    function initData() {
+      // Stock initialization
+      const savedStock = localStorage.getItem("flattrack_stock");
+      if (savedStock) {
+        try {
+          stockState = JSON.parse(savedStock);
+        } catch (e) {
+          stockState = {};
+        }
+      }
+      MENU_ITEMS.forEach(item => {
+        if (typeof stockState[item.id] === "undefined") {
+          stockState[item.id] = item.inStock;
+        }
+      });
 
-function clearAllData() {
-  appOrders = [];
-  appBookings = [];
-  saveState('orders', appOrders);
-  saveState('bookings', appBookings);
-  renderOwnerOrders();
-  renderOwnerBookings();
-  updateKpis();
-}
+      // Orders initialization
+      const savedOrders = localStorage.getItem("flattrack_orders");
+      if (savedOrders) {
+        try {
+          ordersState = JSON.parse(savedOrders);
+        } catch (e) {
+          ordersState = [];
+        }
+      } else {
+        // Initial sample order for demonstration
+        ordersState = [
+          {
+            id: "#FT-84920",
+            customer: "Alex Rivera",
+            items: "1x 24-Hour Nitro Cold Brew, 1x Breakfast Taco Trio",
+            total: "$17.32",
+            pickup: "Next 15 minutes",
+            status: "New",
+            created: "2 mins ago"
+          }
+        ];
+        localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
+      }
 
-// ==================== 5. INITIALIZATION ====================
-renderCustomerMenu();
-renderOwnerStock();
-renderOwnerOrders();
-renderOwnerBookings();
-updateKpis();
-</script>
+      // Bookings initialization
+      const savedBookings = localStorage.getItem("flattrack_bookings");
+      if (savedBookings) {
+        try {
+          bookingsState = JSON.parse(savedBookings);
+        } catch (e) {
+          bookingsState = [];
+        }
+      } else {
+        // Initial sample booking for demonstration
+        bookingsState = [
+          {
+            id: "#BK-4019",
+            name: "Samira Patel",
+            phone: "(512) 555-0198",
+            party: "2 Guests",
+            time: "Today · 10:30 AM",
+            seating: "East Austin Shaded Patio (Dog-Friendly)",
+            status: "Confirmed",
+            created: "10 mins ago"
+          }
+        ];
+        localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
+      }
+    }
+
+    // Dynamic Open/Closed Status
+    function updateStoreStatus() {
+      const now = new Date();
+      const hour = now.getHours();
+      const statusText = document.getElementById("heroStatusText");
+      if (hour >= 7 && hour < 17) {
+        statusText.textContent = "Open Now · 1611 E Cesar Chavez St · Austin, TX";
+      } else {
+        statusText.textContent = "Closed · Opens 7:00 AM · 1611 E Cesar Chavez St · Austin, TX";
+      }
+    }
+
+    // Render Menu Grid based on Category & Stock State
+    function renderMenuGrid() {
+      const grid = document.getElementById("menuGrid");
+      grid.innerHTML = "";
+
+      const filtered = MENU_ITEMS.filter(item => {
+        if (currentCategory === "all") return true;
+        return item.category === currentCategory;
+      });
+
+      filtered.forEach(item => {
+        const isItemInStock = stockState[item.id] !== false;
+        const card = document.createElement("div");
+        card.className = "menu-item-card";
+        card.setAttribute("data-category", item.category);
+
+        card.innerHTML = `
+          <div class="card-top">
+            <h4 class="item-name">${item.name}</h4>
+            <span class="item-price">$${item.price.toFixed(2)}</span>
+          </div>
+          <p class="item-desc">${item.desc}</p>
+          <div class="card-bottom">
+            <div class="stock-tag ${isItemInStock ? 'in-stock' : 'out-of-stock'}">
+              <span class="stock-indicator-dot"></span>
+              <span>${isItemInStock ? 'Available' : 'Sold Out'}</span>
+            </div>
+            ${
+              isItemInStock
+                ? `<button class="add-to-cart-btn" onclick="addItemToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, this)">+ Add</button>`
+                : `<span class="btn-sold-out">Unavailable</span>`
+            }
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Category Filter Handler
+    function filterMenuByCategory(category, btnElement) {
+      currentCategory = category;
+      document.querySelectorAll(".category-tab").forEach(tab => tab.classList.remove("active"));
+      if (btnElement) {
+        btnElement.classList.add("active");
+      }
+      renderMenuGrid();
+    }
+
+    // Cart Management
+    function addItemToCart(name, price, btnElement) {
+      if (cart[name]) {
+        cart[name].qty += 1;
+      } else {
+        cart[name] = { price: price, qty: 1 };
+      }
+
+      if (btnElement) {
+        const originalText = btnElement.textContent;
+        btnElement.textContent = "✓ Added";
+        btnElement.style.color = "var(--green)";
+        btnElement.style.borderColor = "var(--green)";
+        setTimeout(() => {
+          btnElement.textContent = originalText;
+          btnElement.style.color = "";
+          btnElement.style.borderColor = "";
+        }, 1000);
+      }
+
+      renderCartDrawer();
+      updateFloatingCartBtn();
+    }
+
+    function removeItemFromCart(name) {
+      if (cart[name]) {
+        delete cart[name];
+        renderCartDrawer();
+        updateFloatingCartBtn();
+      }
+    }
+
+    function openCart() {
+      document.getElementById("cartDrawer").classList.add("open");
+      document.getElementById("cartOverlay").classList.add("open");
+    }
+
+    function closeCart() {
+      document.getElementById("cartDrawer").classList.remove("open");
+      document.getElementById("cartOverlay").classList.remove("open");
+    }
+
+    function updateFloatingCartBtn() {
+      const btn = document.getElementById("floatingCartBtn");
+      const badge = document.getElementById("floatingCartCount");
+      const totalCount = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+
+      if (totalCount > 0) {
+        badge.textContent = totalCount;
+        btn.style.display = "flex";
+      } else {
+        btn.style.display = "none";
+      }
+    }
+
+    function renderCartDrawer() {
+      const list = document.getElementById("cartItemsList");
+      const summary = document.getElementById("cartSummary");
+      const items = Object.entries(cart);
+
+      if (items.length === 0) {
+        list.innerHTML = `<p class="cart-empty-msg">Your cart is empty. Add drinks or food above.</p>`;
+        summary.style.display = "none";
+        return;
+      }
+
+      summary.style.display = "block";
+      list.innerHTML = "";
+
+      let subtotal = 0;
+      items.forEach(([name, details]) => {
+        const lineTotal = details.price * details.qty;
+        subtotal += lineTotal;
+
+        const row = document.createElement("div");
+        row.className = "cart-item-row";
+        row.innerHTML = `
+          <div class="cart-item-info">
+            <span class="cart-item-title">${name}</span>
+            <span class="cart-item-meta">${details.qty} × $${details.price.toFixed(2)}</span>
+          </div>
+          <div class="cart-item-right">
+            <span class="cart-item-total">$${lineTotal.toFixed(2)}</span>
+            <button class="cart-item-remove" onclick="removeItemFromCart('${name.replace(/'/g, "\\'")}')" title="Remove">&times;</button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+
+      const tax = subtotal * 0.0825;
+      const total = subtotal + tax;
+
+      document.getElementById("cartSubtotal").textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById("cartTax").textContent = `$${tax.toFixed(2)}`;
+      document.getElementById("cartTotal").textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Place Order Handler
+    function placeOrder() {
+      const nameInput = document.getElementById("customerName");
+      const customer = nameInput.value.trim();
+
+      if (!customer) {
+        nameInput.style.animation = "shake 0.4s ease";
+        nameInput.focus();
+        setTimeout(() => { nameInput.style.animation = ""; }, 400);
+        return;
+      }
+
+      const pickupSelect = document.getElementById("pickupWindow");
+      const pickupWindow = pickupSelect.value;
+      const totalText = document.getElementById("cartTotal").textContent;
+
+      const itemsSummary = Object.entries(cart)
+        .map(([name, details]) => `${details.qty}x ${name}`)
+        .join(", ");
+
+      const ticketId = "#FT-" + Math.floor(10000 + Math.random() * 90000);
+
+      const newOrder = {
+        id: ticketId,
+        customer: customer,
+        items: itemsSummary,
+        total: totalText,
+        pickup: pickupWindow,
+        status: "New",
+        created: "Just now"
+      };
+
+      // In a full production server: POST /api/orders
+      // fetch('/api/orders', { method: 'POST', body: JSON.stringify(newOrder) });
+
+      ordersState.unshift(newOrder);
+      localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
+
+      // Broadcast update across open tabs (e.g. Owner Kitchen Screen)
+      bc.postMessage({ key: "orders", val: ordersState });
+
+      // Inline success message
+      const successBanner = document.getElementById("orderSuccessBanner");
+      successBanner.style.display = "block";
+      successBanner.textContent = `✓ Order ${ticketId} confirmed! Ready ${pickupWindow} at the counter.`;
+
+      // Reset cart
+      cart = {};
+      nameInput.value = "";
+      renderCartDrawer();
+      updateFloatingCartBtn();
+      renderOwnerOrdersList();
+      updateKpiCounters();
+
+      setTimeout(() => {
+        successBanner.style.display = "none";
+        closeCart();
+      }, 3200);
+    }
+
+    // Handle Table Booking
+    function handleBooking(event) {
+      event.preventDefault();
+      const name = document.getElementById("bookName").value.trim();
+      const phone = document.getElementById("bookPhone").value.trim();
+      const party = document.getElementById("bookParty").value;
+      const time = document.getElementById("bookTime").value;
+      const seating = document.getElementById("bookSeating").value;
+
+      if (!name || !phone) return;
+
+      const bookingId = "#BK-" + Math.floor(1000 + Math.random() * 9000);
+
+      const newBooking = {
+        id: bookingId,
+        name: name,
+        phone: phone,
+        party: party,
+        time: time,
+        seating: seating,
+        status: "Confirmed",
+        created: "Just now"
+      };
+
+      // In a full production server: POST /api/bookings
+      // fetch('/api/bookings', { method: 'POST', body: JSON.stringify(newBooking) });
+
+      bookingsState.unshift(newBooking);
+      localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
+
+      bc.postMessage({ key: "bookings", val: bookingsState });
+
+      // Show confirmation
+      document.getElementById("bookingForm").style.display = "none";
+      const successBox = document.getElementById("bookingSuccess");
+      document.getElementById("bookingSuccessCode").textContent = `Code: ${bookingId}`;
+      successBox.style.display = "block";
+
+      renderOwnerBookingsList();
+      updateKpiCounters();
+    }
+
+    // Owner PIN Modal Logic
+    function showOwnerPinModal() {
+      const modal = document.getElementById("ownerPinModal");
+      modal.classList.add("open");
+      const digits = document.querySelectorAll(".pin-digit");
+      digits.forEach(d => {
+        d.value = "";
+        d.classList.remove("error");
+      });
+      document.getElementById("pinErrorText").textContent = "";
+      digits[0].focus();
+    }
+
+    function closeOwnerPinModal() {
+      document.getElementById("ownerPinModal").classList.remove("open");
+    }
+
+    function setupPinInputs() {
+      const inputs = document.querySelectorAll(".pin-digit");
+      inputs.forEach((input, idx) => {
+        input.addEventListener("input", (e) => {
+          if (input.value.length === 1 && idx < inputs.length - 1) {
+            inputs[idx + 1].focus();
+          }
+          checkPinComplete();
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !input.value && idx > 0) {
+            inputs[idx - 1].focus();
+          }
+        });
+      });
+    }
+
+    function checkPinComplete() {
+      const inputs = Array.from(document.querySelectorAll(".pin-digit"));
+      const enteredPin = inputs.map(input => input.value).join("");
+      if (enteredPin.length === 4) {
+        verifyOwnerPin(enteredPin);
+      }
+    }
+
+    function verifyOwnerPin(enteredPin) {
+      const inputs = document.querySelectorAll(".pin-digit");
+      const errText = document.getElementById("pinErrorText");
+
+      if (enteredPin === OWNER_PIN) {
+        closeOwnerPinModal();
+        showOwnerDashboard();
+      } else {
+        inputs.forEach(d => d.classList.add("error"));
+        const row = document.getElementById("pinInputsRow");
+        row.style.animation = "shake 0.4s ease";
+        errText.textContent = "Incorrect PIN. Try again.";
+
+        setTimeout(() => {
+          row.style.animation = "";
+          inputs.forEach(d => {
+            d.value = "";
+            d.classList.remove("error");
+          });
+          inputs[0].focus();
+        }, 800);
+      }
+    }
+
+    // Owner Dashboard Overlay
+    function showOwnerDashboard() {
+      document.getElementById("ownerDashboard").style.display = "block";
+      renderOwnerOrdersList();
+      renderOwnerBookingsList();
+      renderOwnerStockList();
+      updateKpiCounters();
+    }
+
+    function closeOwnerDashboard() {
+      document.getElementById("ownerDashboard").style.display = "none";
+    }
+
+    // Owner Orders Queue
+    function renderOwnerOrdersList() {
+      const container = document.getElementById("ownerOrdersList");
+      const countBadge = document.getElementById("ownerOrdersCount");
+      if (!container) return;
+
+      countBadge.textContent = ordersState.length;
+
+      if (ordersState.length === 0) {
+        container.innerHTML = `<p class="empty-state-text">No active orders right now. The queue is clear.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      ordersState.forEach(order => {
+        const card = document.createElement("div");
+        const statusClass = order.status === "New" ? "status-new" : (order.status === "Preparing" ? "status-preparing" : "status-ready");
+        const badgeClass = order.status === "New" ? "badge-new" : (order.status === "Preparing" ? "badge-preparing" : "badge-ready");
+
+        card.className = `ticket-card ${statusClass}`;
+        card.innerHTML = `
+          <div class="ticket-top">
+            <span class="ticket-id">${order.id} · ${order.created}</span>
+            <span class="ticket-badge ${badgeClass}">${order.status}</span>
+          </div>
+          <div class="ticket-customer">${order.customer} <span style="font-size: 12px; color: var(--text-secondary); font-weight: normal;">(${order.pickup})</span></div>
+          <div class="ticket-items">${order.items}</div>
+          <div class="ticket-bottom">
+            <span class="ticket-total">${order.total}</span>
+            <div class="ticket-actions">
+              ${
+                order.status === "New"
+                  ? `<button class="ticket-action-btn btn-brew" onclick="advanceOrder('${order.id}', 'Preparing')">▶ Start Brew</button>`
+                  : (order.status === "Preparing"
+                    ? `<button class="ticket-action-btn btn-ready" onclick="advanceOrder('${order.id}', 'Ready')">✓ Mark Ready</button>`
+                    : `<button class="ticket-action-btn btn-done" onclick="advanceOrder('${order.id}', 'Done')">Complete</button>`)
+              }
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function advanceOrder(id, newStatus) {
+      if (newStatus === "Done") {
+        ordersState = ordersState.filter(o => o.id !== id);
+      } else {
+        const order = ordersState.find(o => o.id === id);
+        if (order) {
+          order.status = newStatus;
+        }
+      }
+
+      localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
+      bc.postMessage({ key: "orders", val: ordersState });
+
+      renderOwnerOrdersList();
+      updateKpiCounters();
+    }
+
+    // Owner Bookings List
+    function renderOwnerBookingsList() {
+      const container = document.getElementById("ownerBookingsList");
+      const countBadge = document.getElementById("ownerBookingsCount");
+      if (!container) return;
+
+      countBadge.textContent = bookingsState.length;
+
+      if (bookingsState.length === 0) {
+        container.innerHTML = `<p class="empty-state-text">No reservations yet today.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      bookingsState.forEach(booking => {
+        const card = document.createElement("div");
+        card.className = "booking-ticket";
+        card.innerHTML = `
+          <div class="booking-ticket-info">
+            <span class="booking-ticket-code">${booking.id} · ${booking.party}</span>
+            <span class="booking-ticket-name">${booking.name} — <span style="color: var(--text-secondary); font-size: 12px;">${booking.phone}</span></span>
+            <span class="booking-ticket-meta">${booking.time} · ${booking.seating}</span>
+          </div>
+          <button class="btn-seat" onclick="seatBooking('${booking.id}')">✓ Seat</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function seatBooking(id) {
+      bookingsState = bookingsState.filter(b => b.id !== id);
+      localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
+      bc.postMessage({ key: "bookings", val: bookingsState });
+      renderOwnerBookingsList();
+      updateKpiCounters();
+    }
+
+    // Owner Stock Manager
+    function renderOwnerStockList() {
+      const container = document.getElementById("ownerStockList");
+      if (!container) return;
+
+      container.innerHTML = "";
+      MENU_ITEMS.forEach(item => {
+        const inStock = stockState[item.id] !== false;
+        const row = document.createElement("div");
+        row.className = "stock-row";
+        row.innerHTML = `
+          <div class="stock-row-info">
+            <span class="stock-row-name">${item.name}</span>
+            <span class="stock-row-price">$${item.price.toFixed(2)}</span>
+          </div>
+          <button class="stock-toggle-btn ${inStock ? 'is-instock' : 'is-soldout'}" onclick="toggleStock(${item.id})">
+            ${inStock ? '● In Stock' : '✕ Sold Out'}
+          </button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function toggleStock(itemId) {
+      stockState[itemId] = !stockState[itemId];
+      localStorage.setItem("flattrack_stock", JSON.stringify(stockState));
+      bc.postMessage({ key: "stock", val: stockState });
+
+      renderOwnerStockList();
+      renderMenuGrid();
+      updateKpiCounters();
+    }
+
+    // Update KPI Numbers
+    function updateKpiCounters() {
+      const kpiOrders = document.getElementById("kpiOrders");
+      const kpiBookings = document.getElementById("kpiBookings");
+      const kpiStock = document.getElementById("kpiStock");
+
+      if (kpiOrders) {
+        kpiOrders.textContent = ordersState.length;
+      }
+      if (kpiBookings) {
+        kpiBookings.textContent = bookingsState.length;
+      }
+      if (kpiStock) {
+        const availableCount = MENU_ITEMS.filter(item => stockState[item.id] !== false).length;
+        kpiStock.textContent = availableCount;
+      }
+    }
+
+    // Ambient Particle Canvas Animation
+    function setupAmbientCanvas() {
+      const canvas = document.getElementById("ambientCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const count = 25;
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.5 + 0.5,
+          alpha: Math.random() * 0.14 + 0.08
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < count; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(201, 168, 76, ${p.alpha})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    // App Initialization
+    document.addEventListener("DOMContentLoaded", () => {
+      initData();
+      updateStoreStatus();
+      renderMenuGrid();
+      renderOwnerOrdersList();
+      renderOwnerBookingsList();
+      renderOwnerStockList();
+      updateKpiCounters();
+      setupPinInputs();
+      setupAmbientCanvas();
+    });
+  </script>
 </body>
 </html>
