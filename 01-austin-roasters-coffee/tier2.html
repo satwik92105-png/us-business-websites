@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat Track Coffee Roasters | Austin, TX | Tier 2 Live Ordering & POS</title>
-  <meta name="description" content="East Austin's specialty micro-roastery. Order ahead, reserve your table, and experience real-time barista kitchen portal sync.">
+  <meta name="description" content="East Austin's specialty micro-roastery. Order ahead, reserve your table, view our roastery map, and connect with our live owner kitchen portal.">
   <link rel="canonical" href="https://satwik92105-png.github.io/01-austin-roasters-coffee/tier2.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,12 +117,12 @@
     .nav-center {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 22px;
     }
 
     .nav-center a {
       color: var(--text-secondary);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 500;
       text-decoration: none;
       transition: color 0.2s;
@@ -169,32 +169,34 @@
       font-weight: 700;
     }
 
-    .owner-login-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
+    .owner-portal-nav-btn {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--border-active);
+      color: var(--gold);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 11.5px;
+      font-weight: 700;
       padding: 6px 14px;
       border-radius: 6px;
-      cursor: pointer;
+      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
     }
 
-    .owner-login-btn:hover {
+    .owner-portal-nav-btn:hover {
+      background: var(--gold);
+      color: #0a0908;
       border-color: var(--gold);
-      color: var(--gold);
+      box-shadow: 0 4px 14px rgba(201, 168, 76, 0.35);
     }
 
     /* Hero Section */
     #hero {
       position: relative;
       z-index: 1;
-      min-height: 92vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -322,12 +324,6 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .stat-chip a, a.stat-chip {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
     }
 
     .stat-chip:hover {
@@ -836,6 +832,155 @@
       font-size: 13px;
     }
 
+    /* Location & Inbuilt Map Section */
+    #locationSection {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 90px 24px;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .location-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .loc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .loc-card:hover {
+      border-color: var(--border-active);
+    }
+
+    .loc-card-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .loc-card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .loc-card-val {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    .loc-card-val a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .loc-card-val a:hover {
+      color: var(--gold);
+    }
+
+    .loc-card-sub {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .map-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      background: var(--bg-card);
+    }
+
+    .map-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 350px;
+      border: none;
+    }
+
+    .map-nav-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .map-action-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      text-decoration: none;
+      text-align: center;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .map-action-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* Direct Owner & Roastery Contact Section */
+    #contactSection {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      padding: 90px 24px;
+    }
+
+    .contact-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    #contactSuccess {
+      display: none;
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
     /* Footer */
     footer {
       position: relative;
@@ -863,8 +1008,9 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 22px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
@@ -884,488 +1030,6 @@
       opacity: 0.8;
     }
 
-    /* Owner PIN Modal */
-    #ownerPinModal {
-      position: fixed;
-      inset: 0;
-      background: var(--overlay);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #ownerPinModal.open {
-      display: flex;
-    }
-
-    .pin-modal-box {
-      position: relative;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      max-width: 360px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 4px;
-    }
-
-    .modal-close-btn:hover {
-      color: var(--cream);
-    }
-
-    .pin-icon {
-      font-size: 2.4rem;
-      margin-bottom: 14px;
-      display: inline-block;
-    }
-
-    .pin-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-
-    .pin-sub {
-      color: var(--text-secondary);
-      font-size: 13px;
-      margin-bottom: 24px;
-      line-height: 1.4;
-    }
-
-    .pin-inputs-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .pin-digit {
-      width: 52px;
-      height: 60px;
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--cream);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .pin-digit:focus {
-      border-color: var(--gold);
-    }
-
-    .pin-digit.error {
-      border-color: var(--red) !important;
-    }
-
-    .pin-error-text {
-      color: var(--red);
-      font-size: 12px;
-      height: 18px;
-      margin-top: 4px;
-    }
-
-    /* Owner Dashboard Full-Screen Overlay */
-    #ownerDashboard {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-base);
-      z-index: 9999;
-      display: none;
-      overflow-y: auto;
-    }
-
-    .owner-topbar {
-      position: sticky;
-      top: 0;
-      background: rgba(10, 9, 8, 0.95);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .owner-topbar-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .owner-lock-btn {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: var(--red);
-      border-radius: 8px;
-      padding: 7px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Space Grotesk', sans-serif;
-      transition: all 0.2s;
-    }
-
-    .owner-lock-btn:hover {
-      background: var(--red);
-      color: #fff;
-    }
-
-    .owner-content {
-      padding: 32px 28px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .kpi-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .kpi-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-    }
-
-    .kpi-value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .owner-main-layout {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 24px;
-    }
-
-    .owner-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .panel-heading {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--cream);
-    }
-
-    .count-badge {
-      background: var(--gold);
-      color: #0a0908;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 50px;
-      padding: 3px 10px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .ticket-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .ticket-card.status-new {
-      border-left: 4px solid var(--orange);
-    }
-
-    .ticket-card.status-preparing {
-      border-left: 4px solid var(--blue);
-    }
-
-    .ticket-card.status-ready {
-      border-left: 4px solid var(--green);
-    }
-
-    .ticket-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .ticket-id {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--gold);
-    }
-
-    .ticket-badge {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      border-radius: 50px;
-      padding: 3px 10px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .badge-new {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--orange);
-      color: var(--orange);
-    }
-
-    .badge-preparing {
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid var(--blue);
-      color: var(--blue);
-    }
-
-    .badge-ready {
-      background: var(--green-dim);
-      border: 1px solid var(--green);
-      color: var(--green);
-    }
-
-    .ticket-customer {
-      color: var(--cream);
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .ticket-items {
-      color: var(--text-secondary);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .ticket-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 4px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .ticket-total {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .ticket-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .ticket-action-btn {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 50px;
-      padding: 5px 12px;
-      border: 1px solid;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-brew {
-      background: rgba(59, 130, 246, 0.15);
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    .btn-brew:hover {
-      background: var(--blue);
-      color: #fff;
-    }
-
-    .btn-ready {
-      background: var(--green-dim);
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .btn-ready:hover {
-      background: var(--green);
-      color: #0a0908;
-    }
-
-    .btn-done {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--text-secondary);
-      color: var(--text-secondary);
-    }
-
-    .btn-done:hover {
-      background: var(--text-secondary);
-      color: #0a0908;
-    }
-
-    .booking-ticket {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--gold);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .booking-ticket-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .booking-ticket-code {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .booking-ticket-name {
-      color: var(--cream);
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .booking-ticket-meta {
-      color: var(--text-secondary);
-      font-size: 12px;
-    }
-
-    .btn-seat {
-      background: rgba(201, 168, 76, 0.1);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-seat:hover {
-      background: var(--gold);
-      color: #0a0908;
-    }
-
-    .stock-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .stock-row-info {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .stock-row-name {
-      color: var(--cream);
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .stock-row-price {
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .stock-toggle-btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 50px;
-      padding: 5px 12px;
-      cursor: pointer;
-      border: 1px solid;
-      transition: all 0.2s;
-    }
-
-    .stock-toggle-btn.is-instock {
-      background: var(--green-dim);
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .stock-toggle-btn.is-soldout {
-      background: var(--red-dim);
-      border-color: var(--red);
-      color: var(--red);
-    }
-
-    .empty-state-text {
-      color: var(--text-secondary);
-      text-align: center;
-      padding: 28px 0;
-      font-size: 13px;
-    }
-
     /* Keyframes */
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -1380,21 +1044,13 @@
       80% { transform: translateX(4px); }
     }
 
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
     /* Responsive Breakpoints */
     @media (max-width: 900px) {
       .nav-center {
         display: none;
       }
-      .owner-main-layout {
+      .location-grid {
         grid-template-columns: 1fr;
-      }
-      .kpi-grid {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -1425,11 +1081,8 @@
       .form-grid-2 {
         grid-template-columns: 1fr;
       }
-      .kpi-grid {
+      .map-nav-actions {
         grid-template-columns: 1fr;
-      }
-      .owner-content {
-        padding: 20px 16px;
       }
     }
   </style>
@@ -1449,6 +1102,8 @@
     <div class="nav-center">
       <a href="#menuSection">Menu</a>
       <a href="#bookingSection">Reserve</a>
+      <a href="#locationSection">Location & Map</a>
+      <a href="#contactSection">Contact</a>
       <a href="tel:+15125406033">Call Us</a>
     </div>
 
@@ -1458,9 +1113,9 @@
         <a href="tier2.html" class="active">Tier 2</a>
         <a href="tier3.html">Tier 3</a>
       </div>
-      <button class="owner-login-btn" onclick="showOwnerPinModal()">
-        <span>Owner Login</span>
-      </button>
+      <a href="owner.html" target="_blank" class="owner-portal-nav-btn" title="Open Dedicated Owner & Kitchen Terminal in New Window">
+        <span>Owner Portal ↗</span>
+      </a>
     </div>
   </nav>
 
@@ -1476,7 +1131,7 @@
     </h1>
 
     <p class="hero-tagline">
-      East Austin's specialty micro-roastery. Order ahead, reserve your seat — no waiting in line.
+      East Austin's specialty micro-roastery. Order ahead, reserve your table — connected live to our barista terminal.
     </p>
 
     <div class="hero-actions">
@@ -1638,6 +1293,127 @@
     </div>
   </section>
 
+  <!-- Location & Inbuilt Map Section -->
+  <section id="locationSection">
+    <div class="section-label">COORDINATES & LOCATION</div>
+    <h2 class="section-title">Visit Our East Austin Roastery</h2>
+    <p class="section-subtitle">1611 E Cesar Chavez St, Austin, TX 78702 · Specialty micro-roaster, dog-friendly patio, bike racks & free street parking.</p>
+
+    <div class="location-grid">
+      <!-- Info Column -->
+      <div class="location-info-col">
+        <div class="loc-card">
+          <div class="loc-card-icon">📍</div>
+          <div>
+            <div class="loc-card-label">Address</div>
+            <div class="loc-card-val">1611 E Cesar Chavez St, Austin, TX 78702</div>
+            <div class="loc-card-sub">East Austin Roastery & Tasting Room</div>
+          </div>
+        </div>
+
+        <div class="loc-card">
+          <div class="loc-card-icon">📞</div>
+          <div>
+            <div class="loc-card-label">Phone & Orders</div>
+            <div class="loc-card-val"><a href="tel:+15125406033">(512) 540-6033</a></div>
+            <div class="loc-card-sub">Mon–Sun 7:00 AM – 5:00 PM CST</div>
+          </div>
+        </div>
+
+        <div class="loc-card">
+          <div class="loc-card-icon">🕒</div>
+          <div>
+            <div class="loc-card-label">Operating Hours</div>
+            <div class="loc-card-val">Monday – Sunday: 7:00 AM – 5:00 PM</div>
+            <div class="loc-card-sub">Full espresso bar, nitro drafts & kitchen tacos daily</div>
+          </div>
+        </div>
+
+        <div class="loc-card">
+          <div class="loc-card-icon">🚲</div>
+          <div>
+            <div class="loc-card-label">Parking & Transit</div>
+            <div class="loc-card-val">Free Street Parking & Bike Racks</div>
+            <div class="loc-card-sub">Free parking on E Cesar Chavez & Chicon St. CapMetro Bus Route 17 stops 1 block away. 100% dog-friendly shaded patio.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In-Built Map Column -->
+      <div class="location-map-col">
+        <div class="map-wrapper">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.1!2d-97.7168!3d30.2562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b5a4e7d0e4c9%3A0x1a2b3c4d5e6f7a8b!2s1611%20E%20Cesar%20Chavez%20St%2C%20Austin%2C%20TX%2078702!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div class="map-nav-actions">
+          <a href="https://maps.google.com/?q=Flat+Track+Coffee+Roasters+Austin+TX" target="_blank" rel="noopener noreferrer" class="map-action-btn">
+            🗺️ Open Google Maps ↗
+          </a>
+          <a href="https://maps.apple.com/?q=1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" rel="noopener noreferrer" class="map-action-btn">
+            🧭 Open Apple Maps ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Direct Owner & Roastery Contact Section -->
+  <section id="contactSection">
+    <div class="contact-inner">
+      <div class="section-label">DIRECT CONTACT</div>
+      <h2 class="section-title">Message the Roastery Owner & Team</h2>
+      <p class="section-subtitle">Have a question, catering request, or whole-bean wholesale inquiry? Messages sync directly to the owner portal.</p>
+
+      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label" for="contactName">Your Name</label>
+            <input type="text" id="contactName" class="form-input" placeholder="e.g. Jordan Lee" required>
+          </div>
+          <div>
+            <label class="form-label" for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" class="form-input" placeholder="jordan@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label" for="contactPhone">Phone Number (Optional)</label>
+            <input type="tel" id="contactPhone" class="form-input" placeholder="(512) 000-0000">
+          </div>
+          <div>
+            <label class="form-label" for="contactType">Inquiry Topic</label>
+            <select id="contactType" class="form-select">
+              <option value="General Question">General Question</option>
+              <option value="Catering & Bulk Coffee">Catering & Bulk Coffee</option>
+              <option value="Private Event">Private Event / Patio Reservation</option>
+              <option value="Wholesale Beans">Wholesale Beans Inquiry</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-full-row">
+          <label class="form-label" for="contactMessage">Your Message</label>
+          <textarea id="contactMessage" class="form-input" rows="4" placeholder="How can our roastery team help you?" style="resize:vertical;" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%; padding:14px;">
+          Send Message to Owner →
+        </button>
+      </form>
+
+      <div id="contactSuccess">
+        <div class="success-icon">✉️</div>
+        <div class="success-title">Message Delivered!</div>
+        <div class="booking-subtext">Your inquiry has been transmitted directly to our owner portal terminal. We will respond promptly within 24 hours.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="footer-logo">Flat Track Coffee Roasters</div>
@@ -1645,104 +1421,15 @@
     <div class="footer-links">
       <a href="#menuSection">Menu</a>
       <a href="#bookingSection">Reserve</a>
-      <a href="tel:+15125406033">Call Us</a>
+      <a href="#locationSection">Location & Map</a>
+      <a href="#contactSection">Contact</a>
+      <a href="owner.html" target="_blank" style="color:var(--gold); font-weight:600;">Owner Portal (Separate Website) ↗</a>
     </div>
-    <div class="footer-copy">© 2024 Flat Track Coffee Roasters. Tier 2 · Frontend + Backend.</div>
+    <div class="footer-copy">© 2024 Flat Track Coffee Roasters. Tier 2 · Frontend + Backend & Real-Time POS.</div>
   </footer>
-
-  <!-- Owner PIN Modal -->
-  <div id="ownerPinModal">
-    <div class="pin-modal-box">
-      <button class="modal-close-btn" onclick="closeOwnerPinModal()">&times;</button>
-      <div class="pin-icon">🔑</div>
-      <h3 class="pin-title">Owner Access</h3>
-      <p class="pin-sub">Enter your 4-digit PIN to access the management portal</p>
-
-      <div class="pin-inputs-row" id="pinInputsRow">
-        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*" autofocus>
-        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
-        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
-        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" pattern="[0-9]*">
-      </div>
-
-      <div class="pin-error-text" id="pinErrorText"></div>
-    </div>
-  </div>
-
-  <!-- Owner Dashboard Full-Screen Overlay -->
-  <div id="ownerDashboard">
-    <div class="owner-topbar">
-      <div class="owner-topbar-title">☕ Owner Portal — Flat Track Coffee</div>
-      <button class="owner-lock-btn" onclick="closeOwnerDashboard()">Close & Lock</button>
-    </div>
-
-    <div class="owner-content">
-      <!-- KPI Row -->
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-title">Active Orders</div>
-          <div class="kpi-value" id="kpiOrders">0</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-title">Today's Bookings</div>
-          <div class="kpi-value" id="kpiBookings">0</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-title">Items Available</div>
-          <div class="kpi-value" id="kpiStock">6</div>
-        </div>
-      </div>
-
-      <!-- Main Layout -->
-      <div class="owner-main-layout">
-        <!-- Left Column: Orders & Bookings -->
-        <div>
-          <!-- Orders Queue -->
-          <div class="owner-panel">
-            <div class="panel-header">
-              <span class="panel-heading">Live Orders</span>
-              <span class="count-badge" id="ownerOrdersCount">0</span>
-            </div>
-            <div id="ownerOrdersList">
-              <!-- Orders injected here -->
-            </div>
-          </div>
-
-          <!-- Bookings Queue -->
-          <div class="owner-panel">
-            <div class="panel-header">
-              <span class="panel-heading">Table Reservations</span>
-              <span class="count-badge" id="ownerBookingsCount">0</span>
-            </div>
-            <div id="ownerBookingsList">
-              <!-- Bookings injected here -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Stock Manager -->
-        <div>
-          <div class="owner-panel">
-            <div class="panel-header">
-              <span class="panel-heading">Menu Stock</span>
-            </div>
-            <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 18px; line-height: 1.4;">
-              Toggle items instantly. Changes update the customer storefront in real time.
-            </p>
-            <div id="ownerStockList">
-              <!-- Stock items injected here -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- JavaScript -->
   <script>
-    // Hardcoded owner PIN per blueprint Section 7
-    const OWNER_PIN = "4321";
-
     // Master Menu Items Array per blueprint Section 3
     const MENU_ITEMS = [
       {
@@ -1802,28 +1489,22 @@
     let bookingsState = []; // Array of bookings
     let currentCategory = "all";
 
-    // Cross-tab Synchronization via BroadcastChannel
+    // Cross-tab Synchronization via BroadcastChannel with owner.html
     const bc = new BroadcastChannel("flattrack_sync");
     bc.onmessage = (ev) => {
       const { key, val } = ev.data;
       if (key === "orders") {
         ordersState = val;
         localStorage.setItem("flattrack_orders", JSON.stringify(val));
-        renderOwnerOrdersList();
-        updateKpiCounters();
       }
       if (key === "bookings") {
         bookingsState = val;
         localStorage.setItem("flattrack_bookings", JSON.stringify(val));
-        renderOwnerBookingsList();
-        updateKpiCounters();
       }
       if (key === "stock") {
         stockState = val;
         localStorage.setItem("flattrack_stock", JSON.stringify(val));
-        renderMenuGrid();
-        renderOwnerStockList();
-        updateKpiCounters();
+        renderMenuGrid(); // updates customer view live when owner toggles stock in owner.html
       }
     };
 
@@ -1853,7 +1534,6 @@
           ordersState = [];
         }
       } else {
-        // Initial sample order for demonstration
         ordersState = [
           {
             id: "#FT-84920",
@@ -1862,7 +1542,7 @@
             total: "$17.32",
             pickup: "Next 15 minutes",
             status: "New",
-            created: "2 mins ago"
+            created: "Just now"
           }
         ];
         localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
@@ -1877,7 +1557,6 @@
           bookingsState = [];
         }
       } else {
-        // Initial sample booking for demonstration
         bookingsState = [
           {
             id: "#BK-4019",
@@ -2051,7 +1730,7 @@
       document.getElementById("cartTotal").textContent = `$${total.toFixed(2)}`;
     }
 
-    // Place Order Handler
+    // Place Order Handler (Syncs to owner.html in real-time)
     function placeOrder() {
       const nameInput = document.getElementById("customerName");
       const customer = nameInput.value.trim();
@@ -2089,7 +1768,7 @@
       ordersState.unshift(newOrder);
       localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
 
-      // Broadcast update across open tabs (e.g. Owner Kitchen Screen)
+      // Broadcast update across open tabs (instantly alerts owner.html)
       bc.postMessage({ key: "orders", val: ordersState });
 
       // Inline success message
@@ -2102,8 +1781,6 @@
       nameInput.value = "";
       renderCartDrawer();
       updateFloatingCartBtn();
-      renderOwnerOrdersList();
-      updateKpiCounters();
 
       setTimeout(() => {
         successBanner.style.display = "none";
@@ -2111,7 +1788,7 @@
       }, 3200);
     }
 
-    // Handle Table Booking
+    // Handle Table Booking (Syncs to owner.html in real-time)
     function handleBooking(event) {
       event.preventDefault();
       const name = document.getElementById("bookName").value.trim();
@@ -2148,238 +1825,45 @@
       const successBox = document.getElementById("bookingSuccess");
       document.getElementById("bookingSuccessCode").textContent = `Code: ${bookingId}`;
       successBox.style.display = "block";
-
-      renderOwnerBookingsList();
-      updateKpiCounters();
     }
 
-    // Owner PIN Modal Logic
-    function showOwnerPinModal() {
-      const modal = document.getElementById("ownerPinModal");
-      modal.classList.add("open");
-      const digits = document.querySelectorAll(".pin-digit");
-      digits.forEach(d => {
-        d.value = "";
-        d.classList.remove("error");
-      });
-      document.getElementById("pinErrorText").textContent = "";
-      digits[0].focus();
-    }
+    // Handle Direct Contact / Inquiry Submission (Syncs to owner.html)
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const phone = document.getElementById("contactPhone").value.trim();
+      const topic = document.getElementById("contactType").value;
+      const msg = document.getElementById("contactMessage").value.trim();
 
-    function closeOwnerPinModal() {
-      document.getElementById("ownerPinModal").classList.remove("open");
-    }
+      if (!name || !email || !msg) return;
 
-    function setupPinInputs() {
-      const inputs = document.querySelectorAll(".pin-digit");
-      inputs.forEach((input, idx) => {
-        input.addEventListener("input", (e) => {
-          if (input.value.length === 1 && idx < inputs.length - 1) {
-            inputs[idx + 1].focus();
-          }
-          checkPinComplete();
-        });
+      const msgId = "#MSG-" + Math.floor(100 + Math.random() * 900);
+      const newMsg = {
+        id: msgId,
+        name: name,
+        email: email,
+        phone: phone || "Not provided",
+        subject: `[${topic}] ${msg}`,
+        time: "Just now"
+      };
 
-        input.addEventListener("keydown", (e) => {
-          if (e.key === "Backspace" && !input.value && idx > 0) {
-            inputs[idx - 1].focus();
-          }
-        });
-      });
-    }
-
-    function checkPinComplete() {
-      const inputs = Array.from(document.querySelectorAll(".pin-digit"));
-      const enteredPin = inputs.map(input => input.value).join("");
-      if (enteredPin.length === 4) {
-        verifyOwnerPin(enteredPin);
-      }
-    }
-
-    function verifyOwnerPin(enteredPin) {
-      const inputs = document.querySelectorAll(".pin-digit");
-      const errText = document.getElementById("pinErrorText");
-
-      if (enteredPin === OWNER_PIN) {
-        closeOwnerPinModal();
-        showOwnerDashboard();
-      } else {
-        inputs.forEach(d => d.classList.add("error"));
-        const row = document.getElementById("pinInputsRow");
-        row.style.animation = "shake 0.4s ease";
-        errText.textContent = "Incorrect PIN. Try again.";
-
-        setTimeout(() => {
-          row.style.animation = "";
-          inputs.forEach(d => {
-            d.value = "";
-            d.classList.remove("error");
-          });
-          inputs[0].focus();
-        }, 800);
-      }
-    }
-
-    // Owner Dashboard Overlay
-    function showOwnerDashboard() {
-      document.getElementById("ownerDashboard").style.display = "block";
-      renderOwnerOrdersList();
-      renderOwnerBookingsList();
-      renderOwnerStockList();
-      updateKpiCounters();
-    }
-
-    function closeOwnerDashboard() {
-      document.getElementById("ownerDashboard").style.display = "none";
-    }
-
-    // Owner Orders Queue
-    function renderOwnerOrdersList() {
-      const container = document.getElementById("ownerOrdersList");
-      const countBadge = document.getElementById("ownerOrdersCount");
-      if (!container) return;
-
-      countBadge.textContent = ordersState.length;
-
-      if (ordersState.length === 0) {
-        container.innerHTML = `<p class="empty-state-text">No active orders right now. The queue is clear.</p>`;
-        return;
+      let messages = [];
+      try {
+        messages = JSON.parse(localStorage.getItem("flattrack_messages") || "[]");
+      } catch (e) {
+        messages = [];
       }
 
-      container.innerHTML = "";
-      ordersState.forEach(order => {
-        const card = document.createElement("div");
-        const statusClass = order.status === "New" ? "status-new" : (order.status === "Preparing" ? "status-preparing" : "status-ready");
-        const badgeClass = order.status === "New" ? "badge-new" : (order.status === "Preparing" ? "badge-preparing" : "badge-ready");
+      messages.unshift(newMsg);
+      localStorage.setItem("flattrack_messages", JSON.stringify(messages));
 
-        card.className = `ticket-card ${statusClass}`;
-        card.innerHTML = `
-          <div class="ticket-top">
-            <span class="ticket-id">${order.id} · ${order.created}</span>
-            <span class="ticket-badge ${badgeClass}">${order.status}</span>
-          </div>
-          <div class="ticket-customer">${order.customer} <span style="font-size: 12px; color: var(--text-secondary); font-weight: normal;">(${order.pickup})</span></div>
-          <div class="ticket-items">${order.items}</div>
-          <div class="ticket-bottom">
-            <span class="ticket-total">${order.total}</span>
-            <div class="ticket-actions">
-              ${
-                order.status === "New"
-                  ? `<button class="ticket-action-btn btn-brew" onclick="advanceOrder('${order.id}', 'Preparing')">▶ Start Brew</button>`
-                  : (order.status === "Preparing"
-                    ? `<button class="ticket-action-btn btn-ready" onclick="advanceOrder('${order.id}', 'Ready')">✓ Mark Ready</button>`
-                    : `<button class="ticket-action-btn btn-done" onclick="advanceOrder('${order.id}', 'Done')">Complete</button>`)
-              }
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
+      // Broadcast to owner.html
+      bc.postMessage({ key: "messages", val: messages });
 
-    function advanceOrder(id, newStatus) {
-      if (newStatus === "Done") {
-        ordersState = ordersState.filter(o => o.id !== id);
-      } else {
-        const order = ordersState.find(o => o.id === id);
-        if (order) {
-          order.status = newStatus;
-        }
-      }
-
-      localStorage.setItem("flattrack_orders", JSON.stringify(ordersState));
-      bc.postMessage({ key: "orders", val: ordersState });
-
-      renderOwnerOrdersList();
-      updateKpiCounters();
-    }
-
-    // Owner Bookings List
-    function renderOwnerBookingsList() {
-      const container = document.getElementById("ownerBookingsList");
-      const countBadge = document.getElementById("ownerBookingsCount");
-      if (!container) return;
-
-      countBadge.textContent = bookingsState.length;
-
-      if (bookingsState.length === 0) {
-        container.innerHTML = `<p class="empty-state-text">No reservations yet today.</p>`;
-        return;
-      }
-
-      container.innerHTML = "";
-      bookingsState.forEach(booking => {
-        const card = document.createElement("div");
-        card.className = "booking-ticket";
-        card.innerHTML = `
-          <div class="booking-ticket-info">
-            <span class="booking-ticket-code">${booking.id} · ${booking.party}</span>
-            <span class="booking-ticket-name">${booking.name} — <span style="color: var(--text-secondary); font-size: 12px;">${booking.phone}</span></span>
-            <span class="booking-ticket-meta">${booking.time} · ${booking.seating}</span>
-          </div>
-          <button class="btn-seat" onclick="seatBooking('${booking.id}')">✓ Seat</button>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function seatBooking(id) {
-      bookingsState = bookingsState.filter(b => b.id !== id);
-      localStorage.setItem("flattrack_bookings", JSON.stringify(bookingsState));
-      bc.postMessage({ key: "bookings", val: bookingsState });
-      renderOwnerBookingsList();
-      updateKpiCounters();
-    }
-
-    // Owner Stock Manager
-    function renderOwnerStockList() {
-      const container = document.getElementById("ownerStockList");
-      if (!container) return;
-
-      container.innerHTML = "";
-      MENU_ITEMS.forEach(item => {
-        const inStock = stockState[item.id] !== false;
-        const row = document.createElement("div");
-        row.className = "stock-row";
-        row.innerHTML = `
-          <div class="stock-row-info">
-            <span class="stock-row-name">${item.name}</span>
-            <span class="stock-row-price">$${item.price.toFixed(2)}</span>
-          </div>
-          <button class="stock-toggle-btn ${inStock ? 'is-instock' : 'is-soldout'}" onclick="toggleStock(${item.id})">
-            ${inStock ? '● In Stock' : '✕ Sold Out'}
-          </button>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    function toggleStock(itemId) {
-      stockState[itemId] = !stockState[itemId];
-      localStorage.setItem("flattrack_stock", JSON.stringify(stockState));
-      bc.postMessage({ key: "stock", val: stockState });
-
-      renderOwnerStockList();
-      renderMenuGrid();
-      updateKpiCounters();
-    }
-
-    // Update KPI Numbers
-    function updateKpiCounters() {
-      const kpiOrders = document.getElementById("kpiOrders");
-      const kpiBookings = document.getElementById("kpiBookings");
-      const kpiStock = document.getElementById("kpiStock");
-
-      if (kpiOrders) {
-        kpiOrders.textContent = ordersState.length;
-      }
-      if (kpiBookings) {
-        kpiBookings.textContent = bookingsState.length;
-      }
-      if (kpiStock) {
-        const availableCount = MENU_ITEMS.filter(item => stockState[item.id] !== false).length;
-        kpiStock.textContent = availableCount;
-      }
+      // Show confirmation
+      document.getElementById("contactForm").style.display = "none";
+      document.getElementById("contactSuccess").style.display = "block";
     }
 
     // Ambient Particle Canvas Animation
@@ -2440,11 +1924,6 @@
       initData();
       updateStoreStatus();
       renderMenuGrid();
-      renderOwnerOrdersList();
-      renderOwnerBookingsList();
-      renderOwnerStockList();
-      updateKpiCounters();
-      setupPinInputs();
       setupAmbientCanvas();
     });
   </script>

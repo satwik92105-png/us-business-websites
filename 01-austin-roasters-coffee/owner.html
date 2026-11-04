@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flat Track Roasters | Dedicated Owner POS & Kitchen Portal</title>
+  <meta name="description" content="Private staff and owner terminal for Flat Track Coffee Roasters. Real-time order kitchen display, table reservations, and live stock control.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #0a0908;
+      --bg-card: #131210;
+      --bg-elevated: #1a1816;
+      --bg-input: #1f1d1a;
+      --gold: #c9a84c;
+      --gold-dim: #a07d35;
+      --gold-text: #e8c97d;
+      --cream: #f2ede4;
+      --text-primary: #d6cfc4;
+      --text-secondary: #8a8178;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-active: rgba(201, 168, 76, 0.5);
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.12);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.12);
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --overlay: rgba(10, 9, 8, 0.88);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* PIN Lock Screen */
+    #pinLockScreen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      background-image: radial-gradient(ellipse 60% 50% at 50% -10%, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .pin-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+    }
+
+    .pin-icon {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .pin-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .pin-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .pin-inputs-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .pin-digit {
+      width: 52px;
+      height: 60px;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--gold);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .pin-digit:focus {
+      border-color: var(--gold);
+    }
+
+    .pin-digit.error {
+      border-color: var(--red) !important;
+    }
+
+    .pin-error-text {
+      color: var(--red);
+      font-size: 12px;
+      height: 18px;
+      margin-top: 4px;
+    }
+
+    .pin-demo-hint {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 20px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px dashed var(--border);
+    }
+
+    /* Main Terminal Layout */
+    #portalContainer {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Top Header Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .portal-branding {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .portal-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portal-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sync-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.8s infinite ease-in-out;
+    }
+
+    .audio-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle-btn.active {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .storefront-link-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .storefront-link-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .lock-btn {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--red);
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .lock-btn:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .kpi-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .kpi-meta {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* Main Dashboard Grid */
+    .portal-main-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+    }
+
+    .portal-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .panel-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-count {
+      background: var(--gold);
+      color: #0a0908;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Order Tickets */
+    .order-ticket {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .order-ticket.new-ticket-anim {
+      animation: highlightFlash 1.5s ease-out;
+    }
+
+    .order-ticket.status-new {
+      border-left: 5px solid var(--orange);
+    }
+
+    .order-ticket.status-preparing {
+      border-left: 5px solid var(--blue);
+    }
+
+    .order-ticket.status-ready {
+      border-left: 5px solid var(--green);
+    }
+
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ticket-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .ticket-status-pill {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-pill-new {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .status-pill-preparing {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--blue);
+      color: var(--blue);
+    }
+
+    .status-pill-ready {
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+
+    .ticket-customer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .ticket-customer-name {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .ticket-pickup-time {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ticket-items-desc {
+      color: var(--text-primary);
+      font-size: 13.5px;
+      line-height: 1.45;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .ticket-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .ticket-total-price {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .ticket-actions-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .ticket-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 6px 14px;
+      border: 1px solid;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-action-brew {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .btn-action-brew:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-action-ready {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .btn-action-ready:hover {
+      background: var(--green);
+      color: #0a0908;
+    }
+
+    .btn-action-complete {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--text-secondary);
+      color: var(--text-secondary);
+    }
+
+    .btn-action-complete:hover {
+      background: var(--text-secondary);
+      color: #0a0908;
+    }
+
+    /* Bookings & Messages Cards */
+    .reservation-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reservation-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .res-code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .res-name {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .res-meta {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .btn-seat-guest {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-seat-guest:hover {
+      background: var(--gold);
+      color: #0a0908;
+    }
+
+    /* Customer Inquiries / Messages */
+    .message-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .msg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .msg-sender {
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .msg-time {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .msg-body {
+      font-size: 13px;
+      color: var(--text-primary);
+      margin: 6px 0;
+      line-height: 1.4;
+    }
+
+    .msg-contact-info {
+      font-size: 11px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-dismiss-msg {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
+    .btn-dismiss-msg:hover {
+      color: var(--cream);
+    }
+
+    /* Stock Controller */
+    .stock-row-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stock-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .stock-name {
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .stock-category-price {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stock-toggle-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+
+    .stock-toggle-btn.in-stock {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .stock-toggle-btn.out-stock {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .empty-state {
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 32px 0;
+      font-size: 13.5px;
+    }
+
+    /* Keyframes */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    @keyframes highlightFlash {
+      0% { background: rgba(201, 168, 76, 0.3); }
+      100% { background: var(--bg-elevated); }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .portal-main-grid {
+        grid-template-columns: 1fr;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PIN Lock Screen -->
+  <div id="pinLockScreen">
+    <div class="pin-card">
+      <div class="pin-icon">🔑</div>
+      <h2 class="pin-title">Owner & Staff Terminal</h2>
+      <p class="pin-subtitle">Flat Track Coffee Roasters · Private Management Portal</p>
+
+      <div class="pin-inputs-row" id="pinRow">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric" autofocus>
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit" inputmode="numeric">
+      </div>
+
+      <div class="pin-error-text" id="pinError"></div>
+
+      <div class="pin-demo-hint">
+        Terminal Passcode: <strong>4321</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Terminal Application -->
+  <main id="portalContainer">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="portal-branding">
+        <h1 class="portal-logo">☕ Flat Track · Kitchen & Counter POS</h1>
+        <div class="portal-sub">1611 E Cesar Chavez St · East Austin, TX · Live Webhook Sync</div>
+      </div>
+
+      <div class="top-controls">
+        <span class="sync-status-badge">
+          <span class="pulse-dot"></span>
+          <span>Online & Syncing</span>
+        </span>
+        <button class="audio-toggle-btn active" id="audioToggleBtn" onclick="toggleAudioChime()">
+          <span id="audioIcon">🔔</span> Sound Alerts: ON
+        </button>
+        <a href="tier2.html" target="_blank" class="storefront-link-btn">
+          <span>Customer Storefront ↗</span>
+        </a>
+        <button class="lock-btn" onclick="lockTerminal()">Lock Terminal</button>
+      </div>
+    </header>
+
+    <!-- KPI Row -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Active Orders</div>
+        <div class="kpi-value" id="kpiActiveOrders">0</div>
+        <div class="kpi-meta">Live in kitchen queue</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Queue Revenue</div>
+        <div class="kpi-value" id="kpiRevenue">$0.00</div>
+        <div class="kpi-meta">Current ticket total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Table Bookings</div>
+        <div class="kpi-value" id="kpiBookings">0</div>
+        <div class="kpi-meta">Reserved seats today</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Items Available</div>
+        <div class="kpi-value" id="kpiStock">6</div>
+        <div class="kpi-meta">Menu items in stock</div>
+      </div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="portal-main-grid">
+      <!-- Left Column: Live Orders Queue -->
+      <div>
+        <!-- Live Orders Panel -->
+        <section class="portal-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <span>🔥 Live Kitchen Order Tickets</span>
+            </h2>
+            <span class="badge-count" id="badgeOrders">0</span>
+          </div>
+          <div id="ordersContainer">
+            <!-- Dynamic tickets injected here -->
+          </div>
+        </section>
+
+        <!-- Table Reservations Panel -->
+        <section class="portal-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <span>📅 Table Reservations</span>
+            </h2>
+            <span class="badge-count" id="badgeBookings">0</span>
+          </div>
+          <div id="bookingsContainer">
+            <!-- Dynamic bookings injected here -->
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Stock Management & Customer Inquiries -->
+      <div>
+        <!-- Menu Stock Management -->
+        <section class="portal-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <span>📦 Live Menu Stock Controller</span>
+            </h2>
+          </div>
+          <p style="color:var(--text-secondary); font-size:12.5px; margin-bottom:16px; line-height:1.4;">
+            1-tap stock status switch. Toggling any item updates customer storefront immediately across all devices.
+          </p>
+          <div id="stockListContainer">
+            <!-- Dynamic stock rows injected here -->
+          </div>
+        </section>
+
+        <!-- Customer Messages & Inquiries -->
+        <section class="portal-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <span>💬 Customer Inquiries</span>
+            </h2>
+            <span class="badge-count" id="badgeMessages">0</span>
+          </div>
+          <div id="messagesContainer">
+            <!-- Dynamic messages injected here -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const OWNER_PIN = "4321";
+    let soundEnabled = true;
+
+    // Master Menu Items matching tier2
+    const MENU_ITEMS = [
+      { id: 1, name: "Dogspeed Espresso Double", category: "Espresso", price: 4.50 },
+      { id: 2, name: "24-Hour Nitro Cold Brew", category: "Nitro & Cold", price: 5.50 },
+      { id: 3, name: "Ethiopian Yirgacheffe Pour-Over", category: "Pour-Over", price: 5.75 },
+      { id: 4, name: "Breakfast Taco Trio", category: "Kitchen", price: 10.50 },
+      { id: 5, name: "Oat Milk Honey Cortado", category: "Espresso", price: 5.00 },
+      { id: 6, name: "Dogspeed Blend Whole Bean (12oz)", category: "Roastery", price: 18.00 }
+    ];
+
+    // Local State
+    let orders = [];
+    let bookings = [];
+    let stockState = {};
+    let messages = [];
+
+    // Cross-Tab BroadcastChannel
+    const bc = new BroadcastChannel("flattrack_sync");
+    bc.onmessage = (ev) => {
+      const { key, val } = ev.data;
+      if (key === "orders") {
+        orders = val;
+        renderOrders();
+        updateKpis();
+        playChime();
+      }
+      if (key === "bookings") {
+        bookings = val;
+        renderBookings();
+        updateKpis();
+        playChime();
+      }
+      if (key === "stock") {
+        stockState = val;
+        renderStock();
+        updateKpis();
+      }
+      if (key === "messages") {
+        messages = val;
+        renderMessages();
+        playChime();
+      }
+    };
+
+    // Synthesized Web Audio API Chime (Zero External Files)
+    function playChime() {
+      if (!soundEnabled) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12); // A5
+
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+      } catch (e) {
+        console.log("Audio notification skipped");
+      }
+    }
+
+    function toggleAudioChime() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById("audioToggleBtn");
+      const icon = document.getElementById("audioIcon");
+      if (soundEnabled) {
+        btn.classList.add("active");
+        btn.innerHTML = `<span>🔔</span> Sound Alerts: ON`;
+      } else {
+        btn.classList.remove("active");
+        btn.innerHTML = `<span>🔕</span> Sound Alerts: MUTED`;
+      }
+    }
+
+    // Load State from LocalStorage
+    function loadInitialData() {
+      // Stock
+      const savedStock = localStorage.getItem("flattrack_stock");
+      if (savedStock) {
+        try { stockState = JSON.parse(savedStock); } catch (e) { stockState = {}; }
+      }
+      MENU_ITEMS.forEach(item => {
+        if (typeof stockState[item.id] === "undefined") {
+          stockState[item.id] = true;
+        }
+      });
+
+      // Orders
+      const savedOrders = localStorage.getItem("flattrack_orders");
+      if (savedOrders) {
+        try { orders = JSON.parse(savedOrders); } catch (e) { orders = []; }
+      } else {
+        orders = [
+          {
+            id: "#FT-84920",
+            customer: "Alex Rivera",
+            items: "1x 24-Hour Nitro Cold Brew, 1x Breakfast Taco Trio",
+            total: "$17.32",
+            pickup: "Next 15 minutes",
+            status: "New",
+            created: "Just now"
+          }
+        ];
+        localStorage.setItem("flattrack_orders", JSON.stringify(orders));
+      }
+
+      // Bookings
+      const savedBookings = localStorage.getItem("flattrack_bookings");
+      if (savedBookings) {
+        try { bookings = JSON.parse(savedBookings); } catch (e) { bookings = []; }
+      } else {
+        bookings = [
+          {
+            id: "#BK-4019",
+            name: "Samira Patel",
+            phone: "(512) 555-0198",
+            party: "2 Guests",
+            time: "Today · 10:30 AM",
+            seating: "East Austin Shaded Patio (Dog-Friendly)",
+            status: "Confirmed",
+            created: "10 mins ago"
+          }
+        ];
+        localStorage.setItem("flattrack_bookings", JSON.stringify(bookings));
+      }
+
+      // Messages
+      const savedMessages = localStorage.getItem("flattrack_messages");
+      if (savedMessages) {
+        try { messages = JSON.parse(savedMessages); } catch (e) { messages = []; }
+      } else {
+        messages = [
+          {
+            id: "#MSG-102",
+            name: "Elena Rostova",
+            email: "elena@austintech.io",
+            phone: "(512) 381-9921",
+            subject: "Catering 40 pax Nitro Cold Brew for Saturday",
+            time: "25 mins ago"
+          }
+        ];
+        localStorage.setItem("flattrack_messages", JSON.stringify(messages));
+      }
+    }
+
+    // Render Orders
+    function renderOrders() {
+      const container = document.getElementById("ordersContainer");
+      const badge = document.getElementById("badgeOrders");
+      badge.textContent = orders.length;
+
+      if (orders.length === 0) {
+        container.innerHTML = `<p class="empty-state">No active orders right now. Orders placed on the storefront will appear here live.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      orders.forEach(order => {
+        const ticket = document.createElement("div");
+        const statusClass = order.status === "New" ? "status-new" : (order.status === "Preparing" ? "status-preparing" : "status-ready");
+        const pillClass = order.status === "New" ? "status-pill-new" : (order.status === "Preparing" ? "status-pill-preparing" : "status-pill-ready");
+
+        ticket.className = `order-ticket ${statusClass}`;
+        ticket.innerHTML = `
+          <div class="ticket-header">
+            <span class="ticket-id">${order.id} · ${order.created}</span>
+            <span class="ticket-status-pill ${pillClass}">${order.status}</span>
+          </div>
+          <div class="ticket-customer-row">
+            <span class="ticket-customer-name">${order.customer}</span>
+            <span class="ticket-pickup-time">Window: ${order.pickup}</span>
+          </div>
+          <div class="ticket-items-desc">${order.items}</div>
+          <div class="ticket-footer">
+            <span class="ticket-total-price">${order.total}</span>
+            <div class="ticket-actions-group">
+              ${
+                order.status === "New"
+                  ? `<button class="ticket-btn btn-action-brew" onclick="advanceOrder('${order.id}', 'Preparing')">▶ Start Brew</button>`
+                  : (order.status === "Preparing"
+                    ? `<button class="ticket-btn btn-action-ready" onclick="advanceOrder('${order.id}', 'Ready')">✓ Mark Ready</button>`
+                    : `<button class="ticket-btn btn-action-complete" onclick="advanceOrder('${order.id}', 'Done')">Complete & Archive</button>`)
+              }
+            </div>
+          </div>
+        `;
+        container.appendChild(ticket);
+      });
+    }
+
+    function advanceOrder(id, nextStatus) {
+      if (nextStatus === "Done") {
+        orders = orders.filter(o => o.id !== id);
+      } else {
+        const o = orders.find(item => item.id === id);
+        if (o) o.status = nextStatus;
+      }
+
+      localStorage.setItem("flattrack_orders", JSON.stringify(orders));
+      bc.postMessage({ key: "orders", val: orders });
+
+      // If connected to live FastAPI backend:
+      // fetch(`/api/orders/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: nextStatus }) });
+
+      renderOrders();
+      updateKpis();
+    }
+
+    // Render Bookings
+    function renderBookings() {
+      const container = document.getElementById("bookingsContainer");
+      const badge = document.getElementById("badgeBookings");
+      badge.textContent = bookings.length;
+
+      if (bookings.length === 0) {
+        container.innerHTML = `<p class="empty-state">No table reservations pending today.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      bookings.forEach(booking => {
+        const card = document.createElement("div");
+        card.className = "reservation-card";
+        card.innerHTML = `
+          <div class="reservation-info">
+            <span class="res-code">${booking.id} · ${booking.party}</span>
+            <span class="res-name">${booking.name} — <a href="tel:${booking.phone}" style="color:var(--text-secondary); text-decoration:none;">${booking.phone}</a></span>
+            <span class="res-meta">${booking.time} · ${booking.seating}</span>
+          </div>
+          <button class="btn-seat-guest" onclick="seatGuest('${booking.id}')">✓ Seat Guest</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function seatGuest(id) {
+      bookings = bookings.filter(b => b.id !== id);
+      localStorage.setItem("flattrack_bookings", JSON.stringify(bookings));
+      bc.postMessage({ key: "bookings", val: bookings });
+      renderBookings();
+      updateKpis();
+    }
+
+    // Render Menu Stock Manager
+    function renderStock() {
+      const container = document.getElementById("stockListContainer");
+      container.innerHTML = "";
+
+      MENU_ITEMS.forEach(item => {
+        const inStock = stockState[item.id] !== false;
+        const row = document.createElement("div");
+        row.className = "stock-row-item";
+        row.innerHTML = `
+          <div class="stock-info">
+            <span class="stock-name">${item.name}</span>
+            <span class="stock-category-price">${item.category} · $${item.price.toFixed(2)}</span>
+          </div>
+          <button class="stock-toggle-btn ${inStock ? 'in-stock' : 'out-stock'}" onclick="toggleStock(${item.id})">
+            ${inStock ? '● In Stock' : '✕ Sold Out'}
+          </button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function toggleStock(itemId) {
+      stockState[itemId] = !stockState[itemId];
+      localStorage.setItem("flattrack_stock", JSON.stringify(stockState));
+      bc.postMessage({ key: "stock", val: stockState });
+
+      // If connected to live FastAPI backend:
+      // fetch(`/api/menu/${itemId}/stock`, { method: 'POST', body: JSON.stringify({ inStock: stockState[itemId] }) });
+
+      renderStock();
+      updateKpis();
+    }
+
+    // Render Inquiries
+    function renderMessages() {
+      const container = document.getElementById("messagesContainer");
+      const badge = document.getElementById("badgeMessages");
+      badge.textContent = messages.length;
+
+      if (messages.length === 0) {
+        container.innerHTML = `<p class="empty-state">No new customer messages.</p>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      messages.forEach(msg => {
+        const card = document.createElement("div");
+        card.className = "message-card";
+        card.innerHTML = `
+          <div class="msg-header">
+            <span class="msg-sender">${msg.name}</span>
+            <span class="msg-time">${msg.time}</span>
+          </div>
+          <div class="msg-body">"${msg.subject}"</div>
+          <div class="msg-contact-info">
+            <span>${msg.phone || ''} ${msg.email ? '· ' + msg.email : ''}</span>
+            <button class="btn-dismiss-msg" onclick="dismissMessage('${msg.id}')">Dismiss</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function dismissMessage(id) {
+      messages = messages.filter(m => m.id !== id);
+      localStorage.setItem("flattrack_messages", JSON.stringify(messages));
+      bc.postMessage({ key: "messages", val: messages });
+      renderMessages();
+    }
+
+    // Update KPIs
+    function updateKpis() {
+      document.getElementById("kpiActiveOrders").textContent = orders.length;
+      document.getElementById("kpiBookings").textContent = bookings.length;
+
+      const inStockCount = MENU_ITEMS.filter(item => stockState[item.id] !== false).length;
+      document.getElementById("kpiStock").textContent = inStockCount;
+
+      let revenueSum = 0;
+      orders.forEach(o => {
+        const clean = parseFloat((o.total || "").replace(/[^0-9.]/g, ""));
+        if (!isNaN(clean)) revenueSum += clean;
+      });
+      document.getElementById("kpiRevenue").textContent = `$${revenueSum.toFixed(2)}`;
+    }
+
+    // PIN Authentication Setup
+    function setupPinInputs() {
+      const inputs = document.querySelectorAll(".pin-digit");
+      inputs.forEach((input, idx) => {
+        input.addEventListener("input", () => {
+          if (input.value.length === 1 && idx < inputs.length - 1) {
+            inputs[idx + 1].focus();
+          }
+          checkPin();
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !input.value && idx > 0) {
+            inputs[idx - 1].focus();
+          }
+        });
+      });
+    }
+
+    function checkPin() {
+      const inputs = Array.from(document.querySelectorAll(".pin-digit"));
+      const entered = inputs.map(i => i.value).join("");
+      if (entered.length === 4) {
+        if (entered === OWNER_PIN) {
+          unlockTerminal();
+        } else {
+          inputs.forEach(i => i.classList.add("error"));
+          const row = document.getElementById("pinRow");
+          row.style.animation = "shake 0.4s ease";
+          document.getElementById("pinError").textContent = "Incorrect PIN. Passcode is 4321.";
+          setTimeout(() => {
+            row.style.animation = "";
+            inputs.forEach(i => {
+              i.value = "";
+              i.classList.remove("error");
+            });
+            inputs[0].focus();
+          }, 800);
+        }
+      }
+    }
+
+    function unlockTerminal() {
+      document.getElementById("pinLockScreen").style.display = "none";
+      document.getElementById("portalContainer").style.display = "block";
+      renderOrders();
+      renderBookings();
+      renderStock();
+      renderMessages();
+      updateKpis();
+    }
+
+    function lockTerminal() {
+      document.getElementById("pinLockScreen").style.display = "flex";
+      document.getElementById("portalContainer").style.display = "none";
+      const inputs = document.querySelectorAll(".pin-digit");
+      inputs.forEach(i => i.value = "");
+      inputs[0].focus();
+    }
+
+    // Auto-check if session was previously unlocked within current window
+    document.addEventListener("DOMContentLoaded", () => {
+      loadInitialData();
+      setupPinInputs();
+    });
+  </script>
+</body>
+</html>
