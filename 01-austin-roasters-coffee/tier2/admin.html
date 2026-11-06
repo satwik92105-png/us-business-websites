@@ -454,12 +454,10 @@
       };
 
       window.deleteProduct = async function(id) {
-        if (confirm("Delete this product from the menu permanently?")) {
-          if (window.FlatTrackAPI) {
-            await window.FlatTrackAPI.deleteMenuItem(id);
-            showToast("Item deleted", "info");
-            loadMenuCRUD();
-          }
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.deleteMenuItem(id);
+          showToast("Item deleted from menu", "info");
+          loadMenuCRUD();
         }
       };
 

@@ -246,6 +246,24 @@
                   Send Order to Kitchen &rarr;
                 </button>
               </form>
+
+              <!-- In-Modal Order Confirmation (Replaces ugly browser confirm/alert banners) -->
+              <div id="checkout-success-view" style="display:none; text-align:center; padding:1.25rem 0.5rem;">
+                <div style="font-size:3rem; margin-bottom:0.75rem;">🎉</div>
+                <h3 id="success-order-title" style="font-size:1.35rem; color:var(--text-primary); margin-bottom:0.4rem;">Order Confirmed!</h3>
+                <p id="success-order-msg" style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:1.25rem; line-height:1.5;">
+                  Estimated pickup: <b>10–12 minutes</b> at 1611 E Cesar Chavez St.<br/>
+                  <span id="success-order-payment" style="color:var(--accent-gold); font-weight:600;">Total Due at Counter: $0.00</span>
+                </p>
+                <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                  <button type="button" class="btn btn-primary" id="btn-print-order-receipt" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                    🖨️ View &amp; Print PDF Tax Receipt
+                  </button>
+                  <button type="button" class="btn btn-secondary" id="btn-close-order-success" style="width:100%;">
+                    Done
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -335,7 +353,6 @@
           });
 
           this.clearCart();
-          this.closeCheckoutModal();
           submitBtn.disabled = false;
           submitBtn.innerText = isTier3 ? "🔒 Pay & Send to Barista →" : "Send Order to Kitchen →";
 
@@ -346,13 +363,35 @@
 
           // Tier 3 generates instant receipt with QR pass & routes to tracker
           if (isTier3) {
+            this.closeCheckoutModal();
             generatePdfReceipt(order);
             setTimeout(() => {
               window.location.href = 'track.html?id=' + order.id;
             }, 1200);
           } else {
-            if (confirm(`Order #${order.id} Confirmed!\n\nEstimated pickup: 10-12 mins at 1611 E Cesar Chavez St.\n\nWould you like to print or save your itemized PDF Tax Receipt?`)) {
-              generatePdfReceipt(order);
+            // Tier 2: Switch modal to in-app confirmation view (ZERO native browser confirm/alert banners!)
+            const formEl = document.getElementById('checkout-form');
+            const successEl = document.getElementById('checkout-success-view');
+            const heading = document.getElementById('modal-checkout-heading');
+            if (heading) heading.innerHTML = '<span>✓</span> Order Confirmed!';
+            if (formEl) formEl.style.display = 'none';
+            if (successEl) {
+              const titleEl = document.getElementById('success-order-title');
+              const payEl = document.getElementById('success-order-payment');
+              if (titleEl) titleEl.innerText = `Order #${order.id} Confirmed!`;
+              if (payEl) payEl.innerText = `Total Due at Counter: $${totals.total.toFixed(2)}`;
+              successEl.style.display = 'block';
+
+              const printBtn = document.getElementById('btn-print-order-receipt');
+              if (printBtn) {
+                printBtn.onclick = () => generatePdfReceipt(order);
+              }
+              const doneBtn = document.getElementById('btn-close-order-success');
+              if (doneBtn) {
+                doneBtn.onclick = () => this.closeCheckoutModal();
+              }
+            } else {
+              this.closeCheckoutModal();
             }
           }
         }
@@ -374,6 +413,10 @@
 
     openCheckoutModal() {
       const isTier3 = window.location.pathname.includes('/tier3/');
+      const formEl = document.getElementById('checkout-form');
+      const successEl = document.getElementById('checkout-success-view');
+      if (formEl) formEl.style.display = 'block';
+      if (successEl) successEl.style.display = 'none';
       const heading = document.getElementById('modal-checkout-heading');
       const emailGroup = document.getElementById('tier3-email-group');
       const paymentSection = document.getElementById('tier3-payment-section');
@@ -412,6 +455,10 @@
     closeCheckoutModal() {
       document.getElementById('checkout-modal-overlay').classList.remove('is-open');
       document.getElementById('floating-cart-trigger').classList.remove('is-hidden');
+      const formEl = document.getElementById('checkout-form');
+      const successEl = document.getElementById('checkout-success-view');
+      if (formEl) formEl.style.display = 'block';
+      if (successEl) successEl.style.display = 'none';
     },
 
     calculateTotals() {
@@ -480,7 +527,7 @@
   function generatePdfReceipt(order) {
     const win = window.open('', '_blank');
     if (!win) {
-      alert("Please allow popups to view and print your PDF receipt.");
+      showToast("Please allow popups in your browser to view your PDF receipt.", "info", 5000);
       return;
     }
 
