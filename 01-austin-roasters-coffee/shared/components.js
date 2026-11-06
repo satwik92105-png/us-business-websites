@@ -291,7 +291,7 @@
               <form id="checkout-form">
                 <div class="form-group">
                   <label class="form-label">Full Name *</label>
-                  <input type="text" id="cust-name" class="form-input" required placeholder="Elena Thorne">
+                  <input type="text" id="cust-name" class="form-input" required placeholder="Your Full Name">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Phone Number (for pickup SMS) *</label>

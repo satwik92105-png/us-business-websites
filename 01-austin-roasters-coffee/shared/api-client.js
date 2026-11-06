@@ -7,7 +7,7 @@
 (function (window) {
   const API_BASE = window.FLAT_TRACK_API_URL || 'http://localhost:8000/api';
   const CHANNEL_NAME = 'flat_track_live_sync';
-  const STORAGE_KEY = 'flat_track_roasters_data_v3';
+  const STORAGE_KEY = 'flat_track_roasters_data_v4';
 
   // Seed Menu Items
   const INITIAL_MENU = [
@@ -123,65 +123,14 @@
     }
   ];
 
-  // Seed Initial Orders
-  const INITIAL_ORDERS = [
-    {
-      id: "FT-8402",
-      customerName: "Alex Rivera",
-      phone: "(512) 809-4112",
-      items: [
-        { name: "Dogspeed Espresso Double", qty: 2, price: 4.50 },
-        { name: "Artisan Butter Croissant", qty: 1, price: 4.50 }
-      ],
-      subtotal: 13.50,
-      tax: 1.11,
-      total: 14.61,
-      status: "Ready for Pickup",
-      orderTime: new Date(Date.now() - 15 * 60000).toISOString(),
-      pickupEstimate: "Ready Now",
-      notes: "Oat milk where applicable"
-    },
-    {
-      id: "FT-8403",
-      customerName: "Elena Thorne",
-      phone: "(512) 651-9023",
-      items: [
-        { name: "Bourbon Smoked Vanilla Latte", qty: 1, price: 6.75, customizations: "Oat Milk, Half Sweet" },
-        { name: "Rosemary & Gruyere Scone", qty: 1, price: 4.75 }
-      ],
-      subtotal: 11.50,
-      tax: 0.95,
-      total: 12.45,
-      status: "Preparing",
-      orderTime: new Date(Date.now() - 6 * 60000).toISOString(),
-      pickupEstimate: "4 mins",
-      notes: ""
-    }
-  ];
-
-  // Seed Initial Reservations
-  const INITIAL_RESERVATIONS = [
-    {
-      id: "RES-401",
-      name: "Marcus Vance",
-      email: "marcus.v@gmail.com",
-      phone: "(512) 330-9114",
-      partySize: 4,
-      date: "Tomorrow",
-      time: "10:30 AM",
-      status: "Confirmed",
-      notes: "Outdoor patio table preferred"
-    }
-  ];
-
   // Storage helper
   function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       const state = {
         menu: INITIAL_MENU,
-        orders: INITIAL_ORDERS,
-        reservations: INITIAL_RESERVATIONS,
+        orders: [],
+        reservations: [],
         inquiries: [],
         subscribers: [],
         promoCodes: [
@@ -209,7 +158,15 @@
       return state;
     }
     try {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      // Clean any legacy mock orders or reservations
+      if (parsed.orders) {
+        parsed.orders = parsed.orders.filter(o => o.id !== 'FT-8402' && o.id !== 'FT-8403' && !o.customerName?.includes('Taylor Jenkins'));
+      }
+      if (parsed.reservations) {
+        parsed.reservations = parsed.reservations.filter(r => r.id !== 'RES-401');
+      }
+      return parsed;
     } catch (e) {
       console.warn("Storage reset due to parse error", e);
       localStorage.removeItem(STORAGE_KEY);
