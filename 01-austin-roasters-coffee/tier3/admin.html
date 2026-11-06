@@ -41,7 +41,7 @@
       background: var(--accent-gold-gradient);
       border-radius: 6px 6px 0 0;
       transition: height 600ms var(--ease-smooth);
-      min-height: 8px;
+      min-height: 4px;
     }
   </style>
 </head>
@@ -68,101 +68,67 @@
       <div>
         <span class="pill-badge">📊 Executive Intelligence</span>
         <h1 style="font-size: 2.4rem;">Roastery Financial & Sales Analytics</h1>
-        <p style="color:var(--text-secondary);">Direct revenue, customer lifetime value, and recurring subscription metrics.</p>
+        <p style="color:var(--text-secondary);">Direct revenue, customer lifetime value, and recurring subscription metrics (calculated live from database).</p>
       </div>
-      <button class="btn btn-outline-gold btn-sm" id="btn-export-csv">📥 Export Order Ledger (CSV)</button>
+      <div style="display:flex; gap:0.6rem;">
+        <button class="btn btn-secondary btn-sm" id="btn-refresh-bi">🔄 Refresh Live Stats</button>
+        <button class="btn btn-outline-gold btn-sm" id="btn-export-csv">📥 Export Order Ledger (CSV)</button>
+      </div>
     </div>
 
-    <!-- 4 High-Level Metric Tiles -->
+    <!-- 4 High-Level Metric Tiles (Dynamically Calculated) -->
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem; margin-bottom:2rem;">
       <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">30-Day Direct Sales</span>
-        <div class="bi-stat-val">$18,420</div>
-        <div style="font-size:0.8rem; color:var(--status-success);">↑ 24% vs prior month (0% platform cut)</div>
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Direct Net Revenue</span>
+        <div class="bi-stat-val" id="metric-revenue">$0.00</div>
+        <div style="font-size:0.8rem; color:var(--status-success);" id="metric-revenue-sub">100% direct customer payments</div>
       </div>
 
       <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Active Bean Subscribers</span>
-        <div class="bi-stat-val">142</div>
-        <div style="font-size:0.8rem; color:var(--accent-gold);">$4,686 Monthly Recurring Revenue (MRR)</div>
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Active Orders In Queue</span>
+        <div class="bi-stat-val" id="metric-orders-count">0</div>
+        <div style="font-size:0.8rem; color:var(--accent-gold);" id="metric-orders-sub">0 orders today</div>
       </div>
 
       <div class="bi-card">
         <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Avg Order Ticket</span>
-        <div class="bi-stat-val">$14.85</div>
-        <div style="font-size:0.8rem; color:var(--text-secondary);">Drink + pastry attachment rate 68%</div>
+        <div class="bi-stat-val" id="metric-avg-ticket">$0.00</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);" id="metric-ticket-sub">Live basket size average</div>
       </div>
 
       <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Aggregator Fees Saved</span>
-        <div class="bi-stat-val">$3,240</div>
-        <div style="font-size:0.8rem; color:var(--status-success);">Kept 100% in roastery bank account</div>
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">3rd-Party Fees Saved (30%)</span>
+        <div class="bi-stat-val" id="metric-fees-saved">$0.00</div>
+        <div style="font-size:0.8rem; color:var(--status-success);">Retained vs aggregator commissions</div>
       </div>
     </div>
 
-    <!-- Charts Row -->
-    <div style="display:grid; grid-template-columns: 1.3fr 0.7fr; gap:2rem; margin-bottom:2rem;">
+    <!-- Dynamic Charts / Breakdown Row -->
+    <div style="display:grid; grid-template-columns: 1.3fr 0.7fr; gap:2rem; margin-bottom:2rem;" id="bi-content-row">
       <!-- Daily Revenue Bar Chart -->
       <div class="bi-card">
         <h3 style="font-size:1.25rem; margin-bottom:0.2rem;">Weekly Direct Counter Volume</h3>
         <p style="font-size:0.82rem; color:var(--text-secondary);">Direct mobile order-ahead transactions by day (USD)</p>
 
-        <div class="chart-bar-container">
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 55%;"></div>
-            <small style="font-size:0.75rem; color:var(--text-secondary);">Mon</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 65%;"></div>
-            <small style="font-size:0.75rem; color:var(--text-secondary);">Tue</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 72%;"></div>
-            <small style="font-size:0.75rem; color:var(--text-secondary);">Wed</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 80%;"></div>
-            <small style="font-size:0.75rem; color:var(--text-secondary);">Thu</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 95%;"></div>
-            <small style="font-size:0.75rem; color:var(--text-secondary);">Fri</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 100%;"></div>
-            <small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sat</small>
-          </div>
-          <div class="chart-bar-col">
-            <div class="chart-bar" style="height: 92%;"></div>
-            <small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sun</small>
-          </div>
+        <div class="chart-bar-container" id="chart-bars-wrap">
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Mon</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Tue</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Wed</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Thu</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Fri</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sat</small></div>
+          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sun</small></div>
         </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.8rem;" id="chart-caption">
+          Bars scale dynamically as counter orders and subscriptions are submitted.
+        </p>
       </div>
 
       <!-- Top Selling Products -->
       <div class="bi-card">
         <h3 style="font-size:1.25rem; margin-bottom:1rem;">Top Velocity Menu Items</h3>
-        <div style="display:flex; flex-direction:column; gap:0.9rem; font-size:0.88rem;">
-          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
-            <span>1. Bourbon Smoked Vanilla Latte</span>
-            <b class="mono-num" style="color:var(--accent-gold);">412 orders</b>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
-            <span>2. Dogspeed Espresso Double</span>
-            <b class="mono-num" style="color:var(--accent-gold);">380 orders</b>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
-            <span>3. East Austin Flash Brew Iced</span>
-            <b class="mono-num" style="color:var(--accent-gold);">294 orders</b>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
-            <span>4. Dogspeed Whole Bean (12oz)</span>
-            <b class="mono-num" style="color:var(--accent-gold);">215 bags</b>
-          </div>
-          <div style="display:flex; justify-content:space-between;">
-            <span>5. Artisan Butter Croissant</span>
-            <b class="mono-num" style="color:var(--accent-gold);">198 orders</b>
-          </div>
+        <div id="top-products-wrap" style="display:flex; flex-direction:column; gap:0.9rem; font-size:0.88rem;">
+          <p style="color:var(--text-secondary); font-size:0.85rem; padding:1rem 0;">No sales recorded yet. Menu items will rank automatically upon first customer checkout.</p>
         </div>
       </div>
     </div>
@@ -171,15 +137,73 @@
   <script src="../shared/api-client.js"></script>
   <script src="../shared/components.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       initDemoControls({ tier: 'tier3', isAdmin: true });
+
+      async function calculateMetrics() {
+        if (!window.FlatTrackAPI) return;
+        const orders = await window.FlatTrackAPI.getOrders();
+        const subs = window.FlatTrackAPI.getSubscribers ? await window.FlatTrackAPI.getSubscribers() : [];
+
+        // Sum real revenue
+        const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+        const ordersCount = orders.length;
+        const avgTicket = ordersCount > 0 ? (totalRevenue / ordersCount) : 0;
+        const feesSaved = totalRevenue * 0.30;
+
+        document.getElementById('metric-revenue').innerText = `$${totalRevenue.toFixed(2)}`;
+        document.getElementById('metric-orders-count').innerText = ordersCount;
+        document.getElementById('metric-orders-sub').innerText = `${ordersCount} direct orders recorded`;
+        document.getElementById('metric-avg-ticket').innerText = `$${avgTicket.toFixed(2)}`;
+        document.getElementById('metric-fees-saved').innerText = `$${feesSaved.toFixed(2)}`;
+
+        // Top Velocity Products
+        const prodCountMap = {};
+        orders.forEach(o => {
+          (o.items || []).forEach(item => {
+            prodCountMap[item.name] = (prodCountMap[item.name] || 0) + (item.qty || 1);
+          });
+        });
+
+        const sortedProds = Object.entries(prodCountMap).sort((a, b) => b[1] - a[1]);
+        const topWrap = document.getElementById('top-products-wrap');
+
+        if (sortedProds.length > 0) {
+          topWrap.innerHTML = sortedProds.slice(0, 5).map(([name, qty], idx) => `
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
+              <span>${idx + 1}. ${name}</span>
+              <b class="mono-num" style="color:var(--accent-gold);">${qty} ordered</b>
+            </div>
+          `).join('');
+        } else {
+          topWrap.innerHTML = `<p style="color:var(--text-secondary); font-size:0.85rem; padding:1rem 0;">No sales recorded yet. Menu items will rank automatically upon first customer checkout.</p>`;
+        }
+      }
+
+      calculateMetrics();
+      document.getElementById('btn-refresh-bi').addEventListener('click', () => {
+        calculateMetrics();
+        showToast("Live BI metrics refreshed", "success");
+      });
+
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'new_order' || event.action === 'order_status_update') {
+            calculateMetrics();
+          }
+        });
+      }
 
       document.getElementById('btn-export-csv').addEventListener('click', async () => {
         if (!window.FlatTrackAPI) return;
         const orders = await window.FlatTrackAPI.getOrders();
+        if (orders.length === 0) {
+          showToast("No orders in ledger to export yet.", "info");
+          return;
+        }
         let csv = "Order ID,Customer,Phone,Items,Subtotal,Tax,Total,Status,Timestamp\n";
         orders.forEach(o => {
-          const itemsStr = o.items.map(i => `${i.qty}x ${i.name}`).join('; ');
+          const itemsStr = (o.items || []).map(i => `${i.qty}x ${i.name}`).join('; ');
           csv += `"${o.id}","${o.customerName}","${o.phone}","${itemsStr}",${o.subtotal},${o.tax},${o.total},"${o.status}","${o.orderTime}"\n`;
         });
 

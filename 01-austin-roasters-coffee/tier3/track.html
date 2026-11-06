@@ -108,6 +108,25 @@
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--accent-gold);
+      text-align: center;
+      min-width: 130px;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all var(--trans-quick);
+    }
+    .auth-tab-btn.active {
+      background: rgba(201, 168, 76, 0.15);
+      color: var(--accent-gold);
+      border-color: var(--border-gold-bright);
     }
     @media (max-width: 768px) {
       .stepper-wrap { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
@@ -134,6 +153,8 @@
         <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
         <li><a href="track.html" class="nav-link active">Live Tracker ⚡</a></li>
         <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
+        <li><a href="story.html" class="nav-link">Story</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="header-actions">
@@ -160,31 +181,94 @@
         <!-- Dynamic state inserted here: Empty / Lookup state or Active Stepper -->
       </div>
 
-      <!-- Loyalty & Rewards Account Section -->
-      <div class="loyalty-banner">
+      <!-- Loyalty & Rewards Account Section (Guest starts with 0 pts) -->
+      <div class="loyalty-banner" id="loyalty-banner-wrap">
         <div>
           <span class="pill-badge" style="margin-bottom:0.4rem;">🎁 Roast Rewards Program</span>
-          <h3 style="font-size: 1.6rem; margin-bottom: 0.3rem;">You have <span id="loyalty-points-val">320</span> ✨ Roast Points</h3>
-          <p style="color:var(--text-secondary); font-size:0.9rem;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.3rem;" id="loyalty-headline">
+            Sign In to View & Earn Roast Points
+          </h3>
+          <p style="color:var(--text-secondary); font-size:0.9rem;" id="loyalty-desc">
             Earn 10 points per $1 spent on orders and bean subscriptions. Unlock free pour-overs and exclusive micro-lots.
           </p>
-          <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
-            <button class="btn btn-secondary btn-sm" id="btn-claim-reward">Redeem Free Pour-Over (250 pts)</button>
-            <button class="btn btn-outline-gold btn-sm" id="btn-demo-auth-toggle">Demo Sign-In (Taylor J.)</button>
+          <div style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;" id="loyalty-actions-wrap">
+            <button class="btn btn-primary btn-sm" id="btn-open-auth-modal">Sign In / Register ✨</button>
+            <button class="btn btn-outline-gold btn-sm" id="btn-quick-google">Continue with Google G</button>
           </div>
         </div>
-        <div class="points-pill">
-          320 PTS
+        <div class="points-pill" id="loyalty-points-badge">
+          0 PTS
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Real Customer Authentication Modal -->
+  <div class="modal-overlay" id="auth-modal-overlay">
+    <div class="modal-card" style="max-width:440px;">
+      <div class="modal-header">
+        <h3 id="auth-modal-title"><span>☕</span> Customer Rewards Account</h3>
+        <button class="modal-close-btn" id="auth-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; gap:0.5rem; margin-bottom:1.2rem;">
+          <button class="auth-tab-btn active" id="tab-btn-login">Sign In</button>
+          <button class="auth-tab-btn" id="tab-btn-register">Create Account</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="customer-login-form">
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="login-email" class="form-input" required placeholder="you@domain.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password *</label>
+            <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%; margin-top:0.5rem;" id="btn-submit-login">
+            Sign In to Account &rarr;
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="customer-register-form" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="reg-name" class="form-input" required placeholder="Alex Rivera">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="reg-email" class="form-input" required placeholder="you@domain.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Create Password *</label>
+            <input type="password" id="reg-password" class="form-input" required placeholder="At least 6 characters">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%; margin-top:0.5rem;" id="btn-submit-register">
+            Create Account & Earn 100 PTS &rarr;
+          </button>
+        </form>
+
+        <div style="text-align:center; margin:1.2rem 0; position:relative;">
+          <hr style="border:0; border-top:1px solid var(--border-subtle);">
+          <span style="position:relative; top:-10px; background:var(--bg-elevated); padding:0 10px; font-size:0.75rem; color:var(--text-muted);">OR</span>
+        </div>
+
+        <button class="btn btn-secondary" style="width:100%;" id="btn-modal-google">
+          <span>G</span> Continue with Google OAuth
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
     <div class="container">
       <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
-      <p style="color: var(--text-muted); font-size: 0.8rem;">Flat Track Coffee Roasters · 4.7★ on Google Maps (880+ Reviews) · 1611 E Cesar Chavez St, Austin, TX · © 2026</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">
+        Flat Track Coffee Roasters · <a href="https://maps.google.com/?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" style="color:var(--accent-gold); text-decoration:underline;"><a href="https://maps.google.com/?q=Flat+Track+Coffee+1611+E+Cesar+Chavez+St+Austin+TX" target="_blank" style="color:var(--accent-gold); text-decoration:underline;">4.7★ on Google Maps (880+ Reviews)</a></a> · 1611 E Cesar Chavez St, Austin, TX · © 2026
+      </p>
     </div>
   </footer>
 
@@ -207,18 +291,17 @@
 
         let activeOrder = null;
         if (activeOrderId) {
-          const orders = await window.FlatTrackAPI.getOrders();
-          activeOrder = orders.find(o => o.id === activeOrderId);
+          activeOrder = await window.FlatTrackAPI.getOrder(activeOrderId);
         }
 
         if (!activeOrder) {
-          // Clean Empty / Lookup State
+          // Clean Empty / Lookup State (Zero fake buttons, Zero mock preloads)
           mainCard.innerHTML = `
-            <div style="text-align: center; padding: 2rem 1rem;">
+            <div style="text-align: center; padding: 2.5rem 1rem;">
               <span style="font-size: 3rem;">🔍</span>
               <h3 style="font-size: 1.5rem; margin: 0.8rem 0 0.4rem 0;">No Active Order Selected</h3>
               <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.5rem auto; font-size: 0.95rem;">
-                Enter your Order Reference Number from your receipt, or place a new pickup order to watch live kitchen status.
+                Enter your Order Reference Number from your receipt, or place a new pickup order to watch live barista counter status.
               </p>
 
               <div style="display:flex; justify-content:center; gap:0.6rem; max-width:400px; margin: 0 auto 1.5rem auto;">
@@ -228,34 +311,22 @@
 
               <div style="border-top:1px solid var(--border-subtle); padding-top:1.5rem; display:flex; justify-content:center; gap:1rem;">
                 <a href="menu.html" class="btn btn-secondary">Order Pickup Ahead 🛒</a>
-                <button class="btn btn-outline-gold" id="btn-quick-sim">⚡ Simulate Live Order Demo</button>
               </div>
             </div>
           `;
 
-          document.getElementById('btn-do-lookup')?.addEventListener('click', () => {
+          document.getElementById('btn-do-lookup')?.addEventListener('click', async () => {
             const val = document.getElementById('order-lookup-input').value.trim().toUpperCase();
             if (val) {
-              activeOrderId = val;
-              renderTracker();
+              const found = await window.FlatTrackAPI.getOrder(val);
+              if (found) {
+                activeOrderId = val;
+                localStorage.setItem('flat_track_last_order_id', val);
+                renderTracker();
+              } else {
+                showToast(`Order #${val} not found in roastery records`, "error");
+              }
             }
-          });
-
-          document.getElementById('btn-quick-sim')?.addEventListener('click', async () => {
-            const sim = await window.FlatTrackAPI.createOrder({
-              customerName: "Taylor Jenkins (VIP)",
-              phone: "(512) 441-8922",
-              items: [
-                { name: "Bourbon Smoked Vanilla Latte", qty: 1, price: 6.75 },
-                { name: "Artisan Butter Croissant", qty: 1, price: 4.50 }
-              ],
-              subtotal: 11.25,
-              notes: "Oat milk"
-            });
-            activeOrderId = sim.id;
-            localStorage.setItem('flat_track_last_order_id', sim.id);
-            showToast(`Simulated Order #${sim.id}!`, "success");
-            renderTracker();
           });
 
           return;
@@ -271,13 +342,14 @@
         const fillWidth = (activeIdx / 3) * 80;
 
         mainCard.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:1rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:1rem; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
             <div>
               <span class="pill-badge" style="margin:0; font-size:0.75rem;">LIVE TICKET #${activeOrder.id}</span>
               <h2 style="font-size:1.8rem; margin-top:0.4rem;">${activeOrder.customerName}</h2>
+              <small style="color:var(--text-muted);">${activeOrder.paymentStatus || 'Paid Online (Stripe)'}</small>
             </div>
             <div style="text-align:right;">
-              <div class="mono-num" style="font-size:1.5rem; font-weight:700; color:var(--accent-gold);">$${activeOrder.total.toFixed(2)}</div>
+              <div class="mono-num" style="font-size:1.6rem; font-weight:700; color:var(--accent-gold);">$${(activeOrder.total || 0).toFixed(2)}</div>
               <small style="color:var(--text-secondary);">Pickup: 1611 E Cesar Chavez</small>
             </div>
           </div>
@@ -288,7 +360,7 @@
             <div class="stepper-line-fill" style="width: ${fillWidth}%;"></div>
 
             <div class="stepper-node ${activeIdx >= 0 ? (activeIdx > 0 ? 'completed' : 'active') : ''}">
-              <div class="stepper-circle">${activeIdx > 0 ? '✓' : '1'}</div>
+              <div class="stepper-circle">${activeIdx > 0 ? '✓' : '💳'}</div>
               <div class="stepper-label">Order Paid ✓</div>
             </div>
 
@@ -312,7 +384,7 @@
           <div style="background:var(--bg-surface); padding:1.25rem; border-radius:12px; border:1px solid var(--border-subtle); margin-bottom:1.5rem;">
             <b style="color:var(--text-primary); font-size:0.95rem;">Itemized Ticket:</b>
             <ul style="list-style:none; margin-top:0.5rem; font-size:0.9rem; color:var(--text-secondary);">
-              ${activeOrder.items.map(i => `<li>• ${i.qty}x <b>${i.name}</b> ${i.customizations ? `(${i.customizations})` : ''} — $${(i.price * i.qty).toFixed(2)}</li>`).join('')}
+              ${(activeOrder.items || []).map(i => `<li>• ${i.qty}x <b>${i.name}</b> ${i.customizations ? `(${i.customizations})` : ''} — $${(i.price * i.qty).toFixed(2)}</li>`).join('')}
             </ul>
           </div>
 
@@ -337,6 +409,125 @@
         });
       }
 
+      // Customer Auth & Loyalty UI Logic
+      function updateLoyaltyUI() {
+        const currentUser = window.FlatTrackAPI ? window.FlatTrackAPI.getCurrentUser() : null;
+        const headline = document.getElementById('loyalty-headline');
+        const desc = document.getElementById('loyalty-desc');
+        const actionsWrap = document.getElementById('loyalty-actions-wrap');
+        const badge = document.getElementById('loyalty-points-badge');
+
+        if (currentUser) {
+          const profile = window.FlatTrackAPI.getLoyaltyProfile();
+          headline.innerHTML = `Welcome back, <b>${currentUser.name || currentUser.email}</b>!`;
+          desc.innerText = `You are a valued Roastery Member. Earn 10 points for every $1 spent. Redeem below for free drinks.`;
+          badge.innerText = `${profile.points} PTS`;
+          actionsWrap.innerHTML = `
+            <button class="btn btn-primary btn-sm" id="btn-redeem-perk">Redeem Free Drink (250 pts)</button>
+            <button class="btn btn-outline-gold btn-sm" id="btn-signout-cust">Sign Out ⏻</button>
+          `;
+
+          document.getElementById('btn-redeem-perk')?.addEventListener('click', () => {
+            if (profile.points >= 250) {
+              profile.points -= 250;
+              showToast("🎉 250 pts redeemed! Free pour-over credited to your next counter order.", "success");
+              updateLoyaltyUI();
+            } else {
+              showToast(`You have ${profile.points} pts. 250 pts needed for a free drink!`, "info");
+            }
+          });
+
+          document.getElementById('btn-signout-cust')?.addEventListener('click', () => {
+            window.FlatTrackAPI.logout();
+            showToast("Signed out successfully", "info");
+            updateLoyaltyUI();
+          });
+        } else {
+          headline.innerText = "Sign In to View & Earn Roast Points";
+          desc.innerText = "Earn 10 points per $1 spent on orders and bean subscriptions. Unlock free pour-overs and exclusive micro-lots.";
+          badge.innerText = "0 PTS";
+          actionsWrap.innerHTML = `
+            <button class="btn btn-primary btn-sm" id="btn-open-auth-modal">Sign In / Register ✨</button>
+            <button class="btn btn-outline-gold btn-sm" id="btn-quick-google">Continue with Google G</button>
+          `;
+          bindAuthModalTriggers();
+        }
+      }
+
+      // Modal Events
+      const authOverlay = document.getElementById('auth-modal-overlay');
+      const authClose = document.getElementById('auth-modal-close');
+      const tabLogin = document.getElementById('tab-btn-login');
+      const tabReg = document.getElementById('tab-btn-register');
+      const loginForm = document.getElementById('customer-login-form');
+      const regForm = document.getElementById('customer-register-form');
+
+      function bindAuthModalTriggers() {
+        document.getElementById('btn-open-auth-modal')?.addEventListener('click', () => {
+          authOverlay.classList.add('is-open');
+        });
+        document.getElementById('btn-quick-google')?.addEventListener('click', async () => {
+          await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
+          showToast("Signed in via Google OAuth!", "success");
+          updateLoyaltyUI();
+        });
+      }
+
+      authClose.addEventListener('click', () => authOverlay.classList.remove('is-open'));
+      authOverlay.addEventListener('click', (e) => {
+        if (e.target === authOverlay) authOverlay.classList.remove('is-open');
+      });
+
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabReg.classList.remove('active');
+        loginForm.style.display = 'block';
+        regForm.style.display = 'none';
+      });
+
+      tabReg.addEventListener('click', () => {
+        tabReg.classList.add('active');
+        tabLogin.classList.remove('active');
+        regForm.style.display = 'block';
+        loginForm.style.display = 'none';
+      });
+
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const em = document.getElementById('login-email').value.trim();
+        const pw = document.getElementById('login-password').value.trim();
+        const res = await window.FlatTrackAPI.login(em, pw);
+        if (res.success) {
+          authOverlay.classList.remove('is-open');
+          showToast(`Welcome back, ${res.user.name}!`, "success");
+          updateLoyaltyUI();
+        } else {
+          showToast("Invalid credentials", "error");
+        }
+      });
+
+      regForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nm = document.getElementById('reg-name').value.trim();
+        const em = document.getElementById('reg-email').value.trim();
+        const pw = document.getElementById('reg-password').value.trim();
+        const res = await window.FlatTrackAPI.register(em, pw, nm);
+        if (res.success) {
+          authOverlay.classList.remove('is-open');
+          showToast(`Account created! +100 welcome bonus points added ✨`, "success");
+          updateLoyaltyUI();
+        } else {
+          showToast("Registration failed", "error");
+        }
+      });
+
+      document.getElementById('btn-modal-google').addEventListener('click', async () => {
+        await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
+        authOverlay.classList.remove('is-open');
+        showToast("Signed in via Google OAuth!", "success");
+        updateLoyaltyUI();
+      });
+
       // Live multi-tab sync
       if (window.FlatTrackAPI) {
         window.FlatTrackAPI.onSync((event) => {
@@ -346,15 +537,8 @@
         });
       }
 
-      // Loyalty buttons
-      document.getElementById('btn-claim-reward').addEventListener('click', () => {
-        showToast("🎁 Reward Redeemed! Added Free Nitro Pour-Over to your account.", "success", 4000);
-      });
-
-      document.getElementById('btn-demo-auth-toggle').addEventListener('click', () => {
-        showToast("✓ Authenticated via Google OAuth Demo (Taylor Jenkins)", "success", 3000);
-      });
-
+      bindAuthModalTriggers();
+      updateLoyaltyUI();
       renderTracker();
     });
   </script>

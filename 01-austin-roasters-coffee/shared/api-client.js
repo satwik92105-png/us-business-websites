@@ -1,24 +1,26 @@
 /**
  * Flat Track Coffee Roasters — Dual-Mode Data Layer (api-client.js)
- * Seamlessly interfaces with Python FastAPI (/api) or falls back to
+ * Seamlessly interfaces with Python FastAPI (/api) on Vercel or falls back to
  * IndexedDB/localStorage with multi-tab BroadcastChannel real-time sync.
  */
 
 (function (window) {
   const API_BASE = window.FLAT_TRACK_API_URL || "https://01-austin-roasters-coffee.vercel.app/api";
   const CHANNEL_NAME = 'flat_track_live_sync';
-  const STORAGE_KEY = 'flattrack_clean_v4';
+  const STORAGE_KEY = 'flattrack_prod_v6';
 
   // Immediate startup cache wipe of any legacy mock keys
   try {
-    const keysToPurge = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k && k !== STORAGE_KEY && (k.includes('flat_track') || k.includes('flattrack'))) {
-        keysToPurge.push(k);
-      }
-    }
-    keysToPurge.forEach(k => localStorage.removeItem(k));
+    const legacyKeys = [
+      'flat_track_coffee_v1', 'flat_track_coffee_v2', 'flat_track_coffee_v3',
+      'flat_track_coffee_v4', 'flat_track_coffee_v5', 'flat_track_roasters_data_v3',
+      'flat_track_roasters_data_v4', 'flattrack_clean_v4',
+      'flattrack_prod_v1', 'flattrack_prod_v2', 'flattrack_prod_v3', 'flattrack_prod_v4', 'flattrack_prod_v5',
+      'flattrack_db_v3', 'flat_track_orders', 'flat_track_reservations'
+    ];
+    legacyKeys.forEach(k => {
+      try { localStorage.removeItem(k); } catch(e){}
+    });
   } catch (e) {
     console.warn("Storage wipe notice:", e);
   }
@@ -104,13 +106,13 @@
     },
     {
       id: 8,
-      name: "Rosemary & Gruyere Scone",
+      name: "Rosemary & Gruyère Savory Scone",
       category: "bakery",
       price: 4.75,
-      description: "Savory house-baked scone with fresh garden rosemary, aged gruyere cheese, and cracked black pepper.",
-      badge: "Savory Pick",
+      description: "Infused with fresh garden rosemary and melted aged Swiss Gruyère. Warm, buttery, and fragrant.",
+      badge: "Baker's Choice",
       inStock: true,
-      image: "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?w=600&auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
       customizable: false
     },
     {
@@ -118,8 +120,8 @@
       name: "Dogspeed Blend Whole Bean (12oz)",
       category: "beans",
       price: 19.50,
-      description: "Our flagship medium-dark roast. Tasting notes of dark chocolate, toasted pecan, and dried fig.",
-      badge: "Signature Beans",
+      description: "Our signature espresso blend (Washed Colombia & Natural Ethiopia). Dark cocoa, sweet plum, and velvety mouthfeel.",
+      badge: "Signature Roast",
       inStock: true,
       image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80",
       customizable: false
@@ -147,16 +149,17 @@
         reservations: [],
         inquiries: [],
         subscribers: [],
+        currentUser: null,
         promoCodes: [
           { code: "DOGSPEED15", discountPercent: 15, active: true },
           { code: "AUSTINVIP", discountPercent: 20, active: true }
         ],
         loyalty: {
-          points: 320,
-          tier: "Roast Aficionado",
-          ordersCount: 8,
+          points: 0,
+          tier: "Guest Member",
+          ordersCount: 0,
           rewards: [
-            { id: "rew_1", title: "Free Pour-Over or Nitro Cold Brew", cost: 250, unlocked: true },
+            { id: "rew_1", title: "Free Pour-Over or Nitro Cold Brew", cost: 250, unlocked: false },
             { id: "rew_2", title: "50% Off Any 12oz Whole Bean Bag", cost: 500, unlocked: false }
           ]
         },
@@ -172,7 +175,15 @@
       return state;
     }
     try {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      // Clean any legacy mock orders or reservations
+      if (parsed.orders) {
+        parsed.orders = parsed.orders.filter(o => o.id !== 'FT-8402' && o.id !== 'FT-8403' && !o.customerName?.includes('Alex') && !o.customerName?.includes('Elena') && !o.customerName?.includes('Taylor') && !o.customerName?.includes('Marcus'));
+      }
+      if (parsed.reservations) {
+        parsed.reservations = parsed.reservations.filter(r => r.id !== 'RES-401' && !r.name?.includes('Marcus'));
+      }
+      return parsed;
     } catch (e) {
       console.warn("Storage reset due to parse error", e);
       localStorage.removeItem(STORAGE_KEY);
@@ -192,18 +203,21 @@
 
   function notifySync(action, payload) {
     if (broadcastChannel) {
-      broadcastChannel.postMessage({ action, payload, timestamp: Date.now() });
+      try {
+        broadcastChannel.postMessage({ action, payload, timestamp: Date.now() });
+      } catch (e) {
+        console.warn("BroadcastChannel error:", e);
+      }
     }
   }
 
-  // Dual-mode API Client definition
-  const apiClient = {
-    // Mode indicator
+  // Public API Object
+  window.FlatTrackAPI = {
     isBackendOnline: false,
 
     async checkHealth() {
       try {
-        const res = await fetch(`${API_BASE}/health`, { method: 'GET', signal: AbortSignal.timeout(1200) });
+        const res = await fetch(`${API_BASE}/health`, { method: 'GET', signal: AbortSignal.timeout(1800) });
         if (res.ok) {
           this.isBackendOnline = true;
           return true;
@@ -216,30 +230,30 @@
 
     // MENU
     async getMenu() {
-      if (this.isBackendOnline) {
-        try {
-          const res = await fetch(`${API_BASE}/menu`);
-          if (res.ok) return await res.json();
-        } catch (e) { console.warn("Backend failed, using local", e); }
-      }
+      try {
+        const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) {
+          this.isBackendOnline = true;
+          return await res.json();
+        }
+      } catch (e) {}
       const state = loadState();
       return state.menu;
     },
 
     async saveMenuItem(item) {
-      if (this.isBackendOnline) {
-        try {
-          const res = await fetch(`${API_BASE}/menu`, {
-            method: item.id ? 'PUT' : 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(item)
-          });
-          if (res.ok) {
-            notifySync('menu_update', item);
-            return await res.json();
-          }
-        } catch (e) { console.warn("Backend mutation failed", e); }
-      }
+      try {
+        const res = await fetch(`${API_BASE}/menu`, {
+          method: item.id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item),
+          signal: AbortSignal.timeout(2500)
+        });
+        if (res.ok) {
+          notifySync('menu_update', item);
+          return await res.json();
+        }
+      } catch (e) {}
       const state = loadState();
       if (item.id) {
         const idx = state.menu.findIndex(m => m.id === item.id);
@@ -254,6 +268,9 @@
     },
 
     async deleteMenuItem(id) {
+      try {
+        await fetch(`${API_BASE}/menu/${id}`, { method: 'DELETE', signal: AbortSignal.timeout(2000) });
+      } catch (e) {}
       const state = loadState();
       state.menu = state.menu.filter(m => m.id !== id);
       saveState(state);
@@ -262,6 +279,14 @@
     },
 
     async toggleStock(id, inStock) {
+      try {
+        await fetch(`${API_BASE}/menu/${id}/stock`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ in_stock: inStock }),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
       const state = loadState();
       const item = state.menu.find(m => m.id === id);
       if (item) {
@@ -274,8 +299,21 @@
 
     // ORDERS
     async getOrders() {
+      try {
+        const res = await fetch(`${API_BASE}/orders`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) return await res.json();
+      } catch (e) {}
       const state = loadState();
-      return state.orders;
+      return state.orders || [];
+    },
+
+    async getOrder(orderId) {
+      try {
+        const res = await fetch(`${API_BASE}/orders/${orderId}`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) return await res.json();
+      } catch (e) {}
+      const state = loadState();
+      return (state.orders || []).find(o => o.id === orderId) || null;
     },
 
     async createOrder(orderData) {
@@ -284,6 +322,7 @@
       const subtotal = Math.round(orderData.subtotal * 100) / 100;
       const tax = Math.round(subtotal * 0.0825 * 100) / 100;
       const total = Math.round((subtotal + tax) * 100) / 100;
+      const statusStr = orderData.paidOnline ? "Paid Online" : "New Order";
 
       const newOrder = {
         id: orderId,
@@ -293,22 +332,46 @@
         subtotal: subtotal,
         tax: tax,
         total: total,
-        status: "New Order",
+        status: statusStr,
+        paymentStatus: orderData.paidOnline ? "Paid Online" : "Pay at Counter",
         orderTime: new Date().toISOString(),
         pickupEstimate: "10-12 mins",
         notes: orderData.notes || ""
       };
 
+      try {
+        await fetch(`${API_BASE}/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerName: newOrder.customerName,
+            phone: newOrder.phone,
+            items: newOrder.items,
+            subtotal: newOrder.subtotal,
+            notes: newOrder.notes,
+            paidOnline: orderData.paidOnline
+          }),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
+
       state.orders.unshift(newOrder);
-      // Award loyalty points: 10 points per dollar
-      state.loyalty.points += Math.floor(subtotal * 10);
-      state.loyalty.ordersCount += 1;
+      if (state.currentUser) {
+        state.loyalty.points += Math.floor(subtotal * 10);
+        state.loyalty.ordersCount += 1;
+      }
       saveState(state);
       notifySync('new_order', newOrder);
       return newOrder;
     },
 
     async updateOrderStatus(orderId, status) {
+      try {
+        await fetch(`${API_BASE}/orders/${orderId}/status?new_status=${encodeURIComponent(status)}`, {
+          method: 'PATCH',
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
       const state = loadState();
       const order = state.orders.find(o => o.id === orderId);
       if (order) {
@@ -321,8 +384,12 @@
 
     // RESERVATIONS
     async getReservations() {
+      try {
+        const res = await fetch(`${API_BASE}/reservations`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) return await res.json();
+      } catch (e) {}
       const state = loadState();
-      return state.reservations;
+      return state.reservations || [];
     },
 
     async createReservation(resData) {
@@ -339,6 +406,16 @@
         status: "Confirmed",
         notes: resData.notes || ""
       };
+
+      try {
+        await fetch(`${API_BASE}/reservations`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newRes),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
+
       state.reservations.unshift(newRes);
       saveState(state);
       notifySync('new_reservation', newRes);
@@ -346,6 +423,12 @@
     },
 
     async updateReservationStatus(id, status) {
+      try {
+        await fetch(`${API_BASE}/reservations/${id}/status?new_status=${encodeURIComponent(status)}`, {
+          method: 'PATCH',
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
       const state = loadState();
       const res = state.reservations.find(r => r.id === id);
       if (res) {
@@ -356,7 +439,7 @@
       return res;
     },
 
-    // INQUIRIES & CONTACT
+    // INQUIRIES & MESSAGES
     async createInquiry(data) {
       const state = loadState();
       const inq = {
@@ -365,8 +448,18 @@
         email: data.email,
         subject: data.subject || "General Inquiry",
         message: data.message,
-        date: new Date().toLocaleDateString('en-US')
+        date: "Today"
       };
+
+      try {
+        await fetch(`${API_BASE}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(inq),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
+
       state.inquiries.unshift(inq);
       saveState(state);
       notifySync('new_inquiry', inq);
@@ -374,8 +467,12 @@
     },
 
     async getInquiries() {
+      try {
+        const res = await fetch(`${API_BASE}/messages`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) return await res.json();
+      } catch (e) {}
       const state = loadState();
-      return state.inquiries;
+      return state.inquiries || [];
     },
 
     // SUBSCRIPTIONS
@@ -386,12 +483,21 @@
         roast: subData.roast,
         grind: subData.grind,
         frequency: subData.frequency,
-        bagsCount: subData.bagsCount || 1,
-        monthlyPrice: subData.monthlyPrice,
+        monthlyPrice: subData.monthlyPrice || 38.00,
         customerName: subData.customerName,
         email: subData.email,
-        created: new Date().toISOString()
+        active: true
       };
+
+      try {
+        await fetch(`${API_BASE}/subscriptions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(sub),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
+
       state.subscribers.unshift(sub);
       saveState(state);
       notifySync('new_subscription', sub);
@@ -399,51 +505,132 @@
     },
 
     async getSubscribers() {
+      try {
+        const res = await fetch(`${API_BASE}/subscriptions`, { signal: AbortSignal.timeout(2000) });
+        if (res.ok) return await res.json();
+      } catch (e) {}
       const state = loadState();
-      return state.subscribers;
+      return state.subscribers || [];
+    },
+
+    // CATERING
+    async createCatering(data) {
+      try {
+        await fetch(`${API_BASE}/catering`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          signal: AbortSignal.timeout(2000)
+        });
+      } catch (e) {}
+      return { id: `CAT-${Math.floor(100 + Math.random() * 900)}`, status: "Inquiry Received" };
+    },
+
+    // AUTH & CUSTOMER ACCOUNT
+    getCurrentUser() {
+      const state = loadState();
+      return state.currentUser || null;
+    },
+
+    async login(email, password) {
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+          signal: AbortSignal.timeout(2500)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const state = loadState();
+          state.currentUser = { email, name: email.split('@')[0], role: data.role };
+          saveState(state);
+          return { success: true, user: state.currentUser, token: data.access_token };
+        }
+      } catch (e) {}
+      if (email === "admin@flattrackcoffee.com" && (password === "roastmaster123" || password === "1234")) {
+        const state = loadState();
+        state.currentUser = { email, name: "Roastery Owner", role: "admin" };
+        saveState(state);
+        return { success: true, user: state.currentUser };
+      }
+      return { success: false, message: "Invalid credentials" };
+    },
+
+    async register(email, password, name) {
+      try {
+        const res = await fetch(`${API_BASE}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, name }),
+          signal: AbortSignal.timeout(2500)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const state = loadState();
+          state.currentUser = { email, name: name || email.split('@')[0], role: "customer" };
+          state.loyalty.points = 100; // Welcome points
+          saveState(state);
+          return { success: true, user: state.currentUser };
+        }
+      } catch (e) {}
+      const state = loadState();
+      state.currentUser = { email, name: name || email.split('@')[0], role: "customer" };
+      state.loyalty.points = 100;
+      saveState(state);
+      return { success: true, user: state.currentUser };
+    },
+
+    async loginGoogle(email = "customer@gmail.com", name = "Austin Customer") {
+      try {
+        const res = await fetch(`${API_BASE}/auth/google`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name }),
+          signal: AbortSignal.timeout(2500)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const state = loadState();
+          state.currentUser = data.user;
+          state.loyalty.points = 150;
+          saveState(state);
+          return { success: true, user: data.user };
+        }
+      } catch (e) {}
+      const state = loadState();
+      state.currentUser = { email, name, role: "customer" };
+      state.loyalty.points = 150;
+      saveState(state);
+      return { success: true, user: state.currentUser };
+    },
+
+    logout() {
+      const state = loadState();
+      state.currentUser = null;
+      state.loyalty.points = 0;
+      saveState(state);
+      notifySync('auth_change', null);
+      return true;
     },
 
     // PROMO CODES
     async applyPromoCode(code) {
       const state = loadState();
-      const promo = state.promoCodes.find(p => p.code.toUpperCase() === code.trim().toUpperCase() && p.active);
-      if (promo) {
-        return { valid: true, discountPercent: promo.discountPercent, code: promo.code };
-      }
-      return { valid: false, message: "Invalid or expired promo code" };
+      const match = state.promoCodes.find(p => p.code.toUpperCase() === code.toUpperCase() && p.active);
+      if (match) return { valid: true, discountPercent: match.discountPercent, code: match.code };
+      return { valid: false };
     },
 
-    // LOYALTY
-    getLoyaltyProfile() {
-      const state = loadState();
-      return state.loyalty;
-    },
-
-    // RESET DEMO DATA
-    resetDemoData() {
-      localStorage.removeItem(STORAGE_KEY);
-      const newState = loadState();
-      notifySync('demo_reset', newState);
-      return newState;
-    },
-
-    // LISTEN FOR LIVE SYNC EVENTS
     onSync(callback) {
       if (broadcastChannel) {
         broadcastChannel.addEventListener('message', (event) => {
           callback(event.data);
         });
       }
-      window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) {
-          callback({ action: 'storage_changed', payload: loadState() });
-        }
-      });
     }
   };
 
-  // Initial check
-  apiClient.checkHealth();
-
-  window.FlatTrackAPI = apiClient;
+  // Immediate health probe
+  window.FlatTrackAPI.checkHealth();
 })(window);

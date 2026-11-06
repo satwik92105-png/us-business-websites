@@ -59,115 +59,12 @@
     setInterval(update, 60000);
   }
 
-  // Floating Demo Controls Pill
+  // Floating Demo Controls Pill - PURGED from customer cafe pages
   function initDemoControls(config = {}) {
-    const currentTier = config.tier || 'tier1';
-    const isAdmin = config.isAdmin || false;
-
-    // Detect root path adjustment
-    const inSubdir = window.location.pathname.includes('/tier1/') || 
-                     window.location.pathname.includes('/tier2/') || 
-                     window.location.pathname.includes('/tier3/');
-    const pfx = inSubdir ? '../' : './';
-
-    const pillWrap = document.createElement('div');
-    pillWrap.className = 'demo-pill-container';
-    pillWrap.id = 'demo-pill-container';
-
-    pillWrap.innerHTML = `
-      <div class="demo-menu-dropdown" id="demo-menu-dropdown">
-        <div class="demo-dropdown-header">
-          <span>✨ Flat Track Showcase</span>
-          <button id="hide-demo-pill-btn" style="color:var(--text-muted); font-size:0.75rem; cursor:pointer;" title="Hide Controls">[Hide]</button>
-        </div>
-        <a href="${pfx}index.html" class="demo-dropdown-item">
-          📊 <b>Agency Sales Hub & Pitch</b>
-        </a>
-        <a href="${pfx}tier1/index.html" class="demo-dropdown-item ${currentTier === 'tier1' ? 'active' : ''}">
-          ☕ <b>Tier 1:</b> Digital Storefront ($500)
-        </a>
-        <a href="${pfx}tier2/index.html" class="demo-dropdown-item ${currentTier === 'tier2' && !isAdmin ? 'active' : ''}">
-          🛒 <b>Tier 2:</b> Operations Hub ($1,500)
-        </a>
-        <a href="${pfx}tier2/admin.html" class="demo-dropdown-item ${currentTier === 'tier2' && isAdmin ? 'active' : ''}">
-          🔐 <b>Tier 2:</b> Owner POS Portal
-        </a>
-        <a href="${pfx}tier3/index.html" class="demo-dropdown-item ${currentTier === 'tier3' && !isAdmin ? 'active' : ''}">
-          👑 <b>Tier 3:</b> Flagship Enterprise ($2,000)
-        </a>
-        <a href="${pfx}tier3/admin.html" class="demo-dropdown-item ${currentTier === 'tier3' && isAdmin ? 'active' : ''}">
-          📈 <b>Tier 3:</b> Owner BI & KDS
-        </a>
-        <div style="border-top: 1px solid var(--border-subtle); margin: 0.25rem 0;"></div>
-        <button class="demo-dropdown-item demo-action-btn" id="demo-sim-order-btn">
-          ⚡ <b>Simulate Incoming Order</b>
-        </button>
-        <button class="demo-dropdown-item demo-action-btn" id="demo-reset-data-btn" style="color:#ef4444;">
-          🔄 <b>Reset Demo Database</b>
-        </button>
-      </div>
-      <button class="demo-pill-btn" id="demo-pill-toggle">
-        <span>✨ Demo Controls</span>
-      </button>
-    `;
-
-    document.body.appendChild(pillWrap);
-
-    const toggleBtn = document.getElementById('demo-pill-toggle');
-    const dropdown = document.getElementById('demo-menu-dropdown');
-    const hideBtn = document.getElementById('hide-demo-pill-btn');
-    const simOrderBtn = document.getElementById('demo-sim-order-btn');
-    const resetDataBtn = document.getElementById('demo-reset-data-btn');
-
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle('is-open');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!pillWrap.contains(e.target)) {
-        dropdown.classList.remove('is-open');
-      }
-    });
-
-    hideBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      pillWrap.style.display = 'none';
-      showToast("Demo controls hidden. Press Shift+D to restore.", "info", 4000);
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if (e.shiftKey && (e.key === 'D' || e.key === 'd')) {
-        pillWrap.style.display = pillWrap.style.display === 'none' ? 'block' : 'none';
-      }
-    });
-
-    simOrderBtn.addEventListener('click', async () => {
-      dropdown.classList.remove('is-open');
-      if (window.FlatTrackAPI) {
-        const simOrder = await window.FlatTrackAPI.createOrder({
-          customerName: "Test Order Guest",
-          phone: "(512) 555-0199",
-          items: [
-            { name: "Single-Origin Ethiopian Pour-Over", qty: 1, price: 6.50 },
-            { name: "Artisan Butter Croissant", qty: 2, price: 4.50 }
-          ],
-          subtotal: 15.50,
-          notes: "Extra napkins please"
-        });
-        showToast(`⚡ Order ${simOrder.id} simulated! Sent to Kitchen POS.`, "success");
-      }
-    });
-
-    resetDataBtn.addEventListener('click', () => {
-      if (confirm("Reset demo data to default clean state?")) {
-        if (window.FlatTrackAPI) {
-          window.FlatTrackAPI.resetDemoData();
-          showToast("Demo data reset to factory state!", "success");
-          setTimeout(() => window.location.reload(), 600);
-        }
-      }
-    });
+    // All cafe pages (tier1, tier2, tier3) must look 100% like a real roastery website
+    // Zero demo pills or admin shortcuts on customer-facing pages.
+    // All agency links, pricing, and portals remain strictly on index.html.
+    return;
   }
 
   // Cart Drawer Manager (Tier 2 & Tier 3)
@@ -284,7 +181,7 @@
         <div class="modal-overlay" id="checkout-modal-overlay">
           <div class="modal-card">
             <div class="modal-header">
-              <h3><span>☕</span> Complete Pickup Order</h3>
+              <h3 id="modal-checkout-heading"><span>☕</span> Complete Pickup Order</h3>
               <button class="modal-close-btn" id="checkout-modal-close">&times;</button>
             </div>
             <div class="modal-body">
@@ -297,10 +194,40 @@
                   <label class="form-label">Phone Number (for pickup SMS) *</label>
                   <input type="tel" id="cust-phone" class="form-input" required placeholder="(512) 555-0199">
                 </div>
+                <div class="form-group" id="tier3-email-group" style="display:none;">
+                  <label class="form-label">Email Address (for instant receipt & QR pickup pass) *</label>
+                  <input type="email" id="cust-email" class="form-input" placeholder="you@domain.com">
+                </div>
                 <div class="form-group">
                   <label class="form-label">Special Barista Notes (Optional)</label>
                   <textarea id="cust-notes" class="form-textarea" rows="2" placeholder="Extra hot, oat milk on side, etc."></textarea>
                 </div>
+
+                <!-- Stripe Online Prepaid Section (Tier 3 Exclusive) -->
+                <div id="tier3-payment-section" style="display:none; margin-bottom:1.2rem; padding:1rem; border-radius:12px; background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.3);">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                    <span style="font-weight:600; font-size:0.88rem; color:var(--text-primary); display:flex; align-items:center; gap:6px;">
+                      <span>💳</span> Stripe Instant Prepaid Checkout
+                    </span>
+                    <span style="font-size:0.75rem; background:rgba(16,185,129,0.15); color:#10b981; padding:2px 8px; border-radius:12px; font-weight:600;">🔒 256-Bit Encrypted</span>
+                  </div>
+                  <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:0.8rem; line-height:1.4;">
+                    Prepaid online express orders bypass the register line and go straight to the barista queue. Zero raw card numbers stored.
+                  </p>
+                  <div style="background:var(--bg-surface, #1e1a17); padding:0.8rem 1rem; border-radius:8px; border:1px solid var(--border-subtle); display:flex; flex-direction:column; gap:0.4rem;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.88rem;">
+                      <span style="font-size:1.1rem;">💳</span>
+                      <span style="font-family:var(--font-mono, monospace); letter-spacing:1px; color:var(--text-primary);">•••• •••• •••• 4242</span>
+                      <span style="margin-left:auto; font-size:0.72rem; color:var(--accent-gold); font-weight:600; background:rgba(201,168,76,0.15); padding:2px 6px; border-radius:4px;">TEST READY</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted, #888);">
+                      <span>Expires 12/28</span>
+                      <span>CVC •••</span>
+                      <span>Zero fee direct checkout</span>
+                    </div>
+                  </div>
+                </div>
+
                 <div style="background:var(--bg-surface); padding:1rem; border-radius:10px; margin-bottom:1.2rem; font-size:0.85rem; border:1px solid var(--border-subtle);">
                   <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
                     <span>Pickup Location:</span>
@@ -310,8 +237,8 @@
                     <span>Estimated Ready Time:</span>
                     <b style="color:var(--accent-gold);">10–12 Minutes</b>
                   </div>
-                  <div style="display:flex; justify-content:space-between;">
-                    <span>Total Due at Pickup:</span>
+                  <div style="display:flex; justify-content:space-between;" id="modal-checkout-total-row">
+                    <span id="modal-payment-mode-label">Total Due at Pickup:</span>
                     <b class="mono-num" id="modal-checkout-total" style="color:var(--accent-gold);">$0.00</b>
                   </div>
                 </div>
@@ -384,10 +311,14 @@
         e.preventDefault();
         const submitBtn = document.getElementById('submit-order-btn');
         submitBtn.disabled = true;
-        submitBtn.innerText = "Transmitting to Roastery...";
+
+        const isTier3 = window.location.pathname.includes('/tier3/');
+        submitBtn.innerText = isTier3 ? "Processing 256-Bit Stripe Payment..." : "Transmitting to Roastery...";
 
         const name = document.getElementById('cust-name').value.trim();
         const phone = document.getElementById('cust-phone').value.trim();
+        const emailInput = document.getElementById('cust-email');
+        const email = emailInput ? emailInput.value.trim() : '';
         const notes = document.getElementById('cust-notes').value.trim();
 
         const totals = this.calculateTotals();
@@ -396,31 +327,33 @@
           const order = await window.FlatTrackAPI.createOrder({
             customerName: name,
             phone: phone,
+            email: email,
             items: this.items,
             subtotal: totals.subtotal,
-            notes: notes
+            notes: notes,
+            paidOnline: isTier3
           });
 
           this.clearCart();
           this.closeCheckoutModal();
           submitBtn.disabled = false;
-          submitBtn.innerText = "Send Order to Kitchen →";
+          submitBtn.innerText = isTier3 ? "🔒 Pay & Send to Barista →" : "Send Order to Kitchen →";
 
-          showToast(`Order #${order.id} sent to kitchen! ☕`, "success", 4000);
+          showToast(isTier3 ? `Payment Successful! Order #${order.id} paid online. ☕` : `Order #${order.id} sent to kitchen! ☕`, "success", 4000);
 
           // Store last order ID for live tracking
           localStorage.setItem('flat_track_last_order_id', order.id);
 
-          // Trigger Receipt Prompt
-          if (confirm(`Order #${order.id} Confirmed!\n\nEstimated pickup: 10-12 mins at 1611 E Cesar Chavez St.\n\nWould you like to print or save your itemized PDF Tax Receipt?`)) {
+          // Tier 3 generates instant receipt with QR pass & routes to tracker
+          if (isTier3) {
             generatePdfReceipt(order);
-          }
-
-          // If on Tier 3, redirect or prompt to track
-          if (window.location.pathname.includes('/tier3/')) {
             setTimeout(() => {
               window.location.href = 'track.html?id=' + order.id;
             }, 1200);
+          } else {
+            if (confirm(`Order #${order.id} Confirmed!\n\nEstimated pickup: 10-12 mins at 1611 E Cesar Chavez St.\n\nWould you like to print or save your itemized PDF Tax Receipt?`)) {
+              generatePdfReceipt(order);
+            }
           }
         }
       });
@@ -440,8 +373,38 @@
     },
 
     openCheckoutModal() {
+      const isTier3 = window.location.pathname.includes('/tier3/');
+      const heading = document.getElementById('modal-checkout-heading');
+      const emailGroup = document.getElementById('tier3-email-group');
+      const paymentSection = document.getElementById('tier3-payment-section');
+      const modeLabel = document.getElementById('modal-payment-mode-label');
+      const submitBtn = document.getElementById('submit-order-btn');
+
       const totals = this.calculateTotals();
       document.getElementById('modal-checkout-total').innerText = `$${totals.total.toFixed(2)}`;
+
+      if (isTier3) {
+        if (heading) heading.innerHTML = '<span>💳</span> Express Mobile Checkout (Stripe Prepaid)';
+        if (emailGroup) {
+          emailGroup.style.display = 'block';
+          const emailInput = document.getElementById('cust-email');
+          if (emailInput) emailInput.required = true;
+        }
+        if (paymentSection) paymentSection.style.display = 'block';
+        if (modeLabel) modeLabel.innerText = 'Total Charged to Card (Paid Online):';
+        if (submitBtn) submitBtn.innerHTML = `🔒 Pay $${totals.total.toFixed(2)} & Send to Barista &rarr;`;
+      } else {
+        if (heading) heading.innerHTML = '<span>☕</span> Complete Pickup Order';
+        if (emailGroup) {
+          emailGroup.style.display = 'none';
+          const emailInput = document.getElementById('cust-email');
+          if (emailInput) emailInput.required = false;
+        }
+        if (paymentSection) paymentSection.style.display = 'none';
+        if (modeLabel) modeLabel.innerText = 'Total Due at Pickup (Pay at Counter):';
+        if (submitBtn) submitBtn.innerHTML = 'Send Order to Kitchen (Pay at Counter) &rarr;';
+      }
+
       document.getElementById('checkout-modal-overlay').classList.add('is-open');
       document.getElementById('floating-cart-trigger').classList.add('is-hidden');
     },
@@ -513,7 +476,7 @@
     }
   };
 
-  // PDF Tax Receipt Generator
+  // PDF Tax Receipt Generator with QR Pickup Pass
   function generatePdfReceipt(order) {
     const win = window.open('', '_blank');
     if (!win) {
@@ -521,29 +484,37 @@
       return;
     }
 
-    const itemsRows = order.items.map(i => `
+    const isPaidOnline = order.paidOnline || order.status === 'Paid Online';
+    const statusLabel = isPaidOnline ? "PAID ONLINE (Stripe 256-Bit Encrypted)" : "PAY AT COUNTER (Due at Pickup)";
+    const statusColor = isPaidOnline ? "#10b981" : "#d97706";
+
+    const itemsRows = (order.items || []).map(i => `
       <tr>
         <td style="padding:8px 0; border-bottom:1px solid #ddd;">${i.qty}x ${i.name} ${i.customizations ? `<br/><small style="color:#666;">${i.customizations}</small>` : ''}</td>
         <td style="padding:8px 0; border-bottom:1px solid #ddd; text-align:right; font-family:monospace;">$${(i.price * i.qty).toFixed(2)}</td>
       </tr>
     `).join('');
 
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=FLATTRACK-ORDER-${order.id}`;
+
     const html = `
       <!DOCTYPE html>
       <html>
       <head>
         <title>Flat Track Coffee — Tax Receipt #${order.id}</title>
+        <meta charset="utf-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; color: #222; max-width: 500px; margin: 0 auto; }
-          .header { text-align: center; border-bottom: 2px dashed #bbb; padding-bottom: 20px; margin-bottom: 20px; }
-          h2 { margin: 0 0 5px 0; font-size: 20px; letter-spacing: 1px; }
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; color: #222; max-width: 500px; margin: 0 auto; background:#fff; }
+          .header { text-align: center; border-bottom: 2px dashed #bbb; padding-bottom: 16px; margin-bottom: 16px; }
+          h2 { margin: 0 0 4px 0; font-size: 20px; letter-spacing: 1px; color:#111; }
           p { margin: 3px 0; font-size: 13px; color: #555; }
-          table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
-          .totals { border-top: 1px solid #222; padding-top: 10px; margin-top: 10px; }
-          .totals-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px; }
-          .grand-total { font-size: 18px; font-weight: bold; border-top: 2px solid #222; padding-top: 8px; margin-top: 8px; }
-          .barcode { text-align: center; margin-top: 30px; font-family: monospace; letter-spacing: 4px; font-size: 22px; padding: 10px; background: #f4f4f4; }
-          .footer { text-align: center; margin-top: 25px; font-size: 12px; color: #777; }
+          .status-badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; color: #fff; background: ${statusColor}; margin: 8px 0; }
+          table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+          .totals { border-top: 1px solid #222; padding-top: 8px; margin-top: 8px; }
+          .totals-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+          .grand-total { font-size: 17px; font-weight: bold; border-top: 2px solid #222; padding-top: 8px; margin-top: 8px; }
+          .qr-box { text-align: center; margin: 20px 0; padding: 12px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; }
+          .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #777; border-top: 1px dashed #ddd; padding-top: 12px; }
           @media print { body { padding: 0; } }
         </style>
       </head>
@@ -552,13 +523,15 @@
           <h2>FLAT TRACK COFFEE ROASTERS</h2>
           <p>1611 E Cesar Chavez St, Austin, TX 78702</p>
           <p>Phone: (512) 540-6033 · Tax ID: 74-3298104-TX</p>
-          <p style="margin-top:8px;"><b>Official Itemized Pickup Tax Receipt</b></p>
+          <div class="status-badge">● ${statusLabel}</div>
+          <p style="margin-top:6px;"><b>Official Itemized Pickup Tax Invoice</b></p>
         </div>
-        <div>
-          <p><b>Order ID:</b> #${order.id}</p>
+        <div style="font-size:13px; line-height:1.5;">
+          <p><b>Order Reference:</b> #${order.id}</p>
           <p><b>Customer:</b> ${order.customerName}</p>
-          <p><b>Phone:</b> ${order.phone}</p>
+          <p><b>Contact:</b> ${order.phone} ${order.email ? `· ${order.email}` : ''}</p>
           <p><b>Placed At:</b> ${new Date(order.orderTime || Date.now()).toLocaleString()}</p>
+          <p><b>Pickup Window:</b> 10–12 Minutes</p>
         </div>
         <table>
           <thead>
@@ -574,23 +547,27 @@
         <div class="totals">
           <div class="totals-row">
             <span>Subtotal:</span>
-            <span style="font-family:monospace;">$${order.subtotal.toFixed(2)}</span>
+            <span style="font-family:monospace;">$${(order.subtotal || 0).toFixed(2)}</span>
           </div>
           <div class="totals-row">
             <span>Texas State & Local Sales Tax (8.25%):</span>
-            <span style="font-family:monospace;">$${order.tax.toFixed(2)}</span>
+            <span style="font-family:monospace;">$${(order.tax || 0).toFixed(2)}</span>
           </div>
           <div class="totals-row grand-total">
-            <span>Total Paid (USD):</span>
-            <span style="font-family:monospace;">$${order.total.toFixed(2)}</span>
+            <span>Total:</span>
+            <span style="font-family:monospace;">$${(order.total || 0).toFixed(2)}</span>
           </div>
         </div>
-        <div class="barcode">
-          *${order.id}*
+
+        <div class="qr-box">
+          <img src="${qrUrl}" alt="QR Pickup Code" width="130" height="130" style="display:block; margin:0 auto;"/>
+          <p style="font-size:11px; color:#555; margin-top:8px; font-weight:600;">Express Barista Pickup QR Pass</p>
+          <small style="color:#888;">Present at 1611 E Cesar Chavez counter for instant hand-off</small>
         </div>
+
         <div class="footer">
-          <p>Thank you for supporting East Austin micro-batch roasting!</p>
-          <p>Present this ticket at the counter for express pickup.</p>
+          <p>Thank you for supporting East Austin micro-batch coffee!</p>
+          <p>© 2026 Flat Track Coffee Roasters · flattrackcoffee.com</p>
         </div>
         <script>
           window.onload = function() { window.print(); }
