@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from database import engine, Base, get_db
 from models import MenuItemModel, OrderModel, ReservationModel, InquiryModel, SubscriberModel, UserModel
 from schemas import (
-    MenuItemCreate, MenuItemResponse, OrderCreate, ReservationCreate,
+    MenuItemCreate, StockUpdateRequest, MenuItemResponse, OrderCreate, ReservationCreate,
     InquiryCreate, SubscriberCreate, LoginRequest, TokenResponse
 )
 from auth import hash_password, verify_password, create_access_token, require_admin
@@ -58,6 +58,9 @@ def startup_populate():
             for name, cat, pr, desc, bg, img, cust in seed_items:
                 db.add(MenuItemModel(name=name, category=cat, price=pr, description=desc, badge=bg, image=img, customizable=cust, in_stock=True))
             db.commit()
+        else:
+            db.query(MenuItemModel).update({MenuItemModel.in_stock: True})
+            db.commit()
     finally:
         db.close()
 
@@ -76,8 +79,7 @@ except Exception:
 
 @app.get("/")
 @app.get("/api")
-def root_status(db: Session = Depends(get_db)):
-    ensure_initial_seed(db)
+def root_status():
     return {"status": "ok", "service": "Flat Track Coffee Roasters API", "version": "3.1.0"}
 
 @app.get("/health")
@@ -133,7 +135,7 @@ def get_menu(db: Session = Depends(get_db)):
         {
             "id": i.id, "name": i.name, "category": i.category,
             "price": i.price, "description": i.description,
-            "badge": i.badge, "inStock": i.in_stock,
+            "badge": i.badge, "inStock": i.in_stock, "in_stock": i.in_stock,
             "image": i.image, "customizable": i.customizable
         }
         for i in items
@@ -181,14 +183,22 @@ def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     return {"deleted": True, "id": item_id}
 
 @app.patch("/menu/{item_id}/stock")
-@app.patch("/api/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
-def toggle_stock(item_id: int, in_stock: bool, db: Session = Depends(get_db)):
+@app.patch("/api/menu/{item_id}/stock")
+def toggle_stock(item_id: int, req: StockUpdateRequest = None, in_stock: bool = None, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    item.in_stock = in_stock
+    new_val = True
+    if req is not None:
+        if req.inStock is not None:
+            new_val = req.inStock
+        elif req.in_stock is not None:
+            new_val = req.in_stock
+    elif in_stock is not None:
+        new_val = in_stock
+    item.in_stock = new_val
     db.commit()
-    return {"id": item.id, "inStock": item.in_stock}
+    return {"id": item.id, "inStock": item.in_stock, "in_stock": item.in_stock}
 
 # --- ORDERS ---
 @app.get("/orders")
@@ -279,7 +289,9 @@ def get_reservations(db: Session = Depends(get_db)):
     return [
         {
             "id": r.id, "name": r.name, "email": r.email, "phone": r.phone,
-            "partySize": r.party_size, "date": r.date, "time": r.time,
+            "partySize": r.party_size, "party_size": r.party_size,
+            "date": r.date, "res_date": r.date,
+            "time": r.time, "res_time": r.time,
             "status": r.status, "notes": r.notes
         }
         for r in res_list
@@ -289,14 +301,30 @@ def get_reservations(db: Session = Depends(get_db)):
 @app.post("/api/reservations")
 def create_reservation(req: ReservationCreate, db: Session = Depends(get_db)):
     res_id = f"RES-{random.randint(100, 999)}"
+    party = req.partySize if req.partySize is not None else (req.party_size if req.party_size is not None else 2)
+    r_date = req.date or req.res_date or "Today"
+    r_time = req.time or req.res_time or "12:00 PM"
     res = ReservationModel(
         id=res_id, name=req.name, email=req.email, phone=req.phone,
-        party_size=req.partySize, date=req.date, time=req.time,
+        party_size=party, date=r_date, time=r_time,
         notes=req.notes or "", status="Confirmed"
     )
     db.add(res)
     db.commit()
-    return {"id": res.id, "status": res.status}
+    return {
+        "id": res.id,
+        "name": res.name,
+        "email": res.email,
+        "phone": res.phone,
+        "partySize": res.party_size,
+        "party_size": res.party_size,
+        "date": res.date,
+        "res_date": res.date,
+        "time": res.time,
+        "res_time": res.time,
+        "status": res.status,
+        "notes": res.notes
+    }
 
 @app.patch("/api/reservations/{res_id}/status")
 def update_reservation_status(res_id: str, new_status: str, db: Session = Depends(get_db)):

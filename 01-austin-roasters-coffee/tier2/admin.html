@@ -158,7 +158,7 @@
       <nav class="admin-tabs">
         <button class="admin-tab-btn active" data-tab="orders">Orders Queue ⚡ (<span id="orders-badge-count">0</span>)</button>
         <button class="admin-tab-btn" data-tab="menu">Menu & Stock CRUD</button>
-        <button class="admin-tab-btn" data-tab="reservations">Table Bookings</button>
+        <button class="admin-tab-btn" data-tab="reservations">Table Bookings (<span id="res-badge-count">0</span>)</button>
         <button class="admin-tab-btn" data-tab="inbox">Inquiries</button>
       </nav>
 
@@ -527,17 +527,25 @@
         const resList = await window.FlatTrackAPI.getReservations();
         const tbody = document.getElementById('reservations-tbody');
 
+        const activeCount = resList.filter(r => r.status === 'Confirmed').length;
+        const badge = document.getElementById('res-badge-count');
+        if (badge) badge.innerText = activeCount;
+
         if (resList.length === 0) {
           tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-secondary); padding:2.5rem 1rem;">No table reservations booked yet. When customers submit reserve.html, their bookings appear here in real time.</td></tr>`;
           return;
         }
 
-        tbody.innerHTML = resList.map(r => `
+        tbody.innerHTML = resList.map(r => {
+          const party = r.partySize || r.party_size || 2;
+          const rDate = r.date || r.res_date || 'Today';
+          const rTime = r.time || r.res_time || '12:00 PM';
+          return `
           <tr>
             <td class="mono-num" style="color:var(--accent-gold); font-weight:600;">${r.id}</td>
             <td><b>${r.name}</b><br/><small style="color:var(--text-secondary);">${r.email} · ${r.phone}</small></td>
-            <td>${r.partySize} Guests</td>
-            <td><b>${r.date}</b><br/>${r.time}</td>
+            <td>${party} Guests</td>
+            <td><b>${rDate}</b><br/>${rTime}</td>
             <td>${r.notes || '—'}</td>
             <td><span class="pill-badge" style="margin:0; font-size:0.75rem;">${r.status}</span></td>
             <td>
@@ -548,7 +556,8 @@
               `}
             </td>
           </tr>
-        `).join('');
+        `;
+        }).join('');
       }
 
       window.updateResStatus = async function(id, status) {

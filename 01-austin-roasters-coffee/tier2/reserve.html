@@ -143,18 +143,10 @@
           </button>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:0.65rem; margin-bottom:1.25rem;">
+        <div style="display:flex; flex-direction:column; gap:0.65rem; margin-bottom:1rem;">
           <a id="btn-email-self" href="#" class="btn btn-primary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.9rem; padding:0.75rem 1rem; text-decoration:none;">
-            ✉️ Email Confirmation to Myself (Pre-filled) &rarr;
+            ✉️ Email Booking Details to Myself (Pre-filled) &rarr;
           </a>
-          <a href="admin.html#tab-reservations" target="_blank" class="btn btn-secondary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.85rem; padding:0.65rem 0.8rem; text-decoration:none; color:var(--accent-gold); border-color:var(--border-gold-subtle);">
-            🔐 View Live on Cafe Host Stand POS &nearr;
-          </a>
-        </div>
-
-        <!-- Architecture Transparency Note -->
-        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius:8px; padding:0.85rem 1rem; font-size:0.8rem; color:var(--text-muted); line-height:1.45;">
-          <b style="color:var(--text-secondary);">💡 Live Demo Architecture:</b> Your booking was written directly to the cafe's Host Stand POS database via real-time sync. In a live client production deployment, hooking up transactional email (e.g. Resend, SendGrid, or AWS SES) automatically dispatches branded HTML emails to customer inboxes within 2 seconds.
         </div>
       </div>
     </div>
@@ -309,7 +301,7 @@
           confirmModal.classList.add('is-open');
 
           // Accurate Toast
-          showToast(`🎉 Table reserved! Reference #${res.id} confirmed on Host Stand.`, "success", 5000);
+          showToast(`🎉 Table reserved! Reference #${res.id} is confirmed. We look forward to hosting you!`, "success", 5000);
         }
       });
     });

@@ -231,14 +231,25 @@
     // MENU
     async getMenu() {
       try {
-        const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(2000) });
+        const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(3000) });
         if (res.ok) {
           this.isBackendOnline = true;
-          return await res.json();
+          const items = await res.json();
+          return items.map(m => {
+            const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
+            return {
+              ...m,
+              inStock: inSt,
+              in_stock: inSt
+            };
+          });
         }
       } catch (e) {}
       const state = loadState();
-      return state.menu;
+      return (state.menu || []).map(m => {
+        const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
+        return { ...m, inStock: inSt, in_stock: inSt };
+      });
     },
 
     async saveMenuItem(item) {
@@ -283,14 +294,15 @@
         await fetch(`${API_BASE}/menu/${id}/stock`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ in_stock: inStock }),
-          signal: AbortSignal.timeout(2000)
+          body: JSON.stringify({ in_stock: inStock, inStock: inStock }),
+          signal: AbortSignal.timeout(3000)
         });
       } catch (e) {}
       const state = loadState();
       const item = state.menu.find(m => m.id === id);
       if (item) {
         item.inStock = inStock;
+        item.in_stock = inStock;
         saveState(state);
         notifySync('stock_toggle', { id, inStock });
       }
@@ -385,36 +397,69 @@
     // RESERVATIONS
     async getReservations() {
       try {
-        const res = await fetch(`${API_BASE}/reservations`, { signal: AbortSignal.timeout(2000) });
-        if (res.ok) return await res.json();
+        const res = await fetch(`${API_BASE}/reservations`, { signal: AbortSignal.timeout(3000) });
+        if (res.ok) {
+          const list = await res.json();
+          return list.map(r => ({
+            ...r,
+            partySize: r.partySize !== undefined ? r.partySize : (r.party_size || 2),
+            party_size: r.party_size !== undefined ? r.party_size : (r.partySize || 2),
+            date: r.date || r.res_date || '',
+            res_date: r.res_date || r.date || '',
+            time: r.time || r.res_time || '',
+            res_time: r.res_time || r.time || ''
+          }));
+        }
       } catch (e) {}
       const state = loadState();
-      return state.reservations || [];
+      return (state.reservations || []).map(r => ({
+        ...r,
+        partySize: r.partySize !== undefined ? r.partySize : (r.party_size || 2),
+        party_size: r.party_size !== undefined ? r.party_size : (r.partySize || 2),
+        date: r.date || r.res_date || '',
+        res_date: r.res_date || r.date || '',
+        time: r.time || r.res_time || '',
+        res_time: r.res_time || r.time || ''
+      }));
     },
 
     async createReservation(resData) {
       const state = loadState();
       const resId = `RES-${Math.floor(100 + Math.random() * 900)}`;
+      const party = parseInt(resData.partySize || resData.party_size, 10) || 2;
+      const dateVal = resData.date || resData.res_date || 'Today';
+      const timeVal = resData.time || resData.res_time || '12:00 PM';
       const newRes = {
         id: resId,
         name: resData.name,
         email: resData.email,
         phone: resData.phone,
-        partySize: parseInt(resData.partySize, 10) || 2,
-        date: resData.date,
-        time: resData.time,
+        partySize: party,
+        party_size: party,
+        date: dateVal,
+        res_date: dateVal,
+        time: timeVal,
+        res_time: timeVal,
         status: "Confirmed",
         notes: resData.notes || ""
       };
 
       try {
-        await fetch(`${API_BASE}/reservations`, {
+        const resp = await fetch(`${API_BASE}/reservations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newRes),
-          signal: AbortSignal.timeout(2000)
+          signal: AbortSignal.timeout(4000)
         });
-      } catch (e) {}
+        if (resp.ok) {
+          const saved = await resp.json();
+          if (saved && saved.id) {
+            newRes.id = saved.id;
+          }
+        }
+      } catch (e) {
+        console.warn("Backend reservation call error, storing locally:", e);
+      }
 
       state.reservations.unshift(newRes);
       saveState(state);

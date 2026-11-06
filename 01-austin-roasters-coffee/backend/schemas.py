@@ -9,11 +9,16 @@ class MenuItemBase(BaseModel):
     description: str
     badge: Optional[str] = None
     in_stock: bool = True
+    inStock: Optional[bool] = True
     image: Optional[str] = None
     customizable: bool = False
 
 class MenuItemCreate(MenuItemBase):
     pass
+
+class StockUpdateRequest(BaseModel):
+    in_stock: Optional[bool] = None
+    inStock: Optional[bool] = None
 
 class MenuItemResponse(MenuItemBase):
     id: int
@@ -37,10 +42,13 @@ class ReservationCreate(BaseModel):
     name: str
     email: str
     phone: str
-    partySize: int
-    date: str
-    time: str
-    notes: Optional[str] = None
+    partySize: Optional[int] = None
+    party_size: Optional[int] = None
+    date: Optional[str] = None
+    res_date: Optional[str] = None
+    time: Optional[str] = None
+    res_time: Optional[str] = None
+    notes: Optional[str] = ""
 
 class InquiryCreate(BaseModel):
     name: str
