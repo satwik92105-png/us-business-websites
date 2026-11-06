@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Order Tracker & Rewards — Flat Track Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .track-hero {
+      padding: 3.5rem 0 2rem 0;
+      text-align: center;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .track-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), var(--gold-glow);
+      margin-bottom: 3rem;
+    }
+    .stepper-wrap {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 2.5rem 0 3rem 0;
+    }
+    .stepper-line-bg {
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 0;
+    }
+    .stepper-line-fill {
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      width: 0%;
+      height: 3px;
+      background: var(--accent-gold-gradient);
+      box-shadow: 0 0 10px var(--accent-gold);
+      z-index: 1;
+      transition: width 400ms var(--ease-smooth);
+    }
+    .stepper-node {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 110px;
+      text-align: center;
+    }
+    .stepper-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      transition: all var(--trans-standard);
+    }
+    .stepper-node.active .stepper-circle {
+      border-color: var(--accent-gold);
+      background: var(--bg-elevated);
+      color: var(--accent-gold);
+      box-shadow: var(--gold-glow);
+      transform: scale(1.08);
+    }
+    .stepper-node.completed .stepper-circle {
+      background: #10b981;
+      border-color: #10b981;
+      color: white;
+    }
+    .stepper-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .stepper-node.active .stepper-label {
+      color: var(--accent-gold);
+    }
+    .loyalty-banner {
+      background: linear-gradient(135deg, #1d1713 0%, #15110e 100%);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .points-pill {
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid var(--border-gold-bright);
+      padding: 0.6rem 1.4rem;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    @media (max-width: 768px) {
+      .stepper-wrap { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .stepper-line-bg, .stepper-line-fill { display: none; }
+      .stepper-node { flex-direction: row; width: 100%; text-align: left; }
+      .loyalty-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Flagship</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
+        <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
+        <li><a href="track.html" class="nav-link active">Live Tracker ⚡</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <div class="track-hero">
+    <div class="container">
+      <span class="pill-badge">⚡ Real-Time Counter Pipeline</span>
+      <h1>Live Counter Tracker & <span class="font-italic">Rewards</span></h1>
+      <p style="color:var(--text-secondary);">Watch your order status update in real time as our baristas dial in your espresso.</p>
+    </div>
+  </div>
+
+  <!-- Tracker Section -->
+  <section class="section">
+    <div class="container" style="max-width: 880px;">
+      <!-- Lookup Form / Active Order View -->
+      <div class="track-card" id="tracker-main-card">
+        <!-- Dynamic state inserted here: Empty / Lookup state or Active Stepper -->
+      </div>
+
+      <!-- Loyalty & Rewards Account Section -->
+      <div class="loyalty-banner">
+        <div>
+          <span class="pill-badge" style="margin-bottom:0.4rem;">🎁 Roast Rewards Program</span>
+          <h3 style="font-size: 1.6rem; margin-bottom: 0.3rem;">You have <span id="loyalty-points-val">320</span> ✨ Roast Points</h3>
+          <p style="color:var(--text-secondary); font-size:0.9rem;">
+            Earn 10 points per $1 spent on orders and bean subscriptions. Unlock free pour-overs and exclusive micro-lots.
+          </p>
+          <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
+            <button class="btn btn-secondary btn-sm" id="btn-claim-reward">Redeem Free Pour-Over (250 pts)</button>
+            <button class="btn btn-outline-gold btn-sm" id="btn-demo-auth-toggle">Demo Sign-In (Taylor J.)</button>
+          </div>
+        </div>
+        <div class="points-pill">
+          320 PTS
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier3', isAdmin: false });
+      CartManager.init();
+
+      const mainCard = document.getElementById('tracker-main-card');
+
+      // Check URL param or localStorage for active order
+      const urlParams = new URLSearchParams(window.location.search);
+      let activeOrderId = urlParams.get('id') || localStorage.getItem('flat_track_last_order_id');
+
+      async function renderTracker() {
+        if (!window.FlatTrackAPI) return;
+
+        let activeOrder = null;
+        if (activeOrderId) {
+          const orders = await window.FlatTrackAPI.getOrders();
+          activeOrder = orders.find(o => o.id === activeOrderId);
+        }
+
+        if (!activeOrder) {
+          // Clean Empty / Lookup State
+          mainCard.innerHTML = `
+            <div style="text-align: center; padding: 2rem 1rem;">
+              <span style="font-size: 3rem;">🔍</span>
+              <h3 style="font-size: 1.5rem; margin: 0.8rem 0 0.4rem 0;">No Active Order Selected</h3>
+              <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.5rem auto; font-size: 0.95rem;">
+                Enter your Order Reference Number from your receipt, or place a new pickup order to watch live kitchen status.
+              </p>
+
+              <div style="display:flex; justify-content:center; gap:0.6rem; max-width:400px; margin: 0 auto 1.5rem auto;">
+                <input type="text" id="order-lookup-input" class="form-input" placeholder="e.g. FT-8402" style="text-transform:uppercase;">
+                <button class="btn btn-primary" id="btn-do-lookup">Track</button>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); padding-top:1.5rem; display:flex; justify-content:center; gap:1rem;">
+                <a href="menu.html" class="btn btn-secondary">Order Pickup Ahead 🛒</a>
+                <button class="btn btn-outline-gold" id="btn-quick-sim">⚡ Simulate Live Order Demo</button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById('btn-do-lookup')?.addEventListener('click', () => {
+            const val = document.getElementById('order-lookup-input').value.trim().toUpperCase();
+            if (val) {
+              activeOrderId = val;
+              renderTracker();
+            }
+          });
+
+          document.getElementById('btn-quick-sim')?.addEventListener('click', async () => {
+            const sim = await window.FlatTrackAPI.createOrder({
+              customerName: "Taylor Jenkins (VIP)",
+              phone: "(512) 441-8922",
+              items: [
+                { name: "Bourbon Smoked Vanilla Latte", qty: 1, price: 6.75 },
+                { name: "Artisan Butter Croissant", qty: 1, price: 4.50 }
+              ],
+              subtotal: 11.25,
+              notes: "Oat milk"
+            });
+            activeOrderId = sim.id;
+            localStorage.setItem('flat_track_last_order_id', sim.id);
+            showToast(`Simulated Order #${sim.id}!`, "success");
+            renderTracker();
+          });
+
+          return;
+        }
+
+        // Active Order Stepper View
+        const status = activeOrder.status;
+        let activeIdx = 0; // 0: Paid, 1: Preparing, 2: Ready, 3: Completed
+        if (status === 'Preparing') activeIdx = 1;
+        if (status === 'Ready for Pickup') activeIdx = 2;
+        if (status === 'Picked Up' || status === 'Completed') activeIdx = 3;
+
+        const fillWidth = (activeIdx / 3) * 80;
+
+        mainCard.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:1rem; margin-bottom:1.5rem;">
+            <div>
+              <span class="pill-badge" style="margin:0; font-size:0.75rem;">LIVE TICKET #${activeOrder.id}</span>
+              <h2 style="font-size:1.8rem; margin-top:0.4rem;">${activeOrder.customerName}</h2>
+            </div>
+            <div style="text-align:right;">
+              <div class="mono-num" style="font-size:1.5rem; font-weight:700; color:var(--accent-gold);">$${activeOrder.total.toFixed(2)}</div>
+              <small style="color:var(--text-secondary);">Pickup: 1611 E Cesar Chavez</small>
+            </div>
+          </div>
+
+          <!-- Stepper -->
+          <div class="stepper-wrap">
+            <div class="stepper-line-bg"></div>
+            <div class="stepper-line-fill" style="width: ${fillWidth}%;"></div>
+
+            <div class="stepper-node ${activeIdx >= 0 ? (activeIdx > 0 ? 'completed' : 'active') : ''}">
+              <div class="stepper-circle">${activeIdx > 0 ? '✓' : '1'}</div>
+              <div class="stepper-label">Order Paid ✓</div>
+            </div>
+
+            <div class="stepper-node ${activeIdx >= 1 ? (activeIdx > 1 ? 'completed' : 'active') : ''}">
+              <div class="stepper-circle">${activeIdx > 1 ? '✓' : '☕'}</div>
+              <div class="stepper-label">Barista Brewing ☕</div>
+            </div>
+
+            <div class="stepper-node ${activeIdx >= 2 ? (activeIdx > 2 ? 'completed' : 'active') : ''}">
+              <div class="stepper-circle">${activeIdx > 2 ? '✓' : '🔔'}</div>
+              <div class="stepper-label">Ready at Counter 🔔</div>
+            </div>
+
+            <div class="stepper-node ${activeIdx >= 3 ? 'completed' : ''}">
+              <div class="stepper-circle">✨</div>
+              <div class="stepper-label">Enjoyed ✨</div>
+            </div>
+          </div>
+
+          <!-- Ticket Details -->
+          <div style="background:var(--bg-surface); padding:1.25rem; border-radius:12px; border:1px solid var(--border-subtle); margin-bottom:1.5rem;">
+            <b style="color:var(--text-primary); font-size:0.95rem;">Itemized Ticket:</b>
+            <ul style="list-style:none; margin-top:0.5rem; font-size:0.9rem; color:var(--text-secondary);">
+              ${activeOrder.items.map(i => `<li>• ${i.qty}x <b>${i.name}</b> ${i.customizations ? `(${i.customizations})` : ''} — $${(i.price * i.qty).toFixed(2)}</li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- Actions -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+            <button class="btn btn-outline-gold btn-sm" id="btn-print-receipt">📄 Download / Print PDF Tax Receipt</button>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-secondary btn-sm" id="btn-clear-tracker">Track Different Order</button>
+              <a href="menu.html" class="btn btn-primary btn-sm">Order More &rarr;</a>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('btn-print-receipt')?.addEventListener('click', () => {
+          generatePdfReceipt(activeOrder);
+        });
+
+        document.getElementById('btn-clear-tracker')?.addEventListener('click', () => {
+          activeOrderId = null;
+          localStorage.removeItem('flat_track_last_order_id');
+          renderTracker();
+        });
+      }
+
+      // Live multi-tab sync
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'order_status_update' || event.action === 'new_order') {
+            renderTracker();
+          }
+        });
+      }
+
+      // Loyalty buttons
+      document.getElementById('btn-claim-reward').addEventListener('click', () => {
+        showToast("🎁 Reward Redeemed! Added Free Nitro Pour-Over to your account.", "success", 4000);
+      });
+
+      document.getElementById('btn-demo-auth-toggle').addEventListener('click', () => {
+        showToast("✓ Authenticated via Google OAuth Demo (Taylor Jenkins)", "success", 3000);
+      });
+
+      renderTracker();
+    });
+  </script>
+</body>
+</html>

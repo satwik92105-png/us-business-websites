@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve a Table — Flat Track Coffee Roasters (Flagship)</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .reserve-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Glass Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Flagship</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
+        <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
+        <li><a href="track.html" class="nav-link">Live Tracker ⚡</a></li>
+        <li><a href="reserve.html" class="nav-link active">Reserve 🪑</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-outline-gold btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header">
+        <span class="pill-badge">🪑 Roastery Atmosphere</span>
+        <h2>Reserve Roastery Seating</h2>
+        <p>Book communal tables or outdoor patio booths for coffee tastings, remote work sprints, or team meetups.</p>
+      </div>
+
+      <div class="reserve-card">
+        <form id="tier3-reserve-form">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" id="res3-name" class="form-input" required placeholder="Elena Thorne">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" id="res3-email" class="form-input" required placeholder="elena@example.com">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" id="res3-phone" class="form-input" required placeholder="(512) 555-0144">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Party Size *</label>
+              <select class="form-select" id="res3-party">
+                <option value="1">1 Person (Quiet Work Spot)</option>
+                <option value="2" selected>2 People (Table Booth)</option>
+                <option value="4">3 – 4 People (Communal Table)</option>
+                <option value="6">5 – 6 People (Large Roastery Table)</option>
+                <option value="8">7 – 8 People (Outdoor Patio Lounge)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Reservation Date *</label>
+              <select class="form-select" id="res3-date" required></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time Slot *</label>
+              <select class="form-select" id="res3-time" required></select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Special Requests (Optional)</label>
+            <textarea id="res3-notes" class="form-textarea" rows="3" placeholder="Patio table, high-top, power outlet access, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="res3-submit-btn">
+            Confirm Roastery Reservation &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier3', isAdmin: false });
+      CartManager.init();
+
+      const dateSelect = document.getElementById('res3-date');
+      const timeSelect = document.getElementById('res3-time');
+
+      const today = new Date();
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const label = i === 0 ? `Today (${d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })})` :
+                      i === 1 ? `Tomorrow (${d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })})` :
+                      d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+        const val = d.toISOString().split('T')[0];
+        dateSelect.innerHTML += `<option value="${val}">${label}</option>`;
+      }
+
+      function updateTimeSlots() {
+        const isToday = dateSelect.selectedIndex === 0;
+        const slots = [
+          "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", 
+          "12:30 PM", "1:30 PM", "2:30 PM", "3:30 PM", "4:30 PM"
+        ];
+        const currentHour = new Date().getHours();
+        timeSelect.innerHTML = '';
+
+        slots.forEach(slot => {
+          let slotHour = parseInt(slot.split(':')[0], 10);
+          if (slot.includes('PM') && slotHour !== 12) slotHour += 12;
+
+          if (!isToday || slotHour > currentHour + 1) {
+            timeSelect.innerHTML += `<option value="${slot}">${slot}</option>`;
+          }
+        });
+
+        if (timeSelect.options.length === 0) {
+          timeSelect.innerHTML = `<option value="">No more slots today - please choose tomorrow</option>`;
+        }
+      }
+
+      dateSelect.addEventListener('change', updateTimeSlots);
+      updateTimeSlots();
+
+      const form = document.getElementById('tier3-reserve-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('res3-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Securing Table...";
+
+        const name = document.getElementById('res3-name').value.trim();
+        const email = document.getElementById('res3-email').value.trim();
+        const phone = document.getElementById('res3-phone').value.trim();
+        const partySize = document.getElementById('res3-party').value;
+        const date = dateSelect.options[dateSelect.selectedIndex].text;
+        const time = timeSelect.value;
+        const notes = document.getElementById('res3-notes').value.trim();
+
+        if (window.FlatTrackAPI) {
+          const res = await window.FlatTrackAPI.createReservation({
+            name, email, phone, partySize, date, time, notes
+          });
+
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Confirm Roastery Reservation →";
+          showToast(`Table confirmed! Reference #${res.id}. Sent to ${email}.`, "success", 5000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

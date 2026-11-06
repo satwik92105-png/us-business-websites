@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flat Track Coffee Roasters — Flagship Hospitality & Subscriptions</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* Tier 3 Flagship Hero with Parallax & Warm Glow */
+    .hero-tier3 {
+      min-height: 94vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-gold-subtle);
+    }
+    .hero-parallax-bg {
+      position: absolute;
+      top: -10%;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background: linear-gradient(180deg, rgba(11, 9, 8, 0.35) 0%, rgba(11, 9, 8, 0.95) 100%), 
+                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&auto=format&fit=crop&q=80') center/cover no-repeat;
+      will-change: transform;
+      z-index: 0;
+    }
+    .hero-steam-glow {
+      position: absolute;
+      top: 20%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, rgba(11, 9, 8, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.15); }
+    }
+    .hero-t3-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-t3-content h1 {
+      font-size: 4.2rem;
+      line-height: 1.12;
+      margin-bottom: 1.4rem;
+    }
+    .hero-t3-content p {
+      font-size: 1.25rem;
+      margin-bottom: 2.2rem;
+      color: var(--text-primary);
+      opacity: 0.92;
+    }
+    .hero-badges-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .hero-float-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(21, 18, 16, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      border: 1px solid var(--border-gold-subtle);
+    }
+    .stats-band {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 3.5rem 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-mono);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .sub-promo-card {
+      background: linear-gradient(135deg, #1b1612 0%, #13100e 100%);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 24px;
+      padding: 3.5rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), var(--gold-glow);
+    }
+    @media (max-width: 900px) {
+      .hero-t3-content h1 { font-size: 3rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .sub-promo-card { grid-template-columns: 1fr; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Glass Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Flagship</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
+        <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
+        <li><a href="track.html" class="nav-link">Live Tracker ⚡</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="subscribe.html" class="btn btn-outline-gold btn-sm">Join Club 🎁</a>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Parallax Hero with Steam Glow -->
+  <section class="hero-tier3" id="hero-section">
+    <div class="hero-parallax-bg" id="hero-bg"></div>
+    <div class="hero-steam-glow"></div>
+
+    <div class="container">
+      <div class="hero-t3-content">
+        <div class="hero-badges-row">
+          <span class="hero-float-badge">🌱 100% Direct-Trade Sourced</span>
+          <span class="hero-float-badge">🔥 Cast-Iron Drum Roasted</span>
+          <span class="hero-float-badge">📍 1611 E Cesar Chavez St</span>
+        </div>
+
+        <h1>Micro-Batch Roasting Meets <span class="font-italic">Modern Hospitality.</span></h1>
+        <p>
+          Experience East Austin's premier specialty roastery. Order fresh coffee for counter pickup, subscribe to bi-weekly single-origin deliveries, or track your live barista brew in real time.
+        </p>
+
+        <div style="display:flex; gap:1.2rem; flex-wrap:wrap;">
+          <a href="menu.html" class="btn btn-primary btn-lg">Order Pickup Ahead 🛒</a>
+          <a href="subscribe.html" class="btn btn-secondary btn-lg">Build Coffee Subscription 📦</a>
+          <a href="track.html" class="btn btn-outline-gold btn-lg">⚡ Live Order Tracker</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated Number Counters Band -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number count-up" data-target="86">0</div>
+          <div class="stat-label">Min. Specialty Cupping Score</div>
+        </div>
+        <div>
+          <div class="stat-number count-up" data-target="48">0</div>
+          <div class="stat-label">Hours From Roast to Ship</div>
+        </div>
+        <div>
+          <div class="stat-number count-up" data-target="750">0</div>
+          <div class="stat-label">Verified 5-Star Reviews</div>
+        </div>
+        <div>
+          <div class="stat-number count-up" data-target="100">0</div>
+          <div class="stat-label">% Direct Farm Relationships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Interactive Seed-to-Cup Scroll Timeline -->
+  <section class="section" id="timeline-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="pill-badge">✨ Interactive Journey</span>
+        <h2>The Seed-to-Cup Craft</h2>
+        <p>Scroll down to explore how our beans journey from high-altitude volcanic soil to your morning brew.</p>
+      </div>
+
+      <div class="timeline-track-wrap">
+        <div class="timeline-line-bg"></div>
+        <div class="timeline-line-fill" id="timeline-progress-fill"></div>
+
+        <!-- Step 1 -->
+        <div class="timeline-step reveal-on-scroll stagger-1" id="step-1">
+          <div class="timeline-dot">🌱</div>
+          <div class="timeline-content">
+            <h4>1. Direct Trade Micro-Lot Harvest</h4>
+            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
+              We partner directly with smallholder farming families in Oaxaca, Huila, and Yirgacheffe at elevations above 1,700m. Cherry selection is 100% hand-harvested at peak brix ripeness.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="timeline-step reveal-on-scroll stagger-2" id="step-2">
+          <div class="timeline-dot">🔥</div>
+          <div class="timeline-content">
+            <h4>2. Small-Batch Cast-Iron Drum Roasting</h4>
+            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
+              Roasted on East Cesar Chavez in calibrated micro-batches. Our roast profiles are dialed into caramelize natural sugars without masking delicate floral, citrus, and stone fruit acidity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="timeline-step reveal-on-scroll stagger-3" id="step-3">
+          <div class="timeline-dot">☕</div>
+          <div class="timeline-content">
+            <h4>3. Precision Barista Dial-In</h4>
+            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
+              Every morning at 6:00 AM, our lead baristas refractometer-test and taste every origin on bar, fine-tuning water temperature, grind distribution, and extraction yield to 20.5%.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-step reveal-on-scroll stagger-4" id="step-4">
+          <div class="timeline-dot">🚀</div>
+          <div class="timeline-content">
+            <h4>4. Delivered Fresh to You (Doorstep or Counter)</h4>
+            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
+              Whether picked up at our cafe in 10 minutes or delivered to your doorstep bi-weekly via our club subscription, you receive peak-fresh beans at their optimal degassing window.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bean Subscription Recurring Revenue Promo -->
+  <section class="section" style="background: var(--bg-elevated); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="sub-promo-card reveal-on-scroll">
+        <div>
+          <span class="pill-badge">☕ Never Run Out of Great Coffee</span>
+          <h2 style="font-size: 2.6rem; margin-bottom: 1rem;">Roastery Coffee Subscriptions</h2>
+          <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 1.8rem;">
+            Choose your favorite roast, select whole bean or your custom home grind, and set your frequency. Enjoy <b>15% off retail pricing</b>, complimentary nationwide shipping, and seasonal reserve access.
+          </p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="subscribe.html" class="btn btn-primary btn-lg">Configure My Subscription 📦</a>
+            <a href="catering.html" class="btn btn-secondary btn-lg">Explore B2B & Catering ✨</a>
+          </div>
+        </div>
+        <div style="border-radius:18px; overflow:hidden; border:1px solid var(--border-gold-subtle);">
+          <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=800&auto=format&fit=crop&q=80" alt="Fresh Whole Bean Coffee Bags">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Reviews -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="pill-badge">⭐ Austin Reputation</span>
+        <h2>Loved Across East Austin</h2>
+        <p>Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.8rem;">
+        <div class="product-card reveal-on-scroll stagger-1" style="padding:2rem;">
+          <div style="color:#f59e0b; font-size:1.2rem; margin-bottom:0.8rem;">★★★★★</div>
+          <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary);">
+            "Having the bi-weekly subscription delivered to my door in Austin has ruined all grocery store coffee for me. Always freshly roasted, fragrant, and smooth."
+          </p>
+          <b style="color:var(--accent-gold);">— Rachel W., Subscription Member</b>
+        </div>
+
+        <div class="product-card reveal-on-scroll stagger-2" style="padding:2rem;">
+          <div style="color:#f59e0b; font-size:1.2rem; margin-bottom:0.8rem;">★★★★★</div>
+          <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary);">
+            "The online order ahead is ridiculously smooth. I order on my phone as I leave home, and my Cortado and scone are waiting on the counter when I walk in."
+          </p>
+          <b style="color:var(--accent-gold);">— Julian M., Daily Counter Regular</b>
+        </div>
+
+        <div class="product-card reveal-on-scroll stagger-3" style="padding:2rem;">
+          <div style="color:#f59e0b; font-size:1.2rem; margin-bottom:0.8rem;">★★★★★</div>
+          <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary);">
+            "We hired their espresso cart for our corporate brand launch in downtown Austin. Baristas were absolute pros and served 200+ drinks effortlessly."
+          </p>
+          <b style="color:var(--accent-gold);">— Danielle C., Event Producer</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier3', isAdmin: false });
+      CartManager.init();
+      initScrollAnimations();
+
+      // Parallax hero background
+      const heroBg = document.getElementById('hero-bg');
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (heroBg && scrolled < 900) {
+          heroBg.style.transform = `translateY(${scrolled * 0.35}px)`;
+        }
+      }, { passive: true });
+
+      // Number Counter animation
+      const counters = document.querySelectorAll('.count-up');
+      let countersDone = false;
+      function checkCounters() {
+        if (countersDone) return;
+        const rect = document.querySelector('.stats-band').getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          countersDone = true;
+          counters.forEach(c => {
+            const target = parseInt(c.dataset.target, 10);
+            let count = 0;
+            const inc = Math.ceil(target / 45);
+            const timer = setInterval(() => {
+              count += inc;
+              if (count >= target) {
+                c.innerText = target + (c.dataset.target === '100' ? '%' : (c.dataset.target === '750' ? '+' : '+'));
+                clearInterval(timer);
+              } else {
+                c.innerText = count;
+              }
+            }, 30);
+          });
+        }
+      }
+      window.addEventListener('scroll', checkCounters, { passive: true });
+      checkCounters();
+
+      // Scroll-linked Seed to Cup timeline progress line
+      const timelineFill = document.getElementById('timeline-progress-fill');
+      const timelineWrap = document.querySelector('.timeline-track-wrap');
+      const steps = document.querySelectorAll('.timeline-step');
+
+      function updateTimeline() {
+        if (!timelineWrap) return;
+        const rect = timelineWrap.getBoundingClientRect();
+        const startY = window.innerHeight * 0.75;
+        if (rect.top < startY && rect.bottom > 0) {
+          const totalDist = rect.height;
+          const currentProgress = Math.min(1, Math.max(0, (startY - rect.top) / totalDist));
+          timelineFill.style.height = `${currentProgress * 100}%`;
+
+          steps.forEach(step => {
+            const sRect = step.getBoundingClientRect();
+            if (sRect.top < startY) {
+              step.classList.add('active');
+            } else {
+              step.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      window.addEventListener('scroll', updateTimeline, { passive: true });
+      updateTimeline();
+    });
+  </script>
+</body>
+</html>

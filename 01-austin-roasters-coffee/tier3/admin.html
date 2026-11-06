@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tier 3 Owner BI & Analytics — Flat Track Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    body { background-color: #0c0a09; }
+    .bi-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 1.8rem;
+    }
+    .bi-stat-val {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin: 0.4rem 0 0.2rem 0;
+    }
+    .chart-bar-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.2rem;
+      height: 180px;
+      padding-top: 1.5rem;
+      border-bottom: 1px solid var(--border-medium);
+    }
+    .chart-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .chart-bar {
+      width: 100%;
+      background: var(--accent-gold-gradient);
+      border-radius: 6px 6px 0 0;
+      transition: height 600ms var(--ease-smooth);
+      min-height: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Admin Bar -->
+  <header style="background:var(--bg-elevated); border-bottom:1px solid var(--border-medium); padding:0.85rem 1.5rem; display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:1.2rem;">
+      <span style="font-size:1.4rem;">☕</span>
+      <div>
+        <b style="font-size:1rem; color:var(--text-primary);">Flat Track Coffee Roasters</b>
+        <span style="font-size:0.75rem; color:var(--accent-gold); margin-left:0.5rem; font-family:monospace;">● TIER 3 BI & REVENUE SUITE</span>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:0.75rem; align-items:center;">
+      <a href="kitchen.html" target="_blank" class="btn btn-primary btn-sm">Launch Tablet KDS 🖥️</a>
+      <a href="../tier2/admin.html" class="btn btn-secondary btn-sm">Menu / Orders POS &rarr;</a>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 2.5rem 0;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="pill-badge">📊 Executive Intelligence</span>
+        <h1 style="font-size: 2.4rem;">Roastery Financial & Sales Analytics</h1>
+        <p style="color:var(--text-secondary);">Direct revenue, customer lifetime value, and recurring subscription metrics.</p>
+      </div>
+      <button class="btn btn-outline-gold btn-sm" id="btn-export-csv">📥 Export Order Ledger (CSV)</button>
+    </div>
+
+    <!-- 4 High-Level Metric Tiles -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem; margin-bottom:2rem;">
+      <div class="bi-card">
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">30-Day Direct Sales</span>
+        <div class="bi-stat-val">$18,420</div>
+        <div style="font-size:0.8rem; color:var(--status-success);">↑ 24% vs prior month (0% platform cut)</div>
+      </div>
+
+      <div class="bi-card">
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Active Bean Subscribers</span>
+        <div class="bi-stat-val">142</div>
+        <div style="font-size:0.8rem; color:var(--accent-gold);">$4,686 Monthly Recurring Revenue (MRR)</div>
+      </div>
+
+      <div class="bi-card">
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Avg Order Ticket</span>
+        <div class="bi-stat-val">$14.85</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Drink + pastry attachment rate 68%</div>
+      </div>
+
+      <div class="bi-card">
+        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Aggregator Fees Saved</span>
+        <div class="bi-stat-val">$3,240</div>
+        <div style="font-size:0.8rem; color:var(--status-success);">Kept 100% in roastery bank account</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div style="display:grid; grid-template-columns: 1.3fr 0.7fr; gap:2rem; margin-bottom:2rem;">
+      <!-- Daily Revenue Bar Chart -->
+      <div class="bi-card">
+        <h3 style="font-size:1.25rem; margin-bottom:0.2rem;">Weekly Direct Counter Volume</h3>
+        <p style="font-size:0.82rem; color:var(--text-secondary);">Direct mobile order-ahead transactions by day (USD)</p>
+
+        <div class="chart-bar-container">
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 55%;"></div>
+            <small style="font-size:0.75rem; color:var(--text-secondary);">Mon</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 65%;"></div>
+            <small style="font-size:0.75rem; color:var(--text-secondary);">Tue</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 72%;"></div>
+            <small style="font-size:0.75rem; color:var(--text-secondary);">Wed</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 80%;"></div>
+            <small style="font-size:0.75rem; color:var(--text-secondary);">Thu</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 95%;"></div>
+            <small style="font-size:0.75rem; color:var(--text-secondary);">Fri</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 100%;"></div>
+            <small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sat</small>
+          </div>
+          <div class="chart-bar-col">
+            <div class="chart-bar" style="height: 92%;"></div>
+            <small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sun</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Selling Products -->
+      <div class="bi-card">
+        <h3 style="font-size:1.25rem; margin-bottom:1rem;">Top Velocity Menu Items</h3>
+        <div style="display:flex; flex-direction:column; gap:0.9rem; font-size:0.88rem;">
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
+            <span>1. Bourbon Smoked Vanilla Latte</span>
+            <b class="mono-num" style="color:var(--accent-gold);">412 orders</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
+            <span>2. Dogspeed Espresso Double</span>
+            <b class="mono-num" style="color:var(--accent-gold);">380 orders</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
+            <span>3. East Austin Flash Brew Iced</span>
+            <b class="mono-num" style="color:var(--accent-gold);">294 orders</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
+            <span>4. Dogspeed Whole Bean (12oz)</span>
+            <b class="mono-num" style="color:var(--accent-gold);">215 bags</b>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span>5. Artisan Butter Croissant</span>
+            <b class="mono-num" style="color:var(--accent-gold);">198 orders</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initDemoControls({ tier: 'tier3', isAdmin: true });
+
+      document.getElementById('btn-export-csv').addEventListener('click', async () => {
+        if (!window.FlatTrackAPI) return;
+        const orders = await window.FlatTrackAPI.getOrders();
+        let csv = "Order ID,Customer,Phone,Items,Subtotal,Tax,Total,Status,Timestamp\n";
+        orders.forEach(o => {
+          const itemsStr = o.items.map(i => `${i.qty}x ${i.name}`).join('; ');
+          csv += `"${o.id}","${o.customerName}","${o.phone}","${itemsStr}",${o.subtotal},${o.tax},${o.total},"${o.status}","${o.orderTime}"\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `flattrack_orders_export_${Date.now()}.csv`;
+        a.click();
+        showToast("CSV Order Ledger exported successfully!", "success");
+      });
+    });
+  </script>
+</body>
+</html>

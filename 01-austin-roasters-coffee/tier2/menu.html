@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Ahead — Flat Track Coffee Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .menu-header-bar {
+      padding: 3.5rem 0 2rem 0;
+      text-align: center;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .menu-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+    .search-box input {
+      padding-left: 2.4rem;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+    .sold-out-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 9, 8, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .sold-out-badge {
+      background: #ef4444;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link active">Order Ahead 🛒</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve Table 🪑</a></li>
+        <li><a href="story.html" class="nav-link">Roastery Story</a></li>
+        <li><a href="contact.html" class="nav-link">Visit & Contact</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <button class="btn btn-outline-gold btn-sm" onclick="CartManager.openDrawer()">View Cart 🛒</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu Header -->
+  <div class="menu-header-bar">
+    <div class="container">
+      <span class="pill-badge">⚡ 10-Min Counter Pickup</span>
+      <h1>Order Ahead from the <span class="font-italic">Roastery</span></h1>
+      <p>Zero aggregator fees. Real-time kitchen dispatch. Pickup at 1611 E Cesar Chavez St.</p>
+    </div>
+  </div>
+
+  <!-- Menu Section -->
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <!-- Search & Category Filters -->
+      <div class="menu-controls-row">
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-secondary btn-sm active" data-cat="all">All</button>
+          <button class="btn btn-secondary btn-sm" data-cat="espresso">☕ Espresso</button>
+          <button class="btn btn-secondary btn-sm" data-cat="specialty">✨ Specialties</button>
+          <button class="btn btn-secondary btn-sm" data-cat="cold">🧊 Cold Brew</button>
+          <button class="btn btn-secondary btn-sm" data-cat="bakery">🥐 Bakery</button>
+          <button class="btn btn-secondary btn-sm" data-cat="beans">🫘 Beans (12oz)</button>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="menu-search-input" class="form-input" placeholder="Search coffee, pastries...">
+        </div>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="menu-grid" id="tier2-menu-container">
+        <!-- Injected via JavaScript from FlatTrackAPI -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Drink Customization Modal -->
+  <div class="modal-overlay" id="custom-modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="custom-modal-title"><span>☕</span> Customize Drink</h3>
+        <button class="modal-close-btn" id="custom-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; gap:1rem; margin-bottom:1.2rem; align-items:center;">
+          <img id="custom-modal-img" src="" style="width:70px; height:70px; border-radius:10px; object-fit:cover;">
+          <div>
+            <h4 id="custom-modal-item-name" style="font-size:1.15rem;">Item Name</h4>
+            <div class="mono-num" id="custom-modal-item-price" style="color:var(--accent-gold); font-size:1.1rem; font-weight:600;">$0.00</div>
+          </div>
+        </div>
+
+        <form id="custom-form">
+          <div class="form-group">
+            <label class="form-label">Milk Selection</label>
+            <select class="form-select" id="custom-milk">
+              <option value="Oat Milk (+ $0.75)">Oat Milk (Minor Figures) +$0.75</option>
+              <option value="Whole Milk" selected>Whole Milk (Organic Pasture)</option>
+              <option value="Almond Milk (+ $0.75)">Almond Milk +$0.75</option>
+              <option value="Skim Milk">Skim Milk</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Sweetness Level</label>
+            <select class="form-select" id="custom-sweet">
+              <option value="Standard Sweetness" selected>Standard Sweetness</option>
+              <option value="Half Sweet (50%)">Half Sweet (50%)</option>
+              <option value="Light Sweet (25%)">Light Sweet (25%)</option>
+              <option value="Unsweetened">Unsweetened (Zero Syrup)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Espresso Shots</label>
+            <select class="form-select" id="custom-shots">
+              <option value="Standard Double Shot" selected>Standard Double Shot</option>
+              <option value="Triple Shot (+ $1.00)">Triple Shot (+$1.00)</option>
+              <option value="Decaf Double">Decaf Dogspeed Double</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+            Add Customized Drink to Order &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier2', isAdmin: false });
+      CartManager.init();
+
+      let activeCategory = 'all';
+      let searchQuery = '';
+      let currentMenu = [];
+      let activeCustomItem = null;
+
+      const grid = document.getElementById('tier2-menu-container');
+
+      async function loadMenu() {
+        if (window.FlatTrackAPI) {
+          currentMenu = await window.FlatTrackAPI.getMenu();
+          renderFilteredMenu();
+        }
+      }
+
+      function renderFilteredMenu() {
+        let items = currentMenu;
+        if (activeCategory !== 'all') {
+          items = items.filter(i => i.category === activeCategory);
+        }
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          items = items.filter(i => i.name.toLowerCase().includes(q) || i.description.toLowerCase().includes(q));
+        }
+
+        if (items.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(--text-secondary);">
+              <p style="font-size: 1.5rem;">🔍</p>
+              <p>No coffee or menu items match your search.</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = items.map(item => `
+          <div class="product-card">
+            ${!item.inStock ? `
+              <div class="sold-out-overlay">
+                <span class="sold-out-badge">Sold Out Today</span>
+              </div>
+            ` : ''}
+            <div class="product-image-wrap">
+              <img src="${item.image}" alt="${item.name}" loading="lazy">
+              ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">${item.name}</h3>
+              <p class="card-desc">${item.description}</p>
+              <div class="card-footer">
+                <span class="card-price mono-num">$${item.price.toFixed(2)}</span>
+                ${item.inStock ? `
+                  <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick(${item.id})">
+                    ${item.customizable ? 'Customize &plus;' : 'Add &plus;'}
+                  </button>
+                ` : `
+                  <span style="font-size:0.8rem; color:#ef4444; font-weight:600;">Out of Stock</span>
+                `}
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      window.handleItemOrderClick = function(id) {
+        const item = currentMenu.find(i => i.id === id);
+        if (!item || !item.inStock) return;
+
+        if (item.customizable) {
+          activeCustomItem = item;
+          document.getElementById('custom-modal-item-name').innerText = item.name;
+          document.getElementById('custom-modal-item-price').innerText = `$${item.price.toFixed(2)}`;
+          document.getElementById('custom-modal-img').src = item.image;
+          document.getElementById('custom-modal-overlay').classList.add('is-open');
+          document.getElementById('floating-cart-trigger').classList.add('is-hidden');
+        } else {
+          CartManager.addItem(item);
+        }
+      };
+
+      // Customization modal close
+      const modalOverlay = document.getElementById('custom-modal-overlay');
+      const modalClose = document.getElementById('custom-modal-close');
+      const customForm = document.getElementById('custom-form');
+
+      function closeCustomModal() {
+        modalOverlay.classList.remove('is-open');
+        document.getElementById('floating-cart-trigger').classList.remove('is-hidden');
+      }
+
+      modalClose.addEventListener('click', closeCustomModal);
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeCustomModal();
+      });
+
+      customForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!activeCustomItem) return;
+
+        const milk = document.getElementById('custom-milk').value;
+        const sweet = document.getElementById('custom-sweet').value;
+        const shots = document.getElementById('custom-shots').value;
+
+        let extraCost = 0;
+        if (milk.includes('+$0.75')) extraCost += 0.75;
+        if (shots.includes('+$1.00')) extraCost += 1.00;
+
+        const customizedItem = {
+          id: activeCustomItem.id,
+          name: activeCustomItem.name,
+          price: activeCustomItem.price + extraCost
+        };
+
+        const details = `${milk} · ${sweet} · ${shots}`;
+        CartManager.addItem(customizedItem, details);
+        closeCustomModal();
+      });
+
+      // Filter tabs
+      document.querySelectorAll('[data-cat]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.dataset.cat;
+          renderFilteredMenu();
+        });
+      });
+
+      // Search input
+      const searchInput = document.getElementById('menu-search-input');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim();
+        renderFilteredMenu();
+      });
+
+      // Multi-tab BroadcastChannel live synchronization
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'menu_update' || event.action === 'stock_toggle' || event.action === 'demo_reset') {
+            loadMenu();
+          }
+        });
+      }
+
+      loadMenu();
+    });
+  </script>
+</body>
+</html>

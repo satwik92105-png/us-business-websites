@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flat Track Coffee Roasters — Austin, TX</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    /* Tier 1 Specific Styles */
+    .hero-tier1 {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(180deg, rgba(11, 9, 8, 0.4) 0%, rgba(11, 9, 8, 0.95) 100%), 
+                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .hero-content {
+      max-width: 760px;
+    }
+    .hero-content h1 {
+      font-size: 3.8rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2.2rem;
+      color: var(--text-primary);
+      opacity: 0.9;
+    }
+    .menu-tabs-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .menu-tab-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      transition: all var(--trans-quick);
+      cursor: pointer;
+    }
+    .menu-tab-btn:hover, .menu-tab-btn.active {
+      background: var(--accent-gold-gradient);
+      color: var(--text-inverse);
+      border-color: transparent;
+      box-shadow: var(--gold-glow);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.6rem;
+    }
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .story-img-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-gold-subtle);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-top: 2.5rem;
+    }
+    .review-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .stars-line {
+      color: #f59e0b;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+    .map-container {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      height: 420px;
+    }
+    @media (max-width: 900px) {
+      .hero-content h1 { font-size: 2.8rem; }
+      .story-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">Our Craft</a></li>
+        <li><a href="#menu" class="nav-link">Menu</a></li>
+        <li><a href="#reviews" class="nav-link">Community</a></li>
+        <li><a href="#location" class="nav-link">Hours & Location</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="tel:5125406033" class="btn btn-outline-gold btn-sm">📞 (512) 540-6033</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-tier1">
+    <div class="container">
+      <div class="hero-content">
+        <span class="pill-badge">📍 East Cesar Chavez St · Austin, Texas</span>
+        <h1>Small-Batch Coffee Roasted With <span class="font-italic">East Austin Soul</span></h1>
+        <p>
+          Dedicated micro-roastery and neighborhood cafe. Direct-trade beans, precision espresso, and house pastries crafted fresh daily on Cesar Chavez.
+        </p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="#menu" class="btn btn-primary btn-lg">Explore Seasonal Menu ☕</a>
+          <button class="btn btn-secondary btn-lg" id="claim-pass-hero-btn">Claim Weekend Pass 🎁</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story & Roasting Heritage -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="story-layout">
+        <div>
+          <span class="pill-badge">🔥 Roasting Philosophy</span>
+          <h2 style="font-size: 2.5rem; margin-bottom: 1.2rem;">Crafted on East Cesar Chavez <span class="font-italic">Since 2012</span></h2>
+          <p style="margin-bottom: 1.2rem; font-size: 1.05rem;">
+            At Flat Track, we believe great coffee isn't pretentious—it's dialed-in. We source relationship-driven, direct-trade green coffee from smallholder farms in Oaxaca, Yirgacheffe, and Huila.
+          </p>
+          <p style="margin-bottom: 1.5rem;">
+            Every batch is roasted in-house in small drums, dialed into peak sweetness and body, and poured by baristas who genuinely care about your morning cup. Whether you're here for a quick double espresso or an afternoon pour-over, you're part of our East Austin community.
+          </p>
+          <div style="display: flex; gap: 2rem; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+            <div>
+              <div class="mono-num" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-gold);">100%</div>
+              <div style="font-size: 0.82rem; color: var(--text-secondary);">Direct Trade Sourced</div>
+            </div>
+            <div>
+              <div class="mono-num" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-gold);">4.8★</div>
+              <div style="font-size: 0.82rem; color: var(--text-secondary);">750+ Verified Reviews</div>
+            </div>
+            <div>
+              <div class="mono-num" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-gold);">7 Days</div>
+              <div style="font-size: 0.82rem; color: var(--text-secondary);">Open 6:30am – 6:00pm</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-img-wrap">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=900&auto=format&fit=crop&q=80" alt="Flat Track Coffee Roastery Bar">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu Showcase (View-Only) -->
+  <section class="section" id="menu" style="background: var(--bg-elevated); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">☕ In-Store Showcase</span>
+        <h2>Curated Seasonal Roastery Menu</h2>
+        <p>Roasted fresh in East Austin. Prices and seasonal offerings updated regularly.</p>
+      </div>
+
+      <!-- Menu Category Tabs -->
+      <div class="menu-tabs-nav">
+        <button class="menu-tab-btn active" data-cat="all">✨ All Offerings</button>
+        <button class="menu-tab-btn" data-cat="espresso">☕ Espresso & Classics</button>
+        <button class="menu-tab-btn" data-cat="specialty">✨ House Specialties</button>
+        <button class="menu-tab-btn" data-cat="cold">🧊 Flash Brew & Cold</button>
+        <button class="menu-tab-btn" data-cat="bakery">🥐 Daily Bakery</button>
+        <button class="menu-tab-btn" data-cat="beans">🫘 Whole Bean Bags</button>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="menu-grid" id="tier1-menu-grid">
+        <!-- Rendered dynamically via api-client.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem; background: var(--bg-surface); padding: 1.5rem; border-radius: 14px; border: 1px solid var(--border-subtle);">
+        <p style="font-size: 0.95rem;">
+          💡 <i>Looking for mobile order-ahead with 1-tap counter pickup?</i><br/>
+          Check out our <a href="../tier2/index.html" style="color:var(--accent-gold); font-weight:600;">Tier 2 Operations Hub</a> or <a href="../tier3/index.html" style="color:var(--accent-gold); font-weight:600;">Tier 3 Flagship</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">⭐ East Austin Community</span>
+        <h2>Loved by Neighborhood Locals</h2>
+        <p>Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div>
+            <div class="stars-line">★★★★★</div>
+            <p style="font-size:0.95rem; color:var(--text-primary); margin-bottom:1rem; font-style:italic;">
+              "The Dogspeed espresso is unmatched anywhere on the East Side. Thick crema, deep chocolate notes, and the staff treats everyone like a regular from day one."
+            </p>
+          </div>
+          <div style="font-weight:600; font-size:0.85rem; color:var(--accent-gold);">
+            — Mateo G., East Cesar Chavez Local
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="stars-line">★★★★★</div>
+            <p style="font-size:0.95rem; color:var(--text-primary); margin-bottom:1rem; font-style:italic;">
+              "The Bourbon Smoked Vanilla Latte is legendary. Paired with a fresh warm croissant, it's my mandatory Saturday morning ritual before hitting Lady Bird Lake."
+            </p>
+          </div>
+          <div style="font-weight:600; font-size:0.85rem; color:var(--accent-gold);">
+            — Sarah K., Austin Runner
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="stars-line">★★★★★</div>
+            <p style="font-size:0.95rem; color:var(--text-primary); margin-bottom:1rem; font-style:italic;">
+              "Best pour-overs in Austin hands down. Sourced cleanly, roasted lightly with clear fruity notes, and the vibe inside the cafe is relaxed and creative."
+            </p>
+          </div>
+          <div style="font-weight:600; font-size:0.85rem; color:var(--accent-gold);">
+            — Derrick P., Coffee Roaster & Writer
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Hours Section with Working Map -->
+  <section class="section" id="location" style="background: var(--bg-surface); border-top: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="story-layout" style="align-items: flex-start;">
+        <div>
+          <span class="pill-badge">📍 Visit The Cafe</span>
+          <h2 style="font-size: 2.4rem; margin-bottom: 1.2rem;">East Cesar Chavez Roastery</h2>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="color:var(--accent-gold); margin-bottom:0.3rem;">Address</h4>
+            <p>1611 E Cesar Chavez St, Austin, TX 78702</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Street parking available along Cesar Chavez & Comal St.</p>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="color:var(--accent-gold); margin-bottom:0.3rem;">Hours of Operation</h4>
+            <p>Monday – Friday: <b>6:30 AM – 6:00 PM</b></p>
+            <p>Saturday – Sunday: <b>7:00 AM – 6:00 PM</b></p>
+          </div>
+
+          <div style="margin-bottom: 2rem;">
+            <h4 style="color:var(--accent-gold); margin-bottom:0.3rem;">Contact & Inquiries</h4>
+            <p>Phone: <a href="tel:5125406033" style="color:var(--text-primary); font-weight:600;">(512) 540-6033</a></p>
+            <p>Email: <a href="mailto:hello@flattrackcoffee.com" style="color:var(--text-secondary);">hello@flattrackcoffee.com</a></p>
+          </div>
+
+          <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Get Directions via Google Maps 📍
+          </a>
+        </div>
+
+        <div class="map-container">
+          <iframe 
+            src="https://maps.google.com/maps?q=1611%20E%20Cesar%20Chavez%20St,%20Austin,%20TX%2078702&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="section" id="contact">
+    <div class="container" style="max-width: 700px;">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="pill-badge">✉️ Get In Touch</span>
+        <h2>Drop Us a Line</h2>
+        <p>Have questions about wholesale, private events, or our seasonal roasts?</p>
+      </div>
+
+      <div style="background:var(--bg-elevated); padding:2rem; border-radius:18px; border:1px solid var(--border-subtle);">
+        <form id="tier1-contact-form">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="contact-name" class="form-input" required placeholder="Elena Thorne">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="contact-email" class="form-input" required placeholder="elena@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message *</label>
+            <textarea id="contact-message" class="form-textarea" rows="4" required placeholder="Tell us how we can help..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="contact-submit-btn">
+            Send Inquiry &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekend Pass Modal -->
+  <div class="modal-overlay" id="pass-modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><span>🎁</span> Claim Weekend Roastery Pass</h3>
+        <button class="modal-close-btn" id="pass-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.9rem; margin-bottom:1.2rem; color:var(--text-secondary);">
+          Visiting us this weekend? Enter your email to claim <b>15% off your first whole bean bag</b> plus a complimentary house cortado with any pastry purchase.
+        </p>
+        <form id="weekend-pass-form">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" id="pass-name" class="form-input" required placeholder="Alex Rivera">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="pass-email" class="form-input" required placeholder="alex@gmail.com">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="pass-submit-btn">
+            Claim 15% Weekend Pass &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Initialize shared components
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier1', isAdmin: false });
+
+      // Render Menu Items
+      const grid = document.getElementById('tier1-menu-grid');
+      let allItems = [];
+
+      if (window.FlatTrackAPI) {
+        allItems = await window.FlatTrackAPI.getMenu();
+        renderMenu(allItems);
+      }
+
+      function renderMenu(items) {
+        grid.innerHTML = items.map(item => `
+          <div class="product-card">
+            <div class="product-image-wrap">
+              <img src="${item.image}" alt="${item.name}" loading="lazy">
+              ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">${item.name}</h3>
+              <p class="card-desc">${item.description}</p>
+              <div class="card-footer">
+                <span class="card-price mono-num">$${item.price.toFixed(2)}</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">In-Store Only</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Filter tabs
+      document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.menu-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.dataset.cat;
+          if (cat === 'all') {
+            renderMenu(allItems);
+          } else {
+            renderMenu(allItems.filter(i => i.category === cat));
+          }
+        });
+      });
+
+      // Contact Form Handler
+      const contactForm = document.getElementById('tier1-contact-form');
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('contact-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Transmitting...";
+
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.createInquiry({ name, email, message });
+        }
+
+        contactForm.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Inquiry →";
+        showToast("Thanks for reaching out! We'll reply within 24 hours.", "success");
+      });
+
+      // Weekend Pass Modal Handlers
+      const passOverlay = document.getElementById('pass-modal-overlay');
+      const passBtn = document.getElementById('claim-pass-hero-btn');
+      const passClose = document.getElementById('pass-modal-close');
+      const passForm = document.getElementById('weekend-pass-form');
+
+      passBtn.addEventListener('click', () => passOverlay.classList.add('is-open'));
+      passClose.addEventListener('click', () => passOverlay.classList.remove('is-open'));
+      passOverlay.addEventListener('click', (e) => {
+        if (e.target === passOverlay) passOverlay.classList.remove('is-open');
+      });
+
+      passForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        passOverlay.classList.remove('is-open');
+        showToast("🎁 Weekend Pass Claimed! Check your inbox for voucher DOGSPEED15.", "success", 4500);
+      });
+    });
+  </script>
+</body>
+</html>

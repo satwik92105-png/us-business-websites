@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Roastery Story — Flat Track Coffee Roasters (Flagship)</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .story-hero {
+      padding: 5rem 0 3.5rem 0;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(11, 9, 8, 0.5) 0%, rgba(11, 9, 8, 0.95) 100%), 
+                  url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .craft-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .craft-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 860px) {
+      .craft-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Glass Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Flagship</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
+        <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
+        <li><a href="track.html" class="nav-link">Live Tracker ⚡</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="story-hero">
+    <div class="container">
+      <span class="pill-badge">🔥 Roasting in Austin Since 2012</span>
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">The Soul of <span class="font-italic">East Cesar Chavez</span></h1>
+      <p style="max-width: 680px; margin: 0 auto; font-size: 1.15rem; color: var(--text-primary); opacity: 0.9;">
+        Built on a passion for vintage motorcycles, small-batch roasting craft, and authentic neighborhood hospitality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Narrative Section -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items:center;">
+        <div>
+          <span class="pill-badge">🌱 Direct Trade Craft</span>
+          <h2 style="font-size: 2.4rem; margin-bottom: 1.2rem;">From Micro-Lot Harvest to Dialed-In Cup</h2>
+          <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+            Flat Track started with a simple conviction: coffee should be unpretentious, honest, and roasted to highlight the natural fruit sweetness of the cherry.
+          </p>
+          <p style="margin-bottom: 1rem;">
+            We travel directly to origin to shake hands with growers across Oaxaca, Antioquia, and Sidama. By paying premiums well above fair-trade floor prices, we secure the finest 86+ specialty micro-lots while supporting agricultural sustainability.
+          </p>
+          <p>
+            Inside our East Cesar Chavez roastery, each lot is roasted in small batches on our cast-iron drum roaster, constantly cupped and adjusted for Austin's palate.
+          </p>
+        </div>
+        <div style="border-radius:20px; overflow:hidden; border:1px solid var(--border-gold-subtle); box-shadow: 0 20px 48px rgba(0,0,0,0.7);">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" alt="Specialty Coffee Roasting Beans">
+        </div>
+      </div>
+
+      <div class="craft-grid">
+        <div class="craft-card">
+          <div class="craft-icon">🌱</div>
+          <h3 style="font-size:1.3rem; margin-bottom:0.6rem;">Direct Trade Sourcing</h3>
+          <p style="font-size:0.92rem;">Direct partnerships with multi-generational smallholder farming families with full traceability.</p>
+        </div>
+        <div class="craft-card">
+          <div class="craft-icon">🔥</div>
+          <h3 style="font-size:1.3rem; margin-bottom:0.6rem;">Small-Batch Roasting</h3>
+          <p style="font-size:0.92rem;">Cast-iron drum conduction roasting for peak body, sweet caramelized sugars, and balanced acidity.</p>
+        </div>
+        <div class="craft-card">
+          <div class="craft-icon">🤝</div>
+          <h3 style="font-size:1.3rem; margin-bottom:0.6rem;">East Austin Hospitality</h3>
+          <p style="font-size:0.92rem;">A welcoming space where neighbors, remote workers, cyclists, and coffee purists gather daily.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier3', isAdmin: false });
+      CartManager.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flat Track Coffee Roasters — Order Ahead & Cafe Hub</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .hero-tier2 {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(180deg, rgba(11, 9, 8, 0.45) 0%, rgba(11, 9, 8, 0.95) 100%), 
+                  url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .hero-box {
+      max-width: 740px;
+    }
+    .hero-box h1 {
+      font-size: 3.6rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+    .hero-box p {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+    .quick-cta-banner {
+      background: linear-gradient(135deg, #181411 0%, #151210 100%);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      margin-top: 4rem;
+    }
+    @media (max-width: 860px) {
+      .hero-box h1 { font-size: 2.6rem; }
+      .quick-cta-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve Table 🪑</a></li>
+        <li><a href="story.html" class="nav-link">Roastery Story</a></li>
+        <li><a href="contact.html" class="nav-link">Visit & Contact</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-tier2">
+    <div class="container">
+      <div class="hero-box">
+        <span class="pill-badge">🚀 Express Counter Pickup · 0% Markup</span>
+        <h1>Skip the Counter Line. <span class="font-italic">Drink Better Coffee.</span></h1>
+        <p>
+          Order ahead directly from Flat Track Roasters on East Cesar Chavez. Freshly pulled shots, dialed-in pour-overs, and warm house pastries ready for pickup in 10 minutes.
+        </p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="menu.html" class="btn btn-primary btn-lg">Order Pickup Ahead 🛒</a>
+          <a href="reserve.html" class="btn btn-secondary btn-lg">Book Roastery Seating 🪑</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Seasonal Offerings -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">🔥 Roaster's Choice</span>
+        <h2>Featured Seasonal Roasts & Drinks</h2>
+        <p>Crafted daily in our East Austin drum roaster. Available for instant counter pickup.</p>
+      </div>
+
+      <div class="featured-grid" id="tier2-featured-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Quick CTA Banner -->
+      <div class="quick-cta-banner">
+        <div>
+          <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Hosting a Meeting or Coffee Tasting?</h3>
+          <p style="color:var(--text-secondary); max-width: 540px;">
+            Reserve our sunny East Austin communal table or outdoor patio booth for up to 8 guests. Complimentary water service included.
+          </p>
+        </div>
+        <a href="reserve.html" class="btn btn-primary btn-lg" style="white-space:nowrap;">Reserve a Table &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier2', isAdmin: false });
+      CartManager.init();
+
+      // Fetch featured products
+      if (window.FlatTrackAPI) {
+        const menu = await window.FlatTrackAPI.getMenu();
+        const featured = menu.slice(0, 3);
+        const grid = document.getElementById('tier2-featured-grid');
+
+        grid.innerHTML = featured.map(item => `
+          <div class="product-card">
+            <div class="product-image-wrap">
+              <img src="${item.image}" alt="${item.name}" loading="lazy">
+              ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">${item.name}</h3>
+              <p class="card-desc">${item.description}</p>
+              <div class="card-footer">
+                <span class="card-price mono-num">$${item.price.toFixed(2)}</span>
+                <button class="btn btn-primary btn-sm" onclick="CartManager.addItem({id:${item.id}, name:'${item.name.replace(/'/g, "\\'")}', price:${item.price}})">
+                  Add to Order +
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>

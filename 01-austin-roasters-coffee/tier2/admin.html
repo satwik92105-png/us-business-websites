@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owner POS & Operations Portal — Flat Track Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    body {
+      background-color: #0c0a09;
+    }
+    .admin-nav {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-medium);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .admin-tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--trans-quick);
+    }
+    .admin-tab-btn:hover, .admin-tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--accent-gold);
+      border-color: var(--border-gold-subtle);
+    }
+    .admin-content-section {
+      display: none;
+      padding: 2.5rem 0;
+    }
+    .admin-content-section.active {
+      display: block;
+    }
+    .order-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      transition: border-color var(--trans-quick);
+    }
+    .order-card.status-new {
+      border-left: 4px solid #ef4444;
+    }
+    .order-card.status-prep {
+      border-left: 4px solid #f59e0b;
+    }
+    .order-card.status-ready {
+      border-left: 4px solid #10b981;
+    }
+    .crud-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-elevated);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .crud-table th, .crud-table td {
+      padding: 0.85rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.88rem;
+    }
+    .crud-table th {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .stock-toggle-btn {
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .stock-toggle-btn.in-stock {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .stock-toggle-btn.sold-out {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .login-container {
+      max-width: 420px;
+      margin: 8rem auto;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Gate Screen -->
+  <div id="admin-login-screen">
+    <div class="login-container">
+      <span style="font-size: 2.5rem;">🔐</span>
+      <h2 style="font-size: 1.6rem; margin: 0.8rem 0 0.3rem 0;">Owner POS Portal</h2>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.8rem;">
+        Flat Track Coffee Roasters · Operations Console
+      </p>
+      <form id="admin-login-form">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Owner Email</label>
+          <input type="email" id="login-email" class="form-input" value="admin@flattrackcoffee.com" required>
+        </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Password / PIN (Demo: roastmaster123)</label>
+          <input type="password" id="login-pass" class="form-input" value="roastmaster123" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+          Authorize & Enter Terminal &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Authenticated Admin Interface -->
+  <div id="admin-dashboard-app" style="display: none;">
+    <!-- Top Admin Bar -->
+    <header class="admin-nav">
+      <div style="display:flex; align-items:center; gap:1.2rem;">
+        <span style="font-size: 1.4rem;">☕</span>
+        <div>
+          <b style="font-size: 1rem; color: var(--text-primary);">Flat Track Roasters</b>
+          <span style="font-size: 0.75rem; color: var(--accent-gold); margin-left: 0.5rem; font-family: monospace;">● OWNER TERMINAL</span>
+        </div>
+      </div>
+
+      <nav class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="orders">Orders Queue ⚡ (<span id="orders-badge-count">0</span>)</button>
+        <button class="admin-tab-btn" data-tab="menu">Menu & Stock CRUD</button>
+        <button class="admin-tab-btn" data-tab="reservations">Table Bookings</button>
+        <button class="admin-tab-btn" data-tab="inbox">Inquiries</button>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:0.8rem;">
+        <button class="btn btn-secondary btn-sm" id="admin-logout-btn">Log Out ⏻</button>
+      </div>
+    </header>
+
+    <!-- SECTION 1: LIVE ORDERS QUEUE -->
+    <main class="container admin-content-section active" id="tab-orders">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div>
+          <h2>Live Orders Queue & Kitchen Dispatch</h2>
+          <p>Real-time customer orders placed via menu.html or customer app.</p>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-manual-refresh-orders">🔄 Refresh Queue</button>
+      </div>
+
+      <div id="orders-list-wrap">
+        <!-- Rendered dynamically -->
+      </div>
+    </main>
+
+    <!-- SECTION 2: MENU & STOCK CRUD -->
+    <section class="container admin-content-section" id="tab-menu">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div>
+          <h2>Menu Manager & Stock Toggle</h2>
+          <p>Add new drinks, edit prices, delete items, or toggle Sold Out in 1 click.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-open-add-product">Add New Product &plus;</button>
+      </div>
+
+      <table class="crud-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Badge</th>
+            <th>Stock Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="crud-menu-tbody">
+          <!-- Rendered dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 3: RESERVATIONS -->
+    <section class="container admin-content-section" id="tab-reservations">
+      <div style="margin-bottom:1.5rem;">
+        <h2>Table Reservations & Seating</h2>
+        <p>Manage customer bookings for communal and patio tables.</p>
+      </div>
+      <table class="crud-table">
+        <thead>
+          <tr>
+            <th>Ref #</th>
+            <th>Customer</th>
+            <th>Party</th>
+            <th>Date & Time</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="reservations-tbody">
+          <!-- Rendered dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 4: INQUIRIES -->
+    <section class="container admin-content-section" id="tab-inbox">
+      <div style="margin-bottom:1.5rem;">
+        <h2>Customer Inquiries & Messages</h2>
+        <p>Direct contact messages sent from contact.html or storefronts.</p>
+      </div>
+      <div id="inbox-list-wrap">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div class="modal-overlay" id="product-modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="product-modal-title"><span>☕</span> Add Menu Item</h3>
+        <button class="modal-close-btn" id="product-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="product-crud-form">
+          <input type="hidden" id="prod-id">
+          <div class="form-group">
+            <label class="form-label">Product Name *</label>
+            <input type="text" id="prod-name" class="form-input" required placeholder="e.g. Vanilla Cardamom Latte">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select class="form-select" id="prod-category">
+                <option value="espresso">Espresso & Classics</option>
+                <option value="specialty">House Specialties</option>
+                <option value="cold">Cold Brew & Iced</option>
+                <option value="bakery">Daily Bakery</option>
+                <option value="beans">Whole Bean Bags</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Price ($ USD) *</label>
+              <input type="number" step="0.25" id="prod-price" class="form-input" required placeholder="5.50">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Callout Badge (Optional)</label>
+            <input type="text" id="prod-badge" class="form-input" placeholder="e.g. Roaster's Pick, New, Organic">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description *</label>
+            <textarea id="prod-desc" class="form-textarea" rows="2" required placeholder="Tasting notes and ingredients..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image URL</label>
+            <input type="url" id="prod-image" class="form-input" placeholder="https://images.unsplash.com/photo-...">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="save-product-btn">
+            Save Product to Live Menu &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initDemoControls({ tier: 'tier2', isAdmin: true });
+
+      const loginScreen = document.getElementById('admin-login-screen');
+      const app = document.getElementById('admin-dashboard-app');
+      const loginForm = document.getElementById('admin-login-form');
+      const logoutBtn = document.getElementById('admin-logout-btn');
+
+      // Check Session Auth
+      if (sessionStorage.getItem('flattrack_admin_auth') === 'true') {
+        showDashboard();
+      }
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pass = document.getElementById('login-pass').value;
+        if (pass === 'roastmaster123' || pass === '1234') {
+          sessionStorage.setItem('flattrack_admin_auth', 'true');
+          showDashboard();
+          showToast("Authorized as Owner / GM", "success");
+        } else {
+          showToast("Invalid credentials! Try roastmaster123 or 1234", "error");
+        }
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('flattrack_admin_auth');
+        window.location.reload();
+      });
+
+      function showDashboard() {
+        loginScreen.style.display = 'none';
+        app.style.display = 'block';
+        loadAllData();
+      }
+
+      // Tab Switching
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.admin-content-section').forEach(s => s.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+        });
+      });
+
+      // Data loaders
+      async function loadAllData() {
+        loadOrders();
+        loadMenuCRUD();
+        loadReservations();
+        loadInbox();
+      }
+
+      // 1. ORDERS
+      async function loadOrders() {
+        if (!window.FlatTrackAPI) return;
+        const orders = await window.FlatTrackAPI.getOrders();
+        document.getElementById('orders-badge-count').innerText = orders.filter(o => o.status !== 'Picked Up').length;
+
+        const wrap = document.getElementById('orders-list-wrap');
+        if (orders.length === 0) {
+          wrap.innerHTML = `<p style="color:var(--text-secondary); padding:2rem; text-align:center;">No orders currently in queue.</p>`;
+          return;
+        }
+
+        wrap.innerHTML = orders.map(o => {
+          const statusClass = o.status === 'New Order' ? 'status-new' :
+                              o.status === 'Preparing' ? 'status-prep' : 'status-ready';
+
+          return `
+            <div class="order-card ${statusClass}">
+              <div>
+                <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.4rem;">
+                  <b style="font-size:1.15rem; color:var(--text-primary);">Order #${o.id}</b>
+                  <span class="pill-badge" style="margin:0; font-size:0.75rem;">${o.status}</span>
+                </div>
+                <p style="font-size:0.92rem; color:var(--text-primary); margin-bottom:0.3rem;">
+                  <b>${o.customerName}</b> · ${o.phone}
+                </p>
+                <p style="font-size:0.85rem; color:var(--text-secondary);">
+                  Items: ${o.items.map(i => `${i.qty}x ${i.name} ${i.customizations ? `(${i.customizations})` : ''}`).join(', ')}
+                </p>
+                ${o.notes ? `<p style="font-size:0.8rem; color:var(--accent-gold); margin-top:0.2rem;">Notes: ${o.notes}</p>` : ''}
+              </div>
+
+              <div style="text-align:right;">
+                <div class="mono-num" style="font-size:1.3rem; font-weight:700; color:var(--accent-gold); margin-bottom:0.6rem;">
+                  $${o.total.toFixed(2)}
+                </div>
+                <div style="display:flex; gap:0.4rem;">
+                  ${o.status === 'New Order' ? `
+                    <button class="btn btn-primary btn-sm" onclick="advanceOrderStatus('${o.id}', 'Preparing')">Start Brew ☕</button>
+                  ` : ''}
+                  ${o.status === 'Preparing' ? `
+                    <button class="btn btn-primary btn-sm" style="background:#10b981;" onclick="advanceOrderStatus('${o.id}', 'Ready for Pickup')">Mark Ready 🔔</button>
+                  ` : ''}
+                  ${o.status === 'Ready for Pickup' ? `
+                    <button class="btn btn-secondary btn-sm" onclick="advanceOrderStatus('${o.id}', 'Picked Up')">Complete ✓</button>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.advanceOrderStatus = async function(orderId, newStatus) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.updateOrderStatus(orderId, newStatus);
+          showToast(`Order #${orderId} marked as ${newStatus}`, "success");
+          loadOrders();
+        }
+      };
+
+      document.getElementById('btn-manual-refresh-orders').addEventListener('click', loadOrders);
+
+      // 2. MENU CRUD
+      async function loadMenuCRUD() {
+        if (!window.FlatTrackAPI) return;
+        const menu = await window.FlatTrackAPI.getMenu();
+        const tbody = document.getElementById('crud-menu-tbody');
+
+        tbody.innerHTML = menu.map(item => `
+          <tr>
+            <td>
+              <b>${item.name}</b><br/>
+              <small style="color:var(--text-muted);">${item.description.slice(0, 55)}...</small>
+            </td>
+            <td><span class="pill-badge" style="margin:0; font-size:0.7rem;">${item.category}</span></td>
+            <td class="mono-num" style="font-weight:600; color:var(--accent-gold);">$${item.price.toFixed(2)}</td>
+            <td>${item.badge || '—'}</td>
+            <td>
+              <button class="stock-toggle-btn ${item.inStock ? 'in-stock' : 'sold-out'}" onclick="toggleStockStatus(${item.id}, ${!item.inStock})">
+                ${item.inStock ? '✓ In Stock' : '✕ Sold Out'}
+              </button>
+            </td>
+            <td>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="btn btn-secondary btn-sm" onclick="openEditProductModal(${item.id})">Edit</button>
+                <button class="btn btn-secondary btn-sm" style="color:#ef4444;" onclick="deleteProduct(${item.id})">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.toggleStockStatus = async function(id, newStatus) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.toggleStock(id, newStatus);
+          showToast(`Item ${newStatus ? 'marked In Stock' : 'marked Sold Out Today'}`, "info");
+          loadMenuCRUD();
+        }
+      };
+
+      window.deleteProduct = async function(id) {
+        if (confirm("Delete this product from the menu permanently?")) {
+          if (window.FlatTrackAPI) {
+            await window.FlatTrackAPI.deleteMenuItem(id);
+            showToast("Item deleted", "info");
+            loadMenuCRUD();
+          }
+        }
+      };
+
+      // Modal Add / Edit Product
+      const prodModal = document.getElementById('product-modal-overlay');
+      const prodForm = document.getElementById('product-crud-form');
+      const addProdBtn = document.getElementById('btn-open-add-product');
+      const prodClose = document.getElementById('product-modal-close');
+
+      addProdBtn.addEventListener('click', () => {
+        prodForm.reset();
+        document.getElementById('prod-id').value = '';
+        document.getElementById('product-modal-title').innerHTML = `<span>☕</span> Add New Product`;
+        document.getElementById('prod-image').value = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80';
+        prodModal.classList.add('is-open');
+      });
+
+      window.openEditProductModal = async function(id) {
+        const menu = await window.FlatTrackAPI.getMenu();
+        const item = menu.find(i => i.id === id);
+        if (!item) return;
+
+        document.getElementById('prod-id').value = item.id;
+        document.getElementById('prod-name').value = item.name;
+        document.getElementById('prod-category').value = item.category;
+        document.getElementById('prod-price').value = item.price;
+        document.getElementById('prod-badge').value = item.badge || '';
+        document.getElementById('prod-desc').value = item.description;
+        document.getElementById('prod-image').value = item.image;
+        document.getElementById('product-modal-title').innerHTML = `<span>✏️</span> Edit Product`;
+        prodModal.classList.add('is-open');
+      };
+
+      prodClose.addEventListener('click', () => prodModal.classList.remove('is-open'));
+      prodModal.addEventListener('click', (e) => {
+        if (e.target === prodModal) prodModal.classList.remove('is-open');
+      });
+
+      prodForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const idVal = document.getElementById('prod-id').value;
+        const itemData = {
+          name: document.getElementById('prod-name').value.trim(),
+          category: document.getElementById('prod-category').value,
+          price: parseFloat(document.getElementById('prod-price').value),
+          badge: document.getElementById('prod-badge').value.trim(),
+          description: document.getElementById('prod-desc').value.trim(),
+          image: document.getElementById('prod-image').value.trim() || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80',
+          inStock: true,
+          customizable: ['espresso', 'specialty', 'cold'].includes(document.getElementById('prod-category').value)
+        };
+        if (idVal) itemData.id = parseInt(idVal, 10);
+
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.saveMenuItem(itemData);
+          prodModal.classList.remove('is-open');
+          showToast(`Menu saved! Customer tabs updated in real time.`, "success");
+          loadMenuCRUD();
+        }
+      });
+
+      // 3. RESERVATIONS
+      async function loadReservations() {
+        if (!window.FlatTrackAPI) return;
+        const resList = await window.FlatTrackAPI.getReservations();
+        const tbody = document.getElementById('reservations-tbody');
+
+        if (resList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-secondary);">No reservations scheduled.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = resList.map(r => `
+          <tr>
+            <td class="mono-num" style="color:var(--accent-gold); font-weight:600;">${r.id}</td>
+            <td><b>${r.name}</b><br/><small style="color:var(--text-secondary);">${r.email} · ${r.phone}</small></td>
+            <td>${r.partySize} Guests</td>
+            <td><b>${r.date}</b><br/>${r.time}</td>
+            <td>${r.notes || '—'}</td>
+            <td><span class="pill-badge" style="margin:0; font-size:0.75rem;">${r.status}</span></td>
+            <td>
+              ${r.status === 'Confirmed' ? `
+                <button class="btn btn-secondary btn-sm" onclick="updateResStatus('${r.id}', 'Seated')">Seat Guest</button>
+              ` : `
+                <span style="color:var(--status-success); font-weight:600;">✓ Completed</span>
+              `}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.updateResStatus = async function(id, status) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.updateReservationStatus(id, status);
+          showToast(`Reservation #${id} updated to ${status}`, "success");
+          loadReservations();
+        }
+      };
+
+      // 4. INBOX
+      async function loadInbox() {
+        if (!window.FlatTrackAPI) return;
+        const inq = await window.FlatTrackAPI.getInquiries();
+        const wrap = document.getElementById('inbox-list-wrap');
+        if (inq.length === 0) {
+          wrap.innerHTML = `<p style="color:var(--text-secondary); padding:2rem; text-align:center;">Inbox is empty.</p>`;
+          return;
+        }
+
+        wrap.innerHTML = inq.map(m => `
+          <div style="background:var(--bg-elevated); border:1px solid var(--border-subtle); border-radius:14px; padding:1.4rem; margin-bottom:1rem;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+              <b>${m.name} &lt;${m.email}&gt;</b>
+              <small style="color:var(--text-muted);">${m.date}</small>
+            </div>
+            <div style="color:var(--accent-gold); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Subject: ${m.subject}</div>
+            <p style="font-size:0.92rem; color:var(--text-secondary);">${m.message}</p>
+          </div>
+        `).join('');
+      }
+
+      // Live multi-tab sync
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'new_order') {
+            loadOrders();
+            showToast(`🔔 New Order #${event.payload.id} received!`, "success", 4000);
+          } else if (event.action === 'new_reservation') {
+            loadReservations();
+            showToast(`🪑 New Reservation #${event.payload.id} booked!`, "info", 4000);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

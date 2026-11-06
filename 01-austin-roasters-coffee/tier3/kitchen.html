@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barista KDS — Flat Track Coffee Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    body {
+      background-color: #050404;
+      color: #f5f2eb;
+      padding: 0;
+      margin: 0;
+    }
+    .kds-header {
+      background: #120f0d;
+      border-bottom: 2px solid var(--border-gold-bright);
+      padding: 1rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .kds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+    .kds-card {
+      background: #181411;
+      border: 2px solid var(--border-medium);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    }
+    .kds-card.status-new {
+      border-color: #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+    }
+    .kds-card.status-prep {
+      border-color: #f59e0b;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    }
+    .kds-card.status-ready {
+      border-color: #10b981;
+    }
+    .kds-card-header {
+      padding: 1rem 1.2rem;
+      background: #201a16;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .kds-card-body {
+      padding: 1.2rem;
+      flex-grow: 1;
+    }
+    .kds-card-footer {
+      padding: 1rem 1.2rem;
+      background: #120f0d;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 0.5rem;
+    }
+    .kds-item-line {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .kds-bump-btn {
+      flex: 1;
+      padding: 0.9rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- KDS Top Bar -->
+  <header class="kds-header">
+    <div style="display:flex; align-items:center; gap:1.2rem;">
+      <span style="font-size:1.8rem;">☕</span>
+      <div>
+        <h1 style="font-size:1.4rem; margin:0;">Flat Track Roasters — Barista KDS</h1>
+        <small style="color:var(--text-secondary);">1611 E Cesar Chavez Counter Terminal · Live Queue</small>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.5rem;">
+      <div id="kds-clock" class="mono-num" style="font-size:1.4rem; font-weight:700; color:var(--accent-gold);">
+        --:--:--
+      </div>
+      <button class="btn btn-secondary btn-sm" id="btn-audio-test">🔊 Audio Chime Test</button>
+    </div>
+  </header>
+
+  <!-- KDS Active Grid -->
+  <main class="kds-grid" id="kds-grid">
+    <!-- Rendered dynamically -->
+  </main>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Live digital clock
+      const clockEl = document.getElementById('kds-clock');
+      function updateClock() {
+        const now = new Date();
+        clockEl.innerText = now.toLocaleTimeString('en-US', { hour12: false });
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Audio Chime Generator using Web Audio API
+      function playChime() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+          osc.frequency.setValueAtTime(880, ctx.currentTime + 0.12); // A5
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.6);
+        } catch (e) {
+          console.warn("Audio chime disabled or blocked by browser policy", e);
+        }
+      }
+
+      document.getElementById('btn-audio-test').addEventListener('click', () => {
+        playChime();
+        showToast("Audio chime triggered", "info");
+      });
+
+      // Load & Render Tickets
+      const grid = document.getElementById('kds-grid');
+
+      async function renderKDS() {
+        if (!window.FlatTrackAPI) return;
+        const allOrders = await window.FlatTrackAPI.getOrders();
+        // Show only active tickets (not Picked Up)
+        const activeOrders = allOrders.filter(o => o.status !== 'Picked Up');
+
+        if (activeOrders.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column:1/-1; text-align:center; padding:6rem 1rem; color:var(--text-secondary);">
+              <span style="font-size:3.5rem;">✨</span>
+              <h2 style="margin-top:1rem;">All Orders Cleared</h2>
+              <p style="margin-top:0.5rem;">Counter is ready for incoming pickup orders.</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = activeOrders.map(o => {
+          const statusClass = o.status === 'New Order' ? 'status-new' :
+                              o.status === 'Preparing' ? 'status-prep' : 'status-ready';
+
+          return `
+            <div class="kds-card ${statusClass}">
+              <div class="kds-card-header">
+                <div>
+                  <b style="font-size:1.3rem; color:var(--text-primary);">#${o.id}</b>
+                  <div style="font-size:0.85rem; color:var(--accent-gold); font-weight:600;">${o.customerName}</div>
+                </div>
+                <span class="pill-badge" style="margin:0; font-size:0.75rem;">${o.status}</span>
+              </div>
+
+              <div class="kds-card-body">
+                ${o.items.map(i => `
+                  <div class="kds-item-line">
+                    <span>${i.qty}x ${i.name}</span>
+                  </div>
+                  ${i.customizations ? `<div style="font-size:0.88rem; color:var(--accent-gold); margin-bottom:0.7rem;">⤷ ${i.customizations}</div>` : ''}
+                `).join('')}
+
+                ${o.notes ? `<div style="background:#261f1a; padding:0.6rem; border-radius:8px; font-size:0.82rem; color:#f59e0b; margin-top:0.8rem;">Note: ${o.notes}</div>` : ''}
+              </div>
+
+              <div class="kds-card-footer">
+                ${o.status === 'New Order' ? `
+                  <button class="kds-bump-btn" style="background:#f59e0b; color:#0b0908;" onclick="bumpKdsOrder('${o.id}', 'Preparing')">
+                    Start Brew ☕
+                  </button>
+                ` : ''}
+                ${o.status === 'Preparing' ? `
+                  <button class="kds-bump-btn" style="background:#10b981; color:white;" onclick="bumpKdsOrder('${o.id}', 'Ready for Pickup')">
+                    Ready at Counter 🔔
+                  </button>
+                ` : ''}
+                ${o.status === 'Ready for Pickup' ? `
+                  <button class="kds-bump-btn" style="background:var(--bg-surface); color:var(--text-primary); border:1px solid var(--border-medium);" onclick="bumpKdsOrder('${o.id}', 'Picked Up')">
+                    Complete / Clear ✓
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.bumpKdsOrder = async function(id, nextStatus) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.updateOrderStatus(id, nextStatus);
+          playChime();
+          showToast(`Order #${id} updated to ${nextStatus}`, "success");
+          renderKDS();
+        }
+      };
+
+      // Multi-tab real-time sync
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'new_order') {
+            playChime();
+            showToast(`🔔 Incoming Order #${event.payload.id}!`, "success", 4000);
+            renderKDS();
+          } else if (event.action === 'order_status_update') {
+            renderKDS();
+          }
+        });
+      }
+
+      renderKDS();
+    });
+  </script>
+</body>
+</html>

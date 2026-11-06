@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Events & B2B Wholesale — Flat Track Coffee Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .catering-calc-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.8rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), var(--gold-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Flagship</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
+        <li><a href="catering.html" class="nav-link active">Catering & B2B ✨</a></li>
+        <li><a href="track.html" class="nav-link">Live Tracker ⚡</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <div style="padding: 4.5rem 0 2.5rem 0; text-align: center; background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <span class="pill-badge">✨ High-Ticket Event Services</span>
+      <h1>Mobile Espresso Bar & <span class="font-italic">Wholesale Coffee</span></h1>
+      <p style="max-width: 650px; margin: 0 auto; color: var(--text-secondary);">
+        Bring East Austin's dialed-in espresso bar to your corporate summit, wedding, or studio production. Complete with dedicated baristas, glassware, and custom drink menus.
+      </p>
+    </div>
+  </div>
+
+  <!-- Catering Calculator & Quote Builder -->
+  <section class="section">
+    <div class="container" style="max-width: 860px;">
+      <div class="catering-calc-card">
+        <h2 style="font-size: 2rem; margin-bottom: 0.5rem; text-align: center;">Instant Event Quote Calculator</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+          Estimate your event package pricing instantly and book your roastery team.
+        </p>
+
+        <form id="catering-form">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.4rem; margin-bottom:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Service Type</label>
+              <select class="form-select" id="cat-service">
+                <option value="espresso_cart" selected>Full Mobile Espresso Bar (2 Baristas + Unlimited Drinks)</option>
+                <option value="cold_brew_tap">Cold Brew & Flash Brew Kegerator Setup</option>
+                <option value="office_bulk">Weekly Office Whole Bean Program (10-50 lbs)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Guest Count</label>
+              <select class="form-select" id="cat-guests">
+                <option value="50">Up to 50 Guests</option>
+                <option value="100" selected>50 – 100 Guests</option>
+                <option value="200">100 – 200 Guests</option>
+                <option value="350">200 – 350+ Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.4rem; margin-bottom:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Event Duration (Hours)</label>
+              <select class="form-select" id="cat-hours">
+                <option value="2">2 Hours of Service</option>
+                <option value="3" selected>3 Hours of Service</option>
+                <option value="4">4 Hours of Service</option>
+                <option value="6">Full Day (6+ Hours)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Event Date</label>
+              <input type="date" id="cat-date" class="form-input" required>
+            </div>
+          </div>
+
+          <div style="background:var(--bg-surface); padding:1.5rem; border-radius:14px; border:1px solid var(--border-gold-subtle); margin-bottom:1.8rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <span style="font-size:0.85rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em;">Estimated Investment</span>
+                <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Includes commercial La Marzocco gear, oat & whole milks, house syrups, and travel.</div>
+              </div>
+              <div class="mono-num" id="cat-quote-display" style="font-size:2.2rem; font-weight:700; color:var(--accent-gold);">$850.00</div>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom:0.8rem; font-size:1.1rem; color:var(--text-primary);">Organizer Contact Details</h4>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem; margin-bottom:1.2rem;">
+            <div class="form-group">
+              <label class="form-label">Contact Name *</label>
+              <input type="text" id="cat-name" class="form-input" required placeholder="Julian Vance">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Email *</label>
+              <input type="email" id="cat-email" class="form-input" required placeholder="julian@company.com">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="cat-submit-btn">
+            Lock In Date & Request Formal Contract &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier3', isAdmin: false });
+      CartManager.init();
+
+      // Dynamic calculation
+      const serviceSelect = document.getElementById('cat-service');
+      const guestsSelect = document.getElementById('cat-guests');
+      const hoursSelect = document.getElementById('cat-hours');
+      const display = document.getElementById('cat-quote-display');
+
+      function calculate() {
+        let base = 500;
+        if (serviceSelect.value === 'espresso_cart') base = 650;
+        if (serviceSelect.value === 'cold_brew_tap') base = 400;
+        if (serviceSelect.value === 'office_bulk') base = 350;
+
+        const guests = parseInt(guestsSelect.value, 10);
+        const hours = parseInt(hoursSelect.value, 10);
+
+        const guestCost = guests * 3.5;
+        const hourCost = (hours - 2) * 125;
+
+        const total = Math.max(base, base + guestCost + hourCost);
+        display.innerText = `$${total.toFixed(2)}`;
+      }
+
+      serviceSelect.addEventListener('change', calculate);
+      guestsSelect.addEventListener('change', calculate);
+      hoursSelect.addEventListener('change', calculate);
+      calculate();
+
+      // Submit
+      const form = document.getElementById('catering-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('cat-submit-btn');
+        btn.disabled = true;
+        btn.innerText = "Transmitting Booking Request...";
+
+        const name = document.getElementById('cat-name').value;
+        const email = document.getElementById('cat-email').value;
+        const date = document.getElementById('cat-date').value;
+
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.createInquiry({
+            name, email,
+            subject: `Catering Quote Request (${serviceSelect.value}) for ${date}`,
+            message: `Estimated Quote: ${display.innerText} | Guests: ${guestsSelect.value} | Hours: ${hoursSelect.value}`
+          });
+
+          form.reset();
+          btn.disabled = false;
+          btn.innerText = "Lock In Date & Request Formal Contract →";
+          showToast("🎉 Event inquiry received! Our catering lead will send a formal proposal within 12 hours.", "success", 5000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

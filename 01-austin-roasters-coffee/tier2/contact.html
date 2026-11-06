@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit & Contact — Flat Track Coffee Roasters</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: flex-start;
+    }
+    .map-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      height: 400px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    @media (max-width: 860px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-glass">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve Table 🪑</a></li>
+        <li><a href="story.html" class="nav-link">Roastery Story</a></li>
+        <li><a href="contact.html" class="nav-link active">Visit & Contact</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">📍 East Austin Roastery</span>
+        <h2>Visit Us on Cesar Chavez</h2>
+        <p>Come by for your morning pour-over, whole bean bags, or to work on our sunny outdoor patio.</p>
+      </div>
+
+      <div class="contact-layout">
+        <!-- Info & Hours -->
+        <div>
+          <div style="background:var(--bg-elevated); padding:2rem; border-radius:18px; border:1px solid var(--border-subtle); margin-bottom:2rem;">
+            <h3 style="font-size:1.4rem; color:var(--accent-gold); margin-bottom:1rem;">Location & Hours</h3>
+            <p style="margin-bottom:0.8rem; font-size:1rem;">
+              <b>Address:</b><br/>
+              1611 E Cesar Chavez St, Austin, TX 78702
+            </p>
+            <p style="margin-bottom:0.8rem; font-size:1rem;">
+              <b>Operating Hours:</b><br/>
+              Monday – Friday: 6:30 AM – 6:00 PM<br/>
+              Saturday – Sunday: 7:00 AM – 6:00 PM
+            </p>
+            <p style="margin-bottom:1.5rem; font-size:1rem;">
+              <b>Direct Phone:</b><br/>
+              <a href="tel:5125406033" style="color:var(--text-primary); font-weight:600;">(512) 540-6033</a>
+            </p>
+            <a href="https://maps.google.com/?q=1611+E+Cesar+Chavez+St,+Austin,+TX+78702" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;">
+              Open Directions in Google Maps 📍
+            </a>
+          </div>
+
+          <div class="map-frame">
+            <iframe 
+              src="https://maps.google.com/maps?q=1611%20E%20Cesar%20Chavez%20St,%20Austin,%20TX%2078702&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div style="background:var(--bg-elevated); padding:2.5rem; border-radius:18px; border:1px solid var(--border-subtle);">
+          <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">Send Us a Message</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.8rem;">
+            Questions about catering, office coffee beans, or community events? We'll get back to you within 24 hours.
+          </p>
+
+          <form id="tier2-contact-form">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" id="c-name" class="form-input" required placeholder="Elena Thorne">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" id="c-email" class="form-input" required placeholder="elena@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select class="form-select" id="c-subject">
+                <option value="General Inquiry">General Question</option>
+                <option value="Whole Bean Wholesale">Whole Bean Wholesale Inquiry</option>
+                <option value="Catering & Events">Espresso Cart / Catering</option>
+                <option value="Feedback">Roastery Experience Feedback</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea id="c-msg" class="form-textarea" rows="4" required placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="c-submit-btn">
+              Send Message &rarr;
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;"><b>Flat Track Coffee Roasters</b> · 1611 E Cesar Chavez St, Austin, TX 78702 · (512) 540-6033</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Sample Customer Reviews (Demo Concept) · Website Concept Demo · © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../shared/api-client.js"></script>
+  <script src="../shared/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAustinTimeBadge('austin-status-badge');
+      initDemoControls({ tier: 'tier2', isAdmin: false });
+      CartManager.init();
+
+      const form = document.getElementById('tier2-contact-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('c-submit-btn');
+        btn.disabled = true;
+        btn.innerText = "Transmitting...";
+
+        const name = document.getElementById('c-name').value.trim();
+        const email = document.getElementById('c-email').value.trim();
+        const subject = document.getElementById('c-subject').value;
+        const message = document.getElementById('c-msg').value.trim();
+
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.createInquiry({ name, email, subject, message });
+          form.reset();
+          btn.disabled = false;
+          btn.innerText = "Send Message →";
+          showToast("Message sent to the Roastery team! We'll reply shortly.", "success");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
