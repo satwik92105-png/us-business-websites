@@ -73,10 +73,19 @@ except Exception:
     pass
 
 # --- HEALTH & AUTH ---
+
+@app.get("/")
+@app.get("/api")
+def root_status(db: Session = Depends(get_db)):
+    ensure_initial_seed(db)
+    return {"status": "ok", "service": "Flat Track Coffee Roasters API", "version": "3.1.0"}
+
+@app.get("/health")
 @app.get("/api/health")
 def health_check():
     return {"status": "ok", "service": "Flat Track Coffee Roasters API", "version": "3.1.0"}
 
+@app.post("/auth/login")
 @app.post("/api/auth/login", response_model=TokenResponse)
 def login(req: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(UserModel).filter(UserModel.email == req.email).first()
@@ -85,6 +94,7 @@ def login(req: LoginRequest, db: Session = Depends(get_db)):
     token = create_access_token({"sub": user.email, "role": user.role})
     return {"access_token": token, "token_type": "bearer", "role": user.role}
 
+@app.post("/auth/register")
 @app.post("/api/auth/register")
 def register_customer(req: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(UserModel).filter(UserModel.email == req.email).first()
@@ -97,6 +107,7 @@ def register_customer(req: LoginRequest, db: Session = Depends(get_db)):
     token = create_access_token({"sub": new_user.email, "role": "customer"})
     return {"access_token": token, "token_type": "bearer", "role": "customer", "user": {"email": new_user.email, "points": 100}}
 
+@app.post("/auth/google")
 @app.post("/api/auth/google")
 def google_oauth(data: dict, db: Session = Depends(get_db)):
     email = data.get("email", "customer@gmail.com")
@@ -114,6 +125,7 @@ def google_oauth(data: dict, db: Session = Depends(get_db)):
     }
 
 # --- PUBLIC MENU ENDPOINTS ---
+@app.get("/menu")
 @app.get("/api/menu")
 def get_menu(db: Session = Depends(get_db)):
     items = db.query(MenuItemModel).all()
@@ -128,6 +140,7 @@ def get_menu(db: Session = Depends(get_db)):
     ]
 
 # --- PROTECTED ADMIN MENU MUTATIONS ---
+@app.post("/menu")
 @app.post("/api/menu", dependencies=[Depends(require_admin)])
 def create_menu_item(req: MenuItemCreate, db: Session = Depends(get_db)):
     item = MenuItemModel(
@@ -140,6 +153,7 @@ def create_menu_item(req: MenuItemCreate, db: Session = Depends(get_db)):
     db.refresh(item)
     return item
 
+@app.put("/menu/{item_id}")
 @app.put("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
 def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
@@ -156,6 +170,7 @@ def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(ge
     db.commit()
     return item
 
+@app.delete("/menu/{item_id}")
 @app.delete("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
 def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
@@ -165,6 +180,7 @@ def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"deleted": True, "id": item_id}
 
+@app.patch("/menu/{item_id}/stock")
 @app.patch("/api/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
 def toggle_stock(item_id: int, in_stock: bool, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
@@ -175,6 +191,7 @@ def toggle_stock(item_id: int, in_stock: bool, db: Session = Depends(get_db)):
     return {"id": item.id, "inStock": item.in_stock}
 
 # --- ORDERS ---
+@app.get("/orders")
 @app.get("/api/orders")
 def get_orders(db: Session = Depends(get_db)):
     orders = db.query(OrderModel).order_by(OrderModel.order_time.desc()).all()
@@ -188,6 +205,7 @@ def get_orders(db: Session = Depends(get_db)):
         for o in orders
     ]
 
+@app.get("/orders/{order_id}")
 @app.get("/api/orders/{order_id}")
 def get_single_order(order_id: str, db: Session = Depends(get_db)):
     order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
@@ -200,6 +218,7 @@ def get_single_order(order_id: str, db: Session = Depends(get_db)):
         "orderTime": order.order_time.isoformat(), "notes": order.notes
     }
 
+@app.post("/orders")
 @app.post("/api/orders")
 def place_order(req: OrderCreate, db: Session = Depends(get_db)):
     order_id = f"FT-{random.randint(1000, 9999)}"
@@ -229,6 +248,7 @@ def place_order(req: OrderCreate, db: Session = Depends(get_db)):
         "qrCode": f"FLATTRACK-{order.id}-VERIFIED"
     }
 
+@app.patch("/orders/{order_id}/status")
 @app.patch("/api/orders/{order_id}/status")
 def update_order_status(order_id: str, new_status: str, db: Session = Depends(get_db)):
     order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
@@ -239,6 +259,7 @@ def update_order_status(order_id: str, new_status: str, db: Session = Depends(ge
     return {"id": order.id, "status": order.status}
 
 # --- CHECKOUT (STRIPE PREPAID TEST INTEGRATION) ---
+@app.post("/checkout/create-session")
 @app.post("/api/checkout/create-session")
 def create_checkout_session(data: dict):
     order_id = f"FT-{random.randint(1000, 9999)}"
@@ -251,6 +272,7 @@ def create_checkout_session(data: dict):
     }
 
 # --- RESERVATIONS ---
+@app.get("/reservations")
 @app.get("/api/reservations")
 def get_reservations(db: Session = Depends(get_db)):
     res_list = db.query(ReservationModel).all()
@@ -263,6 +285,7 @@ def get_reservations(db: Session = Depends(get_db)):
         for r in res_list
     ]
 
+@app.post("/reservations")
 @app.post("/api/reservations")
 def create_reservation(req: ReservationCreate, db: Session = Depends(get_db)):
     res_id = f"RES-{random.randint(100, 999)}"
@@ -285,6 +308,7 @@ def update_reservation_status(res_id: str, new_status: str, db: Session = Depend
     return {"id": res.id, "status": res.status}
 
 # --- INQUIRIES & MESSAGES ---
+@app.get("/messages")
 @app.get("/api/messages")
 @app.get("/api/inquiries")
 def get_inquiries(db: Session = Depends(get_db)):
@@ -297,6 +321,7 @@ def get_inquiries(db: Session = Depends(get_db)):
         for i in items
     ]
 
+@app.post("/messages")
 @app.post("/api/messages")
 @app.post("/api/inquiries")
 def create_inquiry(req: InquiryCreate, db: Session = Depends(get_db)):
@@ -311,6 +336,7 @@ def create_inquiry(req: InquiryCreate, db: Session = Depends(get_db)):
     return {"id": inq.id, "saved": True}
 
 # --- SUBSCRIBERS & CATERING ---
+@app.get("/subscriptions")
 @app.get("/api/subscriptions")
 @app.get("/api/subscribers")
 def get_subscriptions(db: Session = Depends(get_db)):
@@ -324,6 +350,7 @@ def get_subscriptions(db: Session = Depends(get_db)):
         for s in subs
     ]
 
+@app.post("/subscriptions")
 @app.post("/api/subscriptions")
 @app.post("/api/subscribers")
 def create_subscriber(req: SubscriberCreate, db: Session = Depends(get_db)):
@@ -337,6 +364,7 @@ def create_subscriber(req: SubscriberCreate, db: Session = Depends(get_db)):
     db.commit()
     return {"id": sub.id, "active": True}
 
+@app.post("/catering")
 @app.post("/api/catering")
 def create_catering(data: dict):
     return {"id": f"CAT-{random.randint(100, 999)}", "status": "Inquiry Received", "confirmed": True}
