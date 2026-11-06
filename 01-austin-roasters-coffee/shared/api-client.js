@@ -5,9 +5,23 @@
  */
 
 (function (window) {
-  const API_BASE = window.FLAT_TRACK_API_URL || 'http://localhost:8000/api';
+  const API_BASE = window.FLAT_TRACK_API_URL || "https://01-austin-roasters-coffee.vercel.app/api";
   const CHANNEL_NAME = 'flat_track_live_sync';
-  const STORAGE_KEY = 'flat_track_roasters_data_v4';
+  const STORAGE_KEY = 'flattrack_clean_v4';
+
+  // Immediate startup cache wipe of any legacy mock keys
+  try {
+    const keysToPurge = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k !== STORAGE_KEY && (k.includes('flat_track') || k.includes('flattrack'))) {
+        keysToPurge.push(k);
+      }
+    }
+    keysToPurge.forEach(k => localStorage.removeItem(k));
+  } catch (e) {
+    console.warn("Storage wipe notice:", e);
+  }
 
   // Seed Menu Items
   const INITIAL_MENU = [
@@ -158,15 +172,7 @@
       return state;
     }
     try {
-      const parsed = JSON.parse(raw);
-      // Clean any legacy mock orders or reservations
-      if (parsed.orders) {
-        parsed.orders = parsed.orders.filter(o => o.id !== 'FT-8402' && o.id !== 'FT-8403' && !o.customerName?.includes('Taylor Jenkins'));
-      }
-      if (parsed.reservations) {
-        parsed.reservations = parsed.reservations.filter(r => r.id !== 'RES-401');
-      }
-      return parsed;
+      return JSON.parse(raw);
     } catch (e) {
       console.warn("Storage reset due to parse error", e);
       localStorage.removeItem(STORAGE_KEY);

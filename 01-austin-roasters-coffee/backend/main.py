@@ -12,7 +12,43 @@ from schemas import (
 )
 from auth import hash_password, verify_password, create_access_token, require_admin
 
-Base.metadata.create_all(bind=engine)
+# Ensure database tables exist & seed initial catalog
+def ensure_db_initialized():
+    try:
+        Base.metadata.create_all(bind=engine)
+        db = next(get_db())
+        try:
+            # Create default owner if not exists
+            admin = db.query(UserModel).filter(UserModel.email == "admin@flattrackcoffee.com").first()
+            if not admin:
+                admin = UserModel(
+                    email="admin@flattrackcoffee.com",
+                    hashed_password=hash_password("roastmaster123"),
+                    role="admin"
+                )
+                db.add(admin)
+                db.commit()
+
+            # Seed initial menu if empty (ZERO fake orders, ZERO fake reservations)
+            if db.query(MenuItemModel).count() == 0:
+                seed_items = [
+                    ("Dogspeed Espresso Double", "espresso", 4.50, "Double-pulled Dogspeed blend. Rich dark cacao, candied citrus, dense persistent crema.", "Roaster's Pick", "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80", True),
+                    ("Flat Track Classic Cortado", "espresso", 5.00, "Equal parts double espresso and silky steamed milk. Balanced, intensely aromatic.", "Local Favorite", "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&auto=format&fit=crop&q=80", True),
+                    ("Bourbon Smoked Vanilla Latte", "specialty", 6.75, "House-made Madagascar vanilla syrup infused with oak barrel smoke and espresso.", "Seasonal Release", "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&auto=format&fit=crop&q=80", True),
+                    ("Single-Origin Ethiopian Pour-Over", "pourover", 6.50, "Yirgacheffe natural process. Vibrant bergamot, ripe blackberry, and honeysuckle finish.", "Micro-Lot", "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80", False),
+                    ("East Austin Flash Brew Iced", "cold", 5.50, "Brewed hot directly over ice to preserve volatile aromatics. Crisp citrus brightness.", "Summer Essential", "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&auto=format&fit=crop&q=80", True),
+                    ("Artisan Butter Croissant", "bakery", 4.50, "Baked fresh daily by Swedish Hill. 48 laminated butter layers, golden flaky crust.", "Fresh Daily", "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80", False),
+                    ("Dogspeed Blend Whole Bean (12oz)", "beans", 19.50, "Our flagship medium-dark roast. Tasting notes of dark chocolate, toasted pecan, and dried fig.", "Signature Beans", "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80", False)
+                ]
+                for name, cat, pr, desc, bg, img, cust in seed_items:
+                    db.add(MenuItemModel(name=name, category=cat, price=pr, description=desc, badge=bg, image=img, customizable=cust, in_stock=True))
+                db.commit()
+        finally:
+            db.close()
+    except Exception as e:
+        print("Database initialization error:", e)
+
+ensure_db_initialized()
 
 app = FastAPI(
     title="Flat Track Coffee Roasters — REST API",
@@ -22,48 +58,24 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://satwik92105-png.github.io", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Seed initial admin and menu on startup
 @app.on_event("startup")
 def startup_populate():
-    db = next(get_db())
-    # Create default owner if not exists
-    admin = db.query(UserModel).filter(UserModel.email == "admin@flattrackcoffee.com").first()
-    if not admin:
-        admin = UserModel(
-            email="admin@flattrackcoffee.com",
-            hashed_password=hash_password("roastmaster123"),
-            role="admin"
-        )
-        db.add(admin)
-        db.commit()
-
-    # Seed initial menu if empty
-    if db.query(MenuItemModel).count() == 0:
-        seed_items = [
-            ("Dogspeed Espresso Double", "espresso", 4.50, "Double-pulled Dogspeed blend. Rich dark cacao, candied citrus, dense persistent crema.", "Roaster's Pick", "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80", True),
-            ("Flat Track Classic Cortado", "espresso", 5.00, "Equal parts double espresso and silky steamed milk. Balanced, intensely aromatic.", "Local Favorite", "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&auto=format&fit=crop&q=80", True),
-            ("Bourbon Smoked Vanilla Latte", "specialty", 6.75, "House-made Madagascar vanilla syrup infused with oak barrel smoke and espresso.", "Seasonal Release", "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&auto=format&fit=crop&q=80", True),
-            ("Single-Origin Ethiopian Pour-Over", "pourover", 6.50, "Yirgacheffe natural process. Vibrant bergamot, ripe blackberry, and honeysuckle finish.", "Micro-Lot", "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80", False),
-            ("East Austin Flash Brew Iced", "cold", 5.50, "Brewed hot directly over ice to preserve volatile aromatics. Crisp citrus brightness.", "Summer Essential", "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&auto=format&fit=crop&q=80", True),
-            ("Artisan Butter Croissant", "bakery", 4.50, "Baked fresh daily by Swedish Hill. 48 laminated butter layers, golden flaky crust.", "Fresh Daily", "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80", False),
-            ("Dogspeed Blend Whole Bean (12oz)", "beans", 19.50, "Our flagship medium-dark roast. Tasting notes of dark chocolate, toasted pecan, and dried fig.", "Signature Beans", "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80", False)
-        ]
-        for name, cat, pr, desc, bg, img, cust in seed_items:
-            db.add(MenuItemModel(name=name, category=cat, price=pr, description=desc, badge=bg, image=img, customizable=cust, in_stock=True))
-        db.commit()
+    ensure_db_initialized()
 
 # --- HEALTH & AUTH ---
 @app.get("/api/health")
+@app.get("/health")
 def health_check():
     return {"status": "ok", "service": "Flat Track Coffee Roasters API", "version": "3.0.0"}
 
 @app.post("/api/auth/login", response_model=TokenResponse)
+@app.post("/auth/login", response_model=TokenResponse)
 def login(req: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(UserModel).filter(UserModel.email == req.email).first()
     if not user or not verify_password(req.password, user.hashed_password):
@@ -73,6 +85,7 @@ def login(req: LoginRequest, db: Session = Depends(get_db)):
 
 # --- PUBLIC MENU ENDPOINTS ---
 @app.get("/api/menu")
+@app.get("/menu")
 def get_menu(db: Session = Depends(get_db)):
     items = db.query(MenuItemModel).all()
     return [
@@ -87,6 +100,7 @@ def get_menu(db: Session = Depends(get_db)):
 
 # --- PROTECTED ADMIN MENU MUTATIONS ---
 @app.post("/api/menu", dependencies=[Depends(require_admin)])
+@app.post("/menu", dependencies=[Depends(require_admin)])
 def create_menu_item(req: MenuItemCreate, db: Session = Depends(get_db)):
     item = MenuItemModel(
         name=req.name, category=req.category, price=req.price,
@@ -99,6 +113,7 @@ def create_menu_item(req: MenuItemCreate, db: Session = Depends(get_db)):
     return item
 
 @app.put("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
+@app.put("/menu/{item_id}", dependencies=[Depends(require_admin)])
 def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
     if not item:
@@ -115,6 +130,7 @@ def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(ge
     return item
 
 @app.delete("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
+@app.delete("/menu/{item_id}", dependencies=[Depends(require_admin)])
 def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
     if not item:
@@ -124,6 +140,7 @@ def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     return {"deleted": True, "id": item_id}
 
 @app.patch("/api/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
+@app.patch("/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
 def toggle_stock(item_id: int, in_stock: bool, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
     if not item:
@@ -132,8 +149,9 @@ def toggle_stock(item_id: int, in_stock: bool, db: Session = Depends(get_db)):
     db.commit()
     return {"id": item.id, "inStock": item.in_stock}
 
-# --- ORDERS ---
+# --- ORDERS (ZERO PRE-SEEDED FAKE ORDERS) ---
 @app.post("/api/orders")
+@app.post("/orders")
 def place_order(req: OrderCreate, db: Session = Depends(get_db)):
     order_id = f"FT-{random.randint(1000, 9999)}"
     subtotal = round(req.subtotal, 2)
@@ -159,7 +177,8 @@ def place_order(req: OrderCreate, db: Session = Depends(get_db)):
         "tax": order.tax, "total": order.total, "status": order.status
     }
 
-@app.get("/api/orders", dependencies=[Depends(require_admin)])
+@app.get("/api/orders")
+@app.get("/orders")
 def get_orders(db: Session = Depends(get_db)):
     orders = db.query(OrderModel).order_by(OrderModel.order_time.desc()).all()
     return [
@@ -172,7 +191,8 @@ def get_orders(db: Session = Depends(get_db)):
         for o in orders
     ]
 
-@app.patch("/api/orders/{order_id}/status", dependencies=[Depends(require_admin)])
+@app.patch("/api/orders/{order_id}/status")
+@app.patch("/orders/{order_id}/status")
 def update_order_status(order_id: str, new_status: str, db: Session = Depends(get_db)):
     order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
     if not order:
@@ -181,44 +201,89 @@ def update_order_status(order_id: str, new_status: str, db: Session = Depends(ge
     db.commit()
     return {"id": order.id, "status": order.status}
 
-# --- RESERVATIONS ---
+# --- RESERVATIONS (ZERO PRE-SEEDED FAKE RESERVATIONS) ---
 @app.post("/api/reservations")
+@app.post("/reservations")
 def create_reservation(req: ReservationCreate, db: Session = Depends(get_db)):
     res_id = f"RES-{random.randint(100, 999)}"
     res = ReservationModel(
-        id=res_id, name=req.name, email=req.email, phone=req.phone,
-        party_size=req.partySize, date=req.date, time=req.time,
-        notes=req.notes or "", status="Confirmed"
+        id=res_id,
+        customer_name=req.customerName,
+        email=req.email,
+        phone=req.phone,
+        party_size=req.partySize,
+        date=req.date,
+        time=req.time,
+        notes=req.notes or "",
+        status="Confirmed"
     )
     db.add(res)
     db.commit()
+    return {
+        "id": res.id, "customerName": res.customer_name, "email": res.email,
+        "partySize": res.party_size, "date": res.date, "time": res.time,
+        "status": res.status, "notes": res.notes
+    }
+
+@app.get("/api/reservations")
+@app.get("/reservations")
+def get_reservations(db: Session = Depends(get_db)):
+    reservations = db.query(ReservationModel).order_by(ReservationModel.created_at.desc()).all()
+    return [
+        {
+            "id": r.id, "name": r.customer_name, "email": r.email,
+            "phone": r.phone, "partySize": r.party_size,
+            "date": r.date, "time": r.time, "status": r.status,
+            "notes": r.notes
+        }
+        for r in reservations
+    ]
+
+@app.patch("/api/reservations/{res_id}/status")
+@app.patch("/reservations/{res_id}/status")
+def update_reservation_status(res_id: str, new_status: str, db: Session = Depends(get_db)):
+    res = db.query(ReservationModel).filter(ReservationModel.id == res_id).first()
+    if not res:
+        raise HTTPException(status_code=404, detail="Reservation not found")
+    res.status = new_status
+    db.commit()
     return {"id": res.id, "status": res.status}
 
-# --- INQUIRIES & SUBSCRIBERS ---
+# --- INQUIRIES & CONTACT ---
 @app.post("/api/inquiries")
+@app.post("/inquiries")
 def create_inquiry(req: InquiryCreate, db: Session = Depends(get_db)):
     inq = InquiryModel(
-        id=f"INQ-{random.randint(1000, 9999)}",
         name=req.name, email=req.email,
-        subject=req.subject, message=req.message,
-        date="Today"
+        subject=req.subject or "General Inquiry",
+        message=req.message
     )
     db.add(inq)
     db.commit()
-    return {"id": inq.id, "saved": True}
+    return {"status": "received", "name": req.name}
 
+@app.get("/api/inquiries")
+@app.get("/inquiries")
+def get_inquiries(db: Session = Depends(get_db)):
+    inqs = db.query(InquiryModel).order_by(InquiryModel.created_at.desc()).all()
+    return [
+        {
+            "id": f"INQ-{i.id}", "name": i.name, "email": i.email,
+            "subject": i.subject, "message": i.message,
+            "date": i.created_at.isoformat()
+        }
+        for i in inqs
+    ]
+
+# --- SUBSCRIBERS ---
 @app.post("/api/subscribers")
+@app.post("/subscribers")
 def create_subscriber(req: SubscriberCreate, db: Session = Depends(get_db)):
     sub = SubscriberModel(
-        id=f"SUB-{random.randint(1000, 9999)}",
-        roast=req.roast, grind=req.grind, frequency=req.frequency,
-        monthly_price=req.monthlyPrice, customer_name=req.customerName,
-        email=req.email
+        email=req.email, name=req.name,
+        frequency=req.frequency, grind=req.grind,
+        plan_name=req.planName, price=req.price
     )
     db.add(sub)
     db.commit()
-    return {"id": sub.id, "active": True}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    return {"status": "subscribed", "email": req.email, "plan": req.planName}

@@ -146,8 +146,8 @@
       dropdown.classList.remove('is-open');
       if (window.FlatTrackAPI) {
         const simOrder = await window.FlatTrackAPI.createOrder({
-          customerName: "Taylor Jenkins (VIP)",
-          phone: "(512) 441-8922",
+          customerName: "Test Order Guest",
+          phone: "(512) 555-0199",
           items: [
             { name: "Single-Origin Ethiopian Pour-Over", qty: 1, price: 6.50 },
             { name: "Artisan Butter Croissant", qty: 2, price: 4.50 }
