@@ -84,16 +84,16 @@
           📊 <b>Agency Sales Hub & Pitch</b>
         </a>
         <a href="${pfx}tier1/index.html" class="demo-dropdown-item ${currentTier === 'tier1' ? 'active' : ''}">
-          ☕ <b>Tier 1:</b> Digital Storefront ($497)
+          ☕ <b>Tier 1:</b> Digital Storefront ($500)
         </a>
         <a href="${pfx}tier2/index.html" class="demo-dropdown-item ${currentTier === 'tier2' && !isAdmin ? 'active' : ''}">
-          🛒 <b>Tier 2:</b> Operations Hub ($997)
+          🛒 <b>Tier 2:</b> Operations Hub ($1,500)
         </a>
         <a href="${pfx}tier2/admin.html" class="demo-dropdown-item ${currentTier === 'tier2' && isAdmin ? 'active' : ''}">
           🔐 <b>Tier 2:</b> Owner POS Portal
         </a>
         <a href="${pfx}tier3/index.html" class="demo-dropdown-item ${currentTier === 'tier3' && !isAdmin ? 'active' : ''}">
-          👑 <b>Tier 3:</b> Flagship Enterprise ($1,997)
+          👑 <b>Tier 3:</b> Flagship Enterprise ($2,000)
         </a>
         <a href="${pfx}tier3/admin.html" class="demo-dropdown-item ${currentTier === 'tier3' && isAdmin ? 'active' : ''}">
           📈 <b>Tier 3:</b> Owner BI & KDS

@@ -107,6 +107,59 @@
     </div>
   </section>
 
+  <!-- Reservation Confirmation Modal -->
+  <div class="modal-overlay" id="res-confirm-modal">
+    <div class="modal-card" style="max-width:540px;">
+      <div class="modal-header">
+        <h3 style="display:flex; align-items:center; gap:0.5rem; margin:0; font-size:1.35rem; color:var(--text-primary);">
+          <span style="color:#22c55e;">✓</span> Table Reserved & Confirmed!
+        </h3>
+        <button class="modal-close-btn" id="close-confirm-modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:1.5rem;">
+        <div style="background:rgba(201,168,76,0.08); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1.25rem; margin-bottom:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(201,168,76,0.18);">
+            <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-secondary);">Booking Reference</span>
+            <span class="mono-num" id="conf-ref" style="font-weight:700; color:var(--accent-gold); font-size:1.15rem;">#RES-000</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; font-size:0.9rem;">
+            <div><span style="color:var(--text-muted); font-size:0.78rem; display:block;">Guest Name</span><strong id="conf-name" style="color:var(--text-primary);">-</strong></div>
+            <div><span style="color:var(--text-muted); font-size:0.78rem; display:block;">Party Size</span><strong id="conf-party" style="color:var(--text-primary);">-</strong></div>
+            <div><span style="color:var(--text-muted); font-size:0.78rem; display:block;">Date</span><strong id="conf-date" style="color:var(--text-primary);">-</strong></div>
+            <div><span style="color:var(--text-muted); font-size:0.78rem; display:block;">Time Slot</span><strong id="conf-time" style="color:var(--text-primary);">-</strong></div>
+          </div>
+          <div style="margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed var(--border-subtle); font-size:0.85rem; color:var(--text-secondary);">
+            📍 <b>Flat Track Roastery:</b> 1611 E Cesar Chavez St, Austin, TX · Table held for 15 minutes.
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+          <a id="btn-add-calendar" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.85rem; padding:0.65rem 0.8rem; text-decoration:none;">
+            📅 Add to Google Calendar
+          </a>
+          <button id="btn-print-pass" type="button" class="btn btn-secondary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.85rem; padding:0.65rem 0.8rem;">
+            🖨️ Print / Save Pass
+          </button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.65rem; margin-bottom:1.25rem;">
+          <a id="btn-email-self" href="#" class="btn btn-primary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.9rem; padding:0.75rem 1rem; text-decoration:none;">
+            ✉️ Email Confirmation to Myself (Pre-filled) &rarr;
+          </a>
+          <a href="admin.html#tab-reservations" target="_blank" class="btn btn-secondary" style="display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.85rem; padding:0.65rem 0.8rem; text-decoration:none; color:var(--accent-gold); border-color:var(--border-gold-subtle);">
+            🔐 View Live on Cafe Host Stand POS &nearr;
+          </a>
+        </div>
+
+        <!-- Architecture Transparency Note -->
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius:8px; padding:0.85rem 1rem; font-size:0.8rem; color:var(--text-muted); line-height:1.45;">
+          <b style="color:var(--text-secondary);">💡 Live Demo Architecture:</b> Your booking was written directly to the cafe's Host Stand POS database via real-time sync. In a live client production deployment, hooking up transactional email (e.g. Resend, SendGrid, or AWS SES) automatically dispatches branded HTML emails to customer inboxes within 2 seconds.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 0; text-align: center; color: var(--text-secondary); font-size: 0.88rem;">
     <div class="container">
@@ -166,6 +219,18 @@
       dateSelect.addEventListener('change', updateTimeSlots);
       updateTimeSlots();
 
+      // Modal elements
+      const confirmModal = document.getElementById('res-confirm-modal');
+      const closeConfirmBtn = document.getElementById('close-confirm-modal');
+      const btnPrintPass = document.getElementById('btn-print-pass');
+
+      closeConfirmBtn.addEventListener('click', () => confirmModal.classList.remove('is-open'));
+      confirmModal.addEventListener('click', (e) => {
+        if (e.target === confirmModal) confirmModal.classList.remove('is-open');
+      });
+
+      btnPrintPass.addEventListener('click', () => window.print());
+
       // Reservation Submit
       const form = document.getElementById('reserve-form');
       form.addEventListener('submit', async (e) => {
@@ -178,7 +243,8 @@
         const email = document.getElementById('res-email').value.trim();
         const phone = document.getElementById('res-phone').value.trim();
         const partySize = document.getElementById('res-party').value;
-        const date = dateSelect.options[dateSelect.selectedIndex].text;
+        const dateVal = dateSelect.value;
+        const dateText = dateSelect.options[dateSelect.selectedIndex].text;
         const time = timeSelect.value;
         const notes = document.getElementById('res-notes').value.trim();
 
@@ -191,13 +257,59 @@
 
         if (window.FlatTrackAPI) {
           const res = await window.FlatTrackAPI.createReservation({
-            name, email, phone, partySize, date, time, notes
+            name, email, phone, partySize, date: dateText, time, notes
           });
 
           form.reset();
           submitBtn.disabled = false;
           submitBtn.innerText = "Confirm Roastery Reservation →";
-          showToast(`Table confirmed! Reference #${res.id}. Confirmation sent to ${email}.`, "success", 5000);
+
+          // Populate Confirmation Modal
+          document.getElementById('conf-ref').innerText = `#${res.id}`;
+          document.getElementById('conf-name').innerText = name;
+          document.getElementById('conf-party').innerText = `${partySize} ${partySize === '1' ? 'Guest' : 'Guests'}`;
+          document.getElementById('conf-date').innerText = dateText;
+          document.getElementById('conf-time').innerText = time;
+
+          // Build Google Calendar Link
+          try {
+            const cleanDate = dateVal.replace(/-/g, '');
+            let [hStr, mRest] = time.split(':');
+            let h = parseInt(hStr, 10);
+            let m = mRest.includes('30') ? '30' : '00';
+            if (time.includes('PM') && h !== 12) h += 12;
+            if (time.includes('AM') && h === 12) h = 0;
+            const startH = String(h).padStart(2, '0');
+            const endH = String(Math.min(h + 1, 23)).padStart(2, '0');
+            const startISO = `${cleanDate}T${startH}${m}00`;
+            const endISO = `${cleanDate}T${endH}${m}00`;
+
+            const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Table Reservation · Flat Track Coffee Roasters')}&dates=${startISO}/${endISO}&details=${encodeURIComponent('Table reservation for ' + name + ' (' + partySize + ' guests). Ref #' + res.id + ' at Flat Track Coffee Roasters.')}&location=${encodeURIComponent('1611 E Cesar Chavez St, Austin, TX 78702')}`;
+            document.getElementById('btn-add-calendar').href = gCalUrl;
+          } catch (err) {
+            console.warn('Calendar url build error', err);
+          }
+
+          // Build Pre-filled mailto link
+          const emailSubject = encodeURIComponent(`Table Reservation Confirmed - Flat Track Coffee (#${res.id})`);
+          const emailBody = encodeURIComponent(
+            `Hi ${name},\n\n` +
+            `Your table reservation at Flat Track Coffee Roasters is confirmed!\n\n` +
+            `• Reservation Code: #${res.id}\n` +
+            `• Date: ${dateText}\n` +
+            `• Time: ${time}\n` +
+            `• Party: ${partySize} guests\n` +
+            `• Location: 1611 E Cesar Chavez St, Austin, TX 78702\n\n` +
+            `We look forward to hosting you in East Austin!\n` +
+            `Flat Track Coffee Roasters · (512) 540-6033`
+          );
+          document.getElementById('btn-email-self').href = `mailto:${encodeURIComponent(email)}?subject=${emailSubject}&body=${emailBody}`;
+
+          // Open Modal
+          confirmModal.classList.add('is-open');
+
+          // Accurate Toast
+          showToast(`🎉 Table reserved! Reference #${res.id} confirmed on Host Stand.`, "success", 5000);
         }
       });
     });
