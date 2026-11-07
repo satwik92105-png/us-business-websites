@@ -911,12 +911,17 @@
     let pendingUserName = '';
 
     function openAuthModal() {
-      const modal = document.getElementById('auth-modal-overlay');
+      let modal = document.getElementById('auth-modal-overlay');
+      if (!modal) {
+        initTier3GoogleAuth();
+        modal = document.getElementById('auth-modal-overlay');
+      }
       if (modal) {
         modal.classList.add('is-open');
         updateAuthState();
       }
     }
+    window.openCustomerAuthModal = openAuthModal;
 
     function closeAuthModal() {
       const modal = document.getElementById('auth-modal-overlay');
@@ -1204,6 +1209,17 @@
     }
 
     // 3. Bind click events to ALL auth triggers
+    
+    // Capture-phase click listener so NOTHING can block sign-in button clicks
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('#btn-header-google-auth, .btn-google-auth-trigger');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        openAuthModal();
+      }
+    }, true);
+
     document.querySelectorAll('#btn-header-google-auth, .btn-google-auth-trigger').forEach(btn => {
       btn.onclick = (e) => {
         e.preventDefault();

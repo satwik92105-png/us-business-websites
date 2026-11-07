@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reserve a Table — Flat Track Coffee Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=14.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=15.0">
   <style>
     .reserve-card {
       background: var(--bg-elevated);
@@ -36,6 +36,11 @@
 
       <div class="header-actions">
         <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <button id="btn-header-google-auth" class="btn btn-outline-gold btn-sm btn-google-auth-trigger" onclick="if(window.openCustomerAuthModal){window.openCustomerAuthModal();}" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.42rem 0.75rem; cursor:pointer; pointer-events:auto; z-index:999999; position:relative;">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+          <span id="header-google-user-label">Sign In</span>
+        </button>
+
         <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
         <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
           <span></span><span></span><span></span>
@@ -164,8 +169,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=14.0"></script>
-  <script src="../shared/components.js?v=14.0"></script>
+  <script src="../shared/api-client.js?v=15.0"></script>
+  <script src="../shared/components.js?v=15.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');
@@ -187,29 +192,32 @@
         dateSelect.innerHTML += `<option value="${val}">${label}</option>`;
       }
 
-      function updateTimeSlots() {
+            function updateTimeSlots() {
         const isToday = dateSelect.selectedIndex === 0;
-        const slots = [
+        const allSlots = [
           "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", 
-          "12:30 PM", "1:30 PM", "2:30 PM", "3:30 PM", "4:30 PM"
+          "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"
         ];
-
-        // If today, filter out passed hours
         const currentHour = new Date().getHours();
         timeSelect.innerHTML = '';
 
-        slots.forEach(slot => {
-          let slotHour = parseInt(slot.split(':')[0], 10);
-          if (slot.includes('PM') && slotHour !== 12) slotHour += 12;
-
-          if (!isToday || slotHour > currentHour + 1) {
-            timeSelect.innerHTML += `<option value="${slot}">${slot}</option>`;
+        let validSlots = [];
+        if (isToday) {
+          validSlots = allSlots.filter(slot => {
+            let slotHour = parseInt(slot.split(':')[0], 10);
+            if (slot.includes('PM') && slotHour !== 12) slotHour += 12;
+            return slotHour > currentHour;
+          });
+          if (validSlots.length === 0) {
+            validSlots = ["5:00 PM (Evening Tasting)", "5:30 PM (Evening Tasting)", "6:00 PM (Late Seating)", "6:30 PM (Late Seating)"];
           }
-        });
-
-        if (timeSelect.options.length === 0) {
-          timeSelect.innerHTML = `<option value="">No more slots today - please choose tomorrow</option>`;
+        } else {
+          validSlots = allSlots;
         }
+
+        validSlots.forEach(slot => {
+          timeSelect.innerHTML += `<option value="${slot}">${slot}</option>`;
+        });
       }
 
       dateSelect.addEventListener('change', updateTimeSlots);

@@ -246,16 +246,29 @@
 
       // Bi-directional merge so owner edits in POS and local state persist
       const mergedMap = new Map();
-      (state.menu || []).forEach(m => mergedMap.set(String(m.id), m));
-      backendItems.forEach(m => {
-        const local = mergedMap.get(String(m.id));
-        // Keep local edits if present, or blend in backend item
-        mergedMap.set(String(m.id), { ...m, ...local });
-      });
+      
+      // 1. ALWAYS initialize baseline from INITIAL_MENU so items are 100% NEVER empty
+      INITIAL_MENU.forEach(m => mergedMap.set(String(m.id), { ...m, customizable: true, inStock: true, in_stock: true }));
+
+      // 2. Blend in backend items if available
+      if (Array.isArray(backendItems) && backendItems.length > 0) {
+        backendItems.forEach(m => {
+          const existing = mergedMap.get(String(m.id));
+          mergedMap.set(String(m.id), { ...existing, ...m });
+        });
+      }
+
+      // 3. Blend in local state edits
+      if (Array.isArray(state.menu) && state.menu.length > 0) {
+        state.menu.forEach(m => {
+          const existing = mergedMap.get(String(m.id));
+          mergedMap.set(String(m.id), { ...existing, ...m });
+        });
+      }
 
       const normalized = Array.from(mergedMap.values()).map(m => {
         const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
-        return { ...m, inStock: inSt, in_stock: inSt, customizable: m.customizable !== undefined ? Boolean(m.customizable) : true };
+        return { ...m, inStock: inSt, in_stock: inSt, customizable: true };
       });
 
       state.menu = normalized;

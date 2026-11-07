@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reserve a Table — Flat Track Coffee Roasters (Flagship)</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=14.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=15.0">
   <style>
     .reserve-card {
       background: var(--bg-elevated);
@@ -168,8 +168,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=14.0"></script>
-  <script src="../shared/components.js?v=14.0"></script>
+  <script src="../shared/api-client.js?v=15.0"></script>
+  <script src="../shared/components.js?v=15.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');
@@ -190,27 +190,32 @@
         dateSelect.innerHTML += `<option value="${val}">${label}</option>`;
       }
 
-      function updateTimeSlots() {
+            function updateTimeSlots() {
         const isToday = dateSelect.selectedIndex === 0;
-        const slots = [
+        const allSlots = [
           "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", 
-          "12:30 PM", "1:30 PM", "2:30 PM", "3:30 PM", "4:30 PM"
+          "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"
         ];
         const currentHour = new Date().getHours();
         timeSelect.innerHTML = '';
 
-        slots.forEach(slot => {
-          let slotHour = parseInt(slot.split(':')[0], 10);
-          if (slot.includes('PM') && slotHour !== 12) slotHour += 12;
-
-          if (!isToday || slotHour > currentHour + 1) {
-            timeSelect.innerHTML += `<option value="${slot}">${slot}</option>`;
+        let validSlots = [];
+        if (isToday) {
+          validSlots = allSlots.filter(slot => {
+            let slotHour = parseInt(slot.split(':')[0], 10);
+            if (slot.includes('PM') && slotHour !== 12) slotHour += 12;
+            return slotHour > currentHour;
+          });
+          if (validSlots.length === 0) {
+            validSlots = ["5:00 PM (Evening Tasting)", "5:30 PM (Evening Tasting)", "6:00 PM (Late Seating)", "6:30 PM (Late Seating)"];
           }
-        });
-
-        if (timeSelect.options.length === 0) {
-          timeSelect.innerHTML = `<option value="">No more slots today - please choose tomorrow</option>`;
+        } else {
+          validSlots = allSlots;
         }
+
+        validSlots.forEach(slot => {
+          timeSelect.innerHTML += `<option value="${slot}">${slot}</option>`;
+        });
       }
 
       dateSelect.addEventListener('change', updateTimeSlots);
