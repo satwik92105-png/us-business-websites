@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat Track Coffee Roasters · Flagship 3D Roastery &amp; Subscriptions</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=10.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=11.0">
 
   <style>
     /* Lenis Smooth Scroll Core Architecture */
@@ -27,6 +27,16 @@
     :root {
       --scroll-skew: 0deg;
       --scroll-rx: 0deg;
+    }
+
+    /* GPU Hardware Acceleration for 120 FPS Silky Smooth Scrolling */
+    .hero-word-top, .hero-word-bottom, .hero-cta-card,
+    .why-tall-card, .showcase-3d-card, #roastery-3d-track,
+    .portal-giant-text, .portal-inner-window, .stack-card-3d {
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
     }
 
     /* -------------------------------------------------------------
@@ -385,8 +395,8 @@
 
     .portal-inner-window {
       position: relative;
-      width: clamp(260px, 55vw, 540px);
-      height: clamp(200px, 40vh, 360px);
+      width: min(85vw, 560px);
+      max-width: 560px;
       background: #f4efe6;
       color: #1a1614;
       border-radius: 24px;
@@ -397,10 +407,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: clamp(1.5rem, 3vw, 3rem);
-      box-shadow: 0 0 90px rgba(201, 168, 76, 0.45);
+      padding: clamp(1.8rem, 3.5vw, 3.2rem);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8), 0 0 70px rgba(201, 168, 76, 0.35);
       box-sizing: border-box;
-      will-change: width, height, border-radius;
+      will-change: transform, opacity;
+      transform-origin: center center;
     }
 
     .portal-inner-window h2 {
@@ -979,8 +990,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="../shared/api-client.js?v=10.0"></script>
-  <script src="../shared/components.js?v=10.0"></script>
+  <script src="../shared/api-client.js?v=11.0"></script>
+  <script src="../shared/components.js?v=11.0"></script>
 
   <!-- Lenis + GSAP + Three.js CDNs -->
   <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
@@ -994,24 +1005,18 @@
       if (typeof initAustinTimeBadge === 'function') initAustinTimeBadge('austin-status-badge');
       if (typeof CartManager !== 'undefined') CartManager.init();
 
-      // 2. Initialize Lenis + GSAP ScrollTrigger Integration
+      // 2. High-Performance Lenis 1.1.20 Configuration (Buttery Smooth 60-120 FPS)
       gsap.registerPlugin(ScrollTrigger);
 
       const lenis = new Lenis({
-        duration: 1.25,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        lerp: 0.09,
+        wheelMultiplier: 0.95,
         smoothWheel: true,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.6
+        syncTouch: false,
+        touchMultiplier: 1.5
       });
 
-      lenis.on('scroll', (e) => {
-        ScrollTrigger.update();
-        const skew = Math.max(-6, Math.min(6, e.velocity * 0.16));
-        const rotateX = Math.max(-9, Math.min(9, e.velocity * 0.22));
-        document.documentElement.style.setProperty('--scroll-skew', `${skew}deg`);
-        document.documentElement.style.setProperty('--scroll-rx', `${rotateX}deg`);
-      });
+      lenis.on('scroll', ScrollTrigger.update);
 
       gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
@@ -1019,32 +1024,34 @@
       gsap.ticker.lagSmoothing(0);
 
       // -------------------------------------------------------------
-      // THREE.JS WEBGL SCULPTURE SETUP (#lenis-webgl-hero)
+      // THREE.JS WEBGL SCULPTURE WITH VISIBILITY PAUSING (GPU Optimization)
       // -------------------------------------------------------------
       const canvas = document.getElementById('lenis-webgl-hero');
+      let isHeroVisible = true;
+
       if (canvas && typeof THREE !== 'undefined') {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 5.8;
 
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
         renderer.setSize(window.innerWidth, window.innerHeight);
 
         // Lighting
-        const ambientLight = new THREE.AmbientLight(0xfff5e6, 0.85);
+        const ambientLight = new THREE.AmbientLight(0xfff5e6, 0.9);
         scene.add(ambientLight);
 
-        const goldPointLight = new THREE.PointLight(0xc9a84c, 2.5, 50);
+        const goldPointLight = new THREE.PointLight(0xc9a84c, 2.8, 40);
         goldPointLight.position.set(4, 5, 4);
         scene.add(goldPointLight);
 
-        const warmLight = new THREE.PointLight(0xe0be63, 1.8, 50);
+        const warmLight = new THREE.PointLight(0xe0be63, 1.8, 40);
         warmLight.position.set(-4, -3, 3);
         scene.add(warmLight);
 
         // High-gloss metallic gold & espresso sculpture
-        const geometry = new THREE.TorusKnotGeometry(1.4, 0.42, 128, 32);
+        const geometry = new THREE.TorusKnotGeometry(1.35, 0.40, 100, 24);
         const material = new THREE.MeshStandardMaterial({
           color: 0xc9a84c,
           metalness: 0.88,
@@ -1053,21 +1060,25 @@
         const sculpture = new THREE.Mesh(geometry, material);
         scene.add(sculpture);
 
-        // Render loop
-        let scrollProgress = 0;
+        // Only render when hero is visible in viewport
         function renderThree() {
+          if (!isHeroVisible) return;
           const v = lenis.velocity || 0;
-          sculpture.rotation.x += 0.003 + (v * 0.0005);
-          sculpture.rotation.y += 0.005 + (v * 0.0008);
+          sculpture.rotation.x += 0.003 + (v * 0.0003);
+          sculpture.rotation.y += 0.005 + (v * 0.0005);
           renderer.render(scene, camera);
         }
         gsap.ticker.add(renderThree);
 
-        // Resize handler
+        // Resize handler with debounce
+        let resizeTimer;
         window.addEventListener('resize', () => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+          }, 100);
         });
 
         // -------------------------------------------------------------
@@ -1077,19 +1088,22 @@
           scrollTrigger: {
             trigger: '#hero-pinned-stage',
             start: 'top top',
-            end: '+=140%',
+            end: '+=130%',
             pin: true,
-            scrub: 1,
-            anticipatePin: 1
+            scrub: 0.8,
+            anticipatePin: 1,
+            onToggle: (self) => {
+              isHeroVisible = self.isActive;
+            }
           }
         });
 
         heroTimeline
-          .to('#hero-word-top', { xPercent: -24, ease: 'power1.inOut' }, 0)
-          .to('#hero-word-bottom', { xPercent: 24, ease: 'power1.inOut' }, 0)
-          .to('#hero-cta-card', { y: 0, scale: 1.05, opacity: 1, ease: 'power1.out' }, 0)
-          .to(camera.position, { z: 3.0, ease: 'power1.inOut' }, 0)
-          .to(sculpture.rotation, { y: Math.PI * 3, x: Math.PI * 1.5, ease: 'power1.inOut' }, 0);
+          .to('#hero-word-top', { xPercent: -22, ease: 'power1.out' }, 0)
+          .to('#hero-word-bottom', { xPercent: 22, ease: 'power1.out' }, 0)
+          .to('#hero-cta-card', { y: 0, scale: 1.04, opacity: 1, ease: 'power1.out' }, 0)
+          .to(camera.position, { z: 3.2, ease: 'power1.out' }, 0)
+          .to(sculpture.rotation, { y: Math.PI * 2.5, x: Math.PI * 1.2, ease: 'power1.out' }, 0);
       }
 
       // -------------------------------------------------------------
@@ -1098,7 +1112,7 @@
       const whyCards = gsap.utils.toArray('.why-tall-card');
       whyCards.forEach((card) => {
         gsap.fromTo(card,
-          { y: 90, opacity: 0.15, rotateX: 12, scale: 0.94 },
+          { y: 60, opacity: 0.2, rotateX: 8, scale: 0.96 },
           {
             y: 0,
             opacity: 1,
@@ -1108,66 +1122,65 @@
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              end: 'top 45%',
-              scrub: true
+              end: 'top 50%',
+              scrub: 0.6
             }
           }
         );
       });
 
       // -------------------------------------------------------------
-      // STAGE 3: "FLAT TRACK RUNS EAST AUSTIN" PINNED HORIZONTAL 3D TRACK
+      // STAGE 3: "FLAT TRACK RUNS EAST AUSTIN" PINNED HORIZONTAL TRACK
       // -------------------------------------------------------------
       const track = document.querySelector('#roastery-3d-track');
       if (track) {
         const cards = gsap.utils.toArray('#roastery-3d-track .showcase-3d-card');
+        
+        // Fast batch tilt setter without creating garbage-collected tweens on every frame
+        const setRotateY = gsap.quickTo(cards, "rotateY", { duration: 0.4, ease: "power2.out" });
+        const setRotateZ = gsap.quickTo(cards, "rotateZ", { duration: 0.4, ease: "power2.out" });
+
         gsap.to(track, {
           x: () => -(track.scrollWidth - window.innerWidth + 64),
           ease: 'none',
           scrollTrigger: {
             trigger: '.horizontal-3d-pin-section',
             pin: true,
-            scrub: 1,
+            scrub: 0.8,
             end: () => `+=${track.scrollWidth}`,
             invalidateOnRefresh: true,
             onUpdate: () => {
               const v = lenis.velocity || 0;
-              const clampedY = Math.max(-16, Math.min(16, v * 0.32));
-              const clampedZ = Math.max(-3.5, Math.min(3.5, v * 0.07));
-              gsap.to(cards, {
-                rotateY: clampedY,
-                rotateZ: clampedZ,
-                scale: 1 - Math.min(0.05, Math.abs(v) * 0.0012),
-                duration: 0.35,
-                overwrite: 'auto'
-              });
+              const clampedY = Math.max(-14, Math.min(14, v * 0.25));
+              const clampedZ = Math.max(-3, Math.min(3, v * 0.05));
+              setRotateY(clampedY);
+              setRotateZ(clampedZ);
             }
           }
         });
       }
 
       // -------------------------------------------------------------
-      // STAGE 4: "ENTER THE ROAST" OPTICAL ZOOM-THROUGH PORTAL
+      // STAGE 4: "ENTER THE ROAST" OPTICAL ZOOM-THROUGH (GPU Accelerated)
       // -------------------------------------------------------------
       const portalTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: '#portal-zoom-section',
           pin: true,
-          scrub: 1,
+          scrub: 0.8,
           start: 'top top',
-          end: '+=160%',
+          end: '+=140%',
           anticipatePin: 1
         }
       });
 
+      // Pure transform scaling without layout thrashing
       portalTimeline
-        .to('#portal-giant-text', { scale: 34, opacity: 0, ease: 'power2.in' }, 0)
+        .to('#portal-giant-text', { scale: 28, opacity: 0, ease: 'power2.in' }, 0)
         .to('#portal-inner-window', {
-          width: '100vw',
-          height: '100dvh',
-          borderRadius: '0px',
-          boxShadow: 'none',
-          ease: 'power2.inOut'
+          scale: 1.15,
+          boxShadow: '0 30px 100px rgba(0,0,0,0.9), 0 0 120px rgba(201,168,76,0.6)',
+          ease: 'power2.out'
         }, 0);
 
       // -------------------------------------------------------------
@@ -1177,16 +1190,16 @@
       stackCards.forEach((card, index) => {
         if (index === stackCards.length - 1) return;
         gsap.to(card, {
-          scale: 0.90 + (index * 0.015),
-          y: -22,
-          rotateX: -4,
-          filter: 'brightness(0.55)',
-          ease: 'none',
+          scale: 0.92 + (index * 0.015),
+          y: -18,
+          rotateX: -3,
+          filter: 'brightness(0.6)',
+          ease: 'power1.out',
           scrollTrigger: {
             trigger: stackCards[index + 1],
-            start: 'top 88%',
-            end: 'top 15%',
-            scrub: true
+            start: 'top 85%',
+            end: 'top 20%',
+            scrub: 0.6
           }
         });
       });
@@ -1199,11 +1212,11 @@
         let marqueePos = 0;
         gsap.ticker.add(() => {
           const v = Math.abs(lenis.velocity || 0);
-          marqueePos -= 1.2 + (v * 0.4);
+          marqueePos -= 0.85 + (v * 0.25);
           if (marqueePos <= -50) {
             marqueePos = 0;
           }
-          marqueeInner.style.transform = `translateX(${marqueePos}%)`;
+          marqueeInner.style.transform = `translate3d(${marqueePos}%, 0, 0)`;
         });
       }
     });
