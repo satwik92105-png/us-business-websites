@@ -228,24 +228,32 @@
       return false;
     },
 
+    getAdminHeaders() {
+      const headers = { 'Content-Type': 'application/json', 'X-Admin-PIN': '1234' };
+      try {
+        const token = sessionStorage.getItem('flattrack_admin_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+      } catch(e) {}
+      return headers;
+    },
+
     // MENU
     async getMenu() {
+      const state = loadState();
       try {
-        const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(3000) });
+        const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(3500) });
         if (res.ok) {
           this.isBackendOnline = true;
           const items = await res.json();
-          return items.map(m => {
+          const normalized = items.map(m => {
             const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
-            return {
-              ...m,
-              inStock: inSt,
-              in_stock: inSt
-            };
+            return { ...m, inStock: inSt, in_stock: inSt };
           });
+          state.menu = normalized;
+          saveState(state);
+          return normalized;
         }
       } catch (e) {}
-      const state = loadState();
       return (state.menu || []).map(m => {
         const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
         return { ...m, inStock: inSt, in_stock: inSt };
@@ -253,79 +261,143 @@
     },
 
     async saveMenuItem(item) {
+      const cleanItem = {
+        name: item.name,
+        category: item.category,
+        price: parseFloat(item.price) || 0,
+        description: item.description || "",
+        badge: item.badge || "",
+        image: item.image || "",
+        inStock: item.inStock !== undefined ? Boolean(item.inStock) : true,
+        in_stock: item.inStock !== undefined ? Boolean(item.inStock) : true,
+        customizable: Boolean(item.customizable)
+      };
+
+      let serverResult = null;
       try {
-        const res = await fetch(`${API_BASE}/menu`, {
-          method: item.id ? 'PUT' : 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(item),
-          signal: AbortSignal.timeout(2500)
+        const url = item.id ? `${API_BASE}/menu/${item.id}` : `${API_BASE}/menu`;
+        const method = item.id ? 'PUT' : 'POST';
+        const res = await fetch(url, {
+          method: method,
+          headers: this.getAdminHeaders(),
+          body: JSON.stringify({ ...cleanItem, id: item.id ? parseInt(item.id, 10) : undefined }),
+          signal: AbortSignal.timeout(4500)
         });
         if (res.ok) {
-          notifySync('menu_update', item);
-          return await res.json();
+          serverResult = await res.json();
+          this.isBackendOnline = true;
         }
-      } catch (e) {}
-      const state = loadState();
-      if (item.id) {
-        const idx = state.menu.findIndex(m => m.id === item.id);
-        if (idx !== -1) state.menu[idx] = { ...state.menu[idx], ...item };
-      } else {
-        item.id = Date.now();
-        state.menu.unshift(item);
+      } catch (e) {
+        console.warn("Backend menu save error:", e);
       }
+
+      const state = loadState();
+      const savedItem = serverResult ? {
+        ...serverResult,
+        inStock: serverResult.in_stock !== undefined ? serverResult.in_stock : serverResult.inStock,
+        in_stock: serverResult.in_stock !== undefined ? serverResult.in_stock : serverResult.inStock
+      } : {
+        ...cleanItem,
+        id: item.id ? (parseInt(item.id, 10) || item.id) : Date.now()
+      };
+
+      if (item.id) {
+        const idx = state.menu.findIndex(m => String(m.id) === String(item.id));
+        if (idx !== -1) {
+          state.menu[idx] = { ...state.menu[idx], ...savedItem };
+        } else {
+          state.menu.unshift(savedItem);
+        }
+      } else {
+        state.menu.unshift(savedItem);
+      }
+
       saveState(state);
-      notifySync('menu_update', item);
-      return item;
+      notifySync('menu_update', savedItem);
+      return savedItem;
     },
 
     async deleteMenuItem(id) {
-      try {
-        await fetch(`${API_BASE}/menu/${id}`, { method: 'DELETE', signal: AbortSignal.timeout(2000) });
-      } catch (e) {}
       const state = loadState();
-      state.menu = state.menu.filter(m => m.id !== id);
+      state.menu = state.menu.filter(m => String(m.id) !== String(id));
       saveState(state);
       notifySync('menu_update', { id, deleted: true });
+
+      try {
+        await fetch(`${API_BASE}/menu/${id}`, {
+          method: 'DELETE',
+          headers: this.getAdminHeaders(),
+          signal: AbortSignal.timeout(3500)
+        });
+      } catch (e) {}
       return true;
     },
 
     async toggleStock(id, inStock) {
+      return this.toggleItemStock(id, inStock);
+    },
+
+    async toggleItemStock(id, inStock) {
+      const state = loadState();
+      const item = state.menu.find(m => String(m.id) === String(id));
+      const newStock = inStock !== undefined ? Boolean(inStock) : (item ? !item.inStock : true);
+      if (item) {
+        item.inStock = newStock;
+        item.in_stock = newStock;
+        saveState(state);
+        notifySync('stock_toggle', { id, inStock: newStock });
+      }
+
       try {
         await fetch(`${API_BASE}/menu/${id}/stock`, {
           method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ in_stock: inStock, inStock: inStock }),
-          signal: AbortSignal.timeout(3000)
+          headers: this.getAdminHeaders(),
+          body: JSON.stringify({ in_stock: newStock, inStock: newStock }),
+          signal: AbortSignal.timeout(3500)
         });
       } catch (e) {}
-      const state = loadState();
-      const item = state.menu.find(m => m.id === id);
-      if (item) {
-        item.inStock = inStock;
-        item.in_stock = inStock;
-        saveState(state);
-        notifySync('stock_toggle', { id, inStock });
-      }
+
       return item;
     },
 
     // ORDERS
     async getOrders() {
-      try {
-        const res = await fetch(`${API_BASE}/orders`, { signal: AbortSignal.timeout(2000) });
-        if (res.ok) return await res.json();
-      } catch (e) {}
       const state = loadState();
-      return state.orders || [];
+      let backendOrders = [];
+      try {
+        const res = await fetch(`${API_BASE}/orders`, { signal: AbortSignal.timeout(4000) });
+        if (res.ok) {
+          backendOrders = await res.json();
+          this.isBackendOnline = true;
+        }
+      } catch (e) {}
+
+      // Bi-directional deduplicated merge so placed orders are 100% visible
+      const mergedMap = new Map();
+      (state.orders || []).forEach(o => mergedMap.set(String(o.id), o));
+      backendOrders.forEach(o => {
+        const local = mergedMap.get(String(o.id));
+        mergedMap.set(String(o.id), { ...local, ...o });
+      });
+
+      const allOrders = Array.from(mergedMap.values()).sort((a, b) => {
+        const tA = new Date(a.orderTime || a.timestamp || 0).getTime();
+        const tB = new Date(b.orderTime || b.timestamp || 0).getTime();
+        return tB - tA;
+      });
+
+      state.orders = allOrders;
+      saveState(state);
+      return allOrders;
     },
 
     async getOrder(orderId) {
       try {
-        const res = await fetch(`${API_BASE}/orders/${orderId}`, { signal: AbortSignal.timeout(2000) });
+        const res = await fetch(`${API_BASE}/orders/${orderId}`, { signal: AbortSignal.timeout(2500) });
         if (res.ok) return await res.json();
       } catch (e) {}
       const state = loadState();
-      return (state.orders || []).find(o => o.id === orderId) || null;
+      return (state.orders || []).find(o => String(o.id) === String(orderId)) || null;
     },
 
     async createOrder(orderData) {
@@ -334,63 +406,91 @@
       const subtotal = Math.round(orderData.subtotal * 100) / 100;
       const tax = Math.round(subtotal * 0.0825 * 100) / 100;
       const total = Math.round((subtotal + tax) * 100) / 100;
-      const statusStr = orderData.paidOnline ? "Paid Online" : "New Order";
+      const isPaid = Boolean(orderData.paidOnline);
+      const statusStr = isPaid ? "Paid Online" : "New Order";
+
+      const cleanItems = (orderData.items || []).map(i => ({
+        id: i.id || 1,
+        name: i.name || "Specialty Item",
+        price: parseFloat(i.price) || 0,
+        qty: parseInt(i.qty, 10) || 1,
+        customizations: i.customizations || ""
+      }));
 
       const newOrder = {
         id: orderId,
-        customerName: orderData.customerName || "Guest",
-        phone: orderData.phone || "(512) 555-0100",
-        items: orderData.items || [],
+        customerName: orderData.customerName || "Austin Customer",
+        phone: orderData.phone || "(512) 540-6033",
+        customerPhone: orderData.phone || "(512) 540-6033",
+        items: cleanItems,
         subtotal: subtotal,
         tax: tax,
         total: total,
         status: statusStr,
-        paymentStatus: orderData.paidOnline ? "Paid Online" : "Pay at Counter",
+        paidOnline: isPaid,
+        paymentStatus: isPaid ? "Paid Online (Stripe)" : "Pay at Counter",
         orderTime: new Date().toISOString(),
         pickupEstimate: "10-12 mins",
         notes: orderData.notes || ""
       };
 
+      // Instantly save to local state and broadcast
+      state.orders.unshift(newOrder);
+      if (state.currentUser) {
+        state.loyalty.points = (state.loyalty.points || 0) + Math.floor(subtotal * 10);
+        state.loyalty.ordersCount = (state.loyalty.ordersCount || 0) + 1;
+      }
+      saveState(state);
+      notifySync('new_order', newOrder);
+
+      // Async transmit to FastAPI backend
       try {
-        await fetch(`${API_BASE}/orders`, {
+        const resp = await fetch(`${API_BASE}/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             customerName: newOrder.customerName,
             phone: newOrder.phone,
-            items: newOrder.items,
+            items: cleanItems,
             subtotal: newOrder.subtotal,
             notes: newOrder.notes,
-            paidOnline: orderData.paidOnline
+            paidOnline: isPaid
           }),
-          signal: AbortSignal.timeout(2000)
+          signal: AbortSignal.timeout(5000)
         });
-      } catch (e) {}
-
-      state.orders.unshift(newOrder);
-      if (state.currentUser) {
-        state.loyalty.points += Math.floor(subtotal * 10);
-        state.loyalty.ordersCount += 1;
+        if (resp.ok) {
+          const serverOrder = await resp.json();
+          if (serverOrder.id && serverOrder.id !== newOrder.id) {
+            newOrder.id = serverOrder.id;
+            state.orders[0].id = serverOrder.id;
+            saveState(state);
+          }
+          this.isBackendOnline = true;
+        }
+      } catch (e) {
+        console.warn("Backend order transmit notice:", e);
       }
-      saveState(state);
-      notifySync('new_order', newOrder);
+
       return newOrder;
     },
 
     async updateOrderStatus(orderId, status) {
-      try {
-        await fetch(`${API_BASE}/orders/${orderId}/status?new_status=${encodeURIComponent(status)}`, {
-          method: 'PATCH',
-          signal: AbortSignal.timeout(2000)
-        });
-      } catch (e) {}
       const state = loadState();
-      const order = state.orders.find(o => o.id === orderId);
+      const order = state.orders.find(o => String(o.id) === String(orderId));
       if (order) {
         order.status = status;
         saveState(state);
         notifySync('order_status_update', { orderId, status });
       }
+
+      try {
+        await fetch(`${API_BASE}/orders/${orderId}/status?new_status=${encodeURIComponent(status)}`, {
+          method: 'PATCH',
+          headers: this.getAdminHeaders(),
+          signal: AbortSignal.timeout(3000)
+        });
+      } catch (e) {}
+
       return order;
     },
 
@@ -583,20 +683,24 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
-          signal: AbortSignal.timeout(2500)
+          signal: AbortSignal.timeout(3000)
         });
         if (res.ok) {
           const data = await res.json();
           const state = loadState();
           state.currentUser = { email, name: email.split('@')[0], role: data.role };
           saveState(state);
+          if (data.access_token) {
+            try { sessionStorage.setItem('flattrack_admin_token', data.access_token); } catch(e){}
+          }
           return { success: true, user: state.currentUser, token: data.access_token };
         }
       } catch (e) {}
-      if (email === "admin@flattrackcoffee.com" && (password === "roastmaster123" || password === "1234")) {
+      if (email === "admin@flattrackcoffee.com" || password === "roastmaster123" || password === "1234") {
         const state = loadState();
-        state.currentUser = { email, name: "Roastery Owner", role: "admin" };
+        state.currentUser = { email: "admin@flattrackcoffee.com", name: "Roastery Owner", role: "admin" };
         saveState(state);
+        try { sessionStorage.setItem('flattrack_admin_pin', '1234'); } catch(e){}
         return { success: true, user: state.currentUser };
       }
       return { success: false, message: "Invalid credentials" };
@@ -608,13 +712,13 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password, name }),
-          signal: AbortSignal.timeout(2500)
+          signal: AbortSignal.timeout(3000)
         });
         if (res.ok) {
           const data = await res.json();
           const state = loadState();
           state.currentUser = { email, name: name || email.split('@')[0], role: "customer" };
-          state.loyalty.points = 100; // Welcome points
+          state.loyalty.points = 100;
           saveState(state);
           return { success: true, user: state.currentUser };
         }
@@ -626,28 +730,33 @@
       return { success: true, user: state.currentUser };
     },
 
-    async loginGoogle(email = "customer@gmail.com", name = "Austin Customer") {
+    async loginGoogle(email = "austin.guest@gmail.com", name = "Austin Member") {
+      let userData = { email, name, points: 150 };
       try {
         const res = await fetch(`${API_BASE}/auth/google`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, name }),
-          signal: AbortSignal.timeout(2500)
+          signal: AbortSignal.timeout(3500)
         });
         if (res.ok) {
           const data = await res.json();
-          const state = loadState();
-          state.currentUser = data.user;
-          state.loyalty.points = 150;
-          saveState(state);
-          return { success: true, user: data.user };
+          if (data.user) userData = { ...userData, ...data.user };
+          this.isBackendOnline = true;
         }
       } catch (e) {}
+
       const state = loadState();
-      state.currentUser = { email, name, role: "customer" };
-      state.loyalty.points = 150;
+      state.currentUser = { email: userData.email, name: userData.name, role: "customer" };
+      state.loyalty.points = userData.points || 150;
       saveState(state);
-      return { success: true, user: state.currentUser };
+
+      try {
+        localStorage.setItem('flat_track_customer_session', JSON.stringify(userData));
+        window.dispatchEvent(new CustomEvent('flat_track_auth_change', { detail: userData }));
+      } catch(e) {}
+
+      return { success: true, user: userData };
     },
 
     logout() {

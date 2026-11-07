@@ -1,6 +1,7 @@
 import json
 import random
 import os
+from typing import Optional, Union, List
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -142,20 +143,27 @@ def get_menu(db: Session = Depends(get_db)):
     ]
 
 # --- PROTECTED ADMIN MENU MUTATIONS ---
-@app.post("/menu")
+@app.post("/menu", dependencies=[Depends(require_admin)])
 @app.post("/api/menu", dependencies=[Depends(require_admin)])
 def create_menu_item(req: MenuItemCreate, db: Session = Depends(get_db)):
+    val = req.inStock if req.inStock is not None else req.in_stock
+    in_st = val if val is not None else True
     item = MenuItemModel(
         name=req.name, category=req.category, price=req.price,
-        description=req.description, badge=req.badge,
-        in_stock=req.in_stock, image=req.image, customizable=req.customizable
+        description=req.description or "", badge=req.badge or "",
+        in_stock=in_st, image=req.image or "", customizable=bool(req.customizable)
     )
     db.add(item)
     db.commit()
     db.refresh(item)
-    return item
+    return {
+        "id": item.id, "name": item.name, "category": item.category,
+        "price": item.price, "description": item.description,
+        "badge": item.badge, "inStock": item.in_stock, "in_stock": item.in_stock,
+        "image": item.image, "customizable": item.customizable
+    }
 
-@app.put("/menu/{item_id}")
+@app.put("/menu/{item_id}", dependencies=[Depends(require_admin)])
 @app.put("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
 def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
@@ -164,15 +172,31 @@ def update_menu_item(item_id: int, req: MenuItemCreate, db: Session = Depends(ge
     item.name = req.name
     item.category = req.category
     item.price = req.price
-    item.description = req.description
-    item.badge = req.badge
-    item.image = req.image
-    item.in_stock = req.in_stock
-    item.customizable = req.customizable
+    item.description = req.description or ""
+    item.badge = req.badge or ""
+    item.image = req.image or item.image
+    val = req.inStock if req.inStock is not None else req.in_stock
+    if val is not None:
+        item.in_stock = val
+    item.customizable = bool(req.customizable)
     db.commit()
-    return item
+    db.refresh(item)
+    return {
+        "id": item.id, "name": item.name, "category": item.category,
+        "price": item.price, "description": item.description,
+        "badge": item.badge, "inStock": item.in_stock, "in_stock": item.in_stock,
+        "image": item.image, "customizable": item.customizable
+    }
 
-@app.delete("/menu/{item_id}")
+@app.put("/menu", dependencies=[Depends(require_admin)])
+@app.put("/api/menu", dependencies=[Depends(require_admin)])
+def update_menu_item_body(req: MenuItemCreate, db: Session = Depends(get_db)):
+    item_id = getattr(req, "id", None)
+    if item_id:
+        return update_menu_item(int(item_id), req, db)
+    return create_menu_item(req, db)
+
+@app.delete("/menu/{item_id}", dependencies=[Depends(require_admin)])
 @app.delete("/api/menu/{item_id}", dependencies=[Depends(require_admin)])
 def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
@@ -182,22 +206,25 @@ def delete_menu_item(item_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"deleted": True, "id": item_id}
 
-@app.patch("/menu/{item_id}/stock")
-@app.patch("/api/menu/{item_id}/stock")
-def toggle_stock(item_id: int, req: StockUpdateRequest = None, in_stock: bool = None, db: Session = Depends(get_db)):
+@app.patch("/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
+@app.patch("/api/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
+@app.post("/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
+@app.post("/api/menu/{item_id}/stock", dependencies=[Depends(require_admin)])
+def toggle_stock(item_id: int, req: Optional[StockUpdateRequest] = None, in_stock: Optional[bool] = None, db: Session = Depends(get_db)):
     item = db.query(MenuItemModel).filter(MenuItemModel.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    new_val = True
+    new_val = not item.in_stock
     if req is not None:
         if req.inStock is not None:
             new_val = req.inStock
         elif req.in_stock is not None:
             new_val = req.in_stock
-    elif in_stock is not None:
+    if in_stock is not None:
         new_val = in_stock
     item.in_stock = new_val
     db.commit()
+    db.refresh(item)
     return {"id": item.id, "inStock": item.in_stock, "in_stock": item.in_stock}
 
 # --- ORDERS ---
@@ -205,15 +232,26 @@ def toggle_stock(item_id: int, req: StockUpdateRequest = None, in_stock: bool = 
 @app.get("/api/orders")
 def get_orders(db: Session = Depends(get_db)):
     orders = db.query(OrderModel).order_by(OrderModel.order_time.desc()).all()
-    return [
-        {
-            "id": o.id, "customerName": o.customer_name, "phone": o.phone,
-            "items": json.loads(o.items_json), "subtotal": o.subtotal,
-            "tax": o.tax, "total": o.total, "status": o.status,
-            "orderTime": o.order_time.isoformat(), "notes": o.notes
-        }
-        for o in orders
-    ]
+    res = []
+    for o in orders:
+        is_paid = (o.status == "Paid Online" or "Paid" in (o.status or ""))
+        res.append({
+            "id": o.id,
+            "customerName": o.customer_name,
+            "phone": o.phone,
+            "customerPhone": o.phone,
+            "items": json.loads(o.items_json) if o.items_json else [],
+            "subtotal": o.subtotal,
+            "tax": o.tax,
+            "total": o.total,
+            "status": o.status,
+            "paidOnline": is_paid,
+            "paymentStatus": "Paid Online (Stripe)" if is_paid else "Pay at Counter",
+            "orderTime": o.order_time.isoformat() if o.order_time else "",
+            "pickupEstimate": "10-12 mins",
+            "notes": o.notes or ""
+        })
+    return res
 
 @app.get("/orders/{order_id}")
 @app.get("/api/orders/{order_id}")
@@ -221,11 +259,21 @@ def get_single_order(order_id: str, db: Session = Depends(get_db)):
     order = db.query(OrderModel).filter(OrderModel.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order reference not found")
+    is_paid = (order.status == "Paid Online" or "Paid" in (order.status or ""))
     return {
-        "id": order.id, "customerName": order.customer_name, "phone": order.phone,
-        "items": json.loads(order.items_json), "subtotal": order.subtotal,
-        "tax": order.tax, "total": order.total, "status": order.status,
-        "orderTime": order.order_time.isoformat(), "notes": order.notes
+        "id": order.id,
+        "customerName": order.customer_name,
+        "phone": order.phone,
+        "customerPhone": order.phone,
+        "items": json.loads(order.items_json) if order.items_json else [],
+        "subtotal": order.subtotal,
+        "tax": order.tax,
+        "total": order.total,
+        "status": order.status,
+        "paidOnline": is_paid,
+        "paymentStatus": "Paid Online (Stripe)" if is_paid else "Pay at Counter",
+        "orderTime": order.order_time.isoformat() if order.order_time else "",
+        "notes": order.notes or ""
     }
 
 @app.post("/orders")
@@ -236,12 +284,14 @@ def place_order(req: OrderCreate, db: Session = Depends(get_db)):
     tax = round(subtotal * 0.0825, 2)
     total = round(subtotal + tax, 2)
 
-    status_str = "Paid Online" if getattr(req, "paidOnline", False) else "New Order"
+    is_paid = bool(req.paidOnline or getattr(req, "paidOnline", False))
+    status_str = "Paid Online" if is_paid else "New Order"
+    payment_status = "Paid Online (Stripe)" if is_paid else "Pay at Counter"
 
     order = OrderModel(
         id=order_id,
         customer_name=req.customerName,
-        phone=req.phone,
+        phone=req.phone or "(512) 540-6033",
         items_json=json.dumps([i.dict() for i in req.items]),
         subtotal=subtotal,
         tax=tax,
@@ -251,10 +301,22 @@ def place_order(req: OrderCreate, db: Session = Depends(get_db)):
     )
     db.add(order)
     db.commit()
+    db.refresh(order)
     return {
-        "id": order.id, "customerName": order.customer_name,
-        "phone": order.phone, "subtotal": order.subtotal,
-        "tax": order.tax, "total": order.total, "status": order.status,
+        "id": order.id,
+        "customerName": order.customer_name,
+        "phone": order.phone,
+        "customerPhone": order.phone,
+        "items": [i.dict() for i in req.items],
+        "subtotal": order.subtotal,
+        "tax": order.tax,
+        "total": order.total,
+        "status": order.status,
+        "paidOnline": is_paid,
+        "paymentStatus": payment_status,
+        "orderTime": order.order_time.isoformat() if order.order_time else "",
+        "pickupEstimate": "10-12 mins",
+        "notes": order.notes,
         "qrCode": f"FLATTRACK-{order.id}-VERIFIED"
     }
 

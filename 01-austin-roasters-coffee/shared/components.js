@@ -810,6 +810,10 @@
           ${linksHTML}
         </ul>
         <div class="mobile-drawer-actions">
+          <button type="button" class="btn btn-outline-gold btn-sm btn-google-auth-trigger" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem; text-align:center; margin-bottom:0.25rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+            <span class="drawer-google-user-label">Sign In with Google</span>
+          </button>
           ${isTier3 ? '<a href="subscribe.html" class="btn btn-primary btn-sm" style="text-align:center;">📦 Join Bean Club</a>' : ''}
           ${isTier2 || isTier3 ? '<a href="reserve.html" class="btn btn-outline-gold btn-sm" style="text-align:center;">🪑 Reserve a Table</a>' : ''}
           <a href="tel:5125406033" class="btn btn-secondary btn-sm" style="text-align:center;">📞 (512) 540-6033</a>
@@ -872,33 +876,36 @@
 
 
   // ====================================================================
-  // GOOGLE OAUTH & CUSTOMER ROAST POINTS SYSTEM (TIER 3)
+  // GOOGLE OAUTH & CUSTOMER ROAST POINTS SYSTEM (UNIVERSAL)
   // ====================================================================
   function initTier3GoogleAuth() {
-    const path = window.location.pathname.toLowerCase();
-    const isTier3 = path.includes('/tier3/') || path.includes('tier3.html');
-    if (!isTier3) return;
+    function openAuthModal() {
+      const modal = document.getElementById('auth-modal-overlay');
+      if (modal) modal.classList.add('is-open');
+    }
 
-    // 1. Inject or update header auth button in .header-actions
+    function closeAuthModal() {
+      const modal = document.getElementById('auth-modal-overlay');
+      if (modal) modal.classList.remove('is-open');
+    }
+
+    // 1. Inject or update header auth button in .header-actions if needed
     const headerActions = document.querySelector('.header-actions');
     if (headerActions && !document.getElementById('btn-header-google-auth')) {
       const authBtn = document.createElement('button');
       authBtn.id = 'btn-header-google-auth';
-      authBtn.className = 'btn btn-outline-gold btn-sm';
+      authBtn.className = 'btn btn-outline-gold btn-sm btn-google-auth-trigger';
       authBtn.style.cssText = 'display:inline-flex; align-items:center; gap:0.4rem; padding:0.42rem 0.75rem;';
       authBtn.innerHTML = `
         <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
         <span id="header-google-user-label">Sign In</span>
       `;
-      // insert before mobile-menu-toggle
       const toggle = headerActions.querySelector('#mobile-menu-toggle');
       if (toggle) {
         headerActions.insertBefore(authBtn, toggle);
       } else {
         headerActions.appendChild(authBtn);
       }
-
-      authBtn.addEventListener('click', openAuthModal);
     }
 
     // 2. Inject Auth Modal into body if not present
@@ -964,30 +971,30 @@
       `;
       document.body.appendChild(modalWrap);
 
-      // Close modal listener
       const closeBtn = document.getElementById('auth-modal-close-btn');
       if (closeBtn) closeBtn.addEventListener('click', closeAuthModal);
       modalWrap.addEventListener('click', (e) => {
         if (e.target === modalWrap) closeAuthModal();
       });
 
-      // Google Sign-In click
       const googleBtn = document.getElementById('btn-modal-google-action');
       if (googleBtn) {
         googleBtn.addEventListener('click', async () => {
           googleBtn.disabled = true;
           googleBtn.innerHTML = 'Connecting to Google OAuth...';
           try {
-            if (window.FlatTrackAPI) {
-              await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
+            let user = null;
+            if (window.FlatTrackAPI && window.FlatTrackAPI.loginGoogle) {
+              const res = await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
+              user = res.user;
             }
             const session = {
-              email: "austin.guest@gmail.com",
-              name: "Austin Coffee Member",
-              points: 150
+              email: user?.email || "austin.guest@gmail.com",
+              name: user?.name || "Austin Coffee Member",
+              points: user?.points || 150
             };
             localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
-            showToast("✓ Authenticated via Google OAuth! 150 Roast Points unlocked.", "success", 4500);
+            showToast("✓ Authenticated via Google OAuth! 150 Roast Points unlocked. ☕", "success", 4500);
             updateAuthState();
             closeAuthModal();
           } catch (e) {
@@ -999,7 +1006,6 @@
         });
       }
 
-      // Email Form Submit
       const emailForm = document.getElementById('auth-email-form');
       if (emailForm) {
         emailForm.addEventListener('submit', (e) => {
@@ -1017,7 +1023,6 @@
         });
       }
 
-      // Logout
       const logoutBtn = document.getElementById('btn-auth-logout');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -1029,15 +1034,13 @@
       }
     }
 
-    function openAuthModal() {
-      const modal = document.getElementById('auth-modal-overlay');
-      if (modal) modal.classList.add('is-open');
-    }
-
-    function closeAuthModal() {
-      const modal = document.getElementById('auth-modal-overlay');
-      if (modal) modal.classList.remove('is-open');
-    }
+    // 3. Bind click events to ALL auth buttons
+    document.querySelectorAll('#btn-header-google-auth, .btn-google-auth-trigger').forEach(btn => {
+      btn.onclick = (e) => {
+        e.preventDefault();
+        openAuthModal();
+      };
+    });
 
     function updateAuthState() {
       let session = null;
@@ -1047,14 +1050,17 @@
       } catch (e) {}
 
       const label = document.getElementById('header-google-user-label');
-      const googleBtn = document.getElementById('btn-header-google-auth');
+      const drawerLabels = document.querySelectorAll('.drawer-google-user-label');
+      const googleBtns = document.querySelectorAll('#btn-header-google-auth, .btn-google-auth-trigger');
       const signedInView = document.getElementById('auth-signed-in-view');
       const emailForm = document.getElementById('auth-email-form');
       const googleModalBtn = document.getElementById('btn-modal-google-action');
 
       if (session && session.email) {
-        if (label) label.innerText = `✨ ${session.name.split(' ')[0]} (${session.points || 150} pts)`;
-        if (googleBtn) googleBtn.style.borderColor = 'var(--accent-gold)';
+        const displayShort = `✨ ${session.name.split(' ')[0]} (${session.points || 150} pts)`;
+        if (label) label.innerText = displayShort;
+        drawerLabels.forEach(dl => dl.innerText = displayShort);
+        googleBtns.forEach(gb => gb.style.borderColor = 'var(--accent-gold)');
         if (signedInView) {
           signedInView.style.display = 'block';
           const nameEl = document.getElementById('auth-user-name');
@@ -1068,14 +1074,15 @@
         if (googleModalBtn) googleModalBtn.style.display = 'none';
       } else {
         if (label) label.innerText = 'Sign In';
-        if (googleBtn) googleBtn.style.borderColor = '';
+        drawerLabels.forEach(dl => dl.innerText = 'Sign In with Google');
+        googleBtns.forEach(gb => gb.style.borderColor = '');
         if (signedInView) signedInView.style.display = 'none';
         if (emailForm) emailForm.style.display = 'block';
         if (googleModalBtn) googleModalBtn.style.display = 'flex';
       }
     }
 
-    // Run auth state update immediately
+    window.addEventListener('flat_track_auth_change', updateAuthState);
     updateAuthState();
   }
 

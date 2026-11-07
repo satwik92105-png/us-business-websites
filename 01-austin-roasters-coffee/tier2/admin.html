@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Owner POS & Operations Portal — Flat Track Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=11.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=12.0">
   <style>
     body {
       background-color: #0c0a09;
@@ -298,8 +298,8 @@
     </div>
   </div>
 
-  <script src="../shared/api-client.js?v=11.0"></script>
-  <script src="../shared/components.js?v=11.0"></script>
+  <script src="../shared/api-client.js?v=12.0"></script>
+  <script src="../shared/components.js?v=12.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initDemoControls({ tier: 'tier2', isAdmin: true });
@@ -314,11 +314,15 @@
         showDashboard();
       }
 
-      loginForm.addEventListener('submit', (e) => {
+      loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const pass = document.getElementById('login-pass').value;
         if (pass === 'roastmaster123' || pass === '1234') {
           sessionStorage.setItem('flattrack_admin_auth', 'true');
+          sessionStorage.setItem('flattrack_admin_pin', '1234');
+          if (window.FlatTrackAPI && window.FlatTrackAPI.login) {
+            await window.FlatTrackAPI.login("admin@flattrackcoffee.com", pass);
+          }
           showDashboard();
           showToast("Authorized as Owner / GM", "success");
         } else {
@@ -368,8 +372,13 @@
         }
 
         wrap.innerHTML = orders.map(o => {
-          const statusClass = o.status === 'New Order' ? 'status-new' :
-                              o.status === 'Preparing' ? 'status-prep' : 'status-ready';
+          const st = o.status || 'New Order';
+          const isNew = st === 'New Order' || st === 'New' || st === 'Paid Online';
+          const isPrep = st === 'Preparing' || st === 'In Prep';
+          const isReady = st === 'Ready for Pickup' || st === 'Ready';
+          const isFulfilled = st === 'Fulfilled' || st === 'Picked Up';
+          const statusClass = isNew ? 'status-new' : (isPrep ? 'status-prep' : (isReady ? 'status-ready' : 'status-fulfilled'));
+          const isPaid = Boolean(o.paidOnline || o.status === 'Paid Online' || (o.paymentStatus && o.paymentStatus.includes('Paid')));
 
           return `
             <div class="order-card ${statusClass}">
@@ -377,29 +386,33 @@
                 <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.4rem;">
                   <b style="font-size:1.15rem; color:var(--text-primary);">Order #${o.id}</b>
                   <span class="pill-badge" style="margin:0; font-size:0.75rem;">${o.status}</span>
+                  ${isPaid ? '<span class="status-indicator" style="margin-left:0.5rem; font-size:0.72rem;">💳 PAID ONLINE (Stripe)</span>' : ''}
                 </div>
                 <p style="font-size:0.92rem; color:var(--text-primary); margin-bottom:0.3rem;">
-                  <b>${o.customerName}</b> · ${o.phone}
+                  <b>${o.customerName}</b> · ${o.phone || o.customerPhone || 'No Phone'}
                 </p>
                 <p style="font-size:0.85rem; color:var(--text-secondary);">
-                  Items: ${o.items.map(i => `${i.qty}x ${i.name} ${i.customizations ? `(${i.customizations})` : ''}`).join(', ')}
+                  Items: ${(o.items || []).map(i => `${i.qty}x ${i.name} ${i.customizations ? `(${i.customizations})` : ''}`).join(', ')}
                 </p>
                 ${o.notes ? `<p style="font-size:0.8rem; color:var(--accent-gold); margin-top:0.2rem;">Notes: ${o.notes}</p>` : ''}
               </div>
 
               <div style="text-align:right;">
                 <div class="mono-num" style="font-size:1.3rem; font-weight:700; color:var(--accent-gold); margin-bottom:0.6rem;">
-                  $${o.total.toFixed(2)}
+                  $${parseFloat(o.total || 0).toFixed(2)}
                 </div>
                 <div style="display:flex; gap:0.4rem;">
-                  ${o.status === 'New Order' ? `
+                  ${isNew ? `
                     <button class="btn btn-primary btn-sm" onclick="advanceOrderStatus('${o.id}', 'Preparing')">Start Brew ☕</button>
                   ` : ''}
-                  ${o.status === 'Preparing' ? `
+                  ${isPrep ? `
                     <button class="btn btn-primary btn-sm" style="background:#10b981;" onclick="advanceOrderStatus('${o.id}', 'Ready for Pickup')">Mark Ready 🔔</button>
                   ` : ''}
-                  ${o.status === 'Ready for Pickup' ? `
+                  ${isReady ? `
                     <button class="btn btn-secondary btn-sm" onclick="advanceOrderStatus('${o.id}', 'Picked Up')">Complete ✓</button>
+                  ` : ''}
+                  ${isFulfilled ? `
+                    <span style="font-size:0.85rem; color:var(--status-success); font-weight:600;">✓ Fulfilled</span>
                   ` : ''}
                 </div>
               </div>

@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tier 3 Flagship Operations &amp; Executive BI — Flat Track Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=11.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=12.0">
   <style>
     body {
       background-color: #0c0a09;
@@ -429,8 +429,8 @@
     </div>
   </div>
 
-  <script src="../shared/api-client.js?v=11.0"></script>
-  <script src="../shared/components.js?v=11.0"></script>
+  <script src="../shared/api-client.js?v=12.0"></script>
+  <script src="../shared/components.js?v=12.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const loginScreen = document.getElementById('admin-login-screen');
@@ -443,11 +443,15 @@
         showDashboard();
       }
 
-      loginForm.addEventListener('submit', (e) => {
+      loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const pass = document.getElementById('login-pass').value;
         if (pass === 'roastmaster123' || pass === '1234') {
           sessionStorage.setItem('flattrack_admin_auth', 'true');
+          sessionStorage.setItem('flattrack_admin_pin', '1234');
+          if (window.FlatTrackAPI && window.FlatTrackAPI.login) {
+            await window.FlatTrackAPI.login("admin@flattrackcoffee.com", pass);
+          }
           showDashboard();
           showToast("Authorized as Owner / GM (Tier 3 Flagship)", "success");
         } else {
@@ -553,7 +557,7 @@
         const wrap = document.getElementById('orders-list-wrap');
         const badge = document.getElementById('orders-badge-count');
 
-        const activeOrders = orders.filter(o => o.status !== 'Fulfilled');
+        const activeOrders = orders.filter(o => o.status !== 'Fulfilled' && o.status !== 'Picked Up');
         if (badge) badge.innerText = activeOrders.length;
 
         if (orders.length === 0) {
@@ -568,8 +572,14 @@
         }
 
         wrap.innerHTML = orders.map(order => {
-          const statusClass = order.status === 'New' ? 'status-new' : (order.status === 'In Prep' ? 'status-prep' : 'status-ready');
-          const itemsList = (order.items || []).map(i => `${i.qty}x ${i.name}`).join(', ');
+          const st = order.status || 'New Order';
+          const isNew = st === 'New Order' || st === 'New' || st === 'Paid Online';
+          const isPrep = st === 'Preparing' || st === 'In Prep';
+          const isReady = st === 'Ready for Pickup' || st === 'Ready';
+          const isFulfilled = st === 'Fulfilled' || st === 'Picked Up';
+          const statusClass = isNew ? 'status-new' : (isPrep ? 'status-prep' : (isReady ? 'status-ready' : 'status-fulfilled'));
+          const itemsList = (order.items || []).map(i => `${i.qty}x ${i.name}${i.customizations ? ` (${i.customizations})` : ''}`).join(', ');
+          const isPaid = Boolean(order.paidOnline || order.status === 'Paid Online' || (order.paymentStatus && order.paymentStatus.includes('Paid')));
 
           return `
             <div class="order-card ${statusClass}">
@@ -577,10 +587,10 @@
                 <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
                   <b style="font-size:1.15rem; color:var(--text-primary);">#${order.id}</b>
                   <span class="pill-badge" style="margin:0; font-size:0.75rem;">${order.status}</span>
-                  ${order.paidOnline ? '<span class="status-indicator">💳 PAID ONLINE (Stripe)</span>' : '<span class="status-indicator closed">Pay at Counter</span>'}
+                  ${isPaid ? '<span class="status-indicator">💳 PAID ONLINE (Stripe)</span>' : '<span class="status-indicator closed">Pay at Counter</span>'}
                 </div>
                 <div style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:0.5rem;">
-                  <b>${order.customerName}</b> (${order.customerPhone || 'No Phone'}) · <span class="mono-num">$${parseFloat(order.total).toFixed(2)}</span>
+                  <b>${order.customerName}</b> (${order.customerPhone || order.phone || 'No Phone'}) · <span class="mono-num">$${parseFloat(order.total || 0).toFixed(2)}</span>
                 </div>
                 <div style="font-size:0.9rem; color:var(--text-primary);">
                   ${itemsList}
@@ -589,16 +599,16 @@
               </div>
 
               <div style="display:flex; gap:0.6rem; align-items:center;">
-                ${order.status === 'New' ? `
-                  <button class="btn btn-secondary btn-sm" onclick="updateOrderStatus('${order.id}', 'In Prep')">Accept &amp; Prep &rarr;</button>
+                ${isNew ? `
+                  <button class="btn btn-secondary btn-sm" onclick="updateOrderStatus('${order.id}', 'Preparing')">Accept &amp; Prep &rarr;</button>
                 ` : ''}
-                ${order.status === 'In Prep' ? `
-                  <button class="btn btn-primary btn-sm" onclick="updateOrderStatus('${order.id}', 'Ready')">Mark Ready &check;</button>
+                ${isPrep ? `
+                  <button class="btn btn-primary btn-sm" onclick="updateOrderStatus('${order.id}', 'Ready for Pickup')">Mark Ready &check;</button>
                 ` : ''}
-                ${order.status === 'Ready' ? `
+                ${isReady ? `
                   <button class="btn btn-secondary btn-sm" onclick="updateOrderStatus('${order.id}', 'Fulfilled')">Complete Pickup</button>
                 ` : ''}
-                ${order.status === 'Fulfilled' ? `
+                ${isFulfilled ? `
                   <span style="font-size:0.85rem; color:var(--status-success); font-weight:600;">✓ Fulfilled</span>
                 ` : ''}
               </div>
