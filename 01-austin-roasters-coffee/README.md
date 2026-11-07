@@ -38,7 +38,7 @@ This repository contains the complete, agency-grade digital platform for **Flat 
 │   └── admin.html               # Tier 2 Isolated Owner Admin POS Terminal
 ├── tier3/
 │   ├── index.html               # Tier 3 Flagship Hero & Scroll Animations
-│   ├── menu.html                # Tier 3 Order Ahead with Roast Points
+│   ├── menu.html                # Tier 3 Order Ahead & Customizer
 │   ├── subscribe.html           # Tier 3 3-Step Bean Subscription Engine
 │   ├── catering.html            # Tier 3 B2B Espresso Cart Quote Calculator
 │   ├── track.html               # Tier 3 Live Counter Stepper & Rewards

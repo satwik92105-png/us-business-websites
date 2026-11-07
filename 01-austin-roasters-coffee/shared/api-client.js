@@ -154,14 +154,9 @@
           { code: "DOGSPEED15", discountPercent: 15, active: true },
           { code: "AUSTINVIP", discountPercent: 20, active: true }
         ],
-        loyalty: {
-          points: 0,
-          tier: "Guest Member",
-          ordersCount: 0,
-          rewards: [
-            { id: "rew_1", title: "Free Pour-Over or Nitro Cold Brew", cost: 250, unlocked: false },
-            { id: "rew_2", title: "50% Off Any 12oz Whole Bean Bag", cost: 500, unlocked: false }
-          ]
+        customerAccount: {
+          tier: "Roastery Member",
+          ordersCount: 0
         },
         settings: {
           storeName: "Flat Track Coffee Roasters",
@@ -437,8 +432,8 @@
       // Instantly save to local state and broadcast
       state.orders.unshift(newOrder);
       if (state.currentUser) {
-        state.loyalty.points = (state.loyalty.points || 0) + Math.floor(subtotal * 10);
-        state.loyalty.ordersCount = (state.loyalty.ordersCount || 0) + 1;
+        state.customerAccount = state.customerAccount || { tier: "Roastery Member", ordersCount: 0 };
+        state.customerAccount.ordersCount = (state.customerAccount.ordersCount || 0) + 1;
       }
       saveState(state);
       notifySync('new_order', newOrder);
@@ -707,6 +702,7 @@
     },
 
     async register(email, password, name) {
+      const user = { email, name: name || email.split('@')[0], role: "customer", member: true };
       try {
         const res = await fetch(`${API_BASE}/auth/register`, {
           method: 'POST',
@@ -717,21 +713,19 @@
         if (res.ok) {
           const data = await res.json();
           const state = loadState();
-          state.currentUser = { email, name: name || email.split('@')[0], role: "customer" };
-          state.loyalty.points = 100;
+          state.currentUser = user;
           saveState(state);
-          return { success: true, user: state.currentUser };
+          return { success: true, user: user };
         }
       } catch (e) {}
       const state = loadState();
-      state.currentUser = { email, name: name || email.split('@')[0], role: "customer" };
-      state.loyalty.points = 100;
+      state.currentUser = user;
       saveState(state);
-      return { success: true, user: state.currentUser };
+      return { success: true, user: user };
     },
 
     async loginGoogle(email = "austin.guest@gmail.com", name = "Austin Member") {
-      let userData = { email, name, points: 150 };
+      let userData = { email, name, role: "customer", member: true };
       try {
         const res = await fetch(`${API_BASE}/auth/google`, {
           method: 'POST',
@@ -747,8 +741,7 @@
       } catch (e) {}
 
       const state = loadState();
-      state.currentUser = { email: userData.email, name: userData.name, role: "customer" };
-      state.loyalty.points = userData.points || 150;
+      state.currentUser = userData;
       saveState(state);
 
       try {
@@ -762,10 +755,22 @@
     logout() {
       const state = loadState();
       state.currentUser = null;
-      state.loyalty.points = 0;
       saveState(state);
+      try { localStorage.removeItem('flat_track_customer_session'); } catch(e){}
       notifySync('auth_change', null);
+      window.dispatchEvent(new CustomEvent('flat_track_auth_change', { detail: null }));
       return true;
+    },
+
+    getLoyaltyProfile() {
+      const state = loadState();
+      const user = state.currentUser || null;
+      return {
+        name: user?.name || "Guest Customer",
+        email: user?.email || "",
+        member: Boolean(user),
+        ordersCount: (state.orders || []).length
+      };
     },
 
     // PROMO CODES

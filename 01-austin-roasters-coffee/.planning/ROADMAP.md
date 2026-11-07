@@ -25,7 +25,7 @@
 - [ ] **Phase 4: Tier 3 Enterprise Suite & Cinematic Scroll Animations (`tier3/`)**
   - Cinematic scroll animations: Parallax hero, staggered reveals, scroll-linked "Seed to Cup" 4-stage timeline, number counters.
   - Pages: `index.html`, `menu.html`, `reserve.html`, `story.html`, `contact.html`, `subscribe.html` (3-step subscription engine), `catering.html` (quote calculator), `track.html` (live order tracker).
-  - Customer Account & Loyalty: Auth/Demo login, 1-Click Reorder, Roast Points & Rewards, Promo codes.
+  - Customer Account: Auth/Demo login, 1-Click Reorder, Order History, Promo codes.
   - Stripe Checkout test redirect & PDF Tax Invoice generator with QR code.
   - Tier 3 Owner BI & KDS: `tier3/admin.html` (BI analytics, sales charts, CSV export) & `tier3/kitchen.html` (tablet KDS with timers and bump buttons).
 

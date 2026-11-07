@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Order Tracker & Rewards — Flat Track Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=12.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=13.0">
   <style>
     .track-hero {
       padding: 3.5rem 0 2rem 0;
@@ -99,7 +99,7 @@
       justify-content: space-between;
       gap: 2rem;
     }
-    .points-pill {
+    .member-status-pill {
       background: rgba(201, 168, 76, 0.15);
       border: 1px solid var(--border-gold-bright);
       padding: 0.6rem 1.4rem;
@@ -178,7 +178,7 @@
   <div class="track-hero">
     <div class="container">
       <span class="pill-badge">⚡ Real-Time Counter Pipeline</span>
-      <h1>Live Counter Tracker & <span class="font-italic">Rewards</span></h1>
+      <h1>Live Counter Tracker & <span class="font-italic">Member Status</span></h1>
       <p style="color:var(--text-secondary);">Watch your order status update in real time as our baristas dial in your espresso.</p>
     </div>
   </div>
@@ -191,23 +191,23 @@
         <!-- Dynamic state inserted here: Empty / Lookup state or Active Stepper -->
       </div>
 
-      <!-- Loyalty & Rewards Account Section (Guest starts with 0 pts) -->
+      <!-- Member Account Section -->
       <div class="loyalty-banner" id="loyalty-banner-wrap">
         <div>
-          <span class="pill-badge" style="margin-bottom:0.4rem;">🎁 Roast Rewards Program</span>
+          <span class="pill-badge" style="margin-bottom:0.4rem;">☕ Flat Track Club Member</span>
           <h3 style="font-size: 1.5rem; margin-bottom: 0.3rem;" id="loyalty-headline">
-            Sign In to View & Earn Roast Points
+            Sign In for Express Counter Pickup &amp; Order History
           </h3>
           <p style="color:var(--text-secondary); font-size:0.9rem;" id="loyalty-desc">
-            Earn 10 points per $1 spent on orders and bean subscriptions. Unlock free pour-overs and exclusive micro-lots.
+            Fast 1-tap checkout, instant pickup notifications, and freshly roasted bean subscriptions.
           </p>
           <div style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;" id="loyalty-actions-wrap">
             <button class="btn btn-primary btn-sm" id="btn-open-auth-modal">Sign In / Register ✨</button>
             <button class="btn btn-outline-gold btn-sm" id="btn-quick-google">Continue with Google G</button>
           </div>
         </div>
-        <div class="points-pill" id="loyalty-points-badge">
-          0 PTS
+        <div class="member-status-pill" id="member-status-badge" style="font-size:0.9rem; padding:0.5rem 1.1rem; border-radius:9999px;">
+          Guest
         </div>
       </div>
     </div>
@@ -217,7 +217,7 @@
   <div class="modal-overlay" id="auth-modal-overlay">
     <div class="modal-card" style="max-width:440px;">
       <div class="modal-header">
-        <h3 id="auth-modal-title"><span>☕</span> Customer Rewards Account</h3>
+        <h3 id="auth-modal-title"><span>☕</span> Roastery Customer Account</h3>
         <button class="modal-close-btn" id="auth-modal-close">&times;</button>
       </div>
       <div class="modal-body">
@@ -256,7 +256,7 @@
             <input type="password" id="reg-password" class="form-input" required placeholder="At least 6 characters">
           </div>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%; margin-top:0.5rem;" id="btn-submit-register">
-            Create Account & Earn 100 PTS &rarr;
+            Create Account &rarr;
           </button>
         </form>
 
@@ -282,8 +282,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=12.0"></script>
-  <script src="../shared/components.js?v=12.0"></script>
+  <script src="../shared/api-client.js?v=13.0"></script>
+  <script src="../shared/components.js?v=13.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       initAustinTimeBadge('austin-status-badge');
@@ -425,27 +425,17 @@
         const headline = document.getElementById('loyalty-headline');
         const desc = document.getElementById('loyalty-desc');
         const actionsWrap = document.getElementById('loyalty-actions-wrap');
-        const badge = document.getElementById('loyalty-points-badge');
+        const badge = document.getElementById('member-status-badge');
 
         if (currentUser) {
-          const profile = window.FlatTrackAPI.getLoyaltyProfile();
           headline.innerHTML = `Welcome back, <b>${currentUser.name || currentUser.email}</b>!`;
-          desc.innerText = `You are a valued Roastery Member. Earn 10 points for every $1 spent. Redeem below for free drinks.`;
-          badge.innerText = `${profile.points} PTS`;
+          desc.innerText = `Your customer account is active for 1-tap express checkout and live order pickup tracking.`;
+          badge.innerText = `Verified Member ✓`;
           actionsWrap.innerHTML = `
-            <button class="btn btn-primary btn-sm" id="btn-redeem-perk">Redeem Free Drink (250 pts)</button>
-            <button class="btn btn-outline-gold btn-sm" id="btn-signout-cust">Sign Out ⏻</button>
+            <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+            <a href="subscribe.html" class="btn btn-outline-gold btn-sm">Manage Subscriptions 📦</a>
+            <button class="btn btn-secondary btn-sm" id="btn-signout-cust">Sign Out ⏻</button>
           `;
-
-          document.getElementById('btn-redeem-perk')?.addEventListener('click', () => {
-            if (profile.points >= 250) {
-              profile.points -= 250;
-              showToast("🎉 250 pts redeemed! Free pour-over credited to your next counter order.", "success");
-              updateLoyaltyUI();
-            } else {
-              showToast(`You have ${profile.points} pts. 250 pts needed for a free drink!`, "info");
-            }
-          });
 
           document.getElementById('btn-signout-cust')?.addEventListener('click', () => {
             window.FlatTrackAPI.logout();
@@ -453,9 +443,9 @@
             updateLoyaltyUI();
           });
         } else {
-          headline.innerText = "Sign In to View & Earn Roast Points";
-          desc.innerText = "Earn 10 points per $1 spent on orders and bean subscriptions. Unlock free pour-overs and exclusive micro-lots.";
-          badge.innerText = "0 PTS";
+          headline.innerText = "Sign In for Express Counter Pickup & Order History";
+          desc.innerText = "Fast 1-tap checkout, instant pickup notifications, and freshly roasted bean subscriptions.";
+          badge.innerText = "Guest";
           actionsWrap.innerHTML = `
             <button class="btn btn-primary btn-sm" id="btn-open-auth-modal">Sign In / Register ✨</button>
             <button class="btn btn-outline-gold btn-sm" id="btn-quick-google">Continue with Google G</button>
@@ -524,7 +514,7 @@
         const res = await window.FlatTrackAPI.register(em, pw, nm);
         if (res.success) {
           authOverlay.classList.remove('is-open');
-          showToast(`Account created! +100 welcome bonus points added ✨`, "success");
+          showToast(`Account created successfully! Welcome to Flat Track Roasters ☕`, "success");
           updateLoyaltyUI();
         } else {
           showToast("Registration failed", "error");

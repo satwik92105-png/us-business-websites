@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Ahead — Flat Track Coffee Roasters (Flagship)</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=12.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=13.0">
   <style>
     .menu-header-bar {
       padding: 3.5rem 0 2rem 0;
@@ -120,7 +120,7 @@
   <!-- Menu Header -->
   <div class="menu-header-bar">
     <div class="container">
-      <span class="pill-badge">⚡ 10-Min Counter Pickup · Earn 10x Points</span>
+      <span class="pill-badge">⚡ 10-Min Counter Pickup · Fresh Daily Roasts</span>
       <h1>Flagship Order Ahead <span class="font-italic">Menu</span></h1>
       <p>Zero third-party markups. Dialed in fresh at 1611 E Cesar Chavez St.</p>
     </div>
@@ -215,8 +215,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=12.0"></script>
-  <script src="../shared/components.js?v=12.0"></script>
+  <script src="../shared/api-client.js?v=13.0"></script>
+  <script src="../shared/components.js?v=13.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       initAustinTimeBadge('austin-status-badge');
@@ -269,11 +269,8 @@
               ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
             </div>
             <div class="card-body">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.4rem;">
+              <div style="margin-bottom:0.4rem;">
                 <h3 class="card-title">${item.name}</h3>
-                <span style="font-size:0.75rem; color:var(--accent-gold); background:rgba(201,168,76,0.1); padding:0.15rem 0.5rem; border-radius:9999px; white-space:nowrap;">
-                  +${Math.floor(item.price * 10)} pts
-                </span>
               </div>
               <p class="card-desc">${item.description}</p>
               <div class="card-footer">

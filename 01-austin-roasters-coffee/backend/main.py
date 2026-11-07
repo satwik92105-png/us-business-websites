@@ -103,18 +103,18 @@ def register_customer(req: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(UserModel).filter(UserModel.email == req.email).first()
     if user:
         token = create_access_token({"sub": user.email, "role": user.role})
-        return {"access_token": token, "token_type": "bearer", "role": user.role, "user": {"email": user.email, "points": 100}}
+        return {"access_token": token, "token_type": "bearer", "role": user.role, "user": {"email": user.email, "member": True}}
     new_user = UserModel(email=req.email, hashed_password=hash_password(req.password), role="customer")
     db.add(new_user)
     db.commit()
     token = create_access_token({"sub": new_user.email, "role": "customer"})
-    return {"access_token": token, "token_type": "bearer", "role": "customer", "user": {"email": new_user.email, "points": 100}}
+    return {"access_token": token, "token_type": "bearer", "role": "customer", "user": {"email": new_user.email, "member": True}}
 
 @app.post("/auth/google")
 @app.post("/api/auth/google")
 def google_oauth(data: dict, db: Session = Depends(get_db)):
     email = data.get("email", "customer@gmail.com")
-    name = data.get("name", "Google Customer")
+    name = data.get("name", "Austin Member")
     user = db.query(UserModel).filter(UserModel.email == email).first()
     if not user:
         user = UserModel(email=email, hashed_password=hash_password("google_oauth_auth_token"), role="customer")
@@ -124,7 +124,7 @@ def google_oauth(data: dict, db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"email": email, "name": name, "points": 150}
+        "user": {"email": email, "name": name, "member": True}
     }
 
 # --- PUBLIC MENU ENDPOINTS ---

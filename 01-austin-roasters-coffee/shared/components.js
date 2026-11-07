@@ -876,7 +876,7 @@
 
 
   // ====================================================================
-  // GOOGLE OAUTH & CUSTOMER ROAST POINTS SYSTEM (UNIVERSAL)
+  // GOOGLE OAUTH & CUSTOMER ACCOUNT SYSTEM (UNIVERSAL)
   // ====================================================================
   function initTier3GoogleAuth() {
     function openAuthModal() {
@@ -921,7 +921,7 @@
           </div>
           <div class="modal-body" style="padding:1.5rem 1.25rem;">
             <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.25rem; text-align:center;">
-              Sign in to earn <b>Roast Points</b>, unlock 1-tap checkout, and track your freshly roasted bean subscriptions.
+              Sign in for 1-tap express checkout, real-time counter order tracking, and freshly roasted bean subscriptions.
             </p>
 
             <!-- Google OAuth Instant Button -->
@@ -957,12 +957,12 @@
               <h4 id="auth-user-name" style="font-size:1.2rem; color:var(--text-primary); margin-bottom:0.25rem;">Austin Member</h4>
               <p id="auth-user-email" style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.25rem;">austin.guest@gmail.com</p>
               <div style="background:rgba(201,168,76,0.12); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem; margin-bottom:1.5rem;">
-                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold);">Available Roast Points</div>
-                <div id="auth-user-points" style="font-size:1.8rem; font-weight:700; color:var(--text-primary); font-family:var(--font-mono);">150 PTS</div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Redeemable on next order</div>
+                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold);">Roastery Account</div>
+                <div id="auth-user-membership" style="font-size:1.2rem; font-weight:700; color:var(--text-primary); margin:0.25rem 0;">Flagship Coffee Member ☕</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Express Counter Pickup &amp; Subscriptions Active</div>
               </div>
               <div style="display:flex; gap:0.75rem;">
-                <a href="track.html" class="btn btn-secondary btn-sm" style="flex:1;">View Rewards</a>
+                <a href="menu.html" class="btn btn-primary btn-sm" style="flex:1;">Order Ahead ⚡</a>
                 <button type="button" id="btn-auth-logout" class="btn btn-outline-gold btn-sm" style="flex:1;">Sign Out</button>
               </div>
             </div>
@@ -991,10 +991,10 @@
             const session = {
               email: user?.email || "austin.guest@gmail.com",
               name: user?.name || "Austin Coffee Member",
-              points: user?.points || 150
+              member: true
             };
             localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
-            showToast("✓ Authenticated via Google OAuth! 150 Roast Points unlocked. ☕", "success", 4500);
+            showToast("✓ Signed in with Google! Welcome to Flat Track Roasters. ☕", "success", 4000);
             updateAuthState();
             closeAuthModal();
           } catch (e) {
@@ -1014,10 +1014,10 @@
           const session = {
             email: email,
             name: email.split('@')[0],
-            points: 100
+            member: true
           };
           localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
-          showToast(`✓ Welcome back, ${session.name}! 100 Roast Points loaded.`, "success", 4000);
+          showToast(`✓ Welcome back, ${session.name}! Member account active.`, "success", 4000);
           updateAuthState();
           closeAuthModal();
         });
@@ -1057,7 +1057,7 @@
       const googleModalBtn = document.getElementById('btn-modal-google-action');
 
       if (session && session.email) {
-        const displayShort = `✨ ${session.name.split(' ')[0]} (${session.points || 150} pts)`;
+        const displayShort = `✨ ${session.name.split(' ')[0]} (Member)`;
         if (label) label.innerText = displayShort;
         drawerLabels.forEach(dl => dl.innerText = displayShort);
         googleBtns.forEach(gb => gb.style.borderColor = 'var(--accent-gold)');
@@ -1065,10 +1065,8 @@
           signedInView.style.display = 'block';
           const nameEl = document.getElementById('auth-user-name');
           const emailEl = document.getElementById('auth-user-email');
-          const ptsEl = document.getElementById('auth-user-points');
           if (nameEl) nameEl.innerText = session.name;
           if (emailEl) emailEl.innerText = session.email;
-          if (ptsEl) ptsEl.innerText = `${session.points || 150} PTS`;
         }
         if (emailForm) emailForm.style.display = 'none';
         if (googleModalBtn) googleModalBtn.style.display = 'none';
