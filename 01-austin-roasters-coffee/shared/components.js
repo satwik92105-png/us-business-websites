@@ -870,4 +870,220 @@
   }
   window.initMobileNavigation = initMobileNavigation;
 
+
+  // ====================================================================
+  // GOOGLE OAUTH & CUSTOMER ROAST POINTS SYSTEM (TIER 3)
+  // ====================================================================
+  function initTier3GoogleAuth() {
+    const path = window.location.pathname.toLowerCase();
+    const isTier3 = path.includes('/tier3/') || path.includes('tier3.html');
+    if (!isTier3) return;
+
+    // 1. Inject or update header auth button in .header-actions
+    const headerActions = document.querySelector('.header-actions');
+    if (headerActions && !document.getElementById('btn-header-google-auth')) {
+      const authBtn = document.createElement('button');
+      authBtn.id = 'btn-header-google-auth';
+      authBtn.className = 'btn btn-outline-gold btn-sm';
+      authBtn.style.cssText = 'display:inline-flex; align-items:center; gap:0.4rem; padding:0.42rem 0.75rem;';
+      authBtn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+        <span id="header-google-user-label">Sign In</span>
+      `;
+      // insert before mobile-menu-toggle
+      const toggle = headerActions.querySelector('#mobile-menu-toggle');
+      if (toggle) {
+        headerActions.insertBefore(authBtn, toggle);
+      } else {
+        headerActions.appendChild(authBtn);
+      }
+
+      authBtn.addEventListener('click', openAuthModal);
+    }
+
+    // 2. Inject Auth Modal into body if not present
+    if (!document.getElementById('auth-modal-overlay')) {
+      const modalWrap = document.createElement('div');
+      modalWrap.id = 'auth-modal-overlay';
+      modalWrap.className = 'modal-overlay';
+      modalWrap.innerHTML = `
+        <div class="modal-card" style="max-width:440px;" data-lenis-prevent>
+          <div class="modal-header">
+            <h3 id="auth-modal-title"><span>✨</span> Roastery Customer Account</h3>
+            <button class="modal-close-btn" id="auth-modal-close-btn">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:1.5rem 1.25rem;">
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.25rem; text-align:center;">
+              Sign in to earn <b>Roast Points</b>, unlock 1-tap checkout, and track your freshly roasted bean subscriptions.
+            </p>
+
+            <!-- Google OAuth Instant Button -->
+            <button type="button" id="btn-modal-google-action" class="btn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.65rem; background:#ffffff; color:#1f1f1f; font-weight:600; font-size:0.95rem; border:1px solid #dadce0; border-radius:10px; padding:0.75rem 1rem; box-shadow:0 2px 6px rgba(0,0,0,0.18); cursor:pointer; margin-bottom:1.5rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+              <span>Continue with Google</span>
+            </button>
+
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
+              <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.08em;">Or Email &amp; Password</span>
+              <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
+            </div>
+
+            <!-- Email Login Form -->
+            <form id="auth-email-form">
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="auth-input-email" class="form-input" required placeholder="you@domain.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="auth-input-pass" class="form-input" required placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">
+                Sign In to Roastery &rarr;
+              </button>
+            </form>
+
+            <!-- Already signed in profile view -->
+            <div id="auth-signed-in-view" style="display:none; text-align:center;">
+              <div style="font-size:2.8rem; margin-bottom:0.5rem;">☕</div>
+              <h4 id="auth-user-name" style="font-size:1.2rem; color:var(--text-primary); margin-bottom:0.25rem;">Austin Member</h4>
+              <p id="auth-user-email" style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.25rem;">austin.guest@gmail.com</p>
+              <div style="background:rgba(201,168,76,0.12); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem; margin-bottom:1.5rem;">
+                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold);">Available Roast Points</div>
+                <div id="auth-user-points" style="font-size:1.8rem; font-weight:700; color:var(--text-primary); font-family:var(--font-mono);">150 PTS</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Redeemable on next order</div>
+              </div>
+              <div style="display:flex; gap:0.75rem;">
+                <a href="track.html" class="btn btn-secondary btn-sm" style="flex:1;">View Rewards</a>
+                <button type="button" id="btn-auth-logout" class="btn btn-outline-gold btn-sm" style="flex:1;">Sign Out</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalWrap);
+
+      // Close modal listener
+      const closeBtn = document.getElementById('auth-modal-close-btn');
+      if (closeBtn) closeBtn.addEventListener('click', closeAuthModal);
+      modalWrap.addEventListener('click', (e) => {
+        if (e.target === modalWrap) closeAuthModal();
+      });
+
+      // Google Sign-In click
+      const googleBtn = document.getElementById('btn-modal-google-action');
+      if (googleBtn) {
+        googleBtn.addEventListener('click', async () => {
+          googleBtn.disabled = true;
+          googleBtn.innerHTML = 'Connecting to Google OAuth...';
+          try {
+            if (window.FlatTrackAPI) {
+              await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
+            }
+            const session = {
+              email: "austin.guest@gmail.com",
+              name: "Austin Coffee Member",
+              points: 150
+            };
+            localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
+            showToast("✓ Authenticated via Google OAuth! 150 Roast Points unlocked.", "success", 4500);
+            updateAuthState();
+            closeAuthModal();
+          } catch (e) {
+            console.error(e);
+          } finally {
+            googleBtn.disabled = false;
+            googleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg> <span>Continue with Google</span>';
+          }
+        });
+      }
+
+      // Email Form Submit
+      const emailForm = document.getElementById('auth-email-form');
+      if (emailForm) {
+        emailForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('auth-input-email').value;
+          const session = {
+            email: email,
+            name: email.split('@')[0],
+            points: 100
+          };
+          localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
+          showToast(`✓ Welcome back, ${session.name}! 100 Roast Points loaded.`, "success", 4000);
+          updateAuthState();
+          closeAuthModal();
+        });
+      }
+
+      // Logout
+      const logoutBtn = document.getElementById('btn-auth-logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem('flat_track_customer_session');
+          showToast("Signed out of customer account", "info");
+          updateAuthState();
+          closeAuthModal();
+        });
+      }
+    }
+
+    function openAuthModal() {
+      const modal = document.getElementById('auth-modal-overlay');
+      if (modal) modal.classList.add('is-open');
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById('auth-modal-overlay');
+      if (modal) modal.classList.remove('is-open');
+    }
+
+    function updateAuthState() {
+      let session = null;
+      try {
+        const raw = localStorage.getItem('flat_track_customer_session');
+        if (raw) session = JSON.parse(raw);
+      } catch (e) {}
+
+      const label = document.getElementById('header-google-user-label');
+      const googleBtn = document.getElementById('btn-header-google-auth');
+      const signedInView = document.getElementById('auth-signed-in-view');
+      const emailForm = document.getElementById('auth-email-form');
+      const googleModalBtn = document.getElementById('btn-modal-google-action');
+
+      if (session && session.email) {
+        if (label) label.innerText = `✨ ${session.name.split(' ')[0]} (${session.points || 150} pts)`;
+        if (googleBtn) googleBtn.style.borderColor = 'var(--accent-gold)';
+        if (signedInView) {
+          signedInView.style.display = 'block';
+          const nameEl = document.getElementById('auth-user-name');
+          const emailEl = document.getElementById('auth-user-email');
+          const ptsEl = document.getElementById('auth-user-points');
+          if (nameEl) nameEl.innerText = session.name;
+          if (emailEl) emailEl.innerText = session.email;
+          if (ptsEl) ptsEl.innerText = `${session.points || 150} PTS`;
+        }
+        if (emailForm) emailForm.style.display = 'none';
+        if (googleModalBtn) googleModalBtn.style.display = 'none';
+      } else {
+        if (label) label.innerText = 'Sign In';
+        if (googleBtn) googleBtn.style.borderColor = '';
+        if (signedInView) signedInView.style.display = 'none';
+        if (emailForm) emailForm.style.display = 'block';
+        if (googleModalBtn) googleModalBtn.style.display = 'flex';
+      }
+    }
+
+    // Run auth state update immediately
+    updateAuthState();
+  }
+
+  // Auto-init on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTier3GoogleAuth);
+  } else {
+    initTier3GoogleAuth();
+  }
+
 })(window);

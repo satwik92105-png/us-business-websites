@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat Track Coffee Roasters — Order Ahead & Cafe Hub</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=9.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=10.0">
   <style>
     .hero-tier2 {
       min-height: 82vh;
@@ -132,8 +132,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=9.0"></script>
-  <script src="../shared/components.js?v=9.0"></script>
+  <script src="../shared/api-client.js?v=10.0"></script>
+  <script src="../shared/components.js?v=10.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       initAustinTimeBadge('austin-status-badge');
@@ -157,7 +157,7 @@
               <p class="card-desc">${item.description}</p>
               <div class="card-footer">
                 <span class="card-price mono-num">$${item.price.toFixed(2)}</span>
-                <button class="btn btn-primary btn-sm" onclick="CartManager.addItem({id:${item.id}, name:'${item.name.replace(/'/g, "\\'")}', price:${item.price}})">
+                <button class="btn btn-primary btn-sm" onclick="CartManager.addItem({id:'${item.id}', name:'${(item.name||'').replace(/'/g, &quot;\'&quot;)}', price:${item.price||0}})">
                   Add to Order +
                 </button>
               </div>
