@@ -4,10 +4,63 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tier 3 Owner BI & Analytics — Flat Track Roasters</title>
+  <title>Tier 3 Flagship Operations &amp; Executive BI — Flat Track Roasters</title>
   <link rel="stylesheet" href="../shared/styles.css?v=10.0">
   <style>
-    body { background-color: #0c0a09; }
+    body {
+      background-color: #0c0a09;
+      color: var(--text-primary);
+    }
+    .admin-nav {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-medium);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      max-width: 100%;
+      scrollbar-width: none;
+    }
+    .admin-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .admin-tab-btn {
+      padding: 0.5rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--trans-quick);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .admin-tab-btn:hover, .admin-tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--accent-gold);
+      border-color: var(--border-gold-subtle);
+    }
+    .admin-content-section {
+      display: none;
+      padding: 2.2rem 0 4rem 0;
+    }
+    .admin-content-section.active {
+      display: block;
+    }
     .bi-card {
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
@@ -43,179 +96,723 @@
       transition: height 600ms var(--ease-smooth);
       min-height: 4px;
     }
+    .order-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .order-card.status-new { border-left: 4px solid #ef4444; }
+    .order-card.status-prep { border-left: 4px solid #f59e0b; }
+    .order-card.status-ready { border-left: 4px solid #10b981; }
+    .crud-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-elevated);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .crud-table th, .crud-table td {
+      padding: 0.85rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.88rem;
+    }
+    .crud-table th {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .stock-toggle-btn {
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .stock-toggle-btn.in-stock {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .stock-toggle-btn.sold-out {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .login-container {
+      max-width: 420px;
+      margin: 8rem auto;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Admin Bar -->
-    <!-- Sticky Glass Navigation Header -->
-    <header style="background:var(--bg-elevated); border-bottom:1px solid var(--border-medium); padding:0.85rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
-    <div style="display:flex; align-items:center; gap:1.2rem;">
-      <span style="font-size:1.4rem;">☕</span>
-      <div>
-        <b style="font-size:1rem; color:var(--text-primary);">Flat Track Coffee Roasters</b>
-        <span style="font-size:0.75rem; color:var(--accent-gold); margin-left:0.5rem; font-family:monospace;">● TIER 3 BI &amp; REVENUE SUITE</span>
-      </div>
-    </div>
-
-    <div style="display:flex; gap:0.75rem; align-items:center;">
-      <a href="kitchen.html" target="_blank" class="btn btn-primary btn-sm">Launch Tablet KDS 🖥️</a>
-      <a href="../tier2/admin.html" class="btn btn-secondary btn-sm">Menu / Orders POS &rarr;</a>
-    </div>
-  </header>
-
-  <main class="container" style="padding: 2.5rem 0;">
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
-      <div>
-        <span class="pill-badge">📊 Executive Intelligence</span>
-        <h1 style="font-size: 2.4rem;">Roastery Financial & Sales Analytics</h1>
-        <p style="color:var(--text-secondary);">Direct revenue, customer lifetime value, and recurring subscription metrics (calculated live from database).</p>
-      </div>
-      <div style="display:flex; gap:0.6rem;">
-        <button class="btn btn-secondary btn-sm" id="btn-refresh-bi">🔄 Refresh Live Stats</button>
-        <button class="btn btn-outline-gold btn-sm" id="btn-export-csv">📥 Export Order Ledger (CSV)</button>
-      </div>
-    </div>
-
-    <!-- 4 High-Level Metric Tiles (Dynamically Calculated) -->
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem; margin-bottom:2rem;">
-      <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Direct Net Revenue</span>
-        <div class="bi-stat-val" id="metric-revenue">$0.00</div>
-        <div style="font-size:0.8rem; color:var(--status-success);" id="metric-revenue-sub">100% direct customer payments</div>
-      </div>
-
-      <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Active Orders In Queue</span>
-        <div class="bi-stat-val" id="metric-orders-count">0</div>
-        <div style="font-size:0.8rem; color:var(--accent-gold);" id="metric-orders-sub">0 orders today</div>
-      </div>
-
-      <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Avg Order Ticket</span>
-        <div class="bi-stat-val" id="metric-avg-ticket">$0.00</div>
-        <div style="font-size:0.8rem; color:var(--text-secondary);" id="metric-ticket-sub">Live basket size average</div>
-      </div>
-
-      <div class="bi-card">
-        <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">3rd-Party Fees Saved (30%)</span>
-        <div class="bi-stat-val" id="metric-fees-saved">$0.00</div>
-        <div style="font-size:0.8rem; color:var(--status-success);">Retained vs aggregator commissions</div>
-      </div>
-    </div>
-
-    <!-- Dynamic Charts / Breakdown Row -->
-    <div style="display:grid; grid-template-columns: 1.3fr 0.7fr; gap:2rem; margin-bottom:2rem;" id="bi-content-row">
-      <!-- Daily Revenue Bar Chart -->
-      <div class="bi-card">
-        <h3 style="font-size:1.25rem; margin-bottom:0.2rem;">Weekly Direct Counter Volume</h3>
-        <p style="font-size:0.82rem; color:var(--text-secondary);">Direct mobile order-ahead transactions by day (USD)</p>
-
-        <div class="chart-bar-container" id="chart-bars-wrap">
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Mon</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Tue</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Wed</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Thu</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Fri</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sat</small></div>
-          <div class="chart-bar-col"><div class="chart-bar" style="height: 6%;"></div><small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sun</small></div>
+  <!-- Login Gate Screen -->
+  <div id="admin-login-screen">
+    <div class="login-container">
+      <span style="font-size: 2.5rem;">🔐</span>
+      <h2 style="font-size: 1.6rem; margin: 0.8rem 0 0.3rem 0;">Tier 3 Flagship Operations</h2>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.8rem;">
+        Flat Track Coffee Roasters · Executive Console &amp; Counter POS
+      </p>
+      <form id="admin-login-form">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Owner / GM Email</label>
+          <input type="email" id="login-email" class="form-input" value="admin@flattrackcoffee.com" required>
         </div>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.8rem;" id="chart-caption">
-          Bars scale dynamically as counter orders and subscriptions are submitted.
-        </p>
-      </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Password / PIN</label>
+          <input type="password" id="login-pass" class="form-input" placeholder="Enter PIN (1234 or roastmaster123)" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+          Authorize &amp; Enter Flagship Console &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
 
-      <!-- Top Selling Products -->
-      <div class="bi-card">
-        <h3 style="font-size:1.25rem; margin-bottom:1rem;">Top Velocity Menu Items</h3>
-        <div id="top-products-wrap" style="display:flex; flex-direction:column; gap:0.9rem; font-size:0.88rem;">
-          <p style="color:var(--text-secondary); font-size:0.85rem; padding:1rem 0;">No sales recorded yet. Menu items will rank automatically upon first customer checkout.</p>
+  <!-- Authenticated Unified Admin Interface -->
+  <div id="admin-dashboard-app" style="display: none;">
+    <!-- Top Admin Bar -->
+    <header class="admin-nav">
+      <div style="display:flex; align-items:center; gap:1.2rem;">
+        <span style="font-size: 1.4rem;">☕</span>
+        <div>
+          <b style="font-size: 1rem; color: var(--text-primary);">Flat Track Roasters</b>
+          <span style="font-size: 0.75rem; color: var(--accent-gold); margin-left: 0.5rem; font-family: monospace;">● TIER 3 ALL-IN-ONE SUITE</span>
         </div>
       </div>
+
+      <!-- Navigation Tabs (BI + POS + CRUD + Reservations + Inbox) -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="analytics">📊 Executive BI</button>
+        <button class="admin-tab-btn" data-tab="orders">🛒 Orders &amp; POS (<span id="orders-badge-count">0</span>)</button>
+        <button class="admin-tab-btn" data-tab="menu">☕ Menu &amp; Stock</button>
+        <button class="admin-tab-btn" data-tab="reservations">🪑 Reservations (<span id="res-badge-count">0</span>)</button>
+        <button class="admin-tab-btn" data-tab="inbox">📬 Inquiries</button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+        <a href="kitchen.html" target="_blank" class="btn btn-primary btn-sm">Tablet KDS 🖥️</a>
+        <a href="index.html" class="btn btn-secondary btn-sm" target="_blank">View Storefront &nearr;</a>
+        <button id="admin-logout-btn" class="btn btn-outline-gold btn-sm">Lock / Logout</button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+
+      <!-- =========================================================
+           TAB 1: EXECUTIVE BI & REVENUE ANALYTICS
+           ========================================================= -->
+      <section id="tab-analytics" class="admin-content-section active">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <span class="pill-badge">📊 Executive Intelligence</span>
+            <h1 style="font-size: 2.2rem; margin-top:0.4rem;">Roastery Financial &amp; Sales Analytics</h1>
+            <p style="color:var(--text-secondary);">Direct revenue, customer lifetime value, and recurring subscription metrics (calculated live from database).</p>
+          </div>
+          <div style="display:flex; gap:0.6rem;">
+            <button class="btn btn-secondary btn-sm" id="btn-refresh-bi">🔄 Refresh Live Stats</button>
+            <button class="btn btn-outline-gold btn-sm" id="btn-export-csv">📥 Export Order Ledger (CSV)</button>
+          </div>
+        </div>
+
+        <!-- Metric Tiles -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+          <div class="bi-card">
+            <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Direct Net Revenue</span>
+            <div class="bi-stat-val" id="metric-revenue">$0.00</div>
+            <div style="font-size:0.8rem; color:var(--status-success);" id="metric-revenue-sub">100% direct customer payments</div>
+          </div>
+
+          <div class="bi-card">
+            <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Active Orders In Queue</span>
+            <div class="bi-stat-val" id="metric-orders-count">0</div>
+            <div style="font-size:0.8rem; color:var(--accent-gold);" id="metric-orders-sub">0 orders today</div>
+          </div>
+
+          <div class="bi-card">
+            <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">Avg Order Ticket</span>
+            <div class="bi-stat-val" id="metric-avg-ticket">$0.00</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary);" id="metric-ticket-sub">Live basket size average</div>
+          </div>
+
+          <div class="bi-card">
+            <span style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase;">3rd-Party Fees Saved (30%)</span>
+            <div class="bi-stat-val" id="metric-fees-saved">$0.00</div>
+            <div style="font-size:0.8rem; color:var(--status-success);">Retained vs aggregator commissions</div>
+          </div>
+        </div>
+
+        <!-- Weekly Volume Bar Chart -->
+        <div class="bi-card" style="margin-bottom:2rem;">
+          <h3 style="font-size:1.2rem; margin-bottom:0.2rem;">Weekly Direct Counter Volume</h3>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">Direct mobile order-ahead transactions by day (USD)</p>
+          <div class="chart-bar-container" id="chart-bars-wrap">
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 12%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Mon</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 18%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Tue</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 25%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Wed</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 38%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Thu</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 55%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Fri</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 75%;"></div><small style="font-size:0.75rem; color:var(--accent-gold); font-weight:bold;">Sat</small></div>
+            <div class="chart-bar-col"><div class="chart-bar" style="height: 60%;"></div><small style="font-size:0.75rem; color:var(--text-secondary);">Sun</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 2: ORDERS & KITCHEN POS QUEUE
+           ========================================================= -->
+      <section id="tab-orders" class="admin-content-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.8rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.8rem;">Live Counter Orders</h2>
+            <p style="color:var(--text-secondary); font-size:0.92rem;">Direct orders placed by customers via menu.html. Bump to update customer status in real-time.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-manual-refresh-orders">🔄 Refresh Queue</button>
+        </div>
+
+        <div id="orders-list-wrap">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 3: MENU CRUD & LIVE STOCK MANAGEMENT
+           ========================================================= -->
+      <section id="tab-menu" class="admin-content-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.8rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.8rem;">Menu Catalog &amp; Live Stock</h2>
+            <p style="color:var(--text-secondary); font-size:0.92rem;">Toggle out-of-stock items in 1 tap. Add new seasonal roasts or edit pricing.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-open-add-product">+ Add New Product</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="crud-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Badge</th>
+                <th>Stock Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="crud-menu-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 4: TABLE RESERVATIONS
+           ========================================================= -->
+      <section id="tab-reservations" class="admin-content-section">
+        <div style="margin-bottom:1.8rem;">
+          <h2 style="font-size:1.8rem;">Table Reservations</h2>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Guests who booked via reserve.html. Click "Seat Guest" when they arrive.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="crud-table">
+            <thead>
+              <tr>
+                <th>Ref #</th>
+                <th>Guest</th>
+                <th>Party</th>
+                <th>Date &amp; Time</th>
+                <th>Special Notes</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="reservations-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           TAB 5: CONTACT INBOX
+           ========================================================= -->
+      <section id="tab-inbox" class="admin-content-section">
+        <div style="margin-bottom:1.8rem;">
+          <h2 style="font-size:1.8rem;">Inquiries &amp; Catering Inbox</h2>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Messages submitted through contact.html and catering inquiries.</p>
+        </div>
+
+        <div id="inbox-list-wrap">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Product Add / Edit Modal -->
+  <div class="modal-overlay" id="product-modal-overlay">
+    <div class="modal-card" style="max-width: 520px;" data-lenis-prevent>
+      <div class="modal-header">
+        <h3 id="product-modal-title"><span>☕</span> Add Menu Offering</h3>
+        <button class="modal-close-btn" id="product-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="product-crud-form">
+          <input type="hidden" id="prod-id">
+          
+          <div class="form-group">
+            <label class="form-label">Item Name *</label>
+            <input type="text" id="prod-name" class="form-input" required placeholder="e.g. Oaxacan Cortado">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select id="prod-category" class="form-select">
+                <option value="espresso">Espresso</option>
+                <option value="specialty">Specialty</option>
+                <option value="cold">Cold Brew</option>
+                <option value="bakery">Bakery</option>
+                <option value="beans">Whole Bean Bags</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Price (USD) *</label>
+              <input type="number" id="prod-price" class="form-input" step="0.25" min="1" required placeholder="5.50">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tag Badge (Optional)</label>
+            <input type="text" id="prod-badge" class="form-input" placeholder="e.g. Roaster's Pick, New, Organic">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea id="prod-desc" class="form-input" rows="2" placeholder="Tasting notes, processing method..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Image URL</label>
+            <input type="url" id="prod-image" class="form-input" placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;">
+            Save Offering &amp; Update Menu &rarr;
+          </button>
+        </form>
+      </div>
     </div>
-  </main>
+  </div>
 
   <script src="../shared/api-client.js?v=10.0"></script>
   <script src="../shared/components.js?v=10.0"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      initDemoControls({ tier: 'tier3', isAdmin: true });
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginScreen = document.getElementById('admin-login-screen');
+      const app = document.getElementById('admin-dashboard-app');
+      const loginForm = document.getElementById('admin-login-form');
+      const logoutBtn = document.getElementById('admin-logout-btn');
 
-      async function calculateMetrics() {
+      // Check Session Auth
+      if (sessionStorage.getItem('flattrack_admin_auth') === 'true') {
+        showDashboard();
+      }
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pass = document.getElementById('login-pass').value;
+        if (pass === 'roastmaster123' || pass === '1234') {
+          sessionStorage.setItem('flattrack_admin_auth', 'true');
+          showDashboard();
+          showToast("Authorized as Owner / GM (Tier 3 Flagship)", "success");
+        } else {
+          showToast("Invalid PIN! Try 1234 or roastmaster123", "error");
+        }
+      });
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          sessionStorage.removeItem('flattrack_admin_auth');
+          window.location.reload();
+        });
+      }
+
+      function showDashboard() {
+        loginScreen.style.display = 'none';
+        app.style.display = 'block';
+        loadAllData();
+      }
+
+      // Tab Switching
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.admin-content-section').forEach(s => s.classList.remove('active'));
+
+          btn.classList.add('active');
+          const tabId = 'tab-' + btn.dataset.tab;
+          const section = document.getElementById(tabId);
+          if (section) section.classList.add('active');
+        });
+      });
+
+      // Load all data
+      function loadAllData() {
+        loadBIStats();
+        loadOrders();
+        loadMenuCRUD();
+        loadReservations();
+        loadInbox();
+      }
+
+      // =========================================================
+      // 1. BI STATS & CHARTS
+      // =========================================================
+      async function loadBIStats() {
         if (!window.FlatTrackAPI) return;
         const orders = await window.FlatTrackAPI.getOrders();
-        const subs = window.FlatTrackAPI.getSubscribers ? await window.FlatTrackAPI.getSubscribers() : [];
+        
+        let totalRevenue = 0;
+        let count = orders.length;
 
-        // Sum real revenue
-        const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
-        const ordersCount = orders.length;
-        const avgTicket = ordersCount > 0 ? (totalRevenue / ordersCount) : 0;
+        orders.forEach(o => {
+          const t = parseFloat(o.total || o.total_amount || 0);
+          if (!isNaN(t)) totalRevenue += t;
+        });
+
+        const avgTicket = count > 0 ? (totalRevenue / count) : 0;
         const feesSaved = totalRevenue * 0.30;
 
         document.getElementById('metric-revenue').innerText = `$${totalRevenue.toFixed(2)}`;
-        document.getElementById('metric-orders-count').innerText = ordersCount;
-        document.getElementById('metric-orders-sub').innerText = `${ordersCount} direct orders recorded`;
+        document.getElementById('metric-orders-count').innerText = count;
+        document.getElementById('metric-orders-sub').innerText = `${count} orders tracked`;
         document.getElementById('metric-avg-ticket').innerText = `$${avgTicket.toFixed(2)}`;
         document.getElementById('metric-fees-saved').innerText = `$${feesSaved.toFixed(2)}`;
-
-        // Top Velocity Products
-        const prodCountMap = {};
-        orders.forEach(o => {
-          (o.items || []).forEach(item => {
-            prodCountMap[item.name] = (prodCountMap[item.name] || 0) + (item.qty || 1);
-          });
-        });
-
-        const sortedProds = Object.entries(prodCountMap).sort((a, b) => b[1] - a[1]);
-        const topWrap = document.getElementById('top-products-wrap');
-
-        if (sortedProds.length > 0) {
-          topWrap.innerHTML = sortedProds.slice(0, 5).map(([name, qty], idx) => `
-            <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-subtle); padding-bottom:0.4rem;">
-              <span>${idx + 1}. ${name}</span>
-              <b class="mono-num" style="color:var(--accent-gold);">${qty} ordered</b>
-            </div>
-          `).join('');
-        } else {
-          topWrap.innerHTML = `<p style="color:var(--text-secondary); font-size:0.85rem; padding:1rem 0;">No sales recorded yet. Menu items will rank automatically upon first customer checkout.</p>`;
-        }
       }
 
-      calculateMetrics();
-      document.getElementById('btn-refresh-bi').addEventListener('click', () => {
-        calculateMetrics();
+      const refreshBiBtn = document.getElementById('btn-refresh-bi');
+      if (refreshBiBtn) refreshBiBtn.addEventListener('click', () => {
+        loadBIStats();
         showToast("Live BI metrics refreshed", "success");
       });
 
-      if (window.FlatTrackAPI) {
-        window.FlatTrackAPI.onSync((event) => {
-          if (event.action === 'new_order' || event.action === 'order_status_update') {
-            calculateMetrics();
-          }
-        });
-      }
-
-      document.getElementById('btn-export-csv').addEventListener('click', async () => {
+      const exportCsvBtn = document.getElementById('btn-export-csv');
+      if (exportCsvBtn) exportCsvBtn.addEventListener('click', async () => {
         if (!window.FlatTrackAPI) return;
         const orders = await window.FlatTrackAPI.getOrders();
         if (orders.length === 0) {
-          showToast("No orders in ledger to export yet.", "info");
+          showToast("No orders available to export", "info");
           return;
         }
-        let csv = "Order ID,Customer,Phone,Items,Subtotal,Tax,Total,Status,Timestamp\n";
+
+        let csv = "Order ID,Customer,Email,Total,Status,Date\n";
         orders.forEach(o => {
-          const itemsStr = (o.items || []).map(i => `${i.qty}x ${i.name}`).join('; ');
-          csv += `"${o.id}","${o.customerName}","${o.phone}","${itemsStr}",${o.subtotal},${o.tax},${o.total},"${o.status}","${o.orderTime}"\n`;
+          csv += `"${o.id}","${o.customerName||''}","${o.customerEmail||''}","${o.total||0}","${o.status||''}","${o.timestamp||''}"\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `flattrack_orders_export_${Date.now()}.csv`;
+        a.download = `flattrack_orders_${Date.now()}.csv`;
         a.click();
-        showToast("CSV Order Ledger exported successfully!", "success");
+        showToast("Exported Order Ledger CSV", "success");
       });
+
+      // =========================================================
+      // 2. ORDERS QUEUE (POS)
+      // =========================================================
+      async function loadOrders() {
+        if (!window.FlatTrackAPI) return;
+        const orders = await window.FlatTrackAPI.getOrders();
+        const wrap = document.getElementById('orders-list-wrap');
+        const badge = document.getElementById('orders-badge-count');
+
+        const activeOrders = orders.filter(o => o.status !== 'Fulfilled');
+        if (badge) badge.innerText = activeOrders.length;
+
+        if (orders.length === 0) {
+          wrap.innerHTML = `
+            <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-secondary); background:var(--bg-elevated); border-radius:16px;">
+              <span style="font-size:2.5rem;">☕</span>
+              <h3 style="margin-top:0.6rem; color:var(--text-primary);">Order Queue is Empty</h3>
+              <p style="font-size:0.9rem; margin-top:0.3rem;">When customers place an order on menu.html, it pops up here instantly in real time.</p>
+            </div>
+          `;
+          return;
+        }
+
+        wrap.innerHTML = orders.map(order => {
+          const statusClass = order.status === 'New' ? 'status-new' : (order.status === 'In Prep' ? 'status-prep' : 'status-ready');
+          const itemsList = (order.items || []).map(i => `${i.qty}x ${i.name}`).join(', ');
+
+          return `
+            <div class="order-card ${statusClass}">
+              <div>
+                <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                  <b style="font-size:1.15rem; color:var(--text-primary);">#${order.id}</b>
+                  <span class="pill-badge" style="margin:0; font-size:0.75rem;">${order.status}</span>
+                  ${order.paidOnline ? '<span class="status-indicator">💳 PAID ONLINE (Stripe)</span>' : '<span class="status-indicator closed">Pay at Counter</span>'}
+                </div>
+                <div style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:0.5rem;">
+                  <b>${order.customerName}</b> (${order.customerPhone || 'No Phone'}) · <span class="mono-num">$${parseFloat(order.total).toFixed(2)}</span>
+                </div>
+                <div style="font-size:0.9rem; color:var(--text-primary);">
+                  ${itemsList}
+                </div>
+                ${order.notes ? `<div style="font-size:0.8rem; color:var(--accent-gold); margin-top:0.3rem;">Note: ${order.notes}</div>` : ''}
+              </div>
+
+              <div style="display:flex; gap:0.6rem; align-items:center;">
+                ${order.status === 'New' ? `
+                  <button class="btn btn-secondary btn-sm" onclick="updateOrderStatus('${order.id}', 'In Prep')">Accept &amp; Prep &rarr;</button>
+                ` : ''}
+                ${order.status === 'In Prep' ? `
+                  <button class="btn btn-primary btn-sm" onclick="updateOrderStatus('${order.id}', 'Ready')">Mark Ready &check;</button>
+                ` : ''}
+                ${order.status === 'Ready' ? `
+                  <button class="btn btn-secondary btn-sm" onclick="updateOrderStatus('${order.id}', 'Fulfilled')">Complete Pickup</button>
+                ` : ''}
+                ${order.status === 'Fulfilled' ? `
+                  <span style="font-size:0.85rem; color:var(--status-success); font-weight:600;">✓ Fulfilled</span>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.updateOrderStatus = async function(id, nextStatus) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.updateOrderStatus(id, nextStatus);
+          showToast(`Order #${id} bumped to ${nextStatus}`, "success");
+          loadOrders();
+          loadBIStats();
+        }
+      };
+
+      const refreshOrdersBtn = document.getElementById('btn-manual-refresh-orders');
+      if (refreshOrdersBtn) refreshOrdersBtn.addEventListener('click', loadOrders);
+
+      // =========================================================
+      // 3. MENU CRUD
+      // =========================================================
+      const prodModal = document.getElementById('product-modal-overlay');
+      const prodForm = document.getElementById('product-crud-form');
+      const openAddBtn = document.getElementById('btn-open-add-product');
+      const closeProdBtn = document.getElementById('product-modal-close');
+
+      openAddBtn.addEventListener('click', () => {
+        prodForm.reset();
+        document.getElementById('prod-id').value = '';
+        document.getElementById('product-modal-title').innerHTML = '<span>☕</span> Add Menu Item';
+        document.getElementById('prod-image').value = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80';
+        prodModal.classList.add('is-open');
+      });
+
+      closeProdBtn.addEventListener('click', () => prodModal.classList.remove('is-open'));
+
+      async function loadMenuCRUD() {
+        if (!window.FlatTrackAPI) return;
+        const menu = await window.FlatTrackAPI.getMenu();
+        const tbody = document.getElementById('crud-menu-tbody');
+
+        tbody.innerHTML = menu.map(item => `
+          <tr>
+            <td>
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <img src="${item.image}" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+                <div>
+                  <b>${item.name}</b>
+                  <div style="color:var(--text-muted); font-size:0.75rem;">${item.description ? item.description.slice(0, 45) + '...' : ''}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge" style="margin:0; font-size:0.75rem;">${item.category}</span></td>
+            <td class="mono-num">$${parseFloat(item.price).toFixed(2)}</td>
+            <td>${item.badge ? `<span style="color:var(--accent-gold); font-size:0.8rem; font-weight:600;">${item.badge}</span>` : '—'}</td>
+            <td>
+              <button class="stock-toggle-btn ${item.inStock ? 'in-stock' : 'sold-out'}" onclick="toggleProductStock('${item.id}')">
+                ${item.inStock ? '● In Stock' : '✕ Sold Out'}
+              </button>
+            </td>
+            <td>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="btn btn-secondary btn-sm" onclick="editProduct('${item.id}')">Edit</button>
+                <button class="btn btn-outline-gold btn-sm" onclick="deleteProduct('${item.id}')">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.toggleProductStock = async function(id) {
+        if (window.FlatTrackAPI) {
+          const res = await window.FlatTrackAPI.toggleItemStock(id);
+          showToast(`Stock updated`, "info");
+          loadMenuCRUD();
+        }
+      };
+
+      window.editProduct = async function(id) {
+        const menu = await window.FlatTrackAPI.getMenu();
+        const item = menu.find(i => String(i.id) === String(id));
+        if (!item) return;
+
+        document.getElementById('prod-id').value = item.id;
+        document.getElementById('prod-name').value = item.name;
+        document.getElementById('prod-category').value = item.category;
+        document.getElementById('prod-price').value = item.price;
+        document.getElementById('prod-badge').value = item.badge || '';
+        document.getElementById('prod-desc').value = item.description || '';
+        document.getElementById('prod-image').value = item.image || '';
+
+        document.getElementById('product-modal-title').innerHTML = '<span>✏️</span> Edit Menu Item';
+        prodModal.classList.add('is-open');
+      };
+
+      window.deleteProduct = async function(id) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.deleteMenuItem(id);
+          showToast("Item deleted from menu", "info");
+          loadMenuCRUD();
+        }
+      };
+
+      prodForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const idVal = document.getElementById('prod-id').value;
+        const itemData = {
+          name: document.getElementById('prod-name').value.trim(),
+          category: document.getElementById('prod-category').value,
+          price: parseFloat(document.getElementById('prod-price').value),
+          badge: document.getElementById('prod-badge').value.trim(),
+          description: document.getElementById('prod-desc').value.trim(),
+          image: document.getElementById('prod-image').value.trim() || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80',
+          inStock: true,
+          customizable: ['espresso', 'specialty', 'cold'].includes(document.getElementById('prod-category').value)
+        };
+        if (idVal) itemData.id = idVal;
+
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.saveMenuItem(itemData);
+          prodModal.classList.remove('is-open');
+          showToast(`Menu saved! Customer tabs updated in real time.`, "success");
+          loadMenuCRUD();
+        }
+      });
+
+      // =========================================================
+      // 4. RESERVATIONS
+      // =========================================================
+      async function loadReservations() {
+        if (!window.FlatTrackAPI) return;
+        const resList = await window.FlatTrackAPI.getReservations();
+        const tbody = document.getElementById('reservations-tbody');
+
+        const activeCount = resList.filter(r => r.status === 'Confirmed').length;
+        const badge = document.getElementById('res-badge-count');
+        if (badge) badge.innerText = activeCount;
+
+        if (resList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-secondary); padding:2.5rem 1rem;">No table reservations booked yet. When customers submit reserve.html, their bookings appear here in real time.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = resList.map(r => {
+          const party = r.partySize || r.party_size || 2;
+          const rDate = r.date || r.res_date || 'Today';
+          const rTime = r.time || r.res_time || '12:00 PM';
+          return `
+          <tr>
+            <td class="mono-num" style="color:var(--accent-gold); font-weight:600;">${r.id}</td>
+            <td><b>${r.name}</b><br/><small style="color:var(--text-secondary);">${r.email} · ${r.phone}</small></td>
+            <td>${party} Guests</td>
+            <td><b>${rDate}</b><br/>${rTime}</td>
+            <td>${r.notes || '—'}</td>
+            <td><span class="pill-badge" style="margin:0; font-size:0.75rem;">${r.status}</span></td>
+            <td>
+              ${r.status === 'Confirmed' ? `
+                <button class="btn btn-secondary btn-sm" onclick="updateResStatus('${r.id}', 'Seated')">Seat Guest</button>
+              ` : `
+                <span style="color:var(--status-success); font-weight:600;">✓ Completed</span>
+              `}
+            </td>
+          </tr>
+        `;
+        }).join('');
+      }
+
+      window.updateResStatus = async function(id, status) {
+        if (window.FlatTrackAPI) {
+          await window.FlatTrackAPI.updateReservationStatus(id, status);
+          showToast(`Reservation #${id} updated to ${status}`, "success");
+          loadReservations();
+        }
+      };
+
+      // =========================================================
+      // 5. INBOX
+      // =========================================================
+      async function loadInbox() {
+        if (!window.FlatTrackAPI) return;
+        const inq = await window.FlatTrackAPI.getInquiries();
+        const wrap = document.getElementById('inbox-list-wrap');
+        if (inq.length === 0) {
+          wrap.innerHTML = `<p style="color:var(--text-secondary); padding:2rem; text-align:center;">Inbox is empty.</p>`;
+          return;
+        }
+
+        wrap.innerHTML = inq.map(m => `
+          <div style="background:var(--bg-elevated); border:1px solid var(--border-subtle); border-radius:14px; padding:1.4rem; margin-bottom:1rem;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+              <b>${m.name} &lt;${m.email}&gt;</b>
+              <small style="color:var(--text-muted);">${m.date || 'Recent'}</small>
+            </div>
+            <div style="color:var(--accent-gold); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Subject: ${m.subject || 'General Inquiry'}</div>
+            <p style="font-size:0.92rem; color:var(--text-secondary);">${m.message || ''}</p>
+          </div>
+        `).join('');
+      }
+
+      // Live multi-tab sync
+      if (window.FlatTrackAPI) {
+        window.FlatTrackAPI.onSync((event) => {
+          if (event.action === 'new_order') {
+            loadOrders();
+            loadBIStats();
+            showToast(`🔔 New Order #${event.payload.id} received!`, "success", 4000);
+          } else if (event.action === 'new_reservation') {
+            loadReservations();
+            showToast(`🪑 New Reservation #${event.payload.id} booked!`, "info", 4000);
+          }
+        });
+      }
     });
   </script>
 </body>
