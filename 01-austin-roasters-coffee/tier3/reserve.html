@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reserve a Table — Flat Track Coffee Roasters (Flagship)</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=15.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=16.0">
   <style>
     .reserve-card {
       background: var(--bg-elevated);
@@ -95,11 +95,29 @@
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem;">
             <div class="form-group">
               <label class="form-label">Reservation Date *</label>
-              <select class="form-select" id="res3-date" required></select>
+              <select class="form-select" id="res3-date" required>
+                <option value="Today">Today (Austin Roastery Seating)</option>
+                <option value="Tomorrow">Tomorrow</option>
+                <option value="Day 3">In 2 Days</option>
+                <option value="Day 4">In 3 Days</option>
+                <option value="Day 5">In 4 Days</option>
+            </select>
             </div>
             <div class="form-group">
               <label class="form-label">Time Slot *</label>
-              <select class="form-select" id="res3-time" required></select>
+              <select class="form-select" id="res3-time" required>
+                <option value="8:00 AM">8:00 AM (Morning Roast)</option>
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="12:00 PM">12:00 PM (Lunch Flight)</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="2:00 PM">2:00 PM (Afternoon Cupping)</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="5:00 PM">5:00 PM (Evening Tasting)</option>
+                <option value="6:00 PM">6:00 PM (Late Seating)</option>
+            </select>
             </div>
           </div>
 
@@ -168,8 +186,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=15.0"></script>
-  <script src="../shared/components.js?v=15.0"></script>
+  <script src="../shared/api-client.js?v=16.0"></script>
+  <script src="../shared/components.js?v=16.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Ahead — Flat Track Coffee Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=15.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=16.0">
   <style>
     .menu-header-bar {
       padding: 3.5rem 0 2rem 0;
@@ -126,7 +126,176 @@
 
       <!-- Menu Grid -->
       <div class="menu-grid" id="tier2-menu-container">
-        <!-- Injected via JavaScript from FlatTrackAPI -->
+
+        <div class="product-card" data-category="espresso">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80" alt="Dogspeed Espresso Double" loading="lazy">
+            <span class="card-badge">Roaster's Pick</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Dogspeed Espresso Double</h3>
+            <p class="card-desc">Double-pulled Dogspeed blend. Rich dark cacao, candied citrus, dense persistent crema. The house signature.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$4.50</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('1')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cold">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&auto=format&fit=crop&q=80" alt="High-Octane Cold Brew" loading="lazy">
+            <span class="card-badge">Best Seller</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">High-Octane Cold Brew</h3>
+            <p class="card-desc">Steeped 20 hours cold-drip method. Ultra smooth, chocolatey undertones, zero bitterness. High caffeine.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$5.50</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('2')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="espresso">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&auto=format&fit=crop&q=80" alt="Cortado (1:1 Ratio)" loading="lazy">
+            <span class="card-badge">Barista Favorite</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Cortado (1:1 Ratio)</h3>
+            <p class="card-desc">Equal parts espresso and warm velvety steamed whole milk in an authentic Gibraltar glass.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$4.75</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('3')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="cold">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&auto=format&fit=crop&q=80" alt="Flat Track Nitro Draft" loading="lazy">
+            <span class="card-badge">On Tap</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Flat Track Nitro Draft</h3>
+            <p class="card-desc">Dogspeed cold brew infused with food-grade nitrogen on tap. Velvety stout-like cascading head.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$6.00</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('4')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="espresso">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80" alt="House Batch Drip (Dogspeed Roast)" loading="lazy">
+            <span class="card-badge">Daily Brew</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">House Batch Drip (Dogspeed Roast)</h3>
+            <p class="card-desc">Precision batch brewed on Marco jet brewer. Clean, vibrant, perfect everyday cup.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$3.75</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('5')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="specialty">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80" alt="Austin Amber Horchata Latte" loading="lazy">
+            <span class="card-badge">House Specialty</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Austin Amber Horchata Latte</h3>
+            <p class="card-desc">House-made rice and almond horchata, Madagascar cinnamon, vanilla bean syrup, espresso double.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$6.50</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('6')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="beans">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80" alt="Dogspeed Whole Bean Blend (12oz)" loading="lazy">
+            <span class="card-badge">Fresh Roasted</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Dogspeed Whole Bean Blend (12oz)</h3>
+            <p class="card-desc">Our flagship roast. Washed Colombian & natural Ethiopian blend. Tasting notes: Dark chocolate, cherry, toasted almond.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$19.00</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('7')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="beans">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&auto=format&fit=crop&q=80" alt="Single Origin Ethiopian Yirgacheffe (12oz)" loading="lazy">
+            <span class="card-badge">Limited Lot</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Single Origin Ethiopian Yirgacheffe (12oz)</h3>
+            <p class="card-desc">Light roasted heirloom varietals. Floral jasmine aroma, bergamot tea sweetness, Meyer lemon finish.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$22.00</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('8')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="specialty">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&auto=format&fit=crop&q=80" alt="Moto-Matcha Lavender Tonic" loading="lazy">
+            <span class="card-badge">Seasonal</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Moto-Matcha Lavender Tonic</h3>
+            <p class="card-desc">Ceremonial grade Uji matcha, culinary lavender reduction, fever tree tonic, fresh lime slice.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$6.25</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('9')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="bakery">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80" alt="Hill Country Cardamom Bun" loading="lazy">
+            <span class="card-badge">Fresh Daily</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Hill Country Cardamom Bun</h3>
+            <p class="card-desc">Twisted Swedish-style bun with freshly crushed green cardamom, pearl sugar crystal crust.</p>
+            <div class="card-footer">
+              <span class="card-price mono-num">$5.00</span>
+              <button class="btn btn-primary btn-sm" onclick="handleItemOrderClick('10')">
+                Customize &plus;
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -193,8 +362,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=15.0"></script>
-  <script src="../shared/components.js?v=15.0"></script>
+  <script src="../shared/api-client.js?v=16.0"></script>
+  <script src="../shared/components.js?v=16.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       initAustinTimeBadge('austin-status-badge');

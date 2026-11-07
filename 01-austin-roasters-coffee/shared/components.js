@@ -4,6 +4,7 @@
  */
 
 (function (window) {
+  if (!window) return;
   // Defensive Safeguard: Suppress all native browser alert/confirm banners in favor of toast / in-modal
   window.alert = function(msg) {
     if (window.showToast) {
@@ -1279,4 +1280,4 @@
     initTier3GoogleAuth();
   }
   window.initTier3GoogleAuth = initTier3GoogleAuth;
-})();
+})(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this));

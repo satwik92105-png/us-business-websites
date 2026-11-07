@@ -308,7 +308,7 @@
       }
 
       const state = loadState();
-      const savedItem = serverResult ? {
+      const savedItem = (serverResult && typeof serverResult === 'object' && !Array.isArray(serverResult) && serverResult.name) ? {
         ...serverResult,
         inStock: serverResult.in_stock !== undefined ? serverResult.in_stock : serverResult.inStock,
         in_stock: serverResult.in_stock !== undefined ? serverResult.in_stock : serverResult.inStock
