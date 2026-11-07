@@ -5,81 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat Track Coffee Roasters — Flagship Hospitality & Subscriptions</title>
   <link rel="stylesheet" href="../shared/styles.css">
+
   <style>
-    /* Tier 3 Flagship Hero with Parallax & Warm Glow */
-    .hero-tier3 {
-      min-height: 94vh;
+    /* Lenis Smooth Scroll Core Architecture */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-smooth iframe {
+      pointer-events: none;
+    }
+
+    /* 1. Pinned 3D Kinetic Typography Hero ("Enter Flat Track") */
+    .hero-kinetic-container {
+      height: 220vh;
+      position: relative;
+      background: #0b0908;
+    }
+    .hero-kinetic-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 1200px;
+      transform-style: preserve-3d;
       display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
+      justify-content: center;
       border-bottom: 1px solid var(--border-gold-subtle);
     }
-    .hero-parallax-bg {
+    #lenis-3d-canvas {
       position: absolute;
-      top: -10%;
-      left: 0;
+      inset: 0;
       width: 100%;
-      height: 120%;
-      background: linear-gradient(180deg, rgba(11, 9, 8, 0.35) 0%, rgba(11, 9, 8, 0.95) 100%), 
-                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&auto=format&fit=crop&q=80') center/cover no-repeat;
-      will-change: transform;
-      z-index: 0;
-    }
-    .hero-steam-glow {
-      position: absolute;
-      top: 20%;
-      right: 15%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, rgba(11, 9, 8, 0) 70%);
-      pointer-events: none;
+      height: 100%;
       z-index: 1;
-      animation: pulseGlow 6s ease-in-out infinite alternate;
+      pointer-events: none;
     }
-    @keyframes pulseGlow {
-      0% { opacity: 0.5; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1.15); }
+    .hero-kinetic-backdrop {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(201,168,76,0.14) 0%, rgba(11,9,8,0.92) 75%);
+      z-index: 0;
+      pointer-events: none;
     }
-    .hero-t3-content {
+    .kinetic-text-wrap {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      width: 100%;
+    }
+    .kinetic-title-left {
+      font-family: Fraunces, serif;
+      font-size: clamp(3.2rem, 11vw, 9.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--accent-gold);
+      line-height: 0.95;
+      text-shadow: 0 10px 40px rgba(0,0,0,0.85), 0 0 50px rgba(201,168,76,0.3);
+      will-change: transform, opacity;
+    }
+    .kinetic-title-right {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(0.95rem, 2.6vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: var(--text-primary);
+      margin-top: 1rem;
+      text-transform: uppercase;
+      text-shadow: 0 4px 25px rgba(0,0,0,0.95);
+      will-change: transform, opacity;
+    }
+    .kinetic-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      animation: floatHint 2.4s ease-in-out infinite;
+      z-index: 4;
+      pointer-events: none;
+    }
+    @keyframes floatHint {
+      0%, 100% { transform: translateY(0); opacity: 0.8; }
+      50% { transform: translateY(8px); opacity: 0.4; }
+    }
+    .hero-portal-content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      max-width: 820px;
+      text-align: center;
+      padding: 0 1.5rem;
+      opacity: 0;
+      transform: scale(0.82) translateZ(-80px);
+      pointer-events: auto;
+      will-change: transform, opacity;
     }
-    .hero-t3-content h1 {
-      font-size: 4.2rem;
+    .hero-portal-content h1 {
+      font-size: clamp(2.4rem, 5.2vw, 4.2rem);
       line-height: 1.12;
-      margin-bottom: 1.4rem;
-    }
-    .hero-t3-content p {
-      font-size: 1.25rem;
-      margin-bottom: 2.2rem;
+      margin-bottom: 1.2rem;
       color: var(--text-primary);
-      opacity: 0.92;
+    }
+    .hero-portal-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      margin-bottom: 2.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
     .hero-badges-row {
       display: flex;
-      gap: 1rem;
-      margin-bottom: 1.8rem;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .hero-float-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(21, 18, 16, 0.85);
+      gap: 0.4rem;
+      background: rgba(21, 18, 16, 0.88);
       backdrop-filter: blur(10px);
-      padding: 0.4rem 0.9rem;
+      padding: 0.4rem 0.95rem;
       border-radius: 9999px;
       font-size: 0.82rem;
       color: var(--accent-gold);
       border: 1px solid var(--border-gold-subtle);
     }
+
+    /* Stats Band */
     .stats-band {
       background: var(--bg-surface);
       border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
       padding: 3.5rem 0;
+      position: relative;
+      z-index: 10;
     }
     .stats-grid {
       display: grid;
@@ -98,6 +180,134 @@
       font-size: 0.9rem;
       color: var(--text-secondary);
     }
+
+    /* 4. Pinned Horizontal 3D Perspective Showcase Track */
+    .horizontal-showcase-section {
+      position: relative;
+      background: #0f0d0b;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .horizontal-pin-wrap {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      perspective: 1200px;
+    }
+    .horizontal-intro {
+      flex: 0 0 380px;
+      margin-right: 4rem;
+    }
+    .horizontal-track {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      will-change: transform;
+    }
+    .horizontal-card-3d {
+      flex: 0 0 340px;
+      background: linear-gradient(145deg, #191512 0%, #110e0c 100%);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 20px;
+      padding: 1.8rem;
+      transform-style: preserve-3d;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.06);
+      transition: border-color 0.3s ease;
+      will-change: transform;
+    }
+    .horizontal-card-3d:hover {
+      border-color: var(--accent-gold);
+    }
+    .h-card-img {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+    }
+    .h-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 5. Stacked Sticky 3D Cards ("01 — 04 Seed-to-Cup Craft") */
+    .stacked-deck-section {
+      padding: 6rem 0 8rem 0;
+      position: relative;
+      background: var(--bg-body);
+    }
+    .stacked-deck-container {
+      position: relative;
+      max-width: 1060px;
+      margin: 0 auto;
+      perspective: 1200px;
+    }
+    .stacked-card-3d {
+      position: sticky;
+      top: 110px;
+      margin-bottom: 4rem;
+      transform-origin: center top;
+      will-change: transform, filter;
+    }
+    .deck-card-inner {
+      background: linear-gradient(145deg, #181411 0%, #0e0c0a 100%);
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: 24px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 80px 1.25fr 1fr;
+      gap: 2.2rem;
+      align-items: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 35px rgba(201,168,76,0.08);
+    }
+    .deck-card-num {
+      font-family: var(--font-mono);
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      opacity: 0.65;
+      line-height: 1;
+    }
+    .deck-card-body h3 {
+      font-size: 1.85rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+    .deck-card-body p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .deck-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .deck-tags span {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      background: rgba(201,168,76,0.08);
+      color: var(--accent-gold);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid rgba(201,168,76,0.22);
+    }
+    .deck-card-media {
+      border-radius: 16px;
+      overflow: hidden;
+      height: 240px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .deck-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Sub Promo Card */
     .sub-promo-card {
       background: linear-gradient(135deg, #1b1612 0%, #13100e 100%);
       border: 1px solid var(--border-gold-subtle);
@@ -108,10 +318,15 @@
       gap: 3rem;
       align-items: center;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), var(--gold-glow);
+      transform-style: preserve-3d;
+      will-change: transform;
     }
+
     @media (max-width: 900px) {
-      .hero-t3-content h1 { font-size: 3rem; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
+      .horizontal-pin-wrap { padding: 0 1.5rem; }
+      .horizontal-intro { flex: 0 0 260px; margin-right: 2rem; }
+      .deck-card-inner { grid-template-columns: 1fr; padding: 2rem; }
       .sub-promo-card { grid-template-columns: 1fr; padding: 2rem; }
     }
   </style>
@@ -130,7 +345,7 @@
         <li><a href="index.html" class="nav-link active">Flagship</a></li>
         <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
         <li><a href="subscribe.html" class="nav-link">Bean Subscriptions 📦</a></li>
-        <li><a href="catering.html" class="nav-link">Catering & B2B ✨</a></li>
+        <li><a href="catering.html" class="nav-link">Catering &amp; B2B ✨</a></li>
         <li><a href="track.html" class="nav-link">Live Tracker ⚡</a></li>
         <li><a href="reserve.html" class="nav-link">Reserve 🪑</a></li>
         <li><a href="story.html" class="nav-link">Story</a></li>
@@ -145,13 +360,27 @@
     </div>
   </header>
 
-  <!-- Parallax Hero with Steam Glow -->
-  <section class="hero-tier3" id="hero-section">
-    <div class="hero-parallax-bg" id="hero-bg"></div>
-    <div class="hero-steam-glow"></div>
+  <!-- 1. PINNED 3D KINETIC TYPOGRAPHY ZOOM-THROUGH HERO -->
+  <section class="hero-kinetic-container" id="hero-kinetic-section">
+    <div class="hero-kinetic-stage" id="hero-kinetic-stage">
+      <div class="hero-kinetic-backdrop"></div>
+      
+      <!-- 2. REAL-TIME THREE.JS 3D CANVAS STAGE -->
+      <canvas id="lenis-3d-canvas"></canvas>
 
-    <div class="container">
-      <div class="hero-t3-content">
+      <!-- Giant 3D Display Title (Zooms past camera in Z-space) -->
+      <div class="kinetic-text-wrap" id="kinetic-text-wrap">
+        <div class="kinetic-title-left" id="kinetic-title-left">FLAT TRACK</div>
+        <div class="kinetic-title-right" id="kinetic-title-right">EAST AUSTIN ROASTERS</div>
+      </div>
+
+      <div class="kinetic-scroll-hint" id="kinetic-scroll-hint">
+        <span>SCROLL TO ENTER</span>
+        <span>↓</span>
+      </div>
+
+      <!-- Underneath Interactive 3D Roastery Showcase Portal -->
+      <div class="hero-portal-content" id="hero-portal-content">
         <div class="hero-badges-row">
           <span class="hero-float-badge">🌱 100% Direct-Trade Sourced</span>
           <span class="hero-float-badge">🔥 Cast-Iron Drum Roasted</span>
@@ -163,7 +392,7 @@
           Experience East Austin's premier specialty roastery. Order fresh coffee for counter pickup, subscribe to bi-weekly single-origin deliveries, or track your live barista brew in real time.
         </p>
 
-        <div style="display:flex; gap:1.2rem; flex-wrap:wrap;">
+        <div style="display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center;">
           <a href="menu.html" class="btn btn-primary btn-lg">Order Pickup Ahead 🛒</a>
           <a href="subscribe.html" class="btn btn-secondary btn-lg">Build Coffee Subscription 📦</a>
           <a href="track.html" class="btn btn-outline-gold btn-lg">⚡ Live Order Tracker</a>
@@ -196,60 +425,177 @@
     </div>
   </section>
 
-  <!-- Signature Interactive Seed-to-Cup Scroll Timeline -->
-  <section class="section" id="timeline-section">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="pill-badge">✨ Interactive Journey</span>
-        <h2>The Seed-to-Cup Craft</h2>
-        <p>Scroll down to explore how our beans journey from high-altitude volcanic soil to your morning brew.</p>
+  <!-- 4. PINNED HORIZONTAL 3D PERSPECTIVE SHOWCASE TRACK -->
+  <section class="horizontal-showcase-section" id="horizontal-showcase-section">
+    <div class="horizontal-pin-wrap" id="horizontal-pin-wrap">
+      <div class="horizontal-intro">
+        <span class="pill-badge">✨ 3D Perspective Track</span>
+        <h2 style="font-size:2.6rem; line-height:1.15; margin:0.8rem 0;">Signature Roasts &amp; Reserves</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.6;">
+          Scroll vertically to glide through our East Austin cast-iron drum roasts, seasonal micro-lots, and subscription boxes in real-time 3D perspective.
+        </p>
+        <div style="margin-top:1.5rem; display:flex; align-items:center; gap:0.6rem; color:var(--accent-gold); font-family:var(--font-mono); font-size:0.85rem; font-weight:700;">
+          <span>GLIDE HORIZONTALLY</span> <span>&rarr;</span>
+        </div>
       </div>
 
-      <div class="timeline-track-wrap">
-        <div class="timeline-line-bg"></div>
-        <div class="timeline-line-fill" id="timeline-progress-fill"></div>
-
-        <!-- Step 1 -->
-        <div class="timeline-step reveal-on-scroll stagger-1" id="step-1">
-          <div class="timeline-dot">🌱</div>
-          <div class="timeline-content">
-            <h4>1. Direct Trade Micro-Lot Harvest</h4>
-            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
-              We partner directly with smallholder farming families in Oaxaca, Huila, and Yirgacheffe at elevations above 1,700m. Cherry selection is 100% hand-harvested at peak brix ripeness.
-            </p>
+      <div class="horizontal-track" id="horizontal-track">
+        <!-- 3D Card 1 -->
+        <div class="horizontal-card-3d tilt-card-3d">
+          <div class="h-card-img">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80" alt="Dogspeed Espresso">
+          </div>
+          <span class="pill-badge" style="font-size:0.72rem; margin-bottom:0.5rem;">Flagship Espresso</span>
+          <h4 style="font-size:1.25rem; margin-bottom:0.4rem; color:var(--text-primary);">Dogspeed Blend</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">
+            Dark chocolate, candied citrus, dense crema. Built for double shots and velvety oat flat whites.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b class="mono-num" style="color:var(--accent-gold); font-size:1.15rem;">$19.50 / 12oz</b>
+            <a href="menu.html" class="btn btn-outline-gold btn-sm">Order Ahead</a>
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="timeline-step reveal-on-scroll stagger-2" id="step-2">
-          <div class="timeline-dot">🔥</div>
-          <div class="timeline-content">
-            <h4>2. Small-Batch Cast-Iron Drum Roasting</h4>
-            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
-              Roasted on East Cesar Chavez in calibrated micro-batches. Our roast profiles are dialed into caramelize natural sugars without masking delicate floral, citrus, and stone fruit acidity.
-            </p>
+        <!-- 3D Card 2 -->
+        <div class="horizontal-card-3d tilt-card-3d">
+          <div class="h-card-img">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80" alt="Ethiopian Single Origin">
+          </div>
+          <span class="pill-badge" style="font-size:0.72rem; margin-bottom:0.5rem;">Single-Origin Micro-Lot</span>
+          <h4 style="font-size:1.25rem; margin-bottom:0.4rem; color:var(--text-primary);">Ethiopian Yirgacheffe</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">
+            Natural process at 2,050m. Bergamot blossom, wild blackberry, honeysuckle finish.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b class="mono-num" style="color:var(--accent-gold); font-size:1.15rem;">$22.00 / 12oz</b>
+            <a href="menu.html" class="btn btn-outline-gold btn-sm">Order Ahead</a>
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="timeline-step reveal-on-scroll stagger-3" id="step-3">
-          <div class="timeline-dot">☕</div>
-          <div class="timeline-content">
-            <h4>3. Precision Barista Dial-In</h4>
-            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
-              Every morning at 6:00 AM, our lead baristas refractometer-test and taste every origin on bar, fine-tuning water temperature, grind distribution, and extraction yield to 20.5%.
-            </p>
+        <!-- 3D Card 3 -->
+        <div class="horizontal-card-3d tilt-card-3d">
+          <div class="h-card-img">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&auto=format&fit=crop&q=80" alt="Bourbon Smoked Reserve">
+          </div>
+          <span class="pill-badge" style="font-size:0.72rem; margin-bottom:0.5rem;">Seasonal Release</span>
+          <h4 style="font-size:1.25rem; margin-bottom:0.4rem; color:var(--text-primary);">Bourbon Smoked Reserve</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">
+            Infused with Texas charred oak staves. Vanilla bean smoke, burnt caramel, toasted pecan.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b class="mono-num" style="color:var(--accent-gold); font-size:1.15rem;">$24.50 / 12oz</b>
+            <a href="menu.html" class="btn btn-outline-gold btn-sm">Order Ahead</a>
           </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="timeline-step reveal-on-scroll stagger-4" id="step-4">
-          <div class="timeline-dot">🚀</div>
-          <div class="timeline-content">
-            <h4>4. Delivered Fresh to You (Doorstep or Counter)</h4>
-            <p style="font-size:0.92rem; color:var(--text-secondary); margin-top:0.4rem;">
-              Whether picked up at our cafe in 10 minutes or delivered to your doorstep bi-weekly via our club subscription, you receive peak-fresh beans at their optimal degassing window.
-            </p>
+        <!-- 3D Card 4 -->
+        <div class="horizontal-card-3d tilt-card-3d">
+          <div class="h-card-img">
+            <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80" alt="Subscription Box">
+          </div>
+          <span class="pill-badge" style="font-size:0.72rem; margin-bottom:0.5rem;">Club Membership</span>
+          <h4 style="font-size:1.25rem; margin-bottom:0.4rem; color:var(--text-primary);">Roaster's Choice Club</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">
+            Rotating bi-weekly single-origins shipped 24 hours off roast. 15% discount &amp; free shipping.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b class="mono-num" style="color:var(--accent-gold); font-size:1.15rem;">From $16.50/ship</b>
+            <a href="subscribe.html" class="btn btn-primary btn-sm">Configure Club</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. STACKED STICKY 3D CARDS ("01 — 04 SEED-TO-CUP CRAFT", LENIS.DEV PHYSICS) -->
+  <section class="stacked-deck-section" id="seed-to-cup-stacked-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll" style="text-align:center; margin-bottom:3.5rem;">
+        <span class="pill-badge">✨ 3D Stacked Deck Architecture</span>
+        <h2 style="font-size:2.8rem;">01 — 04 The Seed-to-Cup Craft</h2>
+        <p style="color:var(--text-secondary); max-width:620px; margin:0.6rem auto 0 auto;">
+          Modeled directly on Lenis.dev 3D card physics. Watch architectural cards stack and scale backward in Z-space as you scroll.
+        </p>
+      </div>
+
+      <div class="stacked-deck-container" id="stacked-deck-container">
+        <!-- Card 01 -->
+        <div class="stacked-card-3d" id="deck-card-1" style="z-index:1;">
+          <div class="deck-card-inner">
+            <div class="deck-card-num">01</div>
+            <div class="deck-card-body">
+              <span class="pill-badge" style="margin-bottom:0.75rem;">🌱 Sourcing Terroir</span>
+              <h3>Direct-Trade High Altitude Harvest</h3>
+              <p>We partner directly with smallholder farming families in Oaxaca, Huila, and Yirgacheffe at elevations above 1,700m. Cherry selection is 100% hand-harvested at peak 22° Brix ripeness, ensuring unmatched origin sweetness.</p>
+              <div class="deck-tags">
+                <span>Elevation: 1,750m–2,100m</span>
+                <span>Process: Natural &amp; Washed</span>
+                <span>Direct Farmer Premium: +45% Fair Trade</span>
+              </div>
+            </div>
+            <div class="deck-card-media">
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80" alt="Coffee Harvest">
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 02 -->
+        <div class="stacked-card-3d" id="deck-card-2" style="z-index:2;">
+          <div class="deck-card-inner">
+            <div class="deck-card-num">02</div>
+            <div class="deck-card-body">
+              <span class="pill-badge" style="margin-bottom:0.75rem;">🔥 Thermal Profiling</span>
+              <h3>Cast-Iron Micro-Batch Drum Roasting</h3>
+              <p>Roasted on East Cesar Chavez in calibrated 15kg micro-batches. Our roast curves caramelize natural bean sugars through precise airflow and burner modulation without masking delicate floral, citrus, and stone fruit acidity.</p>
+              <div class="deck-tags">
+                <span>Batch Size: 15kg</span>
+                <span>Heat: Indirect Convection Drum</span>
+                <span>Degassing Window: 48 Hours</span>
+              </div>
+            </div>
+            <div class="deck-card-media">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop&q=80" alt="Drum Roasting">
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 03 -->
+        <div class="stacked-card-3d" id="deck-card-3" style="z-index:3;">
+          <div class="deck-card-inner">
+            <div class="deck-card-num">03</div>
+            <div class="deck-card-body">
+              <span class="pill-badge" style="margin-bottom:0.75rem;">☕ Barista Dial-In</span>
+              <h3>La Marzocco Precision Extraction</h3>
+              <p>Every morning at 6:00 AM, our lead baristas refractometer-test and taste every single origin on bar. Water mineral profile, temperature (93.5°C), and particle distribution are dialled to achieve an exact 20.5% extraction yield.</p>
+              <div class="deck-tags">
+                <span>Equipment: Custom La Marzocco KB90</span>
+                <span>Target Yield: 20.5% TDS Refractometry</span>
+                <span>Milk: Local Texas Pasture-Raised</span>
+              </div>
+            </div>
+            <div class="deck-card-media">
+              <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=800&auto=format&fit=crop&q=80" alt="La Marzocco Extraction">
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 04 -->
+        <div class="stacked-card-3d" id="deck-card-4" style="z-index:4;">
+          <div class="deck-card-inner">
+            <div class="deck-card-num">04</div>
+            <div class="deck-card-body">
+              <span class="pill-badge" style="margin-bottom:0.75rem;">🚀 Counter &amp; Doorstep</span>
+              <h3>Instant Pickup &amp; Nitrogen-Flushed Subscriptions</h3>
+              <p>Whether ordered ahead on mobile for a 10-minute counter pickup or shipped nationwide bi-weekly in one-way degassing valve bags, you receive roasted beans at their absolute peak flavor window.</p>
+              <div class="deck-tags">
+                <span>Pickup Time: 10–12 Minutes</span>
+                <span>Shipping: Complimentary Nationwide</span>
+                <span>Freshness Guarantee: 100%</span>
+              </div>
+            </div>
+            <div class="deck-card-media">
+              <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=800&auto=format&fit=crop&q=80" alt="Subscription Box">
+            </div>
           </div>
         </div>
       </div>
@@ -259,7 +605,7 @@
   <!-- Bean Subscription Recurring Revenue Promo -->
   <section class="section" style="background: var(--bg-elevated); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
     <div class="container">
-      <div class="sub-promo-card reveal-on-scroll">
+      <div class="sub-promo-card reveal-on-scroll tilt-card-3d">
         <div>
           <span class="pill-badge">☕ Never Run Out of Great Coffee</span>
           <h2 style="font-size: 2.6rem; margin-bottom: 1rem;">Roastery Coffee Subscriptions</h2>
@@ -268,7 +614,7 @@
           </p>
           <div style="display:flex; gap:1rem; flex-wrap:wrap;">
             <a href="subscribe.html" class="btn btn-primary btn-lg">Configure My Subscription 📦</a>
-            <a href="catering.html" class="btn btn-secondary btn-lg">Explore B2B & Catering ✨</a>
+            <a href="catering.html" class="btn btn-secondary btn-lg">Explore B2B &amp; Catering ✨</a>
           </div>
         </div>
         <div style="border-radius:18px; overflow:hidden; border:1px solid var(--border-gold-subtle);">
@@ -284,11 +630,11 @@
       <div class="section-header reveal-on-scroll">
         <span class="pill-badge">⭐ Google Verified Reviews</span>
         <h2>Austin Loved · 4.7★ on Google Maps</h2>
-        <p>Direct customer feedback from 800+ coffee lovers and East Austin locals.</p>
+        <p>Direct customer feedback from 880+ coffee lovers and East Austin locals.</p>
       </div>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.8rem;">
-        <div class="product-card reveal-on-scroll stagger-1" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="product-card tilt-card-3d reveal-on-scroll stagger-1" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
           <div>
             <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.8rem;">★★★★★</div>
             <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary); line-height:1.6;">
@@ -301,7 +647,7 @@
           </div>
         </div>
 
-        <div class="product-card reveal-on-scroll stagger-2" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="product-card tilt-card-3d reveal-on-scroll stagger-2" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
           <div>
             <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.8rem;">★★★★★</div>
             <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary); line-height:1.6;">
@@ -314,7 +660,7 @@
           </div>
         </div>
 
-        <div class="product-card reveal-on-scroll stagger-3" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="product-card tilt-card-3d reveal-on-scroll stagger-3" style="padding:2rem; display:flex; flex-direction:column; justify-content:space-between;">
           <div>
             <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.8rem;">★★★★★</div>
             <p style="font-style:italic; margin-bottom:1.2rem; color:var(--text-primary); line-height:1.6;">
@@ -344,43 +690,330 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js"></script>
-  <script src="../shared/components.js"></script>
+  <!-- Core Scripts & Libraries -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script src="../shared/api-client.js?v=7.0"></script>
+  <script src="../shared/components.js?v=7.0"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');
       initDemoControls({ tier: 'tier3', isAdmin: false });
       CartManager.init();
-      initScrollAnimations();
 
-      // Parallax hero background
-      const heroBg = document.getElementById('hero-bg');
-      window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (heroBg && scrolled < 900) {
-          heroBg.style.transform = `translateY(${scrolled * 0.35}px)`;
+      // ==========================================
+      // 0. LENIS, GSAP & SCROLLTRIGGER INITIALIZATION
+      // ==========================================
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis({
+        lerp: 0.08,
+        wheelMultiplier: 1.0,
+        smoothWheel: true
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      // ==========================================
+      // 1. PINNED 3D KINETIC TYPOGRAPHY ZOOM-THROUGH
+      // ==========================================
+      const heroTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#hero-kinetic-section",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.6
         }
-      }, { passive: true });
+      });
 
-      // Number Counter animation
+      // Split title horizontally and zoom past camera in Z-space
+      heroTL.to("#kinetic-title-left", {
+        x: -window.innerWidth * 0.45,
+        z: 750,
+        scale: 3.2,
+        opacity: 0,
+        ease: "power2.inOut"
+      }, 0);
+
+      heroTL.to("#kinetic-title-right", {
+        x: window.innerWidth * 0.45,
+        z: 650,
+        scale: 2.8,
+        opacity: 0,
+        ease: "power2.inOut"
+      }, 0);
+
+      heroTL.to("#kinetic-scroll-hint", {
+        opacity: 0,
+        y: -30,
+        ease: "power1.out"
+      }, 0);
+
+      // Underneath roastery portal zooms in smoothly
+      heroTL.to("#hero-portal-content", {
+        opacity: 1,
+        scale: 1,
+        z: 0,
+        ease: "power2.out"
+      }, 0.22);
+
+      // ==========================================
+      // 2. REAL-TIME THREE.JS 3D COFFEE STAGE
+      // ==========================================
+      const canvas = document.getElementById('lenis-3d-canvas');
+      if (canvas && typeof THREE !== 'undefined') {
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0b0908, 0.018);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 18);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Lighting
+        const ambLight = new THREE.AmbientLight(0x2a2018, 2.0);
+        scene.add(ambLight);
+
+        const goldPointLight1 = new THREE.PointLight(0xc9a84c, 3.2, 50);
+        goldPointLight1.position.set(10, 12, 10);
+        scene.add(goldPointLight1);
+
+        const amberPointLight2 = new THREE.PointLight(0xf59e0b, 2.5, 40);
+        amberPointLight2.position.set(-10, -8, 8);
+        scene.add(amberPointLight2);
+
+        // 3D Floating Coffee Beans
+        function createBeanGeometry() {
+          const geom = new THREE.SphereGeometry(1, 32, 24);
+          geom.scale(1, 1.38, 0.72);
+          const pos = geom.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            let x = pos.getX(i);
+            let z = pos.getZ(i);
+            if (z > 0 && Math.abs(x) < 0.28) {
+              pos.setZ(i, z - (0.35 - Math.abs(x)) * 0.95);
+            }
+          }
+          geom.computeVertexNormals();
+          return geom;
+        }
+
+        const beanGeo = createBeanGeometry();
+        const beanMat = new THREE.MeshStandardMaterial({
+          color: 0x22130c,
+          roughness: 0.36,
+          metalness: 0.18
+        });
+
+        const beansGroup = new THREE.Group();
+        const beanInstances = [];
+        const beanCount = 14;
+
+        for (let i = 0; i < beanCount; i++) {
+          const mesh = new THREE.Mesh(beanGeo, beanMat);
+          const scale = 0.55 + Math.random() * 0.65;
+          mesh.scale.set(scale, scale, scale);
+          mesh.position.set(
+            (Math.random() - 0.5) * 22,
+            (Math.random() - 0.5) * 14,
+            (Math.random() - 0.5) * 12
+          );
+          mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+          mesh.userData = {
+            rotSpeedX: (Math.random() - 0.5) * 0.015,
+            rotSpeedY: (Math.random() - 0.5) * 0.018,
+            rotSpeedZ: (Math.random() - 0.5) * 0.012
+          };
+          beansGroup.add(mesh);
+          beanInstances.push(mesh);
+        }
+        scene.add(beansGroup);
+
+        // 3D Metallic Espresso Cup
+        const cupGroup = new THREE.Group();
+        const cupMat = new THREE.MeshStandardMaterial({
+          color: 0xc9a84c,
+          metalness: 0.88,
+          roughness: 0.22
+        });
+        const cupBody = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.1, 2.2, 32), cupMat);
+        const cupRim = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.12, 16, 48), cupMat);
+        cupRim.rotation.x = Math.PI / 2;
+        cupRim.position.y = 1.1;
+        cupGroup.add(cupBody);
+        cupGroup.add(cupRim);
+        cupGroup.position.set(5.5, -2, 2);
+        cupGroup.rotation.set(0.35, -0.6, 0.2);
+        scene.add(cupGroup);
+
+        // Golden Steam Particle Cloud
+        const pCount = 260;
+        const pGeo = new THREE.BufferGeometry();
+        const pPositions = new Float32Array(pCount * 3);
+        for (let i = 0; i < pCount * 3; i += 3) {
+          pPositions[i] = (Math.random() - 0.5) * 16;
+          pPositions[i + 1] = (Math.random() - 0.5) * 14;
+          pPositions[i + 2] = (Math.random() - 0.5) * 12;
+        }
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+        const pMat = new THREE.PointsMaterial({
+          color: 0xc9a84c,
+          size: 0.13,
+          transparent: true,
+          opacity: 0.7
+        });
+        const steamParticles = new THREE.Points(pGeo, pMat);
+        scene.add(steamParticles);
+
+        // Render Loop synchronized with GSAP & Lenis
+        gsap.ticker.add((time) => {
+          const vel = lenis.velocity || 0;
+          const velFactor = vel * 0.003;
+
+          beanInstances.forEach((b) => {
+            b.rotation.x += b.userData.rotSpeedX + velFactor;
+            b.rotation.y += b.userData.rotSpeedY + velFactor * 0.5;
+            b.rotation.z += b.userData.rotSpeedZ;
+          });
+
+          cupGroup.rotation.y = -0.6 + Math.sin(time * 0.6) * 0.15 + velFactor * 2.0;
+          cupGroup.rotation.x = 0.35 + Math.cos(time * 0.5) * 0.08;
+
+          // Camera depth drift tied to scroll progress
+          camera.position.z = 18 - (lenis.progress || 0) * 6;
+
+          // Gentle particle rise
+          const posArr = steamParticles.geometry.attributes.position.array;
+          for (let i = 1; i < pCount * 3; i += 3) {
+            posArr[i] += 0.015 + Math.abs(velFactor) * 0.5;
+            if (posArr[i] > 8) posArr[i] = -8;
+          }
+          steamParticles.geometry.attributes.position.needsUpdate = true;
+
+          renderer.render(scene, camera);
+        });
+
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      }
+
+      // ==========================================
+      // 3. VELOCITY-DRIVEN 3D CARD PERSPECTIVE TILT
+      // ==========================================
+      lenis.on('scroll', ({ velocity }) => {
+        const tiltX = Math.max(-8, Math.min(8, velocity * 0.18));
+        const skewY = Math.max(-4, Math.min(4, velocity * 0.08));
+        gsap.to('.tilt-card-3d, .product-card, .sub-promo-card', {
+          rotateX: tiltX,
+          skewY: skewY,
+          duration: 0.35,
+          ease: "power1.out",
+          overwrite: "auto"
+        });
+      });
+
+      // ==========================================
+      // 4. PINNED HORIZONTAL 3D SHOWCASE TRACK
+      // ==========================================
+      const hTrack = document.getElementById('horizontal-track');
+      const hPinWrap = document.getElementById('horizontal-pin-wrap');
+      if (hTrack && hPinWrap) {
+        const totalDistance = hTrack.scrollWidth - window.innerWidth + 320;
+        gsap.to(hTrack, {
+          x: -totalDistance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#horizontal-showcase-section",
+            pin: true,
+            scrub: 1,
+            start: "top top",
+            end: () => "+=" + totalDistance
+          }
+        });
+
+        // 3D perspective angle rotation as cards glide across viewport
+        const hCards = document.querySelectorAll('.horizontal-card-3d');
+        hCards.forEach((c) => {
+          gsap.fromTo(c,
+            { rotateY: -14, transformPerspective: 1000 },
+            {
+              rotateY: 14,
+              ease: "none",
+              scrollTrigger: {
+                trigger: c,
+                containerAnimation: gsap.getTweensOf(hTrack)[0],
+                scrub: 1,
+                start: "left right",
+                end: "right left"
+              }
+            }
+          );
+        });
+      }
+
+      // ==========================================
+      // 5. STACKED STICKY 3D CARDS (LENIS.DEV PHYSICS)
+      // ==========================================
+      const deckCards = gsap.utils.toArray('.stacked-card-3d');
+      deckCards.forEach((card, i) => {
+        if (i < deckCards.length - 1) {
+          ScrollTrigger.create({
+            trigger: deckCards[i + 1],
+            start: "top 260px",
+            end: "top 110px",
+            scrub: true,
+            onUpdate: (self) => {
+              const prog = self.progress;
+              // Card N scales down, recedes in Z-space, tilts, and dims with depth
+              gsap.set(card, {
+                scale: 1 - prog * 0.08,
+                y: -prog * 36,
+                z: -prog * 120,
+                rotateX: prog * 5,
+                filter: `brightness(${1 - prog * 0.35})`
+              });
+            }
+          });
+        }
+      });
+
+      // ==========================================
+      // NUMBER COUNTER ANIMATIONS
+      // ==========================================
       const counters = document.querySelectorAll('.count-up');
       let countersDone = false;
       function checkCounters() {
         if (countersDone) return;
-        const rect = document.querySelector('.stats-band').getBoundingClientRect();
+        const statsEl = document.querySelector('.stats-band');
+        if (!statsEl) return;
+        const rect = statsEl.getBoundingClientRect();
         if (rect.top < window.innerHeight - 50) {
           countersDone = true;
-          counters.forEach(c => {
-            const target = parseInt(c.dataset.target, 10);
+          counters.forEach((c) => {
+            const target = parseFloat(c.dataset.target);
+            if (isNaN(target)) return;
             let count = 0;
-            const inc = Math.ceil(target / 45);
+            const isFloat = c.dataset.target.includes('.');
+            const inc = isFloat ? 0.1 : Math.ceil(target / 45);
             const timer = setInterval(() => {
               count += inc;
               if (count >= target) {
-                c.innerText = target + (c.dataset.target === '100' ? '%' : (c.dataset.target === '750' ? '+' : '+'));
+                c.innerText = c.dataset.target + (c.dataset.target === '100' ? '%' : (c.dataset.target === '4.7' ? '★' : '+'));
                 clearInterval(timer);
               } else {
-                c.innerText = count;
+                c.innerText = isFloat ? count.toFixed(1) : Math.floor(count);
               }
             }, 30);
           });
@@ -388,34 +1021,6 @@
       }
       window.addEventListener('scroll', checkCounters, { passive: true });
       checkCounters();
-
-      // Scroll-linked Seed to Cup timeline progress line
-      const timelineFill = document.getElementById('timeline-progress-fill');
-      const timelineWrap = document.querySelector('.timeline-track-wrap');
-      const steps = document.querySelectorAll('.timeline-step');
-
-      function updateTimeline() {
-        if (!timelineWrap) return;
-        const rect = timelineWrap.getBoundingClientRect();
-        const startY = window.innerHeight * 0.75;
-        if (rect.top < startY && rect.bottom > 0) {
-          const totalDist = rect.height;
-          const currentProgress = Math.min(1, Math.max(0, (startY - rect.top) / totalDist));
-          timelineFill.style.height = `${currentProgress * 100}%`;
-
-          steps.forEach(step => {
-            const sRect = step.getBoundingClientRect();
-            if (sRect.top < startY) {
-              step.classList.add('active');
-            } else {
-              step.classList.remove('active');
-            }
-          });
-        }
-      }
-
-      window.addEventListener('scroll', updateTimeline, { passive: true });
-      updateTimeline();
     });
   </script>
 </body>

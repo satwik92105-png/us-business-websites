@@ -158,8 +158,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js"></script>
-  <script src="../shared/components.js"></script>
+  <script src="../shared/api-client.js?v=7.0"></script>
+  <script src="../shared/components.js?v=7.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');
@@ -225,6 +225,21 @@
           const res = await window.FlatTrackAPI.createReservation({
             name, email, phone, partySize, date, time, notes
           });
+
+          // Automatic background email dispatch to customer's real inbox
+          if (email && window.FlatTrackAPI.sendConfirmationEmail) {
+            window.FlatTrackAPI.sendConfirmationEmail(email, `Table Reservation Confirmed · #${res.id} (Flat Track Coffee Roasters)`, {
+              "Booking Reference": `#${res.id}`,
+              "Guest Name": name,
+              "Date": date,
+              "Time Slot": time,
+              "Party Size": `${partySize} ${partySize === '1' ? 'Guest' : 'Guests'}`,
+              "Phone": phone,
+              "Notes": notes || "None",
+              "Roastery Address": "1611 E Cesar Chavez St, Austin, TX 78702",
+              "Status": "Confirmed on Cafe Host Stand"
+            });
+          }
 
           form.reset();
           submitBtn.disabled = false;

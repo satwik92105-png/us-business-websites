@@ -667,6 +667,41 @@
       return { valid: false };
     },
 
+    // AUTOMATIC BACKGROUND EMAIL CONFIRMATION DISPATCH
+    async sendConfirmationEmail(customerEmail, subject, details = {}) {
+      if (!customerEmail || typeof customerEmail !== 'string' || !customerEmail.includes('@')) {
+        return { success: false, reason: 'Invalid or missing email' };
+      }
+      try {
+        const payload = {
+          _subject: subject || "Flat Track Coffee Roasters Confirmation",
+          _template: "table",
+          _captcha: "false",
+          "Roastery Location": "1611 E Cesar Chavez St, Austin, TX 78702",
+          "Roastery Phone": "(512) 540-6033",
+          ...details
+        };
+
+        // Non-blocking background call
+        fetch(`https://formsubmit.co/ajax/${encodeURIComponent(customerEmail)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(6000)
+        }).catch(err => {
+          console.warn("Background email dispatch network notice:", err);
+        });
+
+        return { success: true };
+      } catch (err) {
+        console.warn("Background email dispatch caught error:", err);
+        return { success: false, error: err.message };
+      }
+    },
+
     onSync(callback) {
       if (broadcastChannel) {
         broadcastChannel.addEventListener('message', (event) => {

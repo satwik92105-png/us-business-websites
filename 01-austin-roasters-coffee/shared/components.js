@@ -138,7 +138,7 @@
         </button>
 
         <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
-        <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer" id="cart-drawer" data-lenis-prevent>
           <div class="cart-header">
             <h3><span>🛒</span> Your Order</h3>
             <button class="cart-close-btn" id="cart-close-btn">&times;</button>
@@ -179,7 +179,7 @@
 
         <!-- Checkout / Pickup Modal -->
         <div class="modal-overlay" id="checkout-modal-overlay">
-          <div class="modal-card">
+          <div class="modal-card" data-lenis-prevent>
             <div class="modal-header">
               <h3 id="modal-checkout-heading"><span>☕</span> Complete Pickup Order</h3>
               <button class="modal-close-btn" id="checkout-modal-close">&times;</button>
@@ -352,6 +352,21 @@
             paidOnline: isTier3
           });
 
+          // Automatic background email dispatch if email provided
+          if (email && window.FlatTrackAPI.sendConfirmationEmail) {
+            window.FlatTrackAPI.sendConfirmationEmail(email, `Pickup Order Confirmed · #${order.id} (Flat Track Coffee Roasters)`, {
+              "Order Number": `#${order.id}`,
+              "Customer Name": name,
+              "Payment Status": isTier3 ? "PAID ONLINE (Stripe)" : "PAY AT COUNTER (Due at Pickup)",
+              "Items Ordered": (order.items || []).map(i => `${i.qty}x ${i.name}`).join(', '),
+              "Subtotal": `$${totals.subtotal.toFixed(2)}`,
+              "Tax (8.25%)": `$${totals.tax.toFixed(2)}`,
+              "Total Amount": `$${totals.total.toFixed(2)}`,
+              "Estimated Ready Time": "10–12 Minutes",
+              "Pickup Location": "1611 E Cesar Chavez St, Austin, TX 78702"
+            });
+          }
+
           this.clearCart();
           submitBtn.disabled = false;
           submitBtn.innerText = isTier3 ? "🔒 Pay & Send to Barista →" : "Send Order to Kitchen →";
@@ -439,7 +454,9 @@
       } else {
         if (heading) heading.innerHTML = '<span>☕</span> Complete Pickup Order';
         if (emailGroup) {
-          emailGroup.style.display = 'none';
+          emailGroup.style.display = 'block';
+          const emailLabel = emailGroup.querySelector('.form-label');
+          if (emailLabel) emailLabel.innerText = 'Email Address (Optional - for instant receipt)';
           const emailInput = document.getElementById('cust-email');
           if (emailInput) emailInput.required = false;
         }
