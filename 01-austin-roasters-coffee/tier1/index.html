@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat Track Coffee Roasters — Austin, TX</title>
-  <link rel="stylesheet" href="../shared/styles.css">
+  <link rel="stylesheet" href="../shared/styles.css?v=9.0">
   <style>
     /* Tier 1 Specific Styles */
     .hero-tier1 {
@@ -108,24 +108,28 @@
 <body>
 
   <!-- Navigation Header -->
+    <!-- Sticky Glass Navigation Header -->
   <header class="header-glass">
-    <div class="container header-container">
+    <div class="header-inner">
       <a href="index.html" class="brand-logo">
         <span class="brand-icon">☕</span>
         <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#about" class="nav-link">Our Craft</a></li>
+      <ul class="nav-links nav-links-desktop">
+        <li><a href="#about" class="nav-link">Craft</a></li>
         <li><a href="#menu" class="nav-link">Menu</a></li>
-        <li><a href="#reviews" class="nav-link">Google Reviews</a></li>
-        <li><a href="#location" class="nav-link">Visit & Location</a></li>
-        <li><a href="#contact" class="nav-link">Inquiries</a></li>
+        <li><a href="#reviews" class="nav-link">Reviews</a></li>
+        <li><a href="#location" class="nav-link">Location</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="header-actions">
         <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
-        <a href="tel:5125406033" class="btn btn-outline-gold btn-sm">📞 (512) 540-6033</a>
+        <a href="#menu" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
@@ -204,7 +208,7 @@
 
       <!-- Menu Items Grid -->
       <div class="menu-grid" id="tier1-menu-grid">
-        <!-- Rendered dynamically via api-client.js?v=7.0 -->
+        <!-- Rendered dynamically via api-client.js?v=9.0 -->
       </div>
 
       <div style="text-align: center; margin-top: 3rem; background: var(--bg-surface); padding: 1.5rem; border-radius: 14px; border: 1px solid var(--border-subtle);">
@@ -393,8 +397,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=7.0"></script>
-  <script src="../shared/components.js?v=7.0"></script>
+  <script src="../shared/api-client.js?v=9.0"></script>
+  <script src="../shared/components.js?v=9.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       // Initialize shared components

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visit & Contact — Flat Track Coffee Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css">
+  <link rel="stylesheet" href="../shared/styles.css?v=9.0">
   <style>
     .contact-layout {
       display: grid;
@@ -27,24 +27,28 @@
 <body>
 
   <!-- Navigation Header -->
+    <!-- Sticky Glass Navigation Header -->
   <header class="header-glass">
-    <div class="container header-container">
+    <div class="header-inner">
       <a href="index.html" class="brand-logo">
         <span class="brand-icon">☕</span>
         <span>FLAT TRACK <span class="font-italic">COFFEE</span></span>
       </a>
 
-      <ul class="nav-links">
+      <ul class="nav-links nav-links-desktop">
         <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="menu.html" class="nav-link">Order Ahead 🛒</a></li>
-        <li><a href="reserve.html" class="nav-link">Reserve Table 🪑</a></li>
-        <li><a href="story.html" class="nav-link">Roastery Story</a></li>
-        <li><a href="contact.html" class="nav-link active">Visit & Contact</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve</a></li>
+        <li><a href="story.html" class="nav-link">Story</a></li>
+        <li><a href="contact.html" class="nav-link active">Visit</a></li>
       </ul>
 
       <div class="header-actions">
         <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
         <a href="menu.html" class="btn btn-primary btn-sm">Order Ahead ⚡</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
@@ -140,8 +144,8 @@
     </div>
   </footer>
 
-  <script src="../shared/api-client.js?v=7.0"></script>
-  <script src="../shared/components.js?v=7.0"></script>
+  <script src="../shared/api-client.js?v=9.0"></script>
+  <script src="../shared/components.js?v=9.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initAustinTimeBadge('austin-status-badge');

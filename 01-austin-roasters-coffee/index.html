@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agency Sales Hub & Package Showcase — Flat Track Coffee Roasters</title>
-  <link rel="stylesheet" href="shared/styles.css">
+  <link rel="stylesheet" href="shared/styles.css?v=9.0">
   <style>
     .hub-hero {
       padding: 5rem 0 3.5rem 0;
@@ -158,16 +158,19 @@
 <body>
 
   <!-- Navigation Header -->
-  <header class="header-glass">
-    <div class="container header-container">
+    <header class="header-glass">
+    <div class="header-inner">
       <a href="index.html" class="brand-logo">
         <span class="brand-icon">☕</span>
         <span>FLAT TRACK <span class="font-italic">SHOWCASE HUB</span></span>
       </a>
       <div class="header-actions">
-        <span class="status-indicator">● LIVE CLIENT SUITE</span>
-        <a href="#tiers" class="btn btn-outline-gold btn-sm">Compare 3 Tiers</a>
-        <a href="#script" class="btn btn-primary btn-sm">2-Min Sales Script</a>
+        <span class="status-indicator">⚡ LIVE CLIENT SUITE</span>
+        <a href="#tiers" class="btn btn-outline-gold btn-sm hide-on-mobile">Compare 3 Tiers</a>
+        <a href="#script" class="btn btn-primary btn-sm">2-Min Pitch</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
@@ -350,8 +353,8 @@
     </div>
   </footer>
 
-  <script src="shared/api-client.js?v=7.0"></script>
-  <script src="shared/components.js?v=7.0"></script>
+  <script src="shared/api-client.js?v=9.0"></script>
+  <script src="shared/components.js?v=9.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       initDemoControls({ tier: 'hub', isAdmin: false });

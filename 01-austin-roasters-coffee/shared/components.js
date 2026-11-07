@@ -4,6 +4,19 @@
  */
 
 (function (window) {
+  // Defensive Safeguard: Suppress all native browser alert/confirm banners in favor of toast / in-modal
+  window.alert = function(msg) {
+    if (window.showToast) {
+      window.showToast(String(msg), 'info', 4500);
+    } else {
+      console.log('[Notice]:', msg);
+    }
+  };
+  window.confirm = function(msg) {
+    console.log('[Confirm suppressed]:', msg);
+    return false;
+  };
+
   // Global Toast Manager
   function showToast(message, type = 'info', duration = 3500) {
     let container = document.getElementById('global-toast-container');
@@ -669,4 +682,192 @@
   window.CartManager = CartManager;
   window.generatePdfReceipt = generatePdfReceipt;
   window.initScrollAnimations = initScrollAnimations;
+
+  // ====================================================================
+  // MOBILE NAVIGATION DRAWER & DESKTOP LABEL COMPACTOR
+  // ====================================================================
+  function initMobileNavigation() {
+    // 1. Compact desktop nav labels so they never crowd 1280px laptops
+    const labelMap = {
+      'order ahead 🛒': 'Menu',
+      'order ahead': 'Menu',
+      'bean subscriptions 📦': 'Subscriptions',
+      'bean subscriptions': 'Subscriptions',
+      'catering & b2b ✨': 'Catering',
+      'catering & b2b': 'Catering',
+      'live tracker ⚡': 'Tracker',
+      'live tracker': 'Tracker',
+      'reserve table 🪑': 'Reserve',
+      'reserve 🪑': 'Reserve',
+      'reserve a table': 'Reserve',
+      'roastery story': 'Story',
+      'our story': 'Story',
+      'visit & contact': 'Visit',
+      'visit & location': 'Visit',
+      'inquire & hours': 'Contact',
+      'our craft': 'Craft',
+      'google reviews': 'Reviews'
+    };
+
+    document.querySelectorAll('.nav-links a, .nav-links-desktop a').forEach(a => {
+      const raw = a.innerText.trim().toLowerCase();
+      if (labelMap[raw]) {
+        a.innerText = labelMap[raw];
+      }
+    });
+
+    // 2. Ensure header has mobile menu toggle button
+    const header = document.querySelector('header.header-glass, header, .site-header, .navbar');
+    if (!header) return;
+
+    let toggleBtn = document.getElementById('mobile-menu-toggle');
+    if (!toggleBtn) {
+      toggleBtn = document.createElement('button');
+      toggleBtn.id = 'mobile-menu-toggle';
+      toggleBtn.className = 'mobile-menu-toggle';
+      toggleBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
+      toggleBtn.innerHTML = '<span></span><span></span><span></span>';
+
+      const actions = header.querySelector('.header-actions');
+      if (actions) {
+        actions.appendChild(toggleBtn);
+      } else {
+        const container = header.querySelector('.header-container, .header-inner') || header;
+        container.appendChild(toggleBtn);
+      }
+    }
+
+    // 3. Inject Mobile Backdrop & Drawer if not already present
+    if (!document.getElementById('mobile-nav-drawer')) {
+      const backdrop = document.createElement('div');
+      backdrop.id = 'mobile-nav-backdrop';
+      backdrop.className = 'mobile-nav-backdrop';
+
+      const drawer = document.createElement('div');
+      drawer.id = 'mobile-nav-drawer';
+      drawer.className = 'mobile-nav-drawer';
+
+      // Detect current path
+      const path = window.location.pathname.toLowerCase();
+      const isTier3 = path.includes('/tier3/') || path.includes('tier3.html');
+      const isTier2 = path.includes('/tier2/') || path.includes('tier2.html');
+      const isTier1 = path.includes('/tier1/') || path.includes('tier1.html');
+
+      let linksHTML = '';
+      const existingLinks = document.querySelectorAll('.nav-links a, .nav-links-desktop a');
+      if (existingLinks.length > 0) {
+        existingLinks.forEach(a => {
+          const href = a.getAttribute('href');
+          const text = a.innerText.trim();
+          const isActive = a.classList.contains('active') ? ' active' : '';
+          linksHTML += `<li><a href="${href}" class="mobile-drawer-link${isActive}">${text} <span>&rarr;</span></a></li>`;
+        });
+      } else if (isTier3) {
+        linksHTML = `
+          <li><a href="index.html" class="mobile-drawer-link">Flagship Home <span>&rarr;</span></a></li>
+          <li><a href="menu.html" class="mobile-drawer-link">Order Ahead 🛒 <span>&rarr;</span></a></li>
+          <li><a href="subscribe.html" class="mobile-drawer-link">Bean Subscriptions 📦 <span>&rarr;</span></a></li>
+          <li><a href="catering.html" class="mobile-drawer-link">Catering &amp; B2B ✨ <span>&rarr;</span></a></li>
+          <li><a href="track.html" class="mobile-drawer-link">Live Tracker ⚡ <span>&rarr;</span></a></li>
+          <li><a href="reserve.html" class="mobile-drawer-link">Reserve Table 🪑 <span>&rarr;</span></a></li>
+          <li><a href="story.html" class="mobile-drawer-link">Roastery Story <span>&rarr;</span></a></li>
+          <li><a href="contact.html" class="mobile-drawer-link">Visit &amp; Contact <span>&rarr;</span></a></li>
+        `;
+      } else if (isTier2) {
+        linksHTML = `
+          <li><a href="index.html" class="mobile-drawer-link">Home <span>&rarr;</span></a></li>
+          <li><a href="menu.html" class="mobile-drawer-link">Order Ahead 🛒 <span>&rarr;</span></a></li>
+          <li><a href="reserve.html" class="mobile-drawer-link">Reserve Table 🪑 <span>&rarr;</span></a></li>
+          <li><a href="story.html" class="mobile-drawer-link">Roastery Story <span>&rarr;</span></a></li>
+          <li><a href="contact.html" class="mobile-drawer-link">Visit &amp; Contact <span>&rarr;</span></a></li>
+        `;
+      } else if (isTier1) {
+        linksHTML = `
+          <li><a href="#about" class="mobile-drawer-link">Our Craft <span>&rarr;</span></a></li>
+          <li><a href="#menu" class="mobile-drawer-link">Menu Offerings <span>&rarr;</span></a></li>
+          <li><a href="#reviews" class="mobile-drawer-link">Google Reviews <span>&rarr;</span></a></li>
+          <li><a href="#location" class="mobile-drawer-link">Visit &amp; Location <span>&rarr;</span></a></li>
+          <li><a href="#contact" class="mobile-drawer-link">Inquire &amp; Hours <span>&rarr;</span></a></li>
+        `;
+      } else {
+        linksHTML = `
+          <li><a href="#tiers" class="mobile-drawer-link">Compare 3 Tiers <span>&rarr;</span></a></li>
+          <li><a href="tier1/index.html" class="mobile-drawer-link">Tier 1 Demo ($497) <span>&rarr;</span></a></li>
+          <li><a href="tier2/index.html" class="mobile-drawer-link">Tier 2 Demo ($997) <span>&rarr;</span></a></li>
+          <li><a href="tier3/index.html" class="mobile-drawer-link">Tier 3 Demo ($1,997) <span>&rarr;</span></a></li>
+          <li><a href="#script" class="mobile-drawer-link">2-Min Sales Pitch <span>&rarr;</span></a></li>
+        `;
+      }
+
+      drawer.innerHTML = `
+        <div class="mobile-drawer-header">
+          <div style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-display, serif); font-weight:700; font-size:1.15rem; color:var(--text-primary);">
+            <span>☕</span> FLAT TRACK ROASTERS
+          </div>
+          <button id="mobile-drawer-close" class="mobile-drawer-close" aria-label="Close menu">&times;</button>
+        </div>
+        <ul class="mobile-drawer-links">
+          ${linksHTML}
+        </ul>
+        <div class="mobile-drawer-actions">
+          ${isTier3 ? '<a href="subscribe.html" class="btn btn-primary btn-sm" style="text-align:center;">📦 Join Bean Club</a>' : ''}
+          ${isTier2 || isTier3 ? '<a href="reserve.html" class="btn btn-outline-gold btn-sm" style="text-align:center;">🪑 Reserve a Table</a>' : ''}
+          <a href="tel:5125406033" class="btn btn-secondary btn-sm" style="text-align:center;">📞 (512) 540-6033</a>
+          <div style="font-size:0.78rem; text-align:center; color:var(--text-secondary); margin-top:0.4rem;">
+            1611 E Cesar Chavez St, Austin, TX 78702
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(drawer);
+
+      // Event Listeners for drawer
+      function openDrawer() {
+        toggleBtn.classList.add('is-active');
+        backdrop.classList.add('is-open');
+        drawer.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        toggleBtn.classList.remove('is-active');
+        backdrop.classList.remove('is-open');
+        drawer.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (drawer.classList.contains('is-open')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      backdrop.addEventListener('click', closeDrawer);
+      const closeBtn = drawer.querySelector('#mobile-drawer-close');
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeDrawer);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+          closeDrawer();
+        }
+      });
+    }
+  }
+
+  // Auto-run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileNavigation);
+  } else {
+    initMobileNavigation();
+  }
+  window.initMobileNavigation = initMobileNavigation;
+
 })(window);

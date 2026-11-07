@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barista KDS — Flat Track Coffee Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css">
+  <link rel="stylesheet" href="../shared/styles.css?v=9.0">
   <style>
     body {
       background-color: #050404;
@@ -87,20 +87,33 @@
 <body>
 
   <!-- KDS Top Bar -->
-  <header class="kds-header">
-    <div style="display:flex; align-items:center; gap:1.2rem;">
-      <span style="font-size:1.8rem;">☕</span>
-      <div>
-        <h1 style="font-size:1.4rem; margin:0;">Flat Track Roasters — Barista KDS</h1>
-        <small style="color:var(--text-secondary);">1611 E Cesar Chavez Counter Terminal · Live Queue</small>
-      </div>
-    </div>
+    <!-- Sticky Glass Navigation Header -->
+  <header class="header-glass">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">☕</span>
+        <span>FLAT TRACK <span class="font-italic">ROASTERS</span></span>
+      </a>
 
-    <div style="display:flex; align-items:center; gap:1.5rem;">
-      <div id="kds-clock" class="mono-num" style="font-size:1.4rem; font-weight:700; color:var(--accent-gold);">
-        --:--:--
+      <ul class="nav-links nav-links-desktop">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="subscribe.html" class="nav-link">Subscriptions</a></li>
+        <li><a href="catering.html" class="nav-link">Catering</a></li>
+        <li><a href="track.html" class="nav-link">Tracker</a></li>
+        <li><a href="reserve.html" class="nav-link">Reserve</a></li>
+        <li><a href="story.html" class="nav-link">Story</a></li>
+        <li><a href="contact.html" class="nav-link">Visit</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <span id="austin-status-badge" class="status-indicator">● Checking Hours...</span>
+        <a href="subscribe.html" class="btn btn-outline-gold btn-sm hide-on-mobile">Join Club</a>
+        <a href="menu.html" class="btn btn-primary btn-sm">Order ⚡</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button class="btn btn-secondary btn-sm" id="btn-audio-test">🔊 Audio Chime Test</button>
     </div>
   </header>
 
@@ -109,8 +122,8 @@
     <!-- Rendered dynamically -->
   </main>
 
-  <script src="../shared/api-client.js?v=7.0"></script>
-  <script src="../shared/components.js?v=7.0"></script>
+  <script src="../shared/api-client.js?v=9.0"></script>
+  <script src="../shared/components.js?v=9.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Live digital clock
