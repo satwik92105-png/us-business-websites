@@ -69,7 +69,7 @@
       badge: "Micro-Lot",
       inStock: true,
       image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     },
     {
       id: 5,
@@ -91,7 +91,7 @@
       badge: "Indulgent",
       inStock: true,
       image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     },
     {
       id: 7,
@@ -102,7 +102,7 @@
       badge: "Fresh Daily",
       inStock: true,
       image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     },
     {
       id: 8,
@@ -113,7 +113,7 @@
       badge: "Baker's Choice",
       inStock: true,
       image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     },
     {
       id: 9,
@@ -124,7 +124,7 @@
       badge: "Signature Roast",
       inStock: true,
       image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     },
     {
       id: 10,
@@ -135,7 +135,7 @@
       badge: "Direct Trade",
       inStock: true,
       image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&auto=format&fit=crop&q=80",
-      customizable: false
+      customizable: true
     }
   ];
 
@@ -171,12 +171,12 @@
     }
     try {
       const parsed = JSON.parse(raw);
-      // Clean any legacy mock orders or reservations
+      // Clean any legacy mock orders or reservations by ID only
       if (parsed.orders) {
-        parsed.orders = parsed.orders.filter(o => o.id !== 'FT-8402' && o.id !== 'FT-8403' && !o.customerName?.includes('Alex') && !o.customerName?.includes('Elena') && !o.customerName?.includes('Taylor') && !o.customerName?.includes('Marcus'));
+        parsed.orders = parsed.orders.filter(o => o.id !== 'FT-8402' && o.id !== 'FT-8403');
       }
       if (parsed.reservations) {
-        parsed.reservations = parsed.reservations.filter(r => r.id !== 'RES-401' && !r.name?.includes('Marcus'));
+        parsed.reservations = parsed.reservations.filter(r => r.id !== 'RES-401');
       }
       return parsed;
     } catch (e) {
@@ -235,24 +235,32 @@
     // MENU
     async getMenu() {
       const state = loadState();
+      let backendItems = [];
       try {
         const res = await fetch(`${API_BASE}/menu`, { signal: AbortSignal.timeout(3500) });
         if (res.ok) {
           this.isBackendOnline = true;
-          const items = await res.json();
-          const normalized = items.map(m => {
-            const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
-            return { ...m, inStock: inSt, in_stock: inSt };
-          });
-          state.menu = normalized;
-          saveState(state);
-          return normalized;
+          backendItems = await res.json();
         }
       } catch (e) {}
-      return (state.menu || []).map(m => {
-        const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
-        return { ...m, inStock: inSt, in_stock: inSt };
+
+      // Bi-directional merge so owner edits in POS and local state persist
+      const mergedMap = new Map();
+      (state.menu || []).forEach(m => mergedMap.set(String(m.id), m));
+      backendItems.forEach(m => {
+        const local = mergedMap.get(String(m.id));
+        // Keep local edits if present, or blend in backend item
+        mergedMap.set(String(m.id), { ...m, ...local });
       });
+
+      const normalized = Array.from(mergedMap.values()).map(m => {
+        const inSt = m.inStock !== undefined ? Boolean(m.inStock) : (m.in_stock !== undefined ? Boolean(m.in_stock) : true);
+        return { ...m, inStock: inSt, in_stock: inSt, customizable: m.customizable !== undefined ? Boolean(m.customizable) : true };
+      });
+
+      state.menu = normalized;
+      saveState(state);
+      return normalized;
     },
 
     async saveMenuItem(item) {
@@ -491,31 +499,42 @@
 
     // RESERVATIONS
     async getReservations() {
+      const state = loadState();
+      let backendList = [];
       try {
         const res = await fetch(`${API_BASE}/reservations`, { signal: AbortSignal.timeout(3000) });
         if (res.ok) {
-          const list = await res.json();
-          return list.map(r => ({
-            ...r,
-            partySize: r.partySize !== undefined ? r.partySize : (r.party_size || 2),
-            party_size: r.party_size !== undefined ? r.party_size : (r.partySize || 2),
-            date: r.date || r.res_date || '',
-            res_date: r.res_date || r.date || '',
-            time: r.time || r.res_time || '',
-            res_time: r.res_time || r.time || ''
-          }));
+          this.isBackendOnline = true;
+          backendList = await res.json();
         }
       } catch (e) {}
-      const state = loadState();
-      return (state.reservations || []).map(r => ({
+
+      // Bi-directional deduplicated merge so customer bookings are 100% visible in POS
+      const mergedMap = new Map();
+      (state.reservations || []).forEach(r => mergedMap.set(String(r.id), r));
+      backendList.forEach(r => {
+        const local = mergedMap.get(String(r.id));
+        mergedMap.set(String(r.id), { ...local, ...r });
+      });
+
+      const all = Array.from(mergedMap.values()).map(r => ({
         ...r,
         partySize: r.partySize !== undefined ? r.partySize : (r.party_size || 2),
         party_size: r.party_size !== undefined ? r.party_size : (r.partySize || 2),
-        date: r.date || r.res_date || '',
-        res_date: r.res_date || r.date || '',
-        time: r.time || r.res_time || '',
-        res_time: r.res_time || r.time || ''
-      }));
+        date: r.date || r.res_date || 'Today',
+        res_date: r.res_date || r.date || 'Today',
+        time: r.time || r.res_time || '12:00 PM',
+        res_time: r.res_time || r.time || '12:00 PM',
+        status: r.status || 'Confirmed'
+      })).sort((a, b) => {
+        const tA = new Date(a.createdAt || a.timestamp || 0).getTime();
+        const tB = new Date(b.createdAt || b.timestamp || 0).getTime();
+        return tB - tA;
+      });
+
+      state.reservations = all;
+      saveState(state);
+      return all;
     },
 
     async createReservation(resData) {

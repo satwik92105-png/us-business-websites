@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tier 3 Flagship Operations &amp; Executive BI — Flat Track Roasters</title>
-  <link rel="stylesheet" href="../shared/styles.css?v=13.0">
+  <link rel="stylesheet" href="../shared/styles.css?v=14.0">
   <style>
     body {
       background-color: #0c0a09;
@@ -429,8 +429,8 @@
     </div>
   </div>
 
-  <script src="../shared/api-client.js?v=13.0"></script>
-  <script src="../shared/components.js?v=13.0"></script>
+  <script src="../shared/api-client.js?v=14.0"></script>
+  <script src="../shared/components.js?v=14.0"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const loginScreen = document.getElementById('admin-login-screen');
@@ -725,7 +725,7 @@
           description: document.getElementById('prod-desc').value.trim(),
           image: document.getElementById('prod-image').value.trim() || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80',
           inStock: true,
-          customizable: ['espresso', 'specialty', 'cold'].includes(document.getElementById('prod-category').value)
+          customizable: true
         };
         if (idVal) itemData.id = idVal;
 

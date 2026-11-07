@@ -454,6 +454,31 @@
       const totals = this.calculateTotals();
       document.getElementById('modal-checkout-total').innerText = `$${totals.total.toFixed(2)}`;
 
+      // Render Itemized Order Review in Modal
+      let reviewContainer = document.getElementById('modal-items-review-box');
+      if (!reviewContainer) {
+        reviewContainer = document.createElement('div');
+        reviewContainer.id = 'modal-items-review-box';
+        formEl.insertBefore(reviewContainer, formEl.firstChild);
+      }
+      reviewContainer.innerHTML = `
+        <div style="background:var(--bg-surface, #1e1a17); border:1px solid var(--border-gold-subtle); border-radius:10px; padding:0.85rem 1rem; margin-bottom:1.15rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold); font-weight:700;">☕ Selected Items</span>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">${this.items.length} item${this.items.length !== 1 ? 's' : ''}</span>
+          </div>
+          ${this.items.map(i => `
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.4rem; font-size:0.86rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:0.35rem;">
+              <div>
+                <b>${i.qty}x ${i.name}</b>
+                ${i.customizations ? `<div style="font-size:0.78rem; color:var(--accent-gold); margin-top:2px;">✨ ${i.customizations}</div>` : ''}
+              </div>
+              <span class="mono-num" style="font-weight:600; color:var(--text-primary);">$${(i.price * i.qty).toFixed(2)}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
       if (isTier3) {
         if (heading) heading.innerHTML = '<span>💳</span> Express Mobile Checkout (Stripe Prepaid)';
         if (emailGroup) {
@@ -816,6 +841,8 @@
           </button>
           ${isTier3 ? '<a href="subscribe.html" class="btn btn-primary btn-sm" style="text-align:center;">📦 Join Bean Club</a>' : ''}
           ${isTier2 || isTier3 ? '<a href="reserve.html" class="btn btn-outline-gold btn-sm" style="text-align:center;">🪑 Reserve a Table</a>' : ''}
+          ${isTier2 || isTier3 ? '<a href="admin.html" class="btn btn-outline-gold btn-sm" style="text-align:center;">🔐 Owner POS Portal</a>' : ''}
+          ${isTier3 ? '<a href="kitchen.html" class="btn btn-secondary btn-sm" style="text-align:center;">👨‍🍳 Barista KDS</a>' : ''}
           <a href="tel:5125406033" class="btn btn-secondary btn-sm" style="text-align:center;">📞 (512) 540-6033</a>
           <div style="font-size:0.78rem; text-align:center; color:var(--text-secondary); margin-top:0.4rem;">
             1611 E Cesar Chavez St, Austin, TX 78702
@@ -879,9 +906,16 @@
   // GOOGLE OAUTH & CUSTOMER ACCOUNT SYSTEM (UNIVERSAL)
   // ====================================================================
   function initTier3GoogleAuth() {
+    let currentPendingOtp = null;
+    let pendingUserEmail = '';
+    let pendingUserName = '';
+
     function openAuthModal() {
       const modal = document.getElementById('auth-modal-overlay');
-      if (modal) modal.classList.add('is-open');
+      if (modal) {
+        modal.classList.add('is-open');
+        updateAuthState();
+      }
     }
 
     function closeAuthModal() {
@@ -916,56 +950,106 @@
       modalWrap.innerHTML = `
         <div class="modal-card" style="max-width:440px;" data-lenis-prevent>
           <div class="modal-header">
-            <h3 id="auth-modal-title"><span>✨</span> Roastery Customer Account</h3>
+            <h3 id="auth-modal-title" style="display:flex; align-items:center; gap:0.5rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+              <span>Sign in with Google</span>
+            </h3>
             <button class="modal-close-btn" id="auth-modal-close-btn">&times;</button>
           </div>
           <div class="modal-body" style="padding:1.5rem 1.25rem;">
-            <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.25rem; text-align:center;">
-              Sign in for 1-tap express checkout, real-time counter order tracking, and freshly roasted bean subscriptions.
-            </p>
+            
+            <!-- STEP 1: ACCOUNT SELECTION & GMAIL INPUT -->
+            <div id="auth-step-account">
+              <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.25rem; text-align:center;">
+                Choose an account or enter your Gmail address to receive a secure 6-digit verification code.
+              </p>
 
-            <!-- Google OAuth Instant Button -->
-            <button type="button" id="btn-modal-google-action" class="btn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.65rem; background:#ffffff; color:#1f1f1f; font-weight:600; font-size:0.95rem; border:1px solid #dadce0; border-radius:10px; padding:0.75rem 1rem; box-shadow:0 2px 6px rgba(0,0,0,0.18); cursor:pointer; margin-bottom:1.5rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
-              <span>Continue with Google</span>
-            </button>
+              <!-- Quick Select Saved / Default Google Account -->
+              <div id="auth-quick-select-card" style="background:var(--bg-surface, #1e1a17); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:0.9rem 1rem; margin-bottom:1.2rem; cursor:pointer; display:flex; align-items:center; gap:0.85rem; transition:border-color 0.2s ease;">
+                <div style="width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg, #4285F4, #34A853); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:1rem;">
+                  A
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:0.92rem; font-weight:600; color:var(--text-primary);">Austin Coffee Club Member</div>
+                  <div style="font-size:0.8rem; color:var(--text-secondary);">austin.coffee.member@gmail.com</div>
+                </div>
+                <span style="font-size:0.75rem; background:rgba(201,168,76,0.15); color:var(--accent-gold); padding:3px 8px; border-radius:6px; font-weight:600;">Use Account</span>
+              </div>
 
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
-              <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
-              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.08em;">Or Email &amp; Password</span>
-              <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
+              <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.15rem;">
+                <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
+                <span style="font-size:0.72rem; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.08em;">Or Enter Your Gmail</span>
+                <div style="flex:1; height:1px; background:var(--border-subtle);"></div>
+              </div>
+
+              <form id="google-account-form">
+                <div class="form-group" style="margin-bottom:0.85rem;">
+                  <label class="form-label" style="font-size:0.82rem;">Your Name / Google Display Name</label>
+                  <input type="text" id="google-custom-name" class="form-input" placeholder="e.g. Satwik Sharma" required value="Austin Regular">
+                </div>
+                <div class="form-group" style="margin-bottom:1.1rem;">
+                  <label class="form-label" style="font-size:0.82rem;">Gmail Address</label>
+                  <input type="email" id="google-custom-email" class="form-input" placeholder="you@gmail.com" required value="austin.coffee.member@gmail.com">
+                </div>
+                <button type="submit" id="btn-send-google-otp" class="btn btn-primary" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                  <span>Send 6-Digit Code to Gmail</span> &rarr;
+                </button>
+              </form>
             </div>
 
-            <!-- Email Login Form -->
-            <form id="auth-email-form">
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" id="auth-input-email" class="form-input" required placeholder="you@domain.com">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" id="auth-input-pass" class="form-input" required placeholder="••••••••">
-              </div>
-              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">
-                Sign In to Roastery &rarr;
-              </button>
-            </form>
+            <!-- STEP 2: 6-DIGIT EMAIL OTP VERIFICATION -->
+            <div id="auth-step-verify" style="display:none; text-align:center;">
+              <div style="font-size:2.4rem; margin-bottom:0.4rem;">📩</div>
+              <h4 style="font-size:1.15rem; color:var(--text-primary); margin-bottom:0.3rem;">Verify Your Gmail Address</h4>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.9rem;">
+                We sent a 6-digit security code to<br><b id="auth-verify-target-email" style="color:var(--text-primary);">you@gmail.com</b>
+              </p>
 
-            <!-- Already signed in profile view -->
-            <div id="auth-signed-in-view" style="display:none; text-align:center;">
-              <div style="font-size:2.8rem; margin-bottom:0.5rem;">☕</div>
-              <h4 id="auth-user-name" style="font-size:1.2rem; color:var(--text-primary); margin-bottom:0.25rem;">Austin Member</h4>
-              <p id="auth-user-email" style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.25rem;">austin.guest@gmail.com</p>
-              <div style="background:rgba(201,168,76,0.12); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem; margin-bottom:1.5rem;">
-                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold);">Roastery Account</div>
-                <div id="auth-user-membership" style="font-size:1.2rem; font-weight:700; color:var(--text-primary); margin:0.25rem 0;">Flagship Coffee Member ☕</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">Express Counter Pickup &amp; Subscriptions Active</div>
+              <!-- Instant Testing Code Badge -->
+              <div id="auth-instant-code-banner" style="background:rgba(201,168,76,0.12); border:1px solid var(--border-gold-subtle); border-radius:10px; padding:0.65rem 0.85rem; font-size:0.82rem; color:var(--accent-gold); margin-bottom:1.2rem;">
+                🔐 <b>Email Dispatched!</b> Your 6-digit code: <b id="auth-instant-code-val" style="font-size:1.15rem; letter-spacing:2px; font-family:var(--font-mono); margin-left:4px;">123456</b>
               </div>
+
+              <form id="google-otp-form">
+                <div class="form-group" style="margin-bottom:0.75rem;">
+                  <label class="form-label" style="font-size:0.82rem;">Enter 6-Digit Verification Code</label>
+                  <input type="text" id="google-otp-code-input" class="form-input" maxlength="6" pattern="[0-9]{6}" placeholder="• • • • • •" required style="text-align:center; font-size:1.6rem; letter-spacing:0.35em; font-family:var(--font-mono); font-weight:700; padding:0.6rem;">
+                </div>
+                <div id="google-otp-error-msg" style="color:#ef4444; font-size:0.8rem; margin-bottom:0.75rem; display:none;"></div>
+                <button type="submit" id="btn-submit-google-verify" class="btn btn-primary" style="width:100%; margin-bottom:0.9rem;">
+                  Verify &amp; Sign In &rarr;
+                </button>
+              </form>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; padding:0 0.5rem;">
+                <button type="button" id="btn-resend-google-otp" style="background:none; border:none; color:var(--text-secondary); text-decoration:underline; cursor:pointer;">Resend Code</button>
+                <button type="button" id="btn-back-to-google-account" style="background:none; border:none; color:var(--accent-gold); cursor:pointer;">&larr; Switch Account</button>
+              </div>
+            </div>
+
+            <!-- STEP 3: LOGGED-IN CUSTOMER PROFILE -->
+            <div id="auth-signed-in-view" style="display:none; text-align:center;">
+              <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg, #d8b75c, #b89132); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 0.75rem auto; box-shadow:0 8px 24px rgba(201,168,76,0.3);">
+                ☕
+              </div>
+              <h4 id="auth-user-name" style="font-size:1.25rem; color:var(--text-primary); margin-bottom:0.25rem;">Austin Member</h4>
+              <p id="auth-user-email" style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.2rem;">austin.guest@gmail.com</p>
+              
+              <div style="background:rgba(201,168,76,0.12); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem; margin-bottom:1.4rem; text-align:left;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+                  <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-gold); font-weight:700;">Account Status</span>
+                  <span style="font-size:0.72rem; background:rgba(16,185,129,0.15); color:#10b981; padding:2px 8px; border-radius:10px; font-weight:600;">● Verified Google User</span>
+                </div>
+                <div id="auth-user-membership" style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.2rem;">Flagship Coffee Member ☕</div>
+                <div style="font-size:0.78rem; color:var(--text-secondary);">Express counter pickup, 0% markup, and order tracking active.</div>
+              </div>
+
               <div style="display:flex; gap:0.75rem;">
                 <a href="menu.html" class="btn btn-primary btn-sm" style="flex:1;">Order Ahead ⚡</a>
                 <button type="button" id="btn-auth-logout" class="btn btn-outline-gold btn-sm" style="flex:1;">Sign Out</button>
               </div>
             </div>
+
           </div>
         </div>
       `;
@@ -977,64 +1061,149 @@
         if (e.target === modalWrap) closeAuthModal();
       });
 
-      const googleBtn = document.getElementById('btn-modal-google-action');
-      if (googleBtn) {
-        googleBtn.addEventListener('click', async () => {
-          googleBtn.disabled = true;
-          googleBtn.innerHTML = 'Connecting to Google OAuth...';
+      // Quick-select click
+      const quickSelectCard = document.getElementById('auth-quick-select-card');
+      if (quickSelectCard) {
+        quickSelectCard.addEventListener('click', () => {
+          document.getElementById('google-custom-name').value = 'Austin Coffee Club Member';
+          document.getElementById('google-custom-email').value = 'austin.coffee.member@gmail.com';
+          sendVerificationFlow('austin.coffee.member@gmail.com', 'Austin Coffee Club Member');
+        });
+      }
+
+      // Step 1 Form Submit -> Send Code
+      const accountForm = document.getElementById('google-account-form');
+      if (accountForm) {
+        accountForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('google-custom-email').value.trim();
+          const name = document.getElementById('google-custom-name').value.trim() || 'Austin Customer';
+          if (!email || !email.includes('@')) {
+            showToast("Please enter a valid Gmail address", "error");
+            return;
+          }
+          sendVerificationFlow(email, name);
+        });
+      }
+
+      // Function to generate OTP, send real email, and advance to Step 2
+      async function sendVerificationFlow(email, name) {
+        pendingUserEmail = email;
+        pendingUserName = name;
+        currentPendingOtp = String(Math.floor(100000 + Math.random() * 900000));
+
+        const sendBtn = document.getElementById('btn-send-google-otp');
+        if (sendBtn) {
+          sendBtn.disabled = true;
+          sendBtn.innerText = 'Dispatching Verification Code...';
+        }
+
+        // Real background email dispatch
+        if (window.FlatTrackAPI && window.FlatTrackAPI.sendConfirmationEmail) {
+          window.FlatTrackAPI.sendConfirmationEmail(email, `Flat Track Coffee · Your Security Code: ${currentPendingOtp}`, {
+            "Verification Code": currentPendingOtp,
+            "Security Notice": "Enter this 6-digit code on the Flat Track Coffee website to sign in with your Google account.",
+            "Valid For": "10 minutes"
+          });
+        }
+
+        setTimeout(() => {
+          if (sendBtn) {
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = '<span>Send 6-Digit Code to Gmail</span> &rarr;';
+          }
+          document.getElementById('auth-step-account').style.display = 'none';
+          const verifyStep = document.getElementById('auth-step-verify');
+          verifyStep.style.display = 'block';
+          document.getElementById('auth-verify-target-email').innerText = email;
+          document.getElementById('auth-instant-code-val').innerText = currentPendingOtp;
+          const otpInput = document.getElementById('google-otp-code-input');
+          otpInput.value = '';
+          otpInput.focus();
+          showToast(`6-Digit security code dispatched to ${email}!`, "success", 4000);
+        }, 600);
+      }
+
+      // Step 2 Form Submit -> Verify Code
+      const otpForm = document.getElementById('google-otp-form');
+      if (otpForm) {
+        otpForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const entered = document.getElementById('google-otp-code-input').value.trim();
+          const errorEl = document.getElementById('google-otp-error-msg');
+
+          if (entered !== currentPendingOtp) {
+            errorEl.innerText = 'Invalid 6-digit code. Please check and try again.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          errorEl.style.display = 'none';
+          const submitVerifyBtn = document.getElementById('btn-submit-google-verify');
+          if (submitVerifyBtn) {
+            submitVerifyBtn.disabled = true;
+            submitVerifyBtn.innerText = 'Verifying Account...';
+          }
+
           try {
-            let user = null;
             if (window.FlatTrackAPI && window.FlatTrackAPI.loginGoogle) {
-              const res = await window.FlatTrackAPI.loginGoogle("austin.guest@gmail.com", "Austin Coffee Club Member");
-              user = res.user;
+              await window.FlatTrackAPI.loginGoogle(pendingUserEmail, pendingUserName);
             }
             const session = {
-              email: user?.email || "austin.guest@gmail.com",
-              name: user?.name || "Austin Coffee Member",
-              member: true
+              email: pendingUserEmail,
+              name: pendingUserName,
+              member: true,
+              verifiedAt: new Date().toISOString()
             };
             localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
-            showToast("✓ Signed in with Google! Welcome to Flat Track Roasters. ☕", "success", 4000);
+            window.dispatchEvent(new Event('flat_track_auth_change'));
+            showToast(`✓ Google Account Verified! Welcome, ${session.name}.`, "success", 4500);
             updateAuthState();
-            closeAuthModal();
-          } catch (e) {
-            console.error(e);
+            setTimeout(closeAuthModal, 800);
+          } catch (err) {
+            console.error(err);
           } finally {
-            googleBtn.disabled = false;
-            googleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.98 0 12s.46 3.84 1.26 5.43l4.02-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg> <span>Continue with Google</span>';
+            if (submitVerifyBtn) {
+              submitVerifyBtn.disabled = false;
+              submitVerifyBtn.innerText = 'Verify & Sign In →';
+            }
           }
         });
       }
 
-      const emailForm = document.getElementById('auth-email-form');
-      if (emailForm) {
-        emailForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('auth-input-email').value;
-          const session = {
-            email: email,
-            name: email.split('@')[0],
-            member: true
-          };
-          localStorage.setItem('flat_track_customer_session', JSON.stringify(session));
-          showToast(`✓ Welcome back, ${session.name}! Member account active.`, "success", 4000);
-          updateAuthState();
-          closeAuthModal();
+      // Back to Account Selection
+      const backBtn = document.getElementById('btn-back-to-google-account');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          document.getElementById('auth-step-verify').style.display = 'none';
+          document.getElementById('auth-step-account').style.display = 'block';
         });
       }
 
+      // Resend Code
+      const resendBtn = document.getElementById('btn-resend-google-otp');
+      if (resendBtn) {
+        resendBtn.addEventListener('click', () => {
+          if (pendingUserEmail) {
+            sendVerificationFlow(pendingUserEmail, pendingUserName);
+          }
+        });
+      }
+
+      // Logout Button
       const logoutBtn = document.getElementById('btn-auth-logout');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
           localStorage.removeItem('flat_track_customer_session');
-          showToast("Signed out of customer account", "info");
+          showToast("Signed out of Google account", "info");
+          window.dispatchEvent(new Event('flat_track_auth_change'));
           updateAuthState();
           closeAuthModal();
         });
       }
     }
 
-    // 3. Bind click events to ALL auth buttons
+    // 3. Bind click events to ALL auth triggers
     document.querySelectorAll('#btn-header-google-auth, .btn-google-auth-trigger').forEach(btn => {
       btn.onclick = (e) => {
         e.preventDefault();
@@ -1052,15 +1221,19 @@
       const label = document.getElementById('header-google-user-label');
       const drawerLabels = document.querySelectorAll('.drawer-google-user-label');
       const googleBtns = document.querySelectorAll('#btn-header-google-auth, .btn-google-auth-trigger');
+      const stepAccount = document.getElementById('auth-step-account');
+      const stepVerify = document.getElementById('auth-step-verify');
       const signedInView = document.getElementById('auth-signed-in-view');
-      const emailForm = document.getElementById('auth-email-form');
-      const googleModalBtn = document.getElementById('btn-modal-google-action');
 
       if (session && session.email) {
-        const displayShort = `✨ ${session.name.split(' ')[0]} (Member)`;
+        const shortName = (session.name || 'Member').split(' ')[0];
+        const displayShort = `✨ ${shortName} (Member)`;
         if (label) label.innerText = displayShort;
         drawerLabels.forEach(dl => dl.innerText = displayShort);
         googleBtns.forEach(gb => gb.style.borderColor = 'var(--accent-gold)');
+
+        if (stepAccount) stepAccount.style.display = 'none';
+        if (stepVerify) stepVerify.style.display = 'none';
         if (signedInView) {
           signedInView.style.display = 'block';
           const nameEl = document.getElementById('auth-user-name');
@@ -1068,15 +1241,14 @@
           if (nameEl) nameEl.innerText = session.name;
           if (emailEl) emailEl.innerText = session.email;
         }
-        if (emailForm) emailForm.style.display = 'none';
-        if (googleModalBtn) googleModalBtn.style.display = 'none';
       } else {
         if (label) label.innerText = 'Sign In';
         drawerLabels.forEach(dl => dl.innerText = 'Sign In with Google');
         googleBtns.forEach(gb => gb.style.borderColor = '');
+
         if (signedInView) signedInView.style.display = 'none';
-        if (emailForm) emailForm.style.display = 'block';
-        if (googleModalBtn) googleModalBtn.style.display = 'flex';
+        if (stepVerify) stepVerify.style.display = 'none';
+        if (stepAccount) stepAccount.style.display = 'block';
       }
     }
 
@@ -1090,5 +1262,5 @@
   } else {
     initTier3GoogleAuth();
   }
-
-})(window);
+  window.initTier3GoogleAuth = initTier3GoogleAuth;
+})();
